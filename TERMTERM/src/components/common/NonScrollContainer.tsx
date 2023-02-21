@@ -18,6 +18,7 @@ const Container = styled.View<{ bgColor: string }>`
   height: ${screenHeight}px;
   background-color: ${(props) => props.bgColor};
   overflow: hidden;
+  position: relative;
 `;
 
 export default NonScrollContainer;
