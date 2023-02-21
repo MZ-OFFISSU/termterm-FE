@@ -13,15 +13,15 @@ const RootStack = createStackNavigator<RootStackParamList>();
 const Container = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Home">
-        <RootStack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
+      <RootStack.Navigator initialRouteName="Login">
         <RootStack.Screen
           name="Login"
           component={Login}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name="Home"
+          component={Home}
           options={{ headerShown: false }}
         />
       </RootStack.Navigator>
