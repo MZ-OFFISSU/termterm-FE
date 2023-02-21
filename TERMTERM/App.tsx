@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import * as Font from "expo-font";
-import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { Home, Login } from "@screens/index";
+import { View } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+import Container from "./Container";
 
-const RootStack = createStackNavigator<RootStackParamList>();
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
@@ -15,27 +13,38 @@ export default function App() {
     await Font.loadAsync({
       SUIT: require("./assets/fonts/SUIT-Variable.ttf"),
     });
-    setIsReady(true);
   };
 
   useEffect(() => {
-    getFonts();
+    async function prepare() {
+      try {
+        getFonts();
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        // 렌더링 사전준비 완료
+        setIsReady(true);
+      }
+    }
+
+    prepare();
   }, []);
 
+  const onLayoutRootView = useCallback(async () => {
+    if (isReady) {
+      //로딩 이후 스플래시 화면 숨김
+      await SplashScreen.hideAsync();
+    }
+  }, [isReady]);
+
+  if (!isReady) {
+    return null;
+  }
+
   return (
-    <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Home">
-        <RootStack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: true }}
-        />
-        <RootStack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }}
-        />
-      </RootStack.Navigator>
-    </NavigationContainer>
+    <View onLayout={onLayoutRootView} style={{ flex: 1, width: "100%" }}>
+      <Container />
+    </View>
   );
 }
