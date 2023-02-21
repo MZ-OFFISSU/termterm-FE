@@ -4,6 +4,7 @@
     "strict": true,
     "baseUrl": ".",
     "typeRoots": ["./node_modules/@types", "@types"],
+    "jsx":"preserve",
     "paths": {
       "@screens/*": ["./src/screens/*"],
       "@components/*": ["./src/components/*"],
