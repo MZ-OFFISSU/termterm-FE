@@ -16,20 +16,29 @@ export type TextStyleSize =
 
 export const TEXT_STYLE_WEIGHT = {
   default: "default",
-  Sb: "sb",
+  Sb: "Sb",
   Eb: "Eb",
   Reg: "Reg",
   Md: "Md",
   Bd: "Bd",
 } as const;
 
-export type TextStyleWeight =
-  typeof TEXT_STYLE_WEIGHT[keyof typeof TEXT_STYLE_WEIGHT];
+// export type TextStyleWeight =
+//   typeof TEXT_STYLE_WEIGHT[keyof typeof TEXT_STYLE_WEIGHT];
 
 interface TextStyle {
   fontSize: number;
   fontWeight: number;
 }
+
+export type TextStyleWeight = {
+  default?: TextStyle;
+  Sb?: TextStyle;
+  Eb?: TextStyle;
+  Reg?: TextStyle;
+  Md?: TextStyle;
+  Bd?: TextStyle;
+};
 
 /**
  * 텍스트 디자인 토큰
@@ -38,7 +47,7 @@ interface TextStyle {
 // export const TEXT_STYLES: Record<
 //   TextStyleSize,
 //   Record<TextStyleWeight, TextStyle>>
-export const TEXT_STYLES: Record<TextStyleSize, any> = {
+export const TEXT_STYLES: Record<TextStyleSize, TextStyleWeight> = {
   [TEXT_STYLE_SIZE.xxl]: {
     [TEXT_STYLE_WEIGHT.default]: {
       fontSize: 32,
