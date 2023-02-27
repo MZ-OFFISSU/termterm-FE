@@ -12,14 +12,22 @@ import { screenWidth } from "@style/dimensions";
 import { Props } from "@interfaces/onboarding";
 import { useRecoilState } from "recoil";
 import { themeState } from "@recoil/themeState";
+import { infoState } from "@recoil/signupState";
 
 const First = ({ onEnd }: Props) => {
   const [theme, setTheme] = useRecoilState(themeState);
+  const [info, setInfo] = useRecoilState(infoState);
   const [name, setName] = useState("");
   const [btnPosition, setBtnPosiition] = useState(30);
 
   const nextStage = () => {
-    if (onEnd && name !== "") onEnd();
+    if (onEnd && name !== "") {
+      setInfo({
+        ...info,
+        name: name,
+      });
+      onEnd();
+    }
   };
 
   useEffect(() => {

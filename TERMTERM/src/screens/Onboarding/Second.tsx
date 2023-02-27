@@ -13,9 +13,11 @@ import { screenWidth } from "@style/dimensions";
 import { Props } from "@interfaces/onboarding";
 import { useRecoilState } from "recoil";
 import { themeState } from "@recoil/themeState";
+import { infoState } from "@recoil/signupState";
 
 const Second = ({ onEnd }: Props) => {
   const [theme, setTheme] = useRecoilState(themeState);
+  const [info, setInfo] = useRecoilState(infoState);
   const [domain, setDomain] = useState("");
   const [job, setJob] = useState("");
   const [btnPosition, setBtnPosiition] = useState(30);
@@ -33,7 +35,15 @@ const Second = ({ onEnd }: Props) => {
   ]);
 
   const nextStage = () => {
-    if (onEnd && domain !== "" && job !== "") onEnd();
+    if (onEnd && domain !== "" && job !== "") {
+      setInfo({
+        ...info,
+        domain: domain,
+        job: job,
+        career: value,
+      });
+      onEnd();
+    }
   };
 
   useEffect(() => {

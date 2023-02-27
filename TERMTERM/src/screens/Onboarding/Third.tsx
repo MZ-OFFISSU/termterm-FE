@@ -12,6 +12,7 @@ import { screenWidth } from "@style/dimensions";
 import { Props } from "@interfaces/onboarding";
 import { useRecoilState } from "recoil";
 import { themeState } from "@recoil/themeState";
+import { infoState } from "@recoil/signupState";
 
 interface JobType {
   title: string;
@@ -47,6 +48,7 @@ const JOB_TYPE: Array<JobType> = [
 
 const Third = ({ onEnd }: Props) => {
   const [theme, setTheme] = useRecoilState(themeState);
+  const [info, setInfo] = useRecoilState(infoState);
   const [jobs, setJobs] = useState<Array<string>>([]);
 
   const selectJob = (job: string) => {
@@ -55,7 +57,13 @@ const Third = ({ onEnd }: Props) => {
   };
 
   const nextStage = () => {
-    if (onEnd && jobs.length > 0) onEnd();
+    if (onEnd && jobs.length > 0) {
+      setInfo({
+        ...info,
+        interests: jobs,
+      });
+      onEnd();
+    }
   };
 
   return (
