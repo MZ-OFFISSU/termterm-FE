@@ -13,13 +13,19 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useRecoilState } from "recoil";
 import { themeState } from "@recoil/themeState";
 import { useState } from "react";
+import { screenWidth } from "@style/dimensions";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
+
+export type Props = StackScreenProps<RootStackParamList, "Onboarding">;
 
 const STAGES = [First, Second, Third] as const;
 
-const Onboarding = () => {
+const Onboarding = ({ navigation }: Props) => {
   const [theme, setTheme] = useRecoilState(themeState);
   const [COLOR] = useThemeStyle(theme);
-  const [curIdx, setCurIdx] = useState(0);
+  const [stage, setStage] = useState(0);
+  const CurrentPage = STAGES[stage];
 
   return (
     <SafeAreaView
@@ -33,17 +39,19 @@ const Onboarding = () => {
             justifyContent: "space-between",
           }}
         >
-          <CaretBtn>
+          <CaretBtn onPress={() => navigation.pop()}>
             <AntDesign name="left" size={20} color={COLOR.Text.active} />
           </CaretBtn>
           <NavigatorTitle style={{ color: COLOR.Text.active }}>
             회원가입
           </NavigatorTitle>
           <NavigatorPager style={{ color: COLOR.Text.active }}>
-            {curIdx + 1} / 3
+            {stage + 1} / 3
           </NavigatorPager>
         </NavigationBar>
-        <></>
+        <Contents>
+          <CurrentPage onEnd={() => setStage((prev) => prev + 1)} />
+        </Contents>
       </Wrapper>
     </SafeAreaView>
   );
@@ -55,8 +63,15 @@ const Wrapper = styled.View`
   display: flex;
   background-color: ${LIGHT_COLOR_STYLE.Background.surface};
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
   position: relative;
+`;
+
+const Contents = styled.View`
+  padding-top: 80px;
+  height: 100%;
+  width: ${screenWidth - 64}px;
 `;
 
 export default Onboarding;
