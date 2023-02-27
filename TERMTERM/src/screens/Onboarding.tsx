@@ -69,7 +69,6 @@ const Wrapper = styled.View`
 `;
 
 const Contents = styled.View`
-  padding-top: 80px;
   height: 100%;
   width: ${screenWidth - 64}px;
 `;
