@@ -11,6 +11,7 @@ import CustomButton, {
   BUTTON_TYPE,
   BUTTON_STATE,
 } from "./buttons/CustomButton";
+import CustomSelector from "./buttons/CustomSelector";
 
 export { BUTTON_STATE, BUTTON_TYPE };
 export { NavigatorTitle, NavigatorPager, CaretBtn };
@@ -20,4 +21,5 @@ export {
   NavigationBar,
   CustomTextInput,
   CustomButton,
+  CustomSelector,
 };
