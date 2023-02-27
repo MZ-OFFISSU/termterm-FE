@@ -49,12 +49,9 @@ const Third = ({ onEnd }: Props) => {
   const [theme, setTheme] = useRecoilState(themeState);
   const [jobs, setJobs] = useState<Array<string>>([]);
 
-  //고쳐야함
   const selectJob = (job: string) => {
-    if (jobs.length < 4) {
-      if (jobs.includes(job)) setJobs(jobs.filter((j) => j !== job));
-      else setJobs((prev) => [...prev, job]);
-    }
+    if (jobs.includes(job)) setJobs(jobs.filter((j) => j !== job));
+    else if (jobs.length < 4) setJobs((prev) => [...prev, job]);
   };
 
   const nextStage = () => {
