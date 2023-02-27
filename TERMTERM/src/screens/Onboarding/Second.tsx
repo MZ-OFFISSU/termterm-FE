@@ -27,7 +27,7 @@ const Second = ({ onEnd }: Props) => {
     { label: "1년 이상 2년 미만", value: "1년 이상 2년 미만" },
     { label: "2년 이상 3년 미만", value: "2년 이상 3년 미만" },
     { label: "3년 이상 4년 미만", value: "3년 이상 4년 미만" },
-    { label: "4년 이상 5년 미만", value: "4년 이상 55년 미만" },
+    { label: "4년 이상 5년 미만", value: "4년 이상 5년 미만" },
     { label: "5년 이상", value: "5년 이상" },
     { label: "시니어", value: "시니어" },
   ]);

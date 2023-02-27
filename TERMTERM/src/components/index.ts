@@ -12,6 +12,7 @@ import CustomButton, {
   BUTTON_STATE,
 } from "./buttons/CustomButton";
 import CustomSelector from "./buttons/CustomSelector";
+import JobCard from "./cards/JobCard";
 
 export { BUTTON_STATE, BUTTON_TYPE };
 export { NavigatorTitle, NavigatorPager, CaretBtn };
@@ -22,4 +23,5 @@ export {
   CustomTextInput,
   CustomButton,
   CustomSelector,
+  JobCard,
 };
