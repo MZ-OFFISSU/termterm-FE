@@ -27,6 +27,10 @@ const Onboarding = ({ navigation }: Props) => {
   const [stage, setStage] = useState(0);
   const CurrentPage = STAGES[stage];
 
+  const onEnd = () => {
+    stage < STAGES.length - 1 ? setStage((prev) => prev + 1) : null;
+  };
+
   return (
     <SafeAreaView
       style={{ flex: 0, backgroundColor: COLOR.Background.surface }}
@@ -50,7 +54,7 @@ const Onboarding = ({ navigation }: Props) => {
           </NavigatorPager>
         </NavigationBar>
         <Contents>
-          <CurrentPage onEnd={() => setStage((prev) => prev + 1)} />
+          <CurrentPage onEnd={() => onEnd()} />
         </Contents>
       </Wrapper>
     </SafeAreaView>
