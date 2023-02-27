@@ -137,197 +137,195 @@ export const TEXT_STYLES: Record<
   },
 };
 
-/**
- * 컬러 디자인 토큰
- */
-export const COLOR_STYLE = {
+export interface colorTheme {
   THEME: {
     primary: {
-      10: {
-        Light: "#EDFFF2",
-        Dark: "#EDFFF2",
-      },
-      20: {
-        Light: "#DCFFE6",
-        Dark: "#DCFFE6",
-      },
-      30: {
-        Light: "#C0FFD2",
-        Dark: "#C0FFD2",
-      },
-      40: {
-        Light: "#99FFB6",
-        Dark: "#99FFB6",
-      },
-      70: {
-        Light: "#54FF84",
-        Dark: "#54FF84",
-      },
-      100: {
-        Light: "#54FF84",
-        Dark: "#54FF84",
-      },
-      110: {
-        Light: "#45F076",
-        Dark: "#45F076",
-      },
-      120: {
-        Light: "#34E466",
-        Dark: "#34E466",
-      },
-      130: {
-        Light: "#19D24D",
-        Dark: "#19D24D",
-      },
-      160: {
-        Light: "#16BD45",
-        Dark: "#16BD45",
-      },
-      variant: {
-        Light: "#A8EABC",
-        Dark: "#A4E9B8",
-      },
+      10: string;
+      20: string;
+      30: string;
+      40: string;
+      70: string;
+      100: string;
+      110: string;
+      120: string;
+      130: string;
+      160: string;
+      variant: string;
+    };
+    secondary: {
+      10: string;
+      20: string;
+      30: string;
+      40: string;
+      70: string;
+      100: string;
+      110: string;
+      120: string;
+      130: string;
+      160: string;
+      variant: string;
+    };
+    negative: string;
+  };
+  Neutral: {
+    100: string;
+    90: string;
+    80: string;
+    70: string;
+    40: string;
+    30: string;
+    20: string;
+    10: string;
+    5: string;
+    0: string;
+  };
+  Text: {
+    active: string;
+    darken: string;
+    default: string;
+    muted: string;
+    disabled: string;
+    lighten: string;
+  };
+  Background: {
+    surface: string;
+    onSurface: string;
+    divider: string;
+    input: string;
+    inputBorderDefault: string;
+    inputBorderFocus: string;
+  };
+  ACCENT: {
+    alwaysRed: string;
+  };
+}
+
+/**
+ * 라이트모드 컬러 디자인 토큰
+ */
+export const LIGHT_COLOR_STYLE: colorTheme = {
+  THEME: {
+    primary: {
+      10: "#EDFFF2",
+      20: "#DCFFE6",
+      30: "#C0FFD2",
+      40: "#99FFB6",
+      70: "#54FF84",
+      100: "#54FF84",
+      110: "#45F076",
+      120: "#34E466",
+      130: "#19D24D",
+      160: "#16BD45",
+      variant: "#A8EABC",
     },
     secondary: {
-      10: {
-        Light: "#FFFEED",
-        Dark: "#FFFEED",
-      },
-      20: {
-        Light: "#FFFDDD",
-        Dark: "#FFFDDD",
-      },
-      30: {
-        Light: "#FFFCC7",
-        Dark: "#FFFCC7",
-      },
-      40: {
-        Light: "#FFFAAA",
-        Dark: "#FFFAAA",
-      },
-      70: {
-        Light: "#FFF66B",
-        Dark: "#FFF66B",
-      },
-      100: {
-        Light: "#FFF849",
-        Dark: "#FFF849",
-      },
-      110: {
-        Light: "#FCF326",
-        Dark: "#FCF326",
-      },
-      120: {
-        Light: "#FFEA2E",
-        Dark: "#FFEA2E",
-      },
-      130: {
-        Light: "#FFDF36",
-        Dark: "#FFDF36",
-      },
-      160: {
-        Light: "#F6CF00",
-        Dark: "#F6CF00",
-      },
-      variant: {
-        Light: "#E4E2AF",
-        Dark: "#E4E2AF",
-      },
+      10: "#FFFEED",
+      20: "#FFFDDD",
+      30: "#FFFCC7",
+      40: "#FFFAAA",
+      70: "#FFF66B",
+      100: "#FFF849",
+      110: "#FCF326",
+      120: "#FFEA2E",
+      130: "#FFDF36",
+      160: "#F6CF00",
+      variant: "#E4E2AF",
     },
     negative: "#FF5454",
   },
   Neutral: {
-    100: {
-      Light: "#1B1B1C",
-      Dark: "#FFFFFF",
-    },
-    90: {
-      Light: "#343536",
-      Dark: "#F2F3F5",
-    },
-    80: {
-      Light: "#474849",
-      Dark: "#EBEDF0",
-    },
-    70: {
-      Light: "#717375",
-      Dark: "#DEE0E2",
-    },
-    40: {
-      Light: "#999B9D",
-      Dark: "#C4C6C9",
-    },
-    30: {
-      Light: "#C4C6C9",
-      Dark: "#999B9D",
-    },
-    20: {
-      Light: "#DEE0E2",
-      Dark: "#6E7277",
-    },
-    10: {
-      Light: "#F0F0F1",
-      Dark: "#46494B",
-    },
-    5: {
-      Light: "#F3F3F4",
-      Dark: "#343536",
-    },
-    0: {
-      Light: "#FFFFFF",
-      Dark: "#1B1B1C",
-    },
+    100: "#1B1B1C",
+    90: "#343536",
+    80: "#474849",
+    70: "#717375",
+    40: "#999B9D",
+    30: "#C4C6C9",
+    20: "#DEE0E2",
+    10: "#F0F0F1",
+    5: "#F3F3F4",
+    0: "#FFFFFF",
   },
   Text: {
-    active: {
-      Light: "#0D0D0D",
-      Dark: "rgba(255, 255, 255, 0.95)",
-    },
-    darken: {
-      Light: "#303030",
-      Dark: "rgba(0, 0, 0, 0.65)",
-    },
-    default: {
-      Light: "#565656",
-      Dark: "rgba(255, 255, 255, 0.75)",
-    },
-    muted: {
-      Light: "#929292",
-      Dark: "rgba(255, 255, 255, 0.55)",
-    },
-    disabled: {
-      Light: "#C5C5C5",
-      Dark: "rgba(255, 255, 255, 0.35)",
-    },
-    lighten: {
-      Light: "#FBFBFB",
-      Dark: "rgba(255, 255, 255, 0.95)",
-    },
+    active: "#0D0D0D",
+    darken: "#303030",
+    default: "#565656",
+    muted: "#929292",
+    disabled: "#C5C5C5",
+    lighten: "#FBFBFB",
   },
   Background: {
-    surface: {
-      Light: "#FFFFFF",
-      Dark: "#121212",
+    surface: "#FFFFFF",
+    onSurface: "#F2F2F2",
+    divider: "#EDEDED",
+    input: "#FAFAFA",
+    inputBorderDefault: "#E2E2E2",
+    inputBorderFocus: "#1B1B1C",
+  },
+  ACCENT: {
+    alwaysRed: "#FF3040",
+  },
+} as const;
+
+/**
+ * 다크모드 컬러 디자인토큰
+ */
+export const DARK_COLOR_STYLE: colorTheme = {
+  THEME: {
+    primary: {
+      10: "#EDFFF2",
+      20: "#DCFFE6",
+      30: "#C0FFD2",
+      40: "#99FFB6",
+      70: "#54FF84",
+      100: "#54FF84",
+      110: "#45F076",
+      120: "#34E466",
+      130: "#19D24D",
+      160: "#16BD45",
+      variant: "#A4E9B8",
     },
-    onSurface: {
-      Light: "#F2F2F2",
-      Dark: "#2C2C2C",
+    secondary: {
+      10: "#FFFEED",
+      20: "#FFFDDD",
+      30: "#FFFCC7",
+      40: "#FFFAAA",
+      70: "#FFF66B",
+      100: "#FFF849",
+      110: "#FCF326",
+      120: "#FFEA2E",
+      130: "#FFDF36",
+      160: "#F6CF00",
+      variant: "#E4E2AF",
     },
-    divider: {
-      Light: "#EDEDED",
-      Dark: "#909092",
-    },
-    input: {
-      Light: "#FAFAFA",
-      Dark: "#202020",
-    },
-    inputBorderDefault: {
-      Light: "#E2E2E2",
-      Dark: "#9B9B9C",
-    },
-    inputBorderFocus: {
-      Light: "#1B1B1C",
-    },
+    negative: "#FF5454",
+  },
+  Neutral: {
+    100: "#FFFFFF",
+    90: "#F2F3F5",
+    80: "#EBEDF0",
+    70: "#DEE0E2",
+    40: "#C4C6C9",
+    30: "#999B9D",
+    20: "#6E7277",
+    10: "#46494B",
+    5: "#343536",
+    0: "#1B1B1C",
+  },
+  Text: {
+    active: "rgba(255, 255, 255, 0.95)",
+    darken: "rgba(0, 0, 0, 0.65)",
+    default: "rgba(255, 255, 255, 0.75)",
+    muted: "rgba(255, 255, 255, 0.55)",
+    disabled: "rgba(255, 255, 255, 0.35)",
+    lighten: "rgba(255, 255, 255, 0.95)",
+  },
+  Background: {
+    surface: "#121212",
+    onSurface: "#2C2C2C",
+    divider: "#909092",
+    input: "#202020",
+    inputBorderDefault: "#9B9B9C",
+    inputBorderFocus: "",
   },
   ACCENT: {
     alwaysRed: "#FF3040",
