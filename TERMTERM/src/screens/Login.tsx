@@ -4,8 +4,12 @@ import { UrlText, NonScrollContainer } from "@components/index";
 import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import SocialLoginButton from "@components/buttons/SocialLogin";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
 
-const Login = () => {
+export type Props = StackScreenProps<RootStackParamList, "Login">;
+
+const Login = ({ navigation }: Props) => {
   const [width, setWidth] = useState(140);
   const [btnWidth, setBtnWidth] = useState(60);
 
@@ -42,7 +46,10 @@ const Login = () => {
           <Title>나만의 용어 모음집</Title>
         </TitleBox>
         <ButtonBox>
-          <SocialLoginButton type="kakao" />
+          <SocialLoginButton
+            type="kakao"
+            onPress={() => navigation.navigate("Onboarding")}
+          />
           <SocialLoginButton type="google" />
           <SocialLoginButton type="apple" />
         </ButtonBox>
