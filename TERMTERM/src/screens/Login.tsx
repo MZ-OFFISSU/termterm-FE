@@ -4,6 +4,8 @@ import { UrlText, NonScrollContainer } from "@components/index";
 import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import SocialLoginButton from "@components/buttons/SocialLogin";
+import { NavigationContainer } from "@react-navigation/native";
+import ToolBar from "@components/common/ToolBar";
 
 const Login = () => {
   const [width, setWidth] = useState(140);
@@ -67,6 +69,7 @@ const Login = () => {
             color: "#929292",
           }}
         />
+        <ToolBar />
       </QuestionBox>
     </NonScrollContainer>
   );

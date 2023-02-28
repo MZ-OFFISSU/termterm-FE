@@ -2,34 +2,104 @@ import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useRecoilState } from "recoil";
 import { themeState } from "@recoil/themeState";
-import { ViewProps } from "react-native";
+import { ViewProps, Text, View } from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
 import { colorTheme } from "@style/designSystem";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 
-interface Props extends ViewProps {
-  children: React.ReactNode;
+/** dummy screen func. Home */
+function HomeScreen() {
+  return <Text>Home</Text>;
+}
+
+/** dummy screen func. Search */
+function SearchScreen() {
+  return <Text>Search</Text>;
+}
+
+/** dummy screen func. Archive */
+function ArchiveScreen() {
+  return <Text>Archive</Text>;
+}
+
+/** dummy screen func. My */
+function MyScreen() {
+  return <Text>My</Text>;
 }
 
 /**
  * 툴바(바텀바) 컴포넌트
  */
-const ToolBar = ({ children, ...props }: Props) => {
-  const [theme, setTheme] = useRecoilState(themeState);
-  const [COLOR] = useThemeStyle(theme);
+const ToolBar = () => {
+  /** tabNavigator 생성 */
+  const Tab = createBottomTabNavigator();
+
   return (
-    <Container COLOR={COLOR} {...props}>
-      {children}
-    </Container>
+    <Tab.Navigator>
+      <Tab.Screen 
+        name="Home" 
+        component={HomeScreen} 
+        options={{
+          headerShown: false,
+          title: '홈',
+          tabBarIcon: ({focused}) => (
+            <Ionicons
+              name="home"
+              style={{ color: focused ? "#FFFFFF" : "#FFFFFF" }}
+              size={24}
+            />
+          ),
+        }}
+      />
+
+      <Tab.Screen 
+        name="Search"  
+        component={SearchScreen}
+        options={{
+          headerShown: false,
+          title: '검색',
+          tabBarIcon: ({focused}) => (
+            <Ionicons
+              name="search"
+              style={{ color: focused ? "#FFFFFF" : "#FFFFFF" }}
+              size={24}
+            />
+          ),
+        }}
+      />
+
+      <Tab.Screen 
+        name="Archive" 
+        component={ArchiveScreen} 
+        options={{
+          headerShown: false,
+          tabBarIcon: ({focused}) => (
+            <Ionicons
+              name="archive"
+              style={{ color: focused ? "#FFFFFF" : "#FFFFFF" }}
+              size={24}
+            />
+          ),
+        }}
+      />
+
+      <Tab.Screen  
+        name="My" 
+        component={MyScreen} 
+        options={{
+          headerShown: false,
+          tabBarIcon: ({focused}) => (
+            <Ionicons
+              name="person"
+              style={{ color: focused ? "#FFFFFF" : "#FFFFFF" }}
+              size={24}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 };
-
-const Container = styled.View<{ COLOR: colorTheme }>`
-  width: 100%;
-  height: 44px;
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  top: 0px;
-  background-color: ${(props) => props.COLOR.Background.surface};
-`;
 
 export default ToolBar;

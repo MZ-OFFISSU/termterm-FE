@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { Home, Login } from "@screens/index";
+import ToolBarTest from "@screens/ToolBarTest";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -22,6 +23,11 @@ const Container = () => {
         <RootStack.Screen
           name="Home"
           component={Home}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name="ToolBarTest"
+          component={ToolBarTest}
           options={{ headerShown: false }}
         />
       </RootStack.Navigator>
