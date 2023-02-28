@@ -46,7 +46,7 @@ const ToolBar = () => {
           tabBarIcon: ({focused}) => (
             <Ionicons
               name="home"
-              style={{ color: focused ? "#FFFFFF" : "#FFFFFF" }}
+              style={{ color: focused ? "#1B1B1C" : "#1B1B1C" }}
               size={24}
             />
           ),
@@ -62,7 +62,7 @@ const ToolBar = () => {
           tabBarIcon: ({focused}) => (
             <Ionicons
               name="search"
-              style={{ color: focused ? "#FFFFFF" : "#FFFFFF" }}
+              style={{ color: focused ? "#1B1B1C" : "#1B1B1C" }}
               size={24}
             />
           ),
@@ -74,10 +74,11 @@ const ToolBar = () => {
         component={ArchiveScreen} 
         options={{
           headerShown: false,
+          title: '아카이브',
           tabBarIcon: ({focused}) => (
             <Ionicons
               name="archive"
-              style={{ color: focused ? "#FFFFFF" : "#FFFFFF" }}
+              style={{ color: focused ? "#1B1B1C" : "#1B1B1C" }}
               size={24}
             />
           ),
@@ -89,10 +90,11 @@ const ToolBar = () => {
         component={MyScreen} 
         options={{
           headerShown: false,
+          title: 'MY',
           tabBarIcon: ({focused}) => (
             <Ionicons
               name="person"
-              style={{ color: focused ? "#FFFFFF" : "#FFFFFF" }}
+              style={{ color: focused ? "#1B1B1C" : "#1B1B1C" }}
               size={24}
             />
           ),

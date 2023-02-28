@@ -27,9 +27,11 @@ const Container = styled.View<{ COLOR: colorTheme }>`
   height: 44px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   position: absolute;
   top: 0px;
   background-color: ${(props) => props.COLOR.Background.surface};
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 3px;
 `;
 
 export default NavigationBar;

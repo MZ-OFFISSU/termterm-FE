@@ -2,8 +2,8 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { Home, Login } from "@screens/index";
-import ToolBarTest from "@screens/ToolBarTest";
+import { Home, Login, Onboarding } from "@screens/index";
+import ToolBar from "@components/common/ToolBar";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -21,13 +21,18 @@ const Container = () => {
           options={{ headerShown: false }}
         />
         <RootStack.Screen
+          name="Onboarding"
+          component={Onboarding}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
           name="Home"
           component={Home}
           options={{ headerShown: false }}
         />
         <RootStack.Screen
-          name="ToolBarTest"
-          component={ToolBarTest}
+          name="ToolBar"
+          component={ToolBar}
           options={{ headerShown: false }}
         />
       </RootStack.Navigator>
