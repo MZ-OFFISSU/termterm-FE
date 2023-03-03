@@ -1,8 +1,6 @@
 import styled from "styled-components/native";
 import { colorTheme } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { useRecoilState } from "recoil";
-import { themeState } from "@recoil/themeState";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { Home, Search, Archive, My } from "./Toolbar/index";
@@ -14,8 +12,7 @@ import { TEXT_STYLES } from "@style/designSystem";
 const ToolBar = () => {
   /** tabNavigator 생성 */
   const Tab = createBottomTabNavigator();
-  const [theme, setTheme] = useRecoilState(themeState);
-  const [COLOR] = useThemeStyle(theme);
+  const [COLOR] = useThemeStyle();
 
   return (
     <Tab.Navigator

@@ -10,8 +10,6 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { useRecoilState } from "recoil";
-import { themeState } from "@recoil/themeState";
 import { useState } from "react";
 import { screenWidth } from "@style/dimensions";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -22,8 +20,7 @@ export type Props = StackScreenProps<RootStackParamList, "Onboarding">;
 const STAGES = [First, Second, Third] as const;
 
 const Onboarding = ({ navigation }: Props) => {
-  const [theme, setTheme] = useRecoilState(themeState);
-  const [COLOR] = useThemeStyle(theme);
+  const [COLOR] = useThemeStyle();
   const [stage, setStage] = useState(0);
   const CurrentPage = STAGES[stage];
 
