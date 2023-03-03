@@ -1,7 +1,5 @@
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { useRecoilState } from "recoil";
-import { themeState } from "@recoil/themeState";
 import { ViewProps } from "react-native";
 import { colorTheme } from "@style/designSystem";
 
@@ -13,8 +11,7 @@ interface Props extends ViewProps {
  * 상단바 컴포넌트
  */
 const NavigationBar = ({ children, ...props }: Props) => {
-  const [theme, setTheme] = useRecoilState(themeState);
-  const [COLOR] = useThemeStyle(theme);
+  const [COLOR] = useThemeStyle();
   return (
     <Container COLOR={COLOR} {...props}>
       {children}
