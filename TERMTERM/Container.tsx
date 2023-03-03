@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { Home, Login, Onboarding } from "@screens/index";
-import ToolBar from "@components/common/ToolBar";
+import ToolBar from "@screens/ToolBar";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
