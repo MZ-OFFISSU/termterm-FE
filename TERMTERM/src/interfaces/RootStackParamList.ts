@@ -9,4 +9,5 @@ export type RootStackParamList = {
   Login: undefined;
   ToolBar: undefined;
   Onboarding: undefined;
+  Curation: undefined;
 };
