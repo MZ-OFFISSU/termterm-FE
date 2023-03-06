@@ -14,9 +14,13 @@ const HomeBar = ({ onSearch }: Props) => {
   const [COLOR] = useThemeStyle();
   return (
     <NavigationBar style={{ justifyContent: "space-between" }}>
-      <AutoSizedImage source={require("@assets/icon/header-icon.png")} />
-      <CaretBtn onPress={() => onSearch()}>
-        <Entypo name="magnifying-glass" size={22} color={COLOR.Text.active} />
+      <AutoSizedImage
+        source={require("@assets/icon/header-icon.png")}
+        height={24}
+        style={{ marginLeft: 20 }}
+      />
+      <CaretBtn onPress={() => onSearch()} style={{ marginRight: 20 }}>
+        <Entypo name="magnifying-glass" size={24} color={COLOR.Text.active} />
       </CaretBtn>
     </NavigationBar>
   );
