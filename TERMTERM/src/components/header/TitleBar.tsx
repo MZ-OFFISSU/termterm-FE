@@ -32,8 +32,10 @@ export interface Props {
 const TitleBar = ({ title, icon, point, onPress }: Props) => {
   const [COLOR] = useThemeStyle();
   return (
-    <NavigationBar>
-      <NavigatorTitle>{title}</NavigatorTitle>
+    <NavigationBar style={{ justifyContent: "space-between" }}>
+      <NavigatorTitle style={{ color: COLOR.Text.active }}>
+        {title}
+      </NavigatorTitle>
       {icon === "point" ? (
         <PointBox>
           <AutoSizedImage source={require("@assets/icon/point.png")} />
@@ -41,7 +43,7 @@ const TitleBar = ({ title, icon, point, onPress }: Props) => {
         </PointBox>
       ) : icon === "folder" ? (
         <FolderBtn onPress={() => onPress!()}>
-          <AntDesign name="addfolder" size={24} color={COLOR.Text.active} />
+          <AntDesign name="addfolder" size={22} color={COLOR.Text.active} />
         </FolderBtn>
       ) : (
         <></>
@@ -58,8 +60,8 @@ const PointBox = styled.View`
 `;
 
 const FolderBtn = styled.TouchableOpacity`
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
