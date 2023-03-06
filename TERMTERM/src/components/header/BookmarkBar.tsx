@@ -26,18 +26,22 @@ const BookmarkBar = ({
   const [COLOR] = useThemeStyle();
   return (
     <NavigationBar style={{ justifyContent: "space-between" }}>
-      <ElementWrapper>
+      <ElementWrapper style={{ marginLeft: 20 }}>
         <CaretBtn onPress={() => onBack()}>
           <AntDesign name="left" size={24} color={COLOR.Text.active} />
         </CaretBtn>
         {title ? (
-          <NavigatorTitle style={{ marginLeft: 5 }}>{title}</NavigatorTitle>
+          <NavigatorTitle style={{ marginLeft: 10 }}>{title}</NavigatorTitle>
         ) : null}
       </ElementWrapper>
-      <ElementWrapper>
-        <CaretBtn onPress={() => onBookmark()}>
+      <ElementWrapper style={{ marginRight: 20 }}>
+        <CaretBtn onPress={() => onBookmark()} style={{ marginRight: 20 }}>
           {bookmarked ? (
-            <Ionicons name="md-bookmark" size={24} color={COLOR.Text.active} />
+            <Ionicons
+              name="md-bookmark"
+              size={24}
+              color={COLOR.THEME.secondary[130]}
+            />
           ) : (
             <Ionicons
               name="ios-bookmark-outline"
