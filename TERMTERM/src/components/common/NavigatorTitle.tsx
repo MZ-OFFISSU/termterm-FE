@@ -21,8 +21,10 @@ export const NavigatorPager = styled.Text`
  * 헤더에 들어가는 카렛버튼
  */
 export const CaretBtn = styled.TouchableOpacity`
+  position: relative;
   width: 24px;
   height: 24px;
+  z-index: 10;
 `;
 
 export const TitleWrapper = styled.View`
