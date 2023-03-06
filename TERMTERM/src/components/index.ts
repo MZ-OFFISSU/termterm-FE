@@ -5,6 +5,7 @@ import {
   NavigatorTitle,
   NavigatorPager,
   CaretBtn,
+  TitleWrapper,
 } from "./common/NavigatorTitle";
 import CustomTextInput from "./common/CustomTextInput";
 import CustomButton, {
@@ -24,4 +25,5 @@ export {
   CustomButton,
   CustomSelector,
   JobCard,
+  TitleWrapper,
 };
