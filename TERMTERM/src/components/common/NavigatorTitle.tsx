@@ -24,3 +24,12 @@ export const CaretBtn = styled.TouchableOpacity`
   width: 20px;
   height: 20px;
 `;
+
+export const TitleWrapper = styled.View`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

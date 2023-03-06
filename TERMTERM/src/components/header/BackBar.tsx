@@ -3,12 +3,13 @@ import {
   NavigatorTitle,
   NavigatorPager,
   CaretBtn,
+  TitleWrapper,
 } from "../common/NavigatorTitle";
 import { AntDesign } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 
 interface Props {
-  title: string;
+  title?: string;
   onBack: () => void;
   maxNum?: number;
   curNum?: number;
@@ -25,17 +26,23 @@ const BackBar = ({ title, onBack, maxNum, curNum }: Props) => {
   const [COLOR] = useThemeStyle();
   return (
     <NavigationBar style={{ justifyContent: "space-between" }}>
-      <CaretBtn onPress={() => onBack()}>
+      <CaretBtn onPress={() => onBack()} style={{ marginLeft: 15 }}>
         <AntDesign name="left" size={24} color={COLOR.Text.active} />
       </CaretBtn>
       {title ? (
-        <NavigatorTitle style={{ color: COLOR.Text.active }}>
-          {title}
-        </NavigatorTitle>
+        <TitleWrapper>
+          <NavigatorTitle
+            style={{
+              color: COLOR.Text.active,
+            }}
+          >
+            {title}
+          </NavigatorTitle>
+        </TitleWrapper>
       ) : (
         <></>
       )}
-      <NavigatorPager style={{ color: COLOR.Text.active }}>
+      <NavigatorPager style={{ color: COLOR.Text.active, marginRight: 20 }}>
         {maxNum && curNum ? `${curNum}/${maxNum}` : ""}
       </NavigatorPager>
     </NavigationBar>
