@@ -5,6 +5,11 @@ import { AntDesign } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 
+export enum Icon {
+  point,
+  folder,
+}
+
 export interface Props {
   title: string;
   /**
@@ -13,7 +18,7 @@ export interface Props {
    * "folder" -> 폴더 아이콘
    * 전달 안하면 아이콘 없음
    */
-  icon?: string;
+  icon?: Icon;
   /**
    * 포인트 점수
    */
@@ -33,15 +38,18 @@ const TitleBar = ({ title, icon, point, onPress }: Props) => {
   const [COLOR] = useThemeStyle();
   return (
     <NavigationBar style={{ justifyContent: "space-between" }}>
-      <NavigatorTitle style={{ color: COLOR.Text.active }}>
+      <NavigatorTitle style={{ color: COLOR.Text.active, marginLeft: 20 }}>
         {title}
       </NavigatorTitle>
-      {icon === "point" ? (
+      {icon === Icon.point ? (
         <PointBox>
-          <AutoSizedImage source={require("@assets/icon/point.png")} />
+          <AutoSizedImage
+            source={require("@assets/icon/points.png")}
+            height={24}
+          />
           <NavigatorPager style={{ marginLeft: 5 }}>{point!}</NavigatorPager>
         </PointBox>
-      ) : icon === "folder" ? (
+      ) : icon === Icon.folder ? (
         <FolderBtn onPress={() => onPress!()}>
           <AntDesign name="addfolder" size={22} color={COLOR.Text.active} />
         </FolderBtn>
@@ -57,6 +65,7 @@ const PointBox = styled.View`
   height: 100%;
   flex-direction: row;
   align-items: center;
+  margin-right: 20px;
 `;
 
 const FolderBtn = styled.TouchableOpacity`
@@ -65,6 +74,7 @@ const FolderBtn = styled.TouchableOpacity`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 20px;
 `;
 
 export default TitleBar;
