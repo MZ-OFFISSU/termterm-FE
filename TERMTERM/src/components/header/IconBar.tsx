@@ -1,4 +1,4 @@
-import NavigationBar from "../common/NavigationBar";
+import HeaderWrapper from "./HeaderWrapper";
 import {
   NavigatorTitle,
   CaretBtn,
@@ -59,7 +59,7 @@ const IconBar = ({ curNum, maxNum, onBack, icon, onPress, onDots }: Props) => {
   };
 
   return (
-    <NavigationBar style={{ justifyContent: "space-between" }}>
+    <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 20 }}>
         <AntDesign name="left" size={24} color={COLOR.Text.active} />
       </CaretBtn>
@@ -84,7 +84,7 @@ const IconBar = ({ curNum, maxNum, onBack, icon, onPress, onDots }: Props) => {
           />
         </CaretBtn>
       </ElementWrapper>
-    </NavigationBar>
+    </HeaderWrapper>
   );
 };
 

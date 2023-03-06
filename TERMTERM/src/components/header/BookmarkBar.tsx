@@ -1,4 +1,4 @@
-import NavigationBar from "../common/NavigationBar";
+import HeaderWrapper from "./HeaderWrapper";
 import { NavigatorTitle, CaretBtn } from "../common/NavigatorTitle";
 import styled from "styled-components/native";
 import { AntDesign } from "@expo/vector-icons";
@@ -25,7 +25,7 @@ const BookmarkBar = ({
 }: Props) => {
   const [COLOR] = useThemeStyle();
   return (
-    <NavigationBar style={{ justifyContent: "space-between" }}>
+    <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <ElementWrapper style={{ marginLeft: 20 }}>
         <CaretBtn onPress={() => onBack()}>
           <AntDesign name="left" size={24} color={COLOR.Text.active} />
@@ -58,7 +58,7 @@ const BookmarkBar = ({
           />
         </CaretBtn>
       </ElementWrapper>
-    </NavigationBar>
+    </HeaderWrapper>
   );
 };
 

@@ -1,4 +1,4 @@
-import NavigationBar from "../common/NavigationBar";
+import HeaderWrapper from "./HeaderWrapper";
 import {
   NavigatorTitle,
   NavigatorPager,
@@ -25,7 +25,7 @@ interface Props {
 const BackBar = ({ title, onBack, maxNum, curNum }: Props) => {
   const [COLOR] = useThemeStyle();
   return (
-    <NavigationBar style={{ justifyContent: "space-between" }}>
+    <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 15 }}>
         <AntDesign name="left" size={24} color={COLOR.Text.active} />
       </CaretBtn>
@@ -45,7 +45,7 @@ const BackBar = ({ title, onBack, maxNum, curNum }: Props) => {
       <NavigatorPager style={{ color: COLOR.Text.active, marginRight: 20 }}>
         {maxNum && curNum ? `${curNum}/${maxNum}` : ""}
       </NavigatorPager>
-    </NavigationBar>
+    </HeaderWrapper>
   );
 };
 
