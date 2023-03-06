@@ -4,7 +4,6 @@ import { UrlText, NonScrollContainer } from "@components/index";
 import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import SocialLoginButton from "@components/buttons/SocialLogin";
-import { NavigationContainer } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 
@@ -51,9 +50,9 @@ const Login = ({ navigation }: Props) => {
             type="kakao"
             onPress={() => navigation.navigate("Onboarding")}
           />
-          <SocialLoginButton 
-            type="google" 
-            onPress={() => navigation.navigate("ToolBar")}  
+          <SocialLoginButton
+            type="google"
+            onPress={() => navigation.navigate("ToolBar")}
           />
           <SocialLoginButton type="apple" />
         </ButtonBox>

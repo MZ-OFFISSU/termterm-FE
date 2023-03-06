@@ -1,4 +1,4 @@
-import NavigationBar from "../common/NavigationBar";
+import HeaderWrapper from "./HeaderWrapper";
 import { NavigatorTitle, NavigatorPager } from "../common/NavigatorTitle";
 import styled from "styled-components/native";
 import { AntDesign } from "@expo/vector-icons";
@@ -37,7 +37,7 @@ export interface Props {
 const TitleBar = ({ title, icon, point, onPress }: Props) => {
   const [COLOR] = useThemeStyle();
   return (
-    <NavigationBar style={{ justifyContent: "space-between" }}>
+    <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <NavigatorTitle style={{ color: COLOR.Text.active, marginLeft: 20 }}>
         {title}
       </NavigatorTitle>
@@ -56,7 +56,7 @@ const TitleBar = ({ title, icon, point, onPress }: Props) => {
       ) : (
         <></>
       )}
-    </NavigationBar>
+    </HeaderWrapper>
   );
 };
 

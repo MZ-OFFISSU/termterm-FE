@@ -1,4 +1,4 @@
-import NavigationBar from "../common/NavigationBar";
+import HeaderWrapper from "./HeaderWrapper";
 import { CaretBtn } from "../common/NavigatorTitle";
 import { Entypo } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
@@ -13,7 +13,7 @@ interface Props {
 const HomeBar = ({ onSearch }: Props) => {
   const [COLOR] = useThemeStyle();
   return (
-    <NavigationBar style={{ justifyContent: "space-between" }}>
+    <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <AutoSizedImage
         source={require("@assets/icon/header-icon.png")}
         height={24}
@@ -22,7 +22,7 @@ const HomeBar = ({ onSearch }: Props) => {
       <CaretBtn onPress={() => onSearch()} style={{ marginRight: 20 }}>
         <Entypo name="magnifying-glass" size={24} color={COLOR.Text.active} />
       </CaretBtn>
-    </NavigationBar>
+    </HeaderWrapper>
   );
 };
 
