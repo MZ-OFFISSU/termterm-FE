@@ -4,10 +4,9 @@ import ContentsHeader from "./ContentsHeadeer";
 
 interface Props extends ViewProps {
   children: React.ReactNode;
-  title: string;
 }
 
-const ContentsWrapper = ({ title, children, ...props }: Props) => {
+const ContentsWrapper = ({ children, ...props }: Props) => {
   return <Container {...props}>{children}</Container>;
 };
 
@@ -17,6 +16,7 @@ const Container = styled.View`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  margin-top: 30px;
 `;
 
 export default ContentsWrapper;
