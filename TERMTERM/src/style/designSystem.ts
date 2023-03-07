@@ -74,6 +74,10 @@ export const TEXT_STYLES: Record<
       fontSize: 18,
       fontWeight: 600,
     },
+    [TEXT_STYLE_WEIGHT.Bd]: {
+      fontSize: 18,
+      fontWeight: 700,
+    },
     [TEXT_STYLE_WEIGHT.Eb]: {
       fontSize: 18,
       fontWeight: 800,
