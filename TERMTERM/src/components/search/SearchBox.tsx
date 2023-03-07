@@ -12,7 +12,11 @@ const SearchBox = ({ ...props }: Props) => {
   return (
     <Container COLOR={COLOR}>
       <Entypo name="magnifying-glass" size={24} color={COLOR.Text.muted} />
-      <InnerTextInput COLOR={COLOR} {...props} />
+      <InnerTextInput
+        COLOR={COLOR}
+        {...props}
+        placeholder="검색어를 입력해주세요."
+      />
     </Container>
   );
 };
@@ -26,14 +30,17 @@ const Container = styled.View<{ COLOR: colorTheme }>`
   justify-content: flex-start;
   align-items: center;
   padding: 0px 10px;
+  border-radius: 6px;
+  overflow: hidden;
 `;
 
 const InnerTextInput = styled.TextInput<{ COLOR: colorTheme }>`
-  width: 95%;
+  width: 90%;
   height: 44px;
   color: ${(props) => props.COLOR.Text.active};
   font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
   font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
+  margin-left: 8px;
 `;
 
 export default SearchBox;
