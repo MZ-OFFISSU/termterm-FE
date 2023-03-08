@@ -20,7 +20,6 @@ interface Props extends TouchableOpacityProps {
 
 const WordCard = () => {
   const [width, setWidth] = useState(83);
-  const [btnWidth, setBtnWidth] = useState(318);
   /** 북마크 여부 상태 */
   const [bookmarkBool, setBookmarkBool] = useState(false);
 
@@ -80,6 +79,7 @@ const Card = styled.View`
   align-items: center;
   overflow: hidden;
   background-color: ${LIGHT_COLOR_STYLE.THEME.primary[10]};
+  margin-bottom: 30px;
 `;
 
 const TitleBox = styled.View`
