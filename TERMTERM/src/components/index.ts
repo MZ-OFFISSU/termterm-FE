@@ -14,6 +14,7 @@ import CustomButton, {
 } from "./buttons/CustomButton";
 import CustomSelector from "./buttons/CustomSelector";
 import JobCard from "./cards/JobCard";
+import WordCard from "./cards/WordCard";
 
 export { BUTTON_STATE, BUTTON_TYPE };
 export { NavigatorTitle, NavigatorPager, CaretBtn };
@@ -25,5 +26,6 @@ export {
   CustomButton,
   CustomSelector,
   JobCard,
+  WordCard,
   TitleWrapper,
 };
