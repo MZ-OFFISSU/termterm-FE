@@ -15,6 +15,7 @@ import CustomButton, {
 import CustomSelector from "./buttons/CustomSelector";
 import JobCard from "./cards/JobCard";
 import WordCard from "./cards/WordCard";
+import DailyQuizRouter from "./quiz/DailyQuizRouter";
 
 export { BUTTON_STATE, BUTTON_TYPE };
 export { NavigatorTitle, NavigatorPager, CaretBtn };
@@ -27,5 +28,6 @@ export {
   CustomSelector,
   JobCard,
   WordCard,
+  DailyQuizRouter,
   TitleWrapper,
 };
