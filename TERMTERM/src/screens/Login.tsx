@@ -54,7 +54,10 @@ const Login = ({ navigation }: Props) => {
             type="google"
             onPress={() => navigation.navigate("ToolBar")}
           />
-          <SocialLoginButton type="apple" />
+          <SocialLoginButton 
+            type="apple" 
+            onPress={() => navigation.navigate("Mainhome")}
+          />
         </ButtonBox>
         <UrlText
           text={`회원가입시 서비스 이용약관 및 개인정보 처리방침에\n동의하게 됩니다.`}
