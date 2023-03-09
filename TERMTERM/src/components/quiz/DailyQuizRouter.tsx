@@ -42,7 +42,7 @@ const DailyQuizRouter = () => {
 const Container = styled.View`
   width: 358px;
   height: 115px;
-  margin: 5px;
+  margin-bottom: 40px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
