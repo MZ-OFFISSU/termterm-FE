@@ -16,6 +16,7 @@ const SearchBox = ({ ...props }: Props) => {
         COLOR={COLOR}
         {...props}
         placeholder="검색어를 입력해주세요."
+        returnKeyType="done"
       />
     </Container>
   );
