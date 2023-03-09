@@ -3,28 +3,30 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { TitleBar } from "@components/header";
-import {
-  SearchBox,
-  ContentsWrapper,
-  ContentsHeader,
-  LogWrapper,
-} from "@components/search";
+import { SearchBox } from "@components/search";
+import { RecentSearched } from "@components/search/containers";
+import { useState } from "react";
+import { useSearch } from "@hooks/useSearch";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
 const dummy = ["기획", "루시", "바쁘거든", "채워", "바빠", "바빠유"];
 
 const Search = ({ navigation }: Props) => {
+  const [keyword, setKeyword] = useState("");
+  const [records, setRecords] = useSearch();
+
   return (
     <SafeAreaView style={{ backgroundColor: "white" }}>
       <Container stickyHeaderIndices={[0]}>
         <TitleBar title="검색" />
         <CotentsArea>
-          <SearchBox />
-          <ContentsWrapper>
-            <ContentsHeader title="최근 검색어" />
-            <LogWrapper logs={dummy} />
-          </ContentsWrapper>
+          <SearchBox
+            onSubmitEditing={() => setRecords([...records, keyword])}
+            value={keyword}
+            onChangeText={(text) => setKeyword(text)}
+          />
+          <RecentSearched records={records} />
         </CotentsArea>
       </Container>
     </SafeAreaView>

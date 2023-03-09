@@ -1,15 +1,17 @@
 import styled from "styled-components/native";
 import Log from "./Log";
+import { useSearch } from "@hooks/useSearch";
 
-interface Props {
-  logs: Array<string>;
-}
-
-const LogWrapper = ({ logs }: Props) => {
+const LogWrapper = () => {
+  const [records, setRecords] = useSearch();
   return (
     <Container>
-      {logs.map((log, idx) => (
-        <Log title={log} key={log} />
+      {records.map((log, idx) => (
+        <Log
+          title={log}
+          key={`${log}_${idx}`}
+          onPress={() => setRecords(records.filter((re) => re !== log))}
+        />
       ))}
     </Container>
   );
