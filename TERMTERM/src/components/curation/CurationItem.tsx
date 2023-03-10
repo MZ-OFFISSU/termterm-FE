@@ -45,7 +45,7 @@ const ItemContainer = styled.View`
 const CurationTitle = styled.Text<{ COLOR: colorTheme }>`
   font-size: ${TEXT_STYLES.md2.Md?.fontSize}px;
   font-weight: ${TEXT_STYLES.md2.Md?.fontWeight};
-  color: ${(props) => props.COLOR.Text.darken};
+  color: ${(props) => props.COLOR.Text.active};
 `;
 
 const CurationThumbnail = styled.TouchableOpacity`
