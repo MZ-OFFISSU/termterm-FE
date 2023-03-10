@@ -4,6 +4,7 @@ import ContentsWrapper from "./components/ContentsWrapper";
 import SearchBox from "./components/SearchBox";
 import NotResult from "./components/NotResult";
 import RecommendWrapper from "./components/RecommendWrapper";
+import ResultWrapper from "./components/ResultWrapper";
 
 export {
   LogWrapper,
@@ -12,4 +13,5 @@ export {
   ContentsHeader,
   NotResult,
   RecommendWrapper,
+  ResultWrapper,
 };
