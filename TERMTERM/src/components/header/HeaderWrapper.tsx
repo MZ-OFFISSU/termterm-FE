@@ -2,6 +2,8 @@ import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { ViewProps } from "react-native";
 import { colorTheme } from "@style/designSystem";
+import { useRecoilState } from "recoil";
+import { themeState } from "@recoil/themeState";
 
 interface Props extends ViewProps {
   children: React.ReactNode;
@@ -12,14 +14,16 @@ interface Props extends ViewProps {
  */
 const HeaderWrapper = ({ children, ...props }: Props) => {
   const [COLOR] = useThemeStyle();
+  const [mode, setMode] = useRecoilState(themeState);
+
   return (
-    <Container COLOR={COLOR} {...props}>
+    <Container COLOR={COLOR} mode={mode} {...props}>
       {children}
     </Container>
   );
 };
 
-const Container = styled.View<{ COLOR: colorTheme }>`
+const Container = styled.View<{ COLOR: colorTheme; mode: boolean }>`
   width: 100%;
   height: 44px;
   display: flex;
@@ -27,7 +31,9 @@ const Container = styled.View<{ COLOR: colorTheme }>`
   align-items: center;
   top: 0px;
   background-color: ${(props) => props.COLOR.Background.surface};
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 3px;
+  box-shadow: ${(props) =>
+      props.mode ? "rgba(0, 0, 0, 0.04)" : "rgba(255, 255, 255, 0.04)"}
+    0px 1.5px 1.5px;
 `;
 
 export default HeaderWrapper;
