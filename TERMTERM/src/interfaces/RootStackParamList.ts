@@ -10,4 +10,7 @@ export type RootStackParamList = {
   ToolBar: undefined;
   Onboarding: undefined;
   Curation: undefined;
+  Mainhome: undefined;
+  Search: undefined;
+  ArchiveBookmark: undefined;
 };
