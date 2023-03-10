@@ -56,7 +56,6 @@ const Login = ({ navigation }: Props) => {
           />
           <SocialLoginButton 
             type="apple" 
-            onPress={() => navigation.navigate("Mainhome")}
           />
         </ButtonBox>
         <UrlText
