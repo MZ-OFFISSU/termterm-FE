@@ -43,7 +43,7 @@ const ToolBar = () => {
           ),
           tabBarLabel: ({ focused }) => (
             <Label focused={focused} COLOR={COLOR}>
-              검색
+              홈
             </Label>
           ),
         }}
@@ -66,7 +66,7 @@ const ToolBar = () => {
           ),
           tabBarLabel: ({ focused }) => (
             <Label focused={focused} COLOR={COLOR}>
-              아카이브
+              검색
             </Label>
           ),
         }}
@@ -89,7 +89,7 @@ const ToolBar = () => {
           ),
           tabBarLabel: ({ focused }) => (
             <Label focused={focused} COLOR={COLOR}>
-              홈
+              아카이브
             </Label>
           ),
         }}

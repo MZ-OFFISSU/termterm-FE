@@ -11,4 +11,5 @@ export type RootStackParamList = {
   Onboarding: undefined;
   Curation: undefined;
   Mainhome: undefined;
+  Search: undefined;
 };
