@@ -128,7 +128,11 @@ export const TEXT_STYLES: Record<
     },
   },
   [TEXT_STYLE_SIZE.xxxsm]: {
-    [TEXT_STYLE_WEIGHT.default]: {
+    [TEXT_STYLE_WEIGHT.Reg]: {
+      fontSize: 10,
+      fontWeight: 400,
+    },
+    [TEXT_STYLE_WEIGHT.Md]: {
       fontSize: 10,
       fontWeight: 500,
     },
