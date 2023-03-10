@@ -1,23 +1,23 @@
 import styled from "styled-components/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StackScreenProps } from "@react-navigation/stack";
-import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { TitleBar } from "@components/header";
 import { SearchBox } from "@components/search";
 import { RecentSearched } from "@components/search/containers";
 import { useState } from "react";
 import { useSearch } from "@hooks/useSearch";
+import { useThemeStyle } from "@hooks/useThemeStyle";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
-
-const dummy = ["기획", "루시", "바쁘거든", "채워", "바빠", "바빠유"];
 
 const Search = ({ navigation }: Props) => {
   const [keyword, setKeyword] = useState("");
   const [records, setRecords] = useSearch();
+  const [COLOR] = useThemeStyle();
 
   return (
-    <SafeAreaView style={{ backgroundColor: "white" }}>
+    <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
       <Container stickyHeaderIndices={[0]}>
         <TitleBar title="검색" />
         <CotentsArea>
@@ -26,7 +26,7 @@ const Search = ({ navigation }: Props) => {
             value={keyword}
             onChangeText={(text) => setKeyword(text)}
           />
-          <RecentSearched records={records} />
+          <RecentSearched />
         </CotentsArea>
       </Container>
     </SafeAreaView>

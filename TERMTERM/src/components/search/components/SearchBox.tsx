@@ -17,6 +17,7 @@ const SearchBox = ({ ...props }: Props) => {
         {...props}
         placeholder="검색어를 입력해주세요."
         returnKeyType="done"
+        placeholderTextColor={COLOR.Text.muted}
       />
     </Container>
   );

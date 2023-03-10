@@ -13,7 +13,7 @@ const Log = ({ title, ...props }: Props) => {
   return (
     <LogBtn COLOR={COLOR} {...props}>
       <LogTitle COLOR={COLOR}>{title}</LogTitle>
-      <Feather name="x" size={18} color={COLOR.Text.darken} />
+      <Feather name="x" size={18} color={COLOR.Text.active} />
     </LogBtn>
   );
 };
@@ -32,7 +32,7 @@ const LogBtn = styled.TouchableOpacity<{ COLOR: colorTheme }>`
 const LogTitle = styled.Text<{ COLOR: colorTheme }>`
   font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
   font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
-  color: ${(props) => props.COLOR.Text.darken};
+  color: ${(props) => props.COLOR.Text.active};
   margin-right: 5px;
 `;
 
