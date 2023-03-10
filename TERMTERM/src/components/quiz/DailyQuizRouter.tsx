@@ -28,7 +28,8 @@ const DailyQuizRouter = () => {
           <AutoSizedImage
               source={require("@assets/test.png")}
               width={width}
-              style={{ marginTop: 12 }}
+              style={{ marginTop: 13 }}
+
           />
           <Title>Daily 용어 퀴즈를 시작해 볼까요?</Title>
           <AutoSizedImage

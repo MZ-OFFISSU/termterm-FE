@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { Curation, Home, Login, Onboarding, ArchiveBookmark } from "@screens/index";
+import { Search, Archive, My } from "@screens/Toolbar/index";
 import ToolBar from "@screens/ToolBar";
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -41,8 +42,8 @@ const Container = () => {
           options={{ headerShown: false }}
         />
         <RootStack.Screen
-          name="ArchiveBookmark"
-          component={ArchiveBookmark}
+          name="Search"
+          component={Search}
           options={{ headerShown: false }}
         />
       </RootStack.Navigator>

@@ -14,6 +14,8 @@ import CustomButton, {
 } from "./buttons/CustomButton";
 import CustomSelector from "./buttons/CustomSelector";
 import JobCard from "./cards/JobCard";
+import WordCard from "./cards/WordCard";
+import BookmarkWordCard from "./cards/BookmarkWordCard";
 import DailyQuizRouter from "./quiz/DailyQuizRouter";
 import ArchiveSelector from "./archive/ArchiveSelector";
 
@@ -27,6 +29,9 @@ export {
   CustomButton,
   CustomSelector,
   JobCard,
+  WordCard,
+  BookmarkWordCard,
+  DailyQuizRouter,
   TitleWrapper,
   ArchiveSelector,
 };
