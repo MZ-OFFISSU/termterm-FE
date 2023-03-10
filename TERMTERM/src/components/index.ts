@@ -14,6 +14,8 @@ import CustomButton, {
 } from "./buttons/CustomButton";
 import CustomSelector from "./buttons/CustomSelector";
 import JobCard from "./cards/JobCard";
+import DailyQuizRouter from "./quiz/DailyQuizRouter";
+import ArchiveSelector from "./archive/ArchiveSelector";
 
 export { BUTTON_STATE, BUTTON_TYPE };
 export { NavigatorTitle, NavigatorPager, CaretBtn };
@@ -26,4 +28,5 @@ export {
   CustomSelector,
   JobCard,
   TitleWrapper,
+  ArchiveSelector,
 };
