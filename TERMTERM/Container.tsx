@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { Curation, Home, Login, Onboarding } from "@screens/index";
+import { Curation, Home, Login, Onboarding, ArchiveBookmark } from "@screens/index";
 import { Search, Archive, My } from "@screens/Toolbar/index";
 import ToolBar from "@screens/ToolBar";
 

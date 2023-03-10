@@ -12,4 +12,5 @@ export type RootStackParamList = {
   Curation: undefined;
   Mainhome: undefined;
   Search: undefined;
+  ArchiveBookmark: undefined;
 };
