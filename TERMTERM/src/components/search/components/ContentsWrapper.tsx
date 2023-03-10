@@ -16,7 +16,7 @@ const Container = styled.View`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 35px;
 `;
 
 export default ContentsWrapper;
