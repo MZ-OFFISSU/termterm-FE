@@ -15,6 +15,7 @@ import CustomButton, {
 import CustomSelector from "./buttons/CustomSelector";
 import JobCard from "./cards/JobCard";
 import WordCard from "./cards/WordCard";
+import BookmarkWordCard from "./cards/BookmarkWordCard";
 import DailyQuizRouter from "./quiz/DailyQuizRouter";
 
 export { BUTTON_STATE, BUTTON_TYPE };
@@ -28,6 +29,7 @@ export {
   CustomSelector,
   JobCard,
   WordCard,
+  BookmarkWordCard,
   DailyQuizRouter,
   TitleWrapper,
 };
