@@ -2,7 +2,12 @@ import styled from "styled-components/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TitleBar } from "@components/header";
 import { SearchBox } from "@components/search";
-import { RecentSearched } from "@components/search/containers";
+import {
+  RecentSearched,
+  RecommendKeyword,
+  RecommendList,
+  ResultList,
+} from "@components/search/containers";
 import { useState } from "react";
 import { useSearch } from "@hooks/useSearch";
 import { useThemeStyle } from "@hooks/useThemeStyle";
@@ -26,7 +31,10 @@ const Search = ({ navigation }: Props) => {
             value={keyword}
             onChangeText={(text) => setKeyword(text)}
           />
+          {/* <ResultList /> */}
           <RecentSearched />
+          <RecommendKeyword />
+          <RecommendList />
         </CotentsArea>
       </Container>
     </SafeAreaView>
