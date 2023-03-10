@@ -5,20 +5,26 @@ import {
   LogWrapper,
   NotResult,
 } from "@components/search";
-
-interface Props extends ViewProps {
-  records: Array<string>;
-}
-
+import styled from "styled-components/native";
+import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { useThemeStyle } from "@hooks/useThemeStyle";
+import { useSearch } from "@hooks/useSearch";
 /**
  * 최근 검색 컨테이너 컴포넌트
  */
-const RecentSearched = ({ records, ...props }: Props) => {
+const RecentSearched = ({ ...props }: ViewProps) => {
+  const [COLOR] = useThemeStyle();
+  const [records, setRecords] = useSearch();
+
   return (
     <ContentsWrapper {...props}>
       {records.length > 0 ? (
         <>
-          <ContentsHeader title="최근 검색어" />
+          <ContentsHeader title="최근 검색어">
+            <RemoveButton onPress={() => setRecords([])}>
+              <RemoveText COLOR={COLOR}>검색어 전체삭제</RemoveText>
+            </RemoveButton>
+          </ContentsHeader>
           <LogWrapper />
         </>
       ) : (
@@ -30,5 +36,13 @@ const RecentSearched = ({ records, ...props }: Props) => {
     </ContentsWrapper>
   );
 };
+
+const RemoveButton = styled.TouchableOpacity``;
+
+const RemoveText = styled.Text<{ COLOR: colorTheme }>`
+  font-size: ${TEXT_STYLES["3xsm"].Md?.fontSize}px;
+  font-weight: ${TEXT_STYLES["3xsm"].Md?.fontWeight};
+  color: ${(props) => props.COLOR.Text.default};
+`;
 
 export default RecentSearched;

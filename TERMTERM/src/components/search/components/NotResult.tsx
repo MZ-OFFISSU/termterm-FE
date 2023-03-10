@@ -25,6 +25,7 @@ const ResultBox = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  margin: 50px 0px;
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
