@@ -5,11 +5,15 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { Home, Search, Archive, My } from "./Toolbar/index";
 import { TEXT_STYLES } from "@style/designSystem";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
+
+export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
 /**
  * 툴바(바텀바) 컴포넌트
  */
-const ToolBar = () => {
+const ToolBar = ({ navigation}: Props) => {
   /** tabNavigator 생성 */
   const Tab = createBottomTabNavigator();
   const [COLOR] = useThemeStyle();
@@ -28,7 +32,7 @@ const ToolBar = () => {
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        children={() => <Home navigation={navigation} />}
         options={{
           headerShown: false,
           title: "홈",
