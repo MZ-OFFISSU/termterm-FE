@@ -13,7 +13,7 @@ export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 /**
  * 툴바(바텀바) 컴포넌트
  */
-const ToolBar = ({ navigation}: Props) => {
+const ToolBar = ({ ...props }: Props) => {
   /** tabNavigator 생성 */
   const Tab = createBottomTabNavigator();
   const [COLOR] = useThemeStyle();
@@ -23,6 +23,7 @@ const ToolBar = ({ navigation}: Props) => {
       screenOptions={({ route }) => ({
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
+          backgroundColor: COLOR.Background.surface,
           height: 65,
           paddingTop: 10,
           paddingBottom: 10,
@@ -32,7 +33,7 @@ const ToolBar = ({ navigation}: Props) => {
     >
       <Tab.Screen
         name="Home"
-        children={() => <Home navigation={navigation} />}
+        component={Home}
         options={{
           headerShown: false,
           title: "홈",
@@ -52,10 +53,9 @@ const ToolBar = ({ navigation}: Props) => {
           ),
         }}
       />
-
       <Tab.Screen
         name="Search"
-        component={Search}
+        children={() => <Search {...props} />}
         options={{
           headerShown: false,
           title: "검색",
