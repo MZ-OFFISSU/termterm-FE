@@ -12,7 +12,7 @@ import { CurationItemProps } from "@interfaces/curation";
 import { TouchableOpacity, Text, View } from "react-native";
 import { HomeBar } from "@components/header";
 
-export type Props = StackScreenProps<RootStackParamList, "Mainhome">;
+export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
 interface TextType {
     username: string
@@ -61,7 +61,7 @@ const Home = ({ navigation }: Props) => {
               <TitleBox>
                   <Title>Daily 용어 퀴즈</Title>
               </TitleBox>
-              <DailyQuizRouter />
+              <DailyQuizRouter navigation={navigation} route={undefined} />
               <FlexContainer>
                   <TitleContainer 
                       username={"세원"}
