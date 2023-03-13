@@ -12,7 +12,11 @@ import AutoSizedImage from "@components/common/AutoSizedImage";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 
-const BookmarkWordCard = () => {
+interface WordCardProps {
+    explain: string;
+}
+
+const BookmarkWordCard = (props: WordCardProps) => {
     const [width, setWidth] = useState(83);
     /** 북마크 여부 상태 */
     const [bookmarkBool, setBookmarkBool] = useState(false);
@@ -40,7 +44,7 @@ const BookmarkWordCard = () => {
 
     return (
         <Card>
-
+            {props.explain}
         </Card>
     );
 }
