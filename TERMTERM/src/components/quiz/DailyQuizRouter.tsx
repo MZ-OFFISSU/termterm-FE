@@ -11,6 +11,9 @@ import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
+export type ScreenProps = StackScreenProps<RootStackParamList, "ToolBar">;
 
 interface Props extends TouchableOpacityProps {
   title: string;
@@ -18,7 +21,7 @@ interface Props extends TouchableOpacityProps {
   isFocused: boolean;
 }
 
-const DailyQuizRouter = () => {
+const DailyQuizRouter = ({ navigation }: ScreenProps ) => {
     const [width, setWidth] = useState(20);
     const [btnWidth, setBtnWidth] = useState(40);
 
@@ -32,10 +35,14 @@ const DailyQuizRouter = () => {
 
           />
           <Title>Daily 용어 퀴즈를 시작해 볼까요?</Title>
-          <AutoSizedImage
-              source = {require("@assets/arrow-button.png")}
-              width={btnWidth}
-          />
+          <TouchableOpacity
+            onPress={() => navigation.navigate("DailyQuiz")}
+          >
+            <AutoSizedImage
+                source = {require("@assets/arrow-button.png")}
+                width={btnWidth}
+            />
+          </TouchableOpacity>
         </FlexContainer>
       </Container>
     )
@@ -70,5 +77,8 @@ const Title = styled.Text`
   margin-top: 15px;
 `;
 
+const ArrowButton = styled.TouchableOpacity`
+
+`;
 
 export default DailyQuizRouter;
