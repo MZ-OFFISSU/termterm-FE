@@ -5,18 +5,24 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme } from "@style/designSystem";
 import { Ionicons } from "@expo/vector-icons";
 
+interface Props extends CurationItemProps {
+  onMove: (id: number) => void;
+}
+
 const CurationItem = ({
+  id,
   title,
   img,
   counts,
   marked,
+  onMove,
   ...props
-}: CurationItemProps) => {
+}: Props) => {
   const [COLOR] = useThemeStyle();
   return (
     <ItemContainer {...props}>
       <CurationTitle COLOR={COLOR}>{title}</CurationTitle>
-      <CurationThumbnail>
+      <CurationThumbnail onPress={() => onMove(id)}>
         <CurationImage source={{ uri: img }} />
         <WordsNum>용어 {counts}개</WordsNum>
         <BookmarkButton>

@@ -34,7 +34,7 @@ const Search = ({ navigation }: Props) => {
           {/* <ResultList /> */}
           <RecentSearched />
           <RecommendKeyword />
-          <RecommendList />
+          <RecommendList navigation={navigation} />
         </CotentsArea>
       </Container>
     </SafeAreaView>
