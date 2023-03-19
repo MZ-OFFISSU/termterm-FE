@@ -7,7 +7,7 @@ import { CurationItem, CurationSelector } from "@components/curation";
 import { useState } from "react";
 import { CurationItemProps } from "@interfaces/curation";
 
-export type Props = StackScreenProps<RootStackParamList, "Login">;
+export type Props = StackScreenProps<RootStackParamList, "Curation">;
 
 const curationItems = [
   "추천",
