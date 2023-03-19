@@ -2,7 +2,15 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { Curation, Home, Login, Onboarding, ArchiveBookmark, DailyQuiz, CompleteQuiz } from "@screens/index";
+import {
+  Curation,
+  Home,
+  Login,
+  Onboarding,
+  ArchiveBookmark,
+  DailyQuiz,
+  CompleteQuiz,
+} from "@screens/index";
 import { Search, Archive, My } from "@screens/Toolbar/index";
 import ToolBar from "@screens/ToolBar";
 
@@ -27,23 +35,8 @@ const Container = () => {
           options={{ headerShown: false }}
         />
         <RootStack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen
           name="ToolBar"
           component={ToolBar}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen
-          name="Curation"
-          component={Curation}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen
-          name="Search"
-          component={Search}
           options={{ headerShown: false }}
         />
         <RootStack.Screen

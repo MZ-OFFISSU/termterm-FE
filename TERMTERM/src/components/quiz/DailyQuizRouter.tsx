@@ -5,8 +5,20 @@ import {
   ImageSourcePropType,
   Image,
 } from "react-native";
-import { DARK_COLOR_STYLE, LIGHT_COLOR_STYLE, TEXT_STYLES, TEXT_STYLE_SIZE, TEXT_STYLE_WEIGHT } from "@style/designSystem";
-import { UrlText, NonScrollContainer, CustomButton, BUTTON_TYPE, BUTTON_STATE } from "@components/index";
+import {
+  DARK_COLOR_STYLE,
+  LIGHT_COLOR_STYLE,
+  TEXT_STYLES,
+  TEXT_STYLE_SIZE,
+  TEXT_STYLE_WEIGHT,
+} from "@style/designSystem";
+import {
+  UrlText,
+  NonScrollContainer,
+  CustomButton,
+  BUTTON_TYPE,
+  BUTTON_STATE,
+} from "@components/index";
 import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -21,32 +33,29 @@ interface Props extends TouchableOpacityProps {
   isFocused: boolean;
 }
 
-const DailyQuizRouter = ({ navigation }: ScreenProps ) => {
-    const [width, setWidth] = useState(20);
-    const [btnWidth, setBtnWidth] = useState(40);
+const DailyQuizRouter = ({ navigation }: ScreenProps) => {
+  const [width, setWidth] = useState(20);
+  const [btnWidth, setBtnWidth] = useState(40);
 
-    return (
-      <Container>
-        <FlexContainer>
+  return (
+    <Container>
+      <FlexContainer>
+        <AutoSizedImage
+          source={require("@assets/test.png")}
+          width={width}
+          style={{ marginTop: 13 }}
+        />
+        <Title>Daily 용어 퀴즈를 시작해 볼까요?</Title>
+        <TouchableOpacity onPress={() => navigation.navigate("DailyQuiz")}>
           <AutoSizedImage
-              source={require("@assets/test.png")}
-              width={width}
-              style={{ marginTop: 13 }}
-
+            source={require("@assets/arrow-button.png")}
+            width={btnWidth}
           />
-          <Title>Daily 용어 퀴즈를 시작해 볼까요?</Title>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("DailyQuiz")}
-          >
-            <AutoSizedImage
-                source = {require("@assets/arrow-button.png")}
-                width={btnWidth}
-            />
-          </TouchableOpacity>
-        </FlexContainer>
-      </Container>
-    )
-}
+        </TouchableOpacity>
+      </FlexContainer>
+    </Container>
+  );
+};
 
 const Container = styled.View`
   width: 358px;
@@ -66,7 +75,7 @@ const FlexContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   margin: auto 0;
-  align-item: center;
+  align-items: center;
 `;
 
 const Title = styled.Text`
@@ -77,8 +86,6 @@ const Title = styled.Text`
   margin-top: 15px;
 `;
 
-const ArrowButton = styled.TouchableOpacity`
-
-`;
+const ArrowButton = styled.TouchableOpacity``;
 
 export default DailyQuizRouter;

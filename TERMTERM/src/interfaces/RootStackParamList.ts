@@ -5,12 +5,13 @@
  * e.g. Profile: {name: string};
  */
 export type RootStackParamList = {
-  Home: undefined;
   Login: undefined;
   ToolBar: undefined;
   Onboarding: undefined;
   Curation: undefined;
+  Home: undefined;
   Search: undefined;
+  Archive: undefined;
   ArchiveBookmark: undefined;
   DailyQuiz: undefined;
   CompleteQuiz: undefined;
