@@ -33,7 +33,7 @@ const ToolBar = ({ ...props }: Props) => {
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        children={() => <Home {...props} />}
         options={{
           headerShown: false,
           title: "홈",
@@ -78,7 +78,7 @@ const ToolBar = ({ ...props }: Props) => {
 
       <Tab.Screen
         name="Archive"
-        component={Archive}
+        children={() => <Archive {...props} />}
         options={{
           headerShown: false,
           title: "아카이브",
