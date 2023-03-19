@@ -4,6 +4,8 @@ import { View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import Container from "./Container";
 import { RecoilRoot } from "recoil";
+import Toast from "react-native-toast-message";
+import { toastConfig } from "@components/popup/toast";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -48,6 +50,7 @@ export default function App() {
       <RecoilRoot>
         <Container />
       </RecoilRoot>
+      <Toast position="top" topOffset={40} config={toastConfig} />
     </View>
   );
 }
