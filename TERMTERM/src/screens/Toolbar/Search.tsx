@@ -19,7 +19,7 @@ export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 const Search = ({ navigation }: Props) => {
   const [keyword, setKeyword] = useState("");
   const [records, setRecords] = useSearch();
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
@@ -34,7 +34,7 @@ const Search = ({ navigation }: Props) => {
           {/* <ResultList /> */}
           <RecentSearched />
           <RecommendKeyword />
-          <RecommendList />
+          <RecommendList navigation={navigation} />
         </CotentsArea>
       </Container>
     </SafeAreaView>

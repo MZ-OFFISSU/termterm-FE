@@ -4,14 +4,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import {
   Curation,
-  Home,
   Login,
   Onboarding,
-  ArchiveBookmark,
   DailyQuiz,
   CompleteQuiz,
+  CurationDetail,
 } from "@screens/index";
-import { Search, Archive, My } from "@screens/Toolbar/index";
 import ToolBar from "@screens/ToolBar";
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -47,6 +45,16 @@ const Container = () => {
         <RootStack.Screen
           name="CompleteQuiz"
           component={CompleteQuiz}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name="Curation"
+          component={Curation}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name="CurationDetail"
+          component={CurationDetail}
           options={{ headerShown: false }}
         />
       </RootStack.Navigator>

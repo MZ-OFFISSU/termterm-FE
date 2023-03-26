@@ -7,8 +7,6 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import styled from "styled-components/native";
-import { useRecoilState } from "recoil";
-import { themeState } from "@recoil/themeState";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -30,11 +28,10 @@ interface Props {
  * 아이콘과 함수를 유동적으로 삽입할 수 있는 헤더
  */
 const IconBar = ({ curNum, maxNum, onBack, icon, onPress, onDots }: Props) => {
-  const [theme, setTheme] = useRecoilState(themeState);
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
 
   const Fold = () => {
-    return theme ? (
+    return mode ? (
       <AutoSizedImage source={require("@assets/icon/fold.png")} height={22} />
     ) : (
       <AutoSizedImage
@@ -45,7 +42,7 @@ const IconBar = ({ curNum, maxNum, onBack, icon, onPress, onDots }: Props) => {
   };
 
   const Collapse = () => {
-    return theme ? (
+    return mode ? (
       <AutoSizedImage
         source={require("@assets/icon/collapse.png")}
         height={24}

@@ -10,7 +10,7 @@ interface Props extends ViewProps {
 }
 
 const NotResult = ({ title, subtitle, ...props }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   return (
     <ResultBox {...props}>
       <Title COLOR={COLOR}>{title}</Title>

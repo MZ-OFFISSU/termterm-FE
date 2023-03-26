@@ -23,7 +23,7 @@ const BookmarkBar = ({
   title,
   bookmarked,
 }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <ElementWrapper style={{ marginLeft: 20 }}>

@@ -5,6 +5,7 @@ import { ViewProps } from "react-native";
  *
  */
 export interface CurationItemProps extends ViewProps {
+  id: number;
   title: string;
   img: string;
   counts: number;

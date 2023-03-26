@@ -11,7 +11,7 @@ interface Props {
  * 메인 화면에서 사용될 헤더 컴포넌트
  */
 const HomeBar = ({ onSearch }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <AutoSizedImage

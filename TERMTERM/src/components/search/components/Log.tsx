@@ -9,7 +9,7 @@ interface Props extends TouchableOpacityProps {
 }
 
 const Log = ({ title, ...props }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   return (
     <LogBtn COLOR={COLOR} {...props}>
       <LogTitle COLOR={COLOR}>{title}</LogTitle>

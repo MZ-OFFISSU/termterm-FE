@@ -10,7 +10,7 @@ interface Props {
 }
 
 const CurationSelector = ({ items, curIdx, setIdx }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   return (
     <Selectors>
       {items.map((item, idx) => (

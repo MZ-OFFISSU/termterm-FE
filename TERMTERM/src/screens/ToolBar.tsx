@@ -16,7 +16,7 @@ export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 const ToolBar = ({ ...props }: Props) => {
   /** tabNavigator 생성 */
   const Tab = createBottomTabNavigator();
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <Tab.Navigator
@@ -27,6 +27,7 @@ const ToolBar = ({ ...props }: Props) => {
           height: 65,
           paddingTop: 10,
           paddingBottom: 10,
+          borderTopColor: "#3c3c4353",
         },
         headerShown: false,
       })}

@@ -20,7 +20,7 @@ export type Props = StackScreenProps<RootStackParamList, "Onboarding">;
 const STAGES = [First, Second, Third] as const;
 
 const Onboarding = ({ navigation }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   const [stage, setStage] = useState(0);
   const CurrentPage = STAGES[stage];
 

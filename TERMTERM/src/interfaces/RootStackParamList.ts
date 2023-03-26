@@ -15,4 +15,5 @@ export type RootStackParamList = {
   ArchiveBookmark: undefined;
   DailyQuiz: undefined;
   CompleteQuiz: undefined;
+  CurationDetail: { id: number };
 };

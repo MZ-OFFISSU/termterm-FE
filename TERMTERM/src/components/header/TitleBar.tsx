@@ -35,7 +35,7 @@ export interface Props {
  * 1~3번 헤더 컴포넌트
  */
 const TitleBar = ({ title, icon, point, onPress }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <NavigatorTitle style={{ color: COLOR.Text.active, marginLeft: 20 }}>

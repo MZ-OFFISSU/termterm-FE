@@ -7,7 +7,7 @@ import { Entypo } from "@expo/vector-icons";
 interface Props extends TextInputProps {}
 
 const SearchBox = ({ ...props }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <Container COLOR={COLOR}>

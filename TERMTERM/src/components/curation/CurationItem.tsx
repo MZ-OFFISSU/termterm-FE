@@ -4,19 +4,26 @@ import { TEXT_STYLES } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme } from "@style/designSystem";
 import { Ionicons } from "@expo/vector-icons";
+import { BookmarkButton } from "@components/common/Bookmark";
+
+interface Props extends CurationItemProps {
+  onMove: (id: number) => void;
+}
 
 const CurationItem = ({
+  id,
   title,
   img,
   counts,
   marked,
+  onMove,
   ...props
-}: CurationItemProps) => {
-  const [COLOR] = useThemeStyle();
+}: Props) => {
+  const [COLOR, mode] = useThemeStyle();
   return (
     <ItemContainer {...props}>
       <CurationTitle COLOR={COLOR}>{title}</CurationTitle>
-      <CurationThumbnail>
+      <CurationThumbnail onPress={() => onMove(id)}>
         <CurationImage source={{ uri: img }} />
         <WordsNum>용어 {counts}개</WordsNum>
         <BookmarkButton>
@@ -72,19 +79,6 @@ const WordsNum = styled.Text`
   font-size: ${TEXT_STYLES["2xsm"].default?.fontSize}px;
   font-weight: ${TEXT_STYLES["2xsm"].default?.fontWeight};
   color: white;
-`;
-
-const BookmarkButton = styled.TouchableOpacity`
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  width: 38px;
-  height: 38px;
-  border-radius: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffffff30;
 `;
 
 export default CurationItem;

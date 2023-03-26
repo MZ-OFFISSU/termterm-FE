@@ -25,10 +25,10 @@ const CustomModal = ({
   onClose,
   onNext,
 }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   return (
     <Modal isVisible={visible}>
-      <Container COLOR={COLOR}>
+      <Container COLOR={COLOR} mode={mode}>
         <Title COLOR={COLOR}>{title}</Title>
         {subtitle ? <Subtitle COLOR={COLOR}>{subtitle}</Subtitle> : <></>}
         <BtnWrapper>
@@ -53,9 +53,12 @@ const CustomModal = ({
   );
 };
 
-const Container = styled.View<{ COLOR: colorTheme }>`
+const Container = styled.View<{ COLOR: colorTheme; mode: boolean }>`
   height: 202px;
-  background-color: ${(props) => props.COLOR.Background.surface};
+  background-color: ${(props) =>
+    props.mode
+      ? props.COLOR.Background.surface
+      : props.COLOR.Background.onSurface};
   border-radius: 8px;
   display: flex;
   align-items: center;

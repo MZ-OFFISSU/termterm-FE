@@ -2,8 +2,6 @@ import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { ViewProps } from "react-native";
 import { colorTheme } from "@style/designSystem";
-import { useRecoilState } from "recoil";
-import { themeState } from "@recoil/themeState";
 
 interface Props extends ViewProps {
   children: React.ReactNode;
@@ -13,8 +11,7 @@ interface Props extends ViewProps {
  * 상단바 컴포넌트
  */
 const HeaderWrapper = ({ children, ...props }: Props) => {
-  const [COLOR] = useThemeStyle();
-  const [mode, setMode] = useRecoilState(themeState);
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <Container COLOR={COLOR} mode={mode} {...props}>

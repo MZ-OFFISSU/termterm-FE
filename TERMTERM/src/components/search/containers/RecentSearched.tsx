@@ -13,7 +13,7 @@ import { useSearch } from "@hooks/useSearch";
  * 최근 검색 컨테이너 컴포넌트
  */
 const RecentSearched = ({ ...props }: ViewProps) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   const [records, setRecords] = useSearch();
 
   return (

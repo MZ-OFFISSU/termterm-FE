@@ -21,18 +21,21 @@ interface TextType {
 
 const dummy: Array<CurationItemProps> = [
   {
+    id: 0,
     title: "개발자 필수용어 30개",
     img: "https://i.pinimg.com/736x/4b/bb/5a/4bbb5aec811322f1bd75dec7f860d251.jpg",
     counts: 30,
     marked: true,
   },
   {
+    id: 1,
     title: "UI/UX에게 꼭 필요한 실무 용어 20개",
     img: "https://i.pinimg.com/564x/bc/0d/10/bc0d109e5e3df2a7d30298fe094c9e7a.jpg",
     counts: 30,
     marked: false,
   },
   {
+    id: 2,
     title: "원활한 커뮤니케이션을 위한 비즈니스 용어",
     img: "https://i.pinimg.com/564x/1f/54/54/1f54548fb67b7c0e449c86625708eafe.jpg",
     counts: 30,
@@ -49,7 +52,7 @@ const Home = ({ navigation, route }: Props) => {
 
   //색상은 이걸로 넘겨서 쓰시면 됩니당.
   //타입은 import 해둔 colorTheme
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <SafeAreaView>
@@ -76,7 +79,12 @@ const Home = ({ navigation, route }: Props) => {
         </FlexContainer>
         <CurationCardWrapper>
           {dummy.map((item, idx) => (
-            <CurationItem {...item} key={item.img} style={{ marginTop: 20 }} />
+            <CurationItem
+              {...item}
+              onMove={() => navigation.push("CurationDetail", { id: item.id })}
+              key={item.img}
+              style={{ marginTop: 20 }}
+            />
           ))}
         </CurationCardWrapper>
       </Container>
