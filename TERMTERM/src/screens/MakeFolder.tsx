@@ -3,9 +3,10 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import styled from "styled-components/native";
 import { colorTheme } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { screenHeight } from "@style/dimensions";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputWrapper from "@components/makefolder/InputWrapper";
+import { Keyboard } from "react-native";
+import CompleteButton from "@components/makefolder/CompleteButton";
 
 export type Props = StackScreenProps<RootStackParamList, "MakeFolder">;
 
@@ -15,6 +16,25 @@ const MakeFolder = ({ navigation }: Props) => {
     name: "",
     desc: "",
   });
+  const [btnPosition, setBtnPosiition] = useState(30);
+
+  //임시로 만들어놓은 완료버튼 핸들러
+  //통신 및 다양한 수정이 필요함...
+  const onComplete = () => {
+    info.name !== "" ? navigation.pop() : null;
+  };
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardWillShow", (e) => {
+      setBtnPosiition(10 + e.endCoordinates.height);
+    });
+    const hideSubscription = Keyboard.addListener("keyboardWillHide", () => {
+      setBtnPosiition(30);
+    });
+
+    showSubscription;
+    hideSubscription;
+  }, []);
 
   return (
     <Container COLOR={COLOR}>
@@ -40,23 +60,30 @@ const MakeFolder = ({ navigation }: Props) => {
           returnKeyType="done"
         />
       </Wrapper>
+      <CompleteButton
+        ready={info.name !== ""}
+        position={btnPosition}
+        onPress={() => onComplete()}
+      />
     </Container>
   );
 };
 
 const Container = styled.View<{ COLOR: colorTheme }>`
   width: 100%;
-  height: ${screenHeight}px;
-  padding: 30px 32px;
+  height: 100%;
+  padding: 30px 16px;
   background-color: ${(props) => props.COLOR.Background.surface};
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  position: relative;
 `;
 
 const Wrapper = styled.View`
   width: 100%;
+  padding: 0px 16px;
 `;
 
 export default MakeFolder;
