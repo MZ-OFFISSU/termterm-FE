@@ -7,6 +7,7 @@ import { Home, Search, Archive, My } from "./Toolbar/index";
 import { TEXT_STYLES } from "@style/designSystem";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { TitleBar } from "@components/header";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -58,7 +59,10 @@ const ToolBar = ({ ...props }: Props) => {
         name="Search"
         children={() => <Search {...props} />}
         options={{
-          headerShown: false,
+          headerShown: true,
+          header: (props) => {
+            return <TitleBar title="검색" />;
+          },
           title: "검색",
           tabBarIcon: ({ focused }) => (
             <Ionicons

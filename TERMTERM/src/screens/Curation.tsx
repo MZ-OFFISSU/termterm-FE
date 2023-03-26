@@ -1,11 +1,11 @@
 import styled from "styled-components/native";
-import { BackBar } from "@components/header";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { CurationItem, CurationSelector } from "@components/curation";
 import { useState } from "react";
 import { CurationItemProps } from "@interfaces/curation";
+import { colorTheme } from "@style/designSystem";
+import { useThemeStyle } from "@hooks/useThemeStyle";
 
 export type Props = StackScreenProps<RootStackParamList, "Curation">;
 
@@ -66,38 +66,35 @@ const dummy: Array<CurationItemProps> = [
 
 const Curation = ({ navigation }: Props) => {
   const [idx, setIdx] = useState(0);
+  const [COLOR, mode] = useThemeStyle();
 
   return (
-    <SafeAreaView style={{ backgroundColor: "white" }}>
-      <Container stickyHeaderIndices={[0]}>
-        <BackBar title="전체 큐레이션" onBack={() => navigation.pop()} />
-        <ContentWrapper>
-          <CurationSelector
-            items={curationItems}
-            curIdx={idx}
-            setIdx={(idx: number) => setIdx(idx)}
-          />
-          <CurationCardWrapper>
-            {dummy.map((item, idx) => (
-              <CurationItem
-                {...item}
-                onMove={() =>
-                  navigation.push("CurationDetail", { id: item.id })
-                }
-                key={item.img}
-                style={{ marginTop: 20 }}
-              />
-            ))}
-          </CurationCardWrapper>
-        </ContentWrapper>
-      </Container>
-    </SafeAreaView>
+    <Container COLOR={COLOR}>
+      <ContentWrapper>
+        <CurationSelector
+          items={curationItems}
+          curIdx={idx}
+          setIdx={(idx: number) => setIdx(idx)}
+        />
+        <CurationCardWrapper>
+          {dummy.map((item, idx) => (
+            <CurationItem
+              {...item}
+              onMove={() => navigation.push("CurationDetail", { id: item.id })}
+              key={item.img}
+              style={{ marginTop: 20 }}
+            />
+          ))}
+        </CurationCardWrapper>
+      </ContentWrapper>
+    </Container>
   );
 };
 
-const Container = styled.ScrollView`
+const Container = styled.ScrollView<{ COLOR: colorTheme }>`
   width: 100%;
   height: 100%;
+  background-color: ${(props) => props.COLOR.Background.surface};
 `;
 
 const ContentWrapper = styled.View`

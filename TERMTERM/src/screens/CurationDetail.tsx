@@ -1,7 +1,5 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { BookmarkBar } from "@components/header";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { CurationItemProps } from "@interfaces/curation";
@@ -14,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import CustomModal from "@components/popup/modal";
+import { colorTheme } from "@style/designSystem";
 
 export type Props = StackScreenProps<RootStackParamList, "CurationDetail">;
 
@@ -55,14 +54,8 @@ const CurationDetail = ({ navigation, route }: Props) => {
   };
 
   return (
-    <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
-      <Container stickyHeaderIndices={[0]}>
-        <BookmarkBar
-          onBack={() => navigation.pop()}
-          onBookmark={() => null}
-          onShare={() => null}
-          bookmarked={false}
-        />
+    <>
+      <Container COLOR={COLOR}>
         <TitleBox
           thumbnail={dummyData.thumbnail}
           title={dummyData.title}
@@ -81,13 +74,14 @@ const CurationDetail = ({ navigation, route }: Props) => {
         onClose={() => setModal(false)}
         onNext={() => onPay()}
       />
-    </SafeAreaView>
+    </>
   );
 };
 
-const Container = styled.ScrollView`
+const Container = styled.ScrollView<{ COLOR: colorTheme }>`
   width: 100%;
   height: 100%;
+  background-color: ${(props) => props.COLOR.Background.surface};
 `;
 
 export default CurationDetail;
