@@ -8,6 +8,7 @@ import { TEXT_STYLES } from "@style/designSystem";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { TitleBar } from "@components/header";
+import { Icon } from "@components/header/TitleBar";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -85,7 +86,16 @@ const ToolBar = ({ ...props }: Props) => {
         name="Archive"
         children={() => <Archive {...props} />}
         options={{
-          headerShown: false,
+          headerShown: true,
+          header: (props) => {
+            return (
+              <TitleBar
+                title="아카이브"
+                icon={Icon.folder}
+                onPress={() => null}
+              />
+            );
+          },
           title: "아카이브",
           tabBarIcon: ({ focused }) => (
             <Ionicons
