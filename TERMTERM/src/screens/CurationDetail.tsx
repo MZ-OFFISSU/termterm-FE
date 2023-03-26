@@ -5,11 +5,82 @@ import { BookmarkBar } from "@components/header";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { CurationItemProps } from "@interfaces/curation";
-import { TitleBox } from "@components/curation/detail";
-import TermPreview from "@components/curation/detail/term";
+import { TitleBox, TermPreview } from "@components/curation/detail";
+import { useEffect, useState } from "react";
+import Toast from "react-native-toast-message";
+import CustomModal from "@components/popup/modal";
 
 export type Props = StackScreenProps<RootStackParamList, "CurationDetail">;
 
+const CurationDetail = ({ navigation, route }: Props) => {
+  //아이디로 통신해서 정보 가져올 것
+  const CURATION_ID = route.params.id;
+  const [COLOR] = useThemeStyle();
+  const [terms, setTerms] = useState(dummyData.terms);
+  const [pay, setPay] = useState(dummyData.pay);
+  const [modal, setModal] = useState(false);
+
+  //토스트메시지 보여주는 함수
+  const showToast = () => {
+    Toast.show({
+      type: "light",
+      text1: "이제 마음껏 큐레이션을 볼 수 있어요!😍",
+    });
+  };
+
+  //모달에서 결제버튼 클릭할 때 실행되는 함수
+  //TODO 통신해서 해금 넣을 것
+  //포인트가 부족한 경우도 있어야함.
+  const onPay = () => {
+    showToast();
+    setModal(false);
+    setPay(true);
+  };
+
+  //결제 여부에 따라서 온오프가 변경됨.
+  //추후 백엔드와 논의가 필요함
+  useEffect(() => {
+    if (pay) setTerms(dummyData.terms);
+    else setTerms(dummyData.terms.slice(0, 5));
+  }, [pay]);
+
+  return (
+    <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
+      <Container stickyHeaderIndices={[0]}>
+        <BookmarkBar
+          onBack={() => navigation.pop()}
+          onBookmark={() => null}
+          onShare={() => null}
+          bookmarked={false}
+        />
+        <TitleBox
+          thumbnail={dummyData.thumbnail}
+          title={dummyData.title}
+          subtitle={dummyData.subtitle}
+          termCnt={dummyData.terms.length}
+        />
+        <TermPreview items={terms} pay={pay} onPay={() => setModal(true)} />
+      </Container>
+      <CustomModal
+        visible={modal}
+        title={"큐레이션을 열까요?"}
+        subtitle={`50 포인트를 사용하면\n큐레이션의 모든 용어를 볼 수 있어요!`}
+        btnTitle={["아니오", "더 볼래요"]}
+        onClose={() => setModal(false)}
+        onNext={() => onPay()}
+      />
+    </SafeAreaView>
+  );
+};
+
+const Container = styled.ScrollView`
+  width: 100%;
+  height: 100%;
+`;
+
+export default CurationDetail;
+
+// 더미데이터들
 const dummyCuration: Array<CurationItemProps> = [
   {
     id: 0,
@@ -98,39 +169,7 @@ const dummyData = {
       bookmarked: true,
     },
   ],
+  pay: false,
   cuations: dummyCuration,
   tags: ["기획자", "IT", "트렌드"],
 };
-
-const CurationDetail = ({ navigation, route }: Props) => {
-  //아이디로 통신해서 정보 가져올 것
-  const CURATION_ID = route.params.id;
-  const [COLOR] = useThemeStyle();
-
-  return (
-    <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
-      <Container stickyHeaderIndices={[0]}>
-        <BookmarkBar
-          onBack={() => navigation.pop()}
-          onBookmark={() => null}
-          onShare={() => null}
-          bookmarked={false}
-        />
-        <TitleBox
-          thumbnail={dummyData.thumbnail}
-          title={dummyData.title}
-          subtitle={dummyData.subtitle}
-          termCnt={dummyData.terms.length}
-        />
-        <TermPreview items={dummyData.terms} />
-      </Container>
-    </SafeAreaView>
-  );
-};
-
-const Container = styled.ScrollView`
-  width: 100%;
-  height: 100%;
-`;
-
-export default CurationDetail;

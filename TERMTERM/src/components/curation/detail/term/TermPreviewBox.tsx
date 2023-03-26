@@ -11,6 +11,9 @@ interface Props extends TouchableOpacityProps {
   bookmarked: boolean;
 }
 
+/**
+ * 용어 미리보기 박스
+ */
 const TermPreviewBox = ({ name, description, bookmarked, ...props }: Props) => {
   const [COLOR] = useThemeStyle();
 
@@ -75,6 +78,7 @@ const Job = styled.Text<{ COLOR: colorTheme }>`
 const Description = styled.Text<{ COLOR: colorTheme }>`
   font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
   font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
+  line-height: ${TEXT_STYLES.xsm.Reg?.fontSize! + 5}px;
   color: ${(props) => props.COLOR.Text.default};
   margin-top: 10px;
   white-space: pre-line;
