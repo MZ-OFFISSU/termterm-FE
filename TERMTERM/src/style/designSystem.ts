@@ -46,6 +46,10 @@ export const TEXT_STYLES: Record<
     },
   },
   [TEXT_STYLE_SIZE.xl]: {
+    [TEXT_STYLE_WEIGHT.Bd]: {
+      fontSize: 24,
+      fontWeight: 700,
+    },
     [TEXT_STYLE_WEIGHT.default]: {
       fontSize: 24,
       fontWeight: 700,
