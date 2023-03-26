@@ -11,6 +11,7 @@ import {
   CurationDetail,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
+import { BackBar, BookmarkBar } from "@components/header";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -50,12 +51,34 @@ const Container = () => {
         <RootStack.Screen
           name="Curation"
           component={Curation}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <BackBar
+                  title="전체 큐레이션"
+                  onBack={() => props.navigation.pop()}
+                />
+              );
+            },
+          }}
         />
         <RootStack.Screen
           name="CurationDetail"
           component={CurationDetail}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <BookmarkBar
+                  onBack={() => props.navigation.pop()}
+                  onBookmark={() => null}
+                  onShare={() => null}
+                  bookmarked={false}
+                />
+              );
+            },
+          }}
         />
       </RootStack.Navigator>
     </NavigationContainer>
