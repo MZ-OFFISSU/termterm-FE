@@ -14,7 +14,7 @@ interface Props {
 const RecommendCuration = ({ items, onNavigate }: Props) => {
   return (
     <ContentsWrapper
-      style={{ paddingLeft: 16, paddingRight: 16, marginBottom: 55 }}
+      style={{ paddingLeft: 16, paddingRight: 16, marginBottom: 30 }}
     >
       <ContentsHeader title={"함께 보면 더 좋은 용어 모음집"} />
       {items.map((item, idx) => (

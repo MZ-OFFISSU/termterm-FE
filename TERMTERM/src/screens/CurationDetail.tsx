@@ -9,6 +9,7 @@ import {
   TitleBox,
   TermPreview,
   RecommendCuration,
+  RelatedTags,
 } from "@components/curation/detail";
 import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
@@ -68,6 +69,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
         />
         <TermPreview items={terms} pay={pay} onPay={() => setModal(true)} />
         <RecommendCuration items={dummyCuration} onNavigate={onNavigate} />
+        <RelatedTags tags={dummyData.tags} />
       </Container>
       <CustomModal
         visible={modal}
