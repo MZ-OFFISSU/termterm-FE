@@ -25,7 +25,7 @@ const CustomModal = ({
   onClose,
   onNext,
 }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   return (
     <Modal isVisible={visible}>
       <Container COLOR={COLOR}>

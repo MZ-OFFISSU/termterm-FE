@@ -11,7 +11,7 @@ interface Props {
 }
 
 const TitleBox = ({ thumbnail, title, subtitle, termCnt }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <Container>
@@ -39,7 +39,7 @@ const Thumbnail = styled.ImageBackground`
 
 const InfoWrapper = styled.View`
   width: 100%;
-  height: 150px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,6 +66,7 @@ const Subtitle = styled.Text<{ COLOR: colorTheme }>`
   color: ${(props) => props.COLOR.Text.default};
   text-align: center;
   white-space: pre-line;
+  margin-top: -20px;
 `;
 
 export default TitleBox;

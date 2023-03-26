@@ -2,16 +2,13 @@ import { TouchableOpacityProps } from "react-native";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme, TEXT_STYLES } from "@style/designSystem";
-import { useRecoilState } from "recoil";
-import { themeState } from "@recoil/themeState";
 
 interface Props extends TouchableOpacityProps {
   title: string;
 }
 
 const Recommend = ({ title, ...props }: Props) => {
-  const [COLOR] = useThemeStyle();
-  const [mode, setMode] = useRecoilState(themeState);
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <RecommendBtn COLOR={COLOR} mode={mode} {...props}>

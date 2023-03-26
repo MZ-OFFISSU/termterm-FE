@@ -11,7 +11,7 @@ interface Props extends ViewProps {
  * 상단바 컴포넌트
  */
 const NavigationBar = ({ children, ...props }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   return (
     <Container COLOR={COLOR} {...props}>
       {children}

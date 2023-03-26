@@ -8,7 +8,7 @@ interface Props {
 }
 
 const RelatedTags = ({ tags }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <ContentsWrapper

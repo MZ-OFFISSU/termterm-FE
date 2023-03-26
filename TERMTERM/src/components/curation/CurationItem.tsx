@@ -19,7 +19,7 @@ const CurationItem = ({
   onMove,
   ...props
 }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   return (
     <ItemContainer {...props}>
       <CurationTitle COLOR={COLOR}>{title}</CurationTitle>

@@ -15,7 +15,7 @@ interface Props extends TouchableOpacityProps {
  * 용어 미리보기 박스
  */
 const TermPreviewBox = ({ name, description, bookmarked, ...props }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <Container

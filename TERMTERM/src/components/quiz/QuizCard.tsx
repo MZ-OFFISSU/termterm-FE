@@ -15,7 +15,7 @@ interface QuizCardProps {
 }
 
 const QuizCard = (props: QuizCardProps) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <CardContainer>

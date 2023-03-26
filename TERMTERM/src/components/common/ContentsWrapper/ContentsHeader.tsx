@@ -10,7 +10,7 @@ interface Props extends TextProps {
 }
 
 const ContentsHeader = ({ title, children, ...props }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   return (
     <HeaderContainer {...props}>
       <Title COLOR={COLOR}>{title}</Title>

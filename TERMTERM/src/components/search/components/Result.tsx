@@ -3,8 +3,6 @@ import { TouchableOpacityProps } from "react-native";
 import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { Ionicons } from "@expo/vector-icons";
-import { useRecoilState } from "recoil";
-import { themeState } from "@recoil/themeState";
 
 interface Props extends TouchableOpacityProps {
   title: string;
@@ -12,8 +10,7 @@ interface Props extends TouchableOpacityProps {
 }
 
 const Result = ({ title, marked, ...props }: Props) => {
-  const [COLOR] = useThemeStyle();
-  const [mode, setMode] = useRecoilState(themeState);
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <ResultBtn COLOR={COLOR} mode={mode} {...props}>

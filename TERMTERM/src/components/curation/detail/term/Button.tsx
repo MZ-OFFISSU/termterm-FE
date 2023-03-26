@@ -9,7 +9,7 @@ interface Props extends TouchableOpacityProps {
 }
 
 const Button = ({ title, ...props }: Props) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <Container COLOR={COLOR} {...props}>

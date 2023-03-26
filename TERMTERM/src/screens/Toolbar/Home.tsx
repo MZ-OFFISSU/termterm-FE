@@ -52,7 +52,7 @@ const Home = ({ navigation, route }: Props) => {
 
   //색상은 이걸로 넘겨서 쓰시면 됩니당.
   //타입은 import 해둔 colorTheme
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
 
   return (
     <SafeAreaView>

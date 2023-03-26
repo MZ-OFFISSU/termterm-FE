@@ -20,7 +20,7 @@ export type Props = StackScreenProps<RootStackParamList, "CurationDetail">;
 const CurationDetail = ({ navigation, route }: Props) => {
   //아이디로 통신해서 정보 가져올 것
   const CURATION_ID = route.params.id;
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   const [terms, setTerms] = useState(dummyData.terms);
   const [pay, setPay] = useState(dummyData.pay);
   const [modal, setModal] = useState(false);
