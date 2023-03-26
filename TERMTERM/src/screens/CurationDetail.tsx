@@ -5,7 +5,11 @@ import { BookmarkBar } from "@components/header";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { CurationItemProps } from "@interfaces/curation";
-import { TitleBox, TermPreview } from "@components/curation/detail";
+import {
+  TitleBox,
+  TermPreview,
+  RecommendCuration,
+} from "@components/curation/detail";
 import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import CustomModal from "@components/popup/modal";
@@ -44,6 +48,9 @@ const CurationDetail = ({ navigation, route }: Props) => {
     else setTerms(dummyData.terms.slice(0, 5));
   }, [pay]);
 
+  //추천 큐레이션 미리보기에서 -> 해당 큐레이션으로 이동하는 함수
+  const onNavigate = (id: number) => {};
+
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
       <Container stickyHeaderIndices={[0]}>
@@ -60,6 +67,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
           termCnt={dummyData.terms.length}
         />
         <TermPreview items={terms} pay={pay} onPay={() => setModal(true)} />
+        <RecommendCuration items={dummyCuration} onNavigate={onNavigate} />
       </Container>
       <CustomModal
         visible={modal}
