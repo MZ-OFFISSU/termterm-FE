@@ -22,7 +22,9 @@ const RelatedTags = ({ tags }: Props) => {
             key={tag}
             style={{ borderWidth: 1, borderColor: COLOR.Neutral[20] }}
           >
-            <TagContent COLOR={COLOR}>{tag}</TagContent>
+            <TagContent COLOR={COLOR} mode={mode}>
+              {tag}
+            </TagContent>
           </Tag>
         ))}
       </TagWrapper>
@@ -49,10 +51,11 @@ const Tag = styled.View<{ COLOR: colorTheme }>`
   margin-right: 6px;
 `;
 
-const TagContent = styled.Text<{ COLOR: colorTheme }>`
+const TagContent = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
   font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
   font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
-  color: ${(props) => props.COLOR.Text.darken};
+  color: ${(props) =>
+    props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
 `;
 
 export default RelatedTags;

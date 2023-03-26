@@ -12,7 +12,7 @@ const Button = ({ title, ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
   return (
-    <Container COLOR={COLOR} {...props}>
+    <Container COLOR={COLOR} mode={mode} {...props}>
       <InnerBox>
         <BtnText COLOR={COLOR}>{title}</BtnText>
         <Entypo
@@ -25,11 +25,12 @@ const Button = ({ title, ...props }: Props) => {
   );
 };
 
-const Container = styled.TouchableOpacity<{ COLOR: colorTheme }>`
+const Container = styled.TouchableOpacity<{ COLOR: colorTheme; mode: boolean }>`
   width: 100%;
   height: 44px;
   border-radius: 8px;
-  background-color: ${(props) => props.COLOR.Neutral[100]};
+  background-color: ${(props) =>
+    props.mode ? props.COLOR.Neutral[100] : props.COLOR.Neutral[10]};
   display: flex;
   align-items: center;
   justify-content: center;

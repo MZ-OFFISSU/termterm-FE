@@ -28,7 +28,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
   //토스트메시지 보여주는 함수
   const showToast = () => {
     Toast.show({
-      type: "light",
+      type: mode ? "light" : "dark",
       text1: "이제 마음껏 큐레이션을 볼 수 있어요!😍",
     });
   };
@@ -50,7 +50,9 @@ const CurationDetail = ({ navigation, route }: Props) => {
   }, [pay]);
 
   //추천 큐레이션 미리보기에서 -> 해당 큐레이션으로 이동하는 함수
-  const onNavigate = (id: number) => {};
+  const onNavigate = (id: number) => {
+    navigation.push("CurationDetail", { id: id });
+  };
 
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
@@ -73,7 +75,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
       </Container>
       <CustomModal
         visible={modal}
-        title={"큐레이션을 열까요?"}
+        title={"큐레이션을 열어볼까요?"}
         subtitle={`50 포인트를 사용하면\n큐레이션의 모든 용어를 볼 수 있어요!`}
         btnTitle={["아니오", "더 볼래요"]}
         onClose={() => setModal(false)}
