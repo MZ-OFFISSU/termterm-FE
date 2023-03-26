@@ -41,7 +41,12 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
               onPress={() => setCurType(idx)}
               style={{ marginLeft: idx !== 0 ? 15 : 0 }}
             >
-              <Type selected={curType === idx}>{type}</Type>
+              <Type
+                selected={curType === idx}
+                style={{ color: COLOR.Text.active }}
+              >
+                {type}
+              </Type>
             </TouchableOpacity>
           ))}
         </TypeSelector>
