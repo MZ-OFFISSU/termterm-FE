@@ -6,6 +6,7 @@ import ArchiveBookmark from "./ArchiveBookmark";
 import DailyQuiz from "./DailyQuiz";
 import CompleteQuiz from "./CompleteQuiz";
 import CurationDetail from "./CurationDetail";
+import MakeFolder from "./MakeFolder";
 
 export {
   Home,
@@ -16,4 +17,5 @@ export {
   DailyQuiz,
   CompleteQuiz,
   CurationDetail,
+  MakeFolder,
 };

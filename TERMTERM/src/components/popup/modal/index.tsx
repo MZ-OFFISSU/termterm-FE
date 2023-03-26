@@ -9,7 +9,7 @@ interface Props {
   title: string;
   subtitle?: string;
   btnTitle: Array<string>;
-  onClose: () => void;
+  onClose?: () => void;
   onNext: () => void;
 }
 
@@ -31,30 +31,41 @@ const CustomModal = ({
       <Container COLOR={COLOR} mode={mode}>
         <Title COLOR={COLOR}>{title}</Title>
         {subtitle ? <Subtitle COLOR={COLOR}>{subtitle}</Subtitle> : <></>}
-        <BtnWrapper>
-          <Button
-            style={{ backgroundColor: COLOR.Neutral[30] }}
-            onPress={() => onClose()}
-          >
-            <ButtonTitle>{btnTitle[0]}</ButtonTitle>
-          </Button>
-          <Button
+        {btnTitle.length === 2 && onClose ? (
+          <BtnWrapper>
+            <Button
+              style={{ backgroundColor: COLOR.Neutral[30] }}
+              onPress={() => onClose()}
+            >
+              <ButtonTitle>{btnTitle[0]}</ButtonTitle>
+            </Button>
+            <Button
+              style={{
+                backgroundColor: COLOR.THEME.primary[130],
+                marginLeft: 8,
+              }}
+              onPress={() => onNext()}
+            >
+              <ButtonTitle>{btnTitle[1]}</ButtonTitle>
+            </Button>
+          </BtnWrapper>
+        ) : (
+          <OneButton
             style={{
               backgroundColor: COLOR.THEME.primary[130],
-              marginLeft: 8,
             }}
             onPress={() => onNext()}
           >
-            <ButtonTitle>{btnTitle[1]}</ButtonTitle>
-          </Button>
-        </BtnWrapper>
+            <ButtonTitle>{btnTitle[0]}</ButtonTitle>
+          </OneButton>
+        )}
       </Container>
     </Modal>
   );
 };
 
 const Container = styled.View<{ COLOR: colorTheme; mode: boolean }>`
-  height: 202px;
+  max-height: 202px;
   background-color: ${(props) =>
     props.mode
       ? props.COLOR.Background.surface
@@ -63,6 +74,7 @@ const Container = styled.View<{ COLOR: colorTheme; mode: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 30px 0px 20px 0px;
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
@@ -96,6 +108,16 @@ const Button = styled.TouchableOpacity`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const OneButton = styled.TouchableOpacity`
+  width: 90%;
+  height: 44px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
 `;
 
 const ButtonTitle = styled.Text`

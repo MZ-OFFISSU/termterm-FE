@@ -9,6 +9,7 @@ import {
   DailyQuiz,
   CompleteQuiz,
   CurationDetail,
+  MakeFolder,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
@@ -75,6 +76,22 @@ const Container = () => {
                   onBookmark={() => null}
                   onShare={() => null}
                   bookmarked={false}
+                />
+              );
+            },
+          }}
+        />
+
+        <RootStack.Screen
+          name="MakeFolder"
+          component={MakeFolder}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <BackBar
+                  title="폴더 만들기"
+                  onBack={() => props.navigation.pop()}
                 />
               );
             },

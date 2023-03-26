@@ -9,6 +9,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { TitleBar } from "@components/header";
 import { Icon } from "@components/header/TitleBar";
+import { useState } from "react";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -19,6 +20,9 @@ const ToolBar = ({ ...props }: Props) => {
   /** tabNavigator 생성 */
   const Tab = createBottomTabNavigator();
   const [COLOR, mode] = useThemeStyle();
+
+  //아카이브 스크린에서 사용할 모달 관련 state
+  const [archiveModal, setArchiveModal] = useState(false);
 
   return (
     <Tab.Navigator
@@ -84,7 +88,9 @@ const ToolBar = ({ ...props }: Props) => {
 
       <Tab.Screen
         name="Archive"
-        children={() => <Archive {...props} />}
+        children={() => (
+          <Archive modal={archiveModal} setModal={setArchiveModal} {...props} />
+        )}
         options={{
           headerShown: true,
           header: (props) => {
@@ -92,7 +98,7 @@ const ToolBar = ({ ...props }: Props) => {
               <TitleBar
                 title="아카이브"
                 icon={Icon.folder}
-                onPress={() => null}
+                onPress={() => setArchiveModal(true)}
               />
             );
           },
