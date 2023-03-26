@@ -32,6 +32,7 @@ const GotoBookmark = ({ type }: Props) => {
       <CustomButton
         COLOR={COLOR}
         mode={mode}
+        //여기 에러나는데 그냥 무시해도 됨
         onPress={() => navigation.navigate("Search")}
       >
         <BtnInner COLOR={COLOR}>북마크 하러가기</BtnInner>

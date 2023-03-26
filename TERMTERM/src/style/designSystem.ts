@@ -124,6 +124,10 @@ export const TEXT_STYLES: Record<
       fontSize: 14,
       fontWeight: 500,
     },
+    [TEXT_STYLE_WEIGHT.Bd]: {
+      fontSize: 14,
+      fontWeight: 700,
+    },
   },
   [TEXT_STYLE_SIZE.xxsm]: {
     [TEXT_STYLE_WEIGHT.default]: {
