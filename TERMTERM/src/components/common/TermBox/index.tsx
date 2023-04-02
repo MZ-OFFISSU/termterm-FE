@@ -9,9 +9,12 @@ interface Props extends TouchableOpacityProps {
   marked: boolean;
 }
 
-const Result = ({ title, marked, ...props }: Props) => {
+/**
+ * 검색 결과 -> 용어
+ * 북마크 폴더 안 -> 용어
+ */
+const TermBox = ({ title, marked, ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-
   return (
     <ResultBtn COLOR={COLOR} mode={mode} {...props}>
       <ResultTitle COLOR={COLOR}>{title}</ResultTitle>
@@ -54,4 +57,4 @@ const ResultTitle = styled.Text<{ COLOR: colorTheme }>`
   color: ${(props) => props.COLOR.Text.active};
 `;
 
-export default Result;
+export default TermBox;

@@ -1,4 +1,4 @@
-import Result from "./Result";
+import TermBox from "@components/common/TermBox";
 import styled from "styled-components/native";
 import { ViewProps } from "react-native";
 
@@ -10,7 +10,11 @@ const ResultWrapper = ({ results, ...props }: Props) => {
   return (
     <Container>
       {results.map((result, idx) => (
-        <Result title={result} marked={false} key={`${result}-${idx}`}></Result>
+        <TermBox
+          title={result}
+          marked={false}
+          key={`${result}-${idx}`}
+        ></TermBox>
       ))}
     </Container>
   );
