@@ -10,9 +10,11 @@ import {
   CompleteQuiz,
   CurationDetail,
   MakeFolder,
+  FolderDetail,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
+import { IconBar, Icon } from "@components/header";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -81,7 +83,6 @@ const Container = () => {
             },
           }}
         />
-
         <RootStack.Screen
           name="MakeFolder"
           component={MakeFolder}
@@ -92,6 +93,23 @@ const Container = () => {
                 <BackBar
                   title="폴더 만들기"
                   onBack={() => props.navigation.pop()}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="FolderDetail"
+          component={FolderDetail}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <IconBar
+                  onBack={() => props.navigation.pop()}
+                  icon={Icon.collapse}
+                  onPress={() => null}
+                  onDots={() => null}
                 />
               );
             },

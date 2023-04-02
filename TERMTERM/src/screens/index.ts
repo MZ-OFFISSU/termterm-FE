@@ -6,6 +6,7 @@ import DailyQuiz from "./DailyQuiz";
 import CompleteQuiz from "./CompleteQuiz";
 import CurationDetail from "./CurationDetail";
 import MakeFolder from "./MakeFolder";
+import FolderDetail from "./FolderDetail";
 
 export {
   Home,
@@ -16,4 +17,5 @@ export {
   CompleteQuiz,
   CurationDetail,
   MakeFolder,
+  FolderDetail,
 };

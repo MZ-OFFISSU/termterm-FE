@@ -17,5 +17,5 @@ export type RootStackParamList = {
   CompleteQuiz: undefined;
   CurationDetail: { id: number };
   MakeFolder: undefined;
-  Folder: { id: number };
+  FolderDetail: { id: number };
 };

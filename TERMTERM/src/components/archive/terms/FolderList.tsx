@@ -14,7 +14,11 @@ const FolderList = ({ folders }: Props) => {
   return (
     <Container>
       {folders.map((folder) => (
-        <Folder onOpen={() => null} key={folder.id} {...folder} />
+        <Folder
+          onOpen={(id: number) => navigation.push("FolderDetail", { id: id })}
+          key={folder.id}
+          {...folder}
+        />
       ))}
     </Container>
   );
