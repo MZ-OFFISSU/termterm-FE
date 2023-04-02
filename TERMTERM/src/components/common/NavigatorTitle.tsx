@@ -25,6 +25,9 @@ export const CaretBtn = styled.TouchableOpacity`
   width: 24px;
   height: 24px;
   z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const TitleWrapper = styled.View`

@@ -4,11 +4,14 @@ import {
   CaretBtn,
   TitleWrapper,
 } from "../common/NavigatorTitle";
-import { AntDesign } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import styled from "styled-components/native";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export enum Icon {
   fold,
@@ -22,12 +25,25 @@ interface Props {
   icon: Icon;
   onPress: () => void;
   onDots: () => void;
+  bookmarked?: boolean;
+  onBookmark?: (id: number) => void;
+  id?: number;
 }
 
 /**
  * 아이콘과 함수를 유동적으로 삽입할 수 있는 헤더
  */
-const IconBar = ({ curNum, maxNum, onBack, icon, onPress, onDots }: Props) => {
+const IconBar = ({
+  curNum,
+  maxNum,
+  onBack,
+  icon,
+  onPress,
+  onDots,
+  bookmarked,
+  onBookmark,
+  id,
+}: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
   const Fold = () => {
@@ -55,6 +71,26 @@ const IconBar = ({ curNum, maxNum, onBack, icon, onPress, onDots }: Props) => {
     );
   };
 
+  const Bookmark = () => {
+    return (
+      <CaretBtn onPress={() => onBookmark!(id!)} style={{ marginRight: 15 }}>
+        {bookmarked ? (
+          <Ionicons
+            name="md-bookmark"
+            size={24}
+            color={COLOR.THEME.secondary[130]}
+          />
+        ) : (
+          <Ionicons
+            name="ios-bookmark-outline"
+            size={24}
+            color={COLOR.Text.active}
+          />
+        )}
+      </CaretBtn>
+    );
+  };
+
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 20 }}>
@@ -70,6 +106,7 @@ const IconBar = ({ curNum, maxNum, onBack, icon, onPress, onDots }: Props) => {
         <></>
       )}
       <ElementWrapper style={{ marginRight: 20 }}>
+        {bookmarked === undefined ? <></> : <Bookmark />}
         <CaretBtn onPress={() => onPress()} style={{ marginRight: 15 }}>
           {icon === Icon.fold ? <Fold /> : <Collapse />}
         </CaretBtn>

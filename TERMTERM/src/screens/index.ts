@@ -7,6 +7,7 @@ import CompleteQuiz from "./CompleteQuiz";
 import CurationDetail from "./CurationDetail";
 import MakeFolder from "./MakeFolder";
 import FolderDetailGlance from "./FolderDetailGlance";
+import FolderDetailCollapse from "./FolderDetailCollapse";
 
 export {
   Home,
@@ -18,4 +19,5 @@ export {
   CurationDetail,
   MakeFolder,
   FolderDetailGlance,
+  FolderDetailCollapse,
 };

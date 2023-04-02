@@ -1,8 +1,7 @@
 import HeaderWrapper from "./HeaderWrapper";
 import { NavigatorTitle, CaretBtn } from "../common/NavigatorTitle";
 import styled from "styled-components/native";
-import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 
 interface Props {

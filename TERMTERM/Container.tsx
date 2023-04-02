@@ -11,6 +11,7 @@ import {
   CurationDetail,
   MakeFolder,
   FolderDetailGlance,
+  FolderDetailCollapse,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
@@ -108,8 +109,34 @@ const Container = () => {
                 <IconBar
                   onBack={() => props.navigation.pop()}
                   icon={Icon.collapse}
-                  onPress={() => null}
+                  onPress={() =>
+                    props.navigation.navigate("FolderDetailCollapse", { id: 0 })
+                  }
                   onDots={() => null}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="FolderDetailCollapse"
+          component={FolderDetailCollapse}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <IconBar
+                  curNum={1}
+                  maxNum={15}
+                  onBack={() => props.navigation.pop()}
+                  icon={Icon.fold}
+                  onPress={() =>
+                    props.navigation.navigate("FolderDetailGlance", { id: 0 })
+                  }
+                  onDots={() => null}
+                  bookmarked={true}
+                  onBookmark={() => null}
+                  id={0}
                 />
               );
             },

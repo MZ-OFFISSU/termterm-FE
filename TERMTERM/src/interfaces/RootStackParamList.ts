@@ -18,4 +18,5 @@ export type RootStackParamList = {
   CurationDetail: { id: number };
   MakeFolder: undefined;
   FolderDetailGlance: { id: number };
+  FolderDetailCollapse: { id: number };
 };
