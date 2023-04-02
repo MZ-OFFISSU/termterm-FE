@@ -10,7 +10,7 @@ import {
   CompleteQuiz,
   CurationDetail,
   MakeFolder,
-  FolderDetail,
+  FolderDetailGlance,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
@@ -99,8 +99,8 @@ const Container = () => {
           }}
         />
         <RootStack.Screen
-          name="FolderDetail"
-          component={FolderDetail}
+          name="FolderDetailGlance"
+          component={FolderDetailGlance}
           options={{
             headerShown: true,
             header: (props) => {

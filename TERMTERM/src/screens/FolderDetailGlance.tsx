@@ -6,9 +6,12 @@ import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { FolderDetailProps } from "@interfaces/folderDetail";
 import TermDetailGlance from "@components/folder/glance";
 
-export type Props = StackScreenProps<RootStackParamList, "FolderDetail">;
+export type Props = StackScreenProps<RootStackParamList, "FolderDetailGlance">;
 
-const FolderDetail = ({ navigation, route }: Props) => {
+/**
+ * 폴더 상세페이지 -> 한눈에보기
+ */
+const FolderDetailGlance = ({ navigation, route }: Props) => {
   /**폴더 아이디로 통신해서 정보 가져오기 */
   const FOLDER_ID = route.params.id;
   const [COLOR, mode] = useThemeStyle();
@@ -53,7 +56,7 @@ const Subtitle = styled.Text<{ COLOR: colorTheme }>`
   margin-top: 10px;
 `;
 
-export default FolderDetail;
+export default FolderDetailGlance;
 
 const dummyData: FolderDetailProps = {
   title: "기획",
