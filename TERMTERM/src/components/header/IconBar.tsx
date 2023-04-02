@@ -12,6 +12,8 @@ import {
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import styled from "styled-components/native";
 import AutoSizedImage from "@components/common/AutoSizedImage";
+import { iconHeaderState } from "@recoil/iconHeaderState";
+import { useRecoilValue } from "recoil";
 
 export enum Icon {
   fold,
@@ -19,32 +21,23 @@ export enum Icon {
 }
 
 interface Props {
-  curNum?: number;
-  maxNum?: number;
   onBack: () => void;
   icon: Icon;
   onPress: () => void;
   onDots: () => void;
-  bookmarked?: boolean;
-  onBookmark?: (id: number) => void;
-  id?: number;
+  bookmarkBar?: boolean;
 }
 
 /**
  * 아이콘과 함수를 유동적으로 삽입할 수 있는 헤더
  */
-const IconBar = ({
-  curNum,
-  maxNum,
-  onBack,
-  icon,
-  onPress,
-  onDots,
-  bookmarked,
-  onBookmark,
-  id,
-}: Props) => {
+const IconBar = ({ onBack, icon, onPress, onDots, bookmarkBar }: Props) => {
   const [COLOR, mode] = useThemeStyle();
+  const headerState = useRecoilValue(iconHeaderState);
+
+  const onBookmark = (id: number) => {
+    null;
+  };
 
   const Fold = () => {
     return mode ? (
@@ -73,8 +66,11 @@ const IconBar = ({
 
   const Bookmark = () => {
     return (
-      <CaretBtn onPress={() => onBookmark!(id!)} style={{ marginRight: 15 }}>
-        {bookmarked ? (
+      <CaretBtn
+        onPress={() => onBookmark(headerState.id)}
+        style={{ marginRight: 15 }}
+      >
+        {headerState.bookmarked ? (
           <Ionicons
             name="md-bookmark"
             size={24}
@@ -96,17 +92,17 @@ const IconBar = ({
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 20 }}>
         <AntDesign name="left" size={24} color={COLOR.Text.active} />
       </CaretBtn>
-      {maxNum && curNum ? (
+      {bookmarkBar ? (
         <TitleWrapper>
           <NavigatorTitle style={{ color: COLOR.Text.active }}>
-            {`${curNum}/${maxNum}`}
+            {`${headerState.curNum}/${headerState.maxNum}`}
           </NavigatorTitle>
         </TitleWrapper>
       ) : (
         <></>
       )}
       <ElementWrapper style={{ marginRight: 20 }}>
-        {bookmarked === undefined ? <></> : <Bookmark />}
+        {bookmarkBar === undefined ? <></> : <Bookmark />}
         <CaretBtn onPress={() => onPress()} style={{ marginRight: 15 }}>
           {icon === Icon.fold ? <Fold /> : <Collapse />}
         </CaretBtn>

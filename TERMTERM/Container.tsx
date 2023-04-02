@@ -126,17 +126,13 @@ const Container = () => {
             header: (props) => {
               return (
                 <IconBar
-                  curNum={1}
-                  maxNum={15}
                   onBack={() => props.navigation.pop()}
                   icon={Icon.fold}
                   onPress={() =>
                     props.navigation.navigate("FolderDetailGlance", { id: 0 })
                   }
                   onDots={() => null}
-                  bookmarked={true}
-                  onBookmark={() => null}
-                  id={0}
+                  bookmarkBar={true}
                 />
               );
             },
