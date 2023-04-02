@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { FolderDetailProps } from "@interfaces/folderDetail";
+import TermDetailGlance from "@components/folder/glance";
 
 export type Props = StackScreenProps<RootStackParamList, "FolderDetail">;
 
@@ -18,6 +19,7 @@ const FolderDetail = ({ navigation, route }: Props) => {
         <Title COLOR={COLOR}>{dummyData.title}</Title>
         <Subtitle COLOR={COLOR}>{dummyData.subtitle}</Subtitle>
       </TitleBox>
+      <TermDetailGlance terms={dummyData.terms} />
     </Container>
   );
 };
@@ -35,7 +37,7 @@ const TitleBox = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 24px 0px;
+  margin: 30px 0px;
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
@@ -48,7 +50,7 @@ const Subtitle = styled.Text<{ COLOR: colorTheme }>`
   font-size: ${TEXT_STYLES.md2.Reg?.fontSize}px;
   font-weight: ${TEXT_STYLES.md2.Reg?.fontWeight};
   color: ${(props) => props.COLOR.Text.default};
-  margin-top: 5px;
+  margin-top: 10px;
 `;
 
 export default FolderDetail;
@@ -129,6 +131,96 @@ const dummyData: FolderDetailProps = {
     },
     {
       id: 7,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 8,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 9,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 10,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 11,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 12,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 13,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 14,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 15,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 16,
       name: "기획자",
       description:
         "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
