@@ -12,8 +12,8 @@ import {
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import styled from "styled-components/native";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { iconHeaderState } from "@recoil/iconHeaderState";
-import { useRecoilValue } from "recoil";
+import { iconHeaderState, modalState } from "@recoil/iconHeaderState";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 export enum Icon {
   fold,
@@ -24,16 +24,16 @@ interface Props {
   onBack: () => void;
   icon: Icon;
   onPress: () => void;
-  onDots: () => void;
   bookmarkBar?: boolean;
 }
 
 /**
  * 아이콘과 함수를 유동적으로 삽입할 수 있는 헤더
  */
-const IconBar = ({ onBack, icon, onPress, onDots, bookmarkBar }: Props) => {
+const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const headerState = useRecoilValue(iconHeaderState);
+  const [modal, setModal] = useRecoilState(modalState);
 
   const onBookmark = (id: number) => {
     null;
@@ -106,7 +106,7 @@ const IconBar = ({ onBack, icon, onPress, onDots, bookmarkBar }: Props) => {
         <CaretBtn onPress={() => onPress()} style={{ marginRight: 15 }}>
           {icon === Icon.fold ? <Fold /> : <Collapse />}
         </CaretBtn>
-        <CaretBtn onPress={() => onDots()}>
+        <CaretBtn onPress={() => setModal(!modal)}>
           <MaterialCommunityIcons
             name="dots-vertical"
             size={24}

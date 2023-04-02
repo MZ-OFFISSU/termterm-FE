@@ -5,6 +5,8 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { FolderDetailProps } from "@interfaces/folderDetail";
 import TermDetailGlance from "@components/folder/glance";
+import { useModal } from "@hooks/useModal";
+import HeaderModal from "@components/common/HeaderModal";
 
 export type Props = StackScreenProps<RootStackParamList, "FolderDetailGlance">;
 
@@ -15,15 +17,19 @@ const FolderDetailGlance = ({ navigation, route }: Props) => {
   /**폴더 아이디로 통신해서 정보 가져오기 */
   const FOLDER_ID = route.params.id;
   const [COLOR, mode] = useThemeStyle();
+  const [modal, setModal] = useModal();
 
   return (
-    <Container COLOR={COLOR}>
-      <TitleBox>
-        <Title COLOR={COLOR}>{dummyData.title}</Title>
-        <Subtitle COLOR={COLOR}>{dummyData.subtitle}</Subtitle>
-      </TitleBox>
-      <TermDetailGlance terms={dummyData.terms} />
-    </Container>
+    <ModalBackground onPress={() => setModal(false)}>
+      <Container COLOR={COLOR}>
+        <TitleBox>
+          <Title COLOR={COLOR}>{dummyData.title}</Title>
+          <Subtitle COLOR={COLOR}>{dummyData.subtitle}</Subtitle>
+        </TitleBox>
+        <TermDetailGlance terms={dummyData.terms} />
+        {modal ? <HeaderModal id={FOLDER_ID} /> : <></>}
+      </Container>
+    </ModalBackground>
   );
 };
 
@@ -32,6 +38,12 @@ const Container = styled.ScrollView<{ COLOR: colorTheme }>`
   height: 100%;
   background-color: ${(props) => props.COLOR.Background.surface};
   padding: 0px 16px;
+  position: relative;
+`;
+
+const ModalBackground = styled.TouchableWithoutFeedback`
+  width: 100%;
+  height: 100%;
 `;
 
 const TitleBox = styled.View`

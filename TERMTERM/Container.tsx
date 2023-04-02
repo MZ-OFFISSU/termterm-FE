@@ -112,7 +112,6 @@ const Container = () => {
                   onPress={() =>
                     props.navigation.navigate("FolderDetailCollapse", { id: 0 })
                   }
-                  onDots={() => null}
                 />
               );
             },
@@ -131,7 +130,6 @@ const Container = () => {
                   onPress={() =>
                     props.navigation.navigate("FolderDetailGlance", { id: 0 })
                   }
-                  onDots={() => null}
                   bookmarkBar={true}
                 />
               );

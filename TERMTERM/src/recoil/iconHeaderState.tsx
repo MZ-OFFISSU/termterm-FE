@@ -18,3 +18,8 @@ export const iconHeaderState = atom<HeaderProps>({
   key: "headerState",
   default: DEFAULT_VALUE,
 });
+
+export const modalState = atom<boolean>({
+  key: "modalState",
+  default: false,
+});
