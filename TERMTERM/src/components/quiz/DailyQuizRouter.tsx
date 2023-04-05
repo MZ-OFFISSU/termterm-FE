@@ -43,7 +43,7 @@ const DailyQuizRouter = ({ navigation }: ScreenProps) => {
         <AutoSizedImage
           source={require("@assets/test.png")}
           width={width}
-          style={{ marginTop: 13 }}
+          style={{ marginTop: 5 }}
         />
         <Title>Daily 용어 퀴즈를 시작해 볼까요?</Title>
         <TouchableOpacity onPress={() => navigation.navigate("DailyQuiz")}>
@@ -83,7 +83,7 @@ const Title = styled.Text`
   font-weight: 500;
   color: #0d0d0d;
   text-align: center;
-  margin-top: 15px;
+  margin-top: 5px;
 `;
 
 const ArrowButton = styled.TouchableOpacity``;

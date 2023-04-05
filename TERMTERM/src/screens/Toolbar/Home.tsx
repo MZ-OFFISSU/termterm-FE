@@ -57,6 +57,7 @@ const Home = ({ navigation, route }: Props) => {
   return (
     <SafeAreaView>
       <Container>
+        {/* TODO : HomeBar 스타일링 수정 필요 */}
         <HomeBar onSearch={() => navigation.push("Search")} />
         {isArchive ?
           <>
