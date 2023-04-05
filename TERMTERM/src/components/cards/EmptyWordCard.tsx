@@ -18,7 +18,7 @@ interface Props extends TouchableOpacityProps {
   isFocused: boolean;
 }
 
-const WordCard = () => {
+const EmptyWordCard = () => {
   const [width, setWidth] = useState(83);
   /** 북마크 여부 상태 */
   const [bookmarkBool, setBookmarkBool] = useState(false);
@@ -46,11 +46,18 @@ const WordCard = () => {
 
     return (
       <Card>
+        <AutoSizedImage
+          source={require("@assets/bookmark-character.png")}
+          width={width}
+        />
         <TitleBox>
           <Title>아직 북마크를 하지 않으셨군요!</Title>
           <SubTitle>북마크를 하면 용어를 더욱</SubTitle>
           <SubTitle>쉽게 다시 볼 수 있어요</SubTitle>
         </TitleBox>
+        <WordButton>
+          <ButtonText>북마크 하러 가기 〉 </ButtonText>
+        </WordButton>
       </Card>
     )
 }
@@ -119,4 +126,4 @@ const ButtonText = styled.Text`
   color: ${DARK_COLOR_STYLE.Text.active};
 `;
 
-export default WordCard;
+export default EmptyWordCard;

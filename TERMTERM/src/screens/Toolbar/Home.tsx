@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { useState } from "react";
-import { WordCard, DailyQuizRouter } from "@components/index";
+import { EmptyWordCard, DailyQuizRouter, WordCard } from "@components/index";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { SafeAreaView } from "react-native";
@@ -47,8 +47,8 @@ const dummy: Array<CurationItemProps> = [
  * 필요시 수정가능합니다.
  */
 const Home = ({ navigation, route }: Props) => {
-  const [bookmarkBool, setBookmarkBool] = useState(false);
   const [idx, setIdx] = useState(0);
+  const [isArchive, setIsArchive] = useState<boolean>(false);
 
   //색상은 이걸로 넘겨서 쓰시면 됩니당.
   //타입은 import 해둔 colorTheme
@@ -58,12 +58,25 @@ const Home = ({ navigation, route }: Props) => {
     <SafeAreaView>
       <Container>
         <HomeBar onSearch={() => navigation.push("Search")} />
-        <TitleContainer
-          username={"세원"}
-          title={"님, 오늘도 파이팅"}
-          subtitle={"북마크한 용어가 없습니다."}
-        />
-        <WordCard />
+        {isArchive ?
+          <>
+            <TitleContainer
+              username={"세원"}
+              title={"님, 오늘도 파이팅👏"}
+              subtitle={"아카이빙한 용어를 확인해보세요!"}
+            />
+            <WordCard />
+          </>
+        : 
+        <>
+          <TitleContainer
+            username={"세원"}
+            title={"님, 오늘도 파이팅"}
+            subtitle={"아카이빙한 용어가 없습니다."}
+          />
+          <EmptyWordCard />
+        </>
+      }
         <TitleBox>
           <Title>Daily 용어 퀴즈</Title>
         </TitleBox>

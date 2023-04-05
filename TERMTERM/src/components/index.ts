@@ -14,11 +14,12 @@ import CustomButton, {
 } from "./buttons/CustomButton";
 import CustomSelector from "./buttons/CustomSelector";
 import JobCard from "./cards/JobCard";
-import WordCard from "./cards/WordCard";
+import EmptyWordCard from "./cards/EmptyWordCard";
 import BookmarkWordCard from "./cards/BookmarkWordCard";
 import DailyQuizRouter from "./quiz/DailyQuizRouter";
 import ArchiveSelector from "./archive/ArchiveSelector";
 import Input from "./common/Input";
+import WordCard from "./cards/WordCard";
 
 export { BUTTON_STATE, BUTTON_TYPE };
 export { NavigatorTitle, NavigatorPager, CaretBtn };
@@ -30,6 +31,7 @@ export {
   CustomButton,
   CustomSelector,
   JobCard,
+  EmptyWordCard,
   WordCard,
   BookmarkWordCard,
   DailyQuizRouter,
