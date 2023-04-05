@@ -10,7 +10,7 @@ const RecommendKeyword = ({ ...props }: ViewProps) => {
   const [records, setRecords] = useSearch();
   return (
     <ContentsWrapper {...props}>
-      <ContentsHeader title="최근 검색어" />
+      <ContentsHeader title="추천 검색어" />
       <RecommendWrapper />
     </ContentsWrapper>
   );

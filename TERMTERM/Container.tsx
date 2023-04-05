@@ -9,9 +9,13 @@ import {
   DailyQuiz,
   CompleteQuiz,
   CurationDetail,
+  MakeFolder,
+  FolderDetailGlance,
+  FolderDetailCollapse,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
+import { IconBar, Icon } from "@components/header";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -75,6 +79,58 @@ const Container = () => {
                   onBookmark={() => null}
                   onShare={() => null}
                   bookmarked={false}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="MakeFolder"
+          component={MakeFolder}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <BackBar
+                  title="폴더 만들기"
+                  onBack={() => props.navigation.pop()}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="FolderDetailGlance"
+          component={FolderDetailGlance}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <IconBar
+                  onBack={() => props.navigation.pop()}
+                  icon={Icon.collapse}
+                  onPress={() =>
+                    props.navigation.navigate("FolderDetailCollapse", { id: 0 })
+                  }
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="FolderDetailCollapse"
+          component={FolderDetailCollapse}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <IconBar
+                  onBack={() => props.navigation.pop()}
+                  icon={Icon.fold}
+                  onPress={() =>
+                    props.navigation.navigate("FolderDetailGlance", { id: 0 })
+                  }
+                  bookmarkBar={true}
                 />
               );
             },

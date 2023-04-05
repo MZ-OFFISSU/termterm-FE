@@ -1,19 +1,20 @@
 import TermBox from "@components/common/TermBox";
 import styled from "styled-components/native";
 import { ViewProps } from "react-native";
+import { Term } from "@interfaces/term";
 
 interface Props extends ViewProps {
-  results: Array<string>;
+  terms: Array<Term>;
 }
 
-const ResultWrapper = ({ results, ...props }: Props) => {
+const TermDetailGlance = ({ terms, ...props }: Props) => {
   return (
-    <Container>
-      {results.map((result, idx) => (
+    <Container {...props}>
+      {terms.map((term, idx) => (
         <TermBox
-          title={result}
-          marked={false}
-          key={`${result}-${idx}`}
+          title={term.name}
+          marked={term.bookmarked}
+          key={term.id}
         ></TermBox>
       ))}
     </Container>
@@ -26,6 +27,7 @@ const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+  padding-bottom: 40px;
 `;
 
-export default ResultWrapper;
+export default TermDetailGlance;

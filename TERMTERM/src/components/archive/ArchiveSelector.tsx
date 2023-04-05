@@ -43,7 +43,7 @@ const Item = styled.Text<{ focused: boolean; COLOR: colorTheme }>`
       : TEXT_STYLES.md2.Reg?.fontWeight};
   color: ${(props) =>
     props.focused ? props.COLOR.Text.active : props.COLOR.Text.muted};
-  marginright: 10px;
+  margin-right: 10px;
 `;
 
 export default ArchiveSelector;

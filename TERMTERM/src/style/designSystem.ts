@@ -46,6 +46,10 @@ export const TEXT_STYLES: Record<
     },
   },
   [TEXT_STYLE_SIZE.xl]: {
+    [TEXT_STYLE_WEIGHT.Bd]: {
+      fontSize: 24,
+      fontWeight: 700,
+    },
     [TEXT_STYLE_WEIGHT.default]: {
       fontSize: 24,
       fontWeight: 700,
@@ -120,11 +124,23 @@ export const TEXT_STYLES: Record<
       fontSize: 14,
       fontWeight: 500,
     },
+    [TEXT_STYLE_WEIGHT.Bd]: {
+      fontSize: 14,
+      fontWeight: 700,
+    },
   },
   [TEXT_STYLE_SIZE.xxsm]: {
     [TEXT_STYLE_WEIGHT.default]: {
       fontSize: 12,
       fontWeight: 500,
+    },
+    [TEXT_STYLE_WEIGHT.Md]: {
+      fontSize: 12,
+      fontWeight: 500,
+    },
+    [TEXT_STYLE_WEIGHT.Reg]: {
+      fontSize: 12,
+      fontWeight: 400,
     },
   },
   [TEXT_STYLE_SIZE.xxxsm]: {

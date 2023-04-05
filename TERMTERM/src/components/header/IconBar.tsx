@@ -4,11 +4,16 @@ import {
   CaretBtn,
   TitleWrapper,
 } from "../common/NavigatorTitle";
-import { AntDesign } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import styled from "styled-components/native";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { iconHeaderState, modalState } from "@recoil/iconHeaderState";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 export enum Icon {
   fold,
@@ -16,19 +21,23 @@ export enum Icon {
 }
 
 interface Props {
-  curNum?: number;
-  maxNum?: number;
   onBack: () => void;
   icon: Icon;
   onPress: () => void;
-  onDots: () => void;
+  bookmarkBar?: boolean;
 }
 
 /**
  * 아이콘과 함수를 유동적으로 삽입할 수 있는 헤더
  */
-const IconBar = ({ curNum, maxNum, onBack, icon, onPress, onDots }: Props) => {
+const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
   const [COLOR, mode] = useThemeStyle();
+  const headerState = useRecoilValue(iconHeaderState);
+  const [modal, setModal] = useRecoilState(modalState);
+
+  const onBookmark = (id: number) => {
+    null;
+  };
 
   const Fold = () => {
     return mode ? (
@@ -55,25 +64,49 @@ const IconBar = ({ curNum, maxNum, onBack, icon, onPress, onDots }: Props) => {
     );
   };
 
+  const Bookmark = () => {
+    return (
+      <CaretBtn
+        onPress={() => onBookmark(headerState.id)}
+        style={{ marginRight: 15 }}
+      >
+        {headerState.bookmarked ? (
+          <Ionicons
+            name="md-bookmark"
+            size={24}
+            color={COLOR.THEME.secondary[130]}
+          />
+        ) : (
+          <Ionicons
+            name="ios-bookmark-outline"
+            size={24}
+            color={COLOR.Text.active}
+          />
+        )}
+      </CaretBtn>
+    );
+  };
+
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 20 }}>
         <AntDesign name="left" size={24} color={COLOR.Text.active} />
       </CaretBtn>
-      {maxNum && curNum ? (
+      {bookmarkBar ? (
         <TitleWrapper>
           <NavigatorTitle style={{ color: COLOR.Text.active }}>
-            {`${curNum}/${maxNum}`}
+            {`${headerState.curNum}/${headerState.maxNum}`}
           </NavigatorTitle>
         </TitleWrapper>
       ) : (
         <></>
       )}
       <ElementWrapper style={{ marginRight: 20 }}>
+        {bookmarkBar === undefined ? <></> : <Bookmark />}
         <CaretBtn onPress={() => onPress()} style={{ marginRight: 15 }}>
           {icon === Icon.fold ? <Fold /> : <Collapse />}
         </CaretBtn>
-        <CaretBtn onPress={() => onDots()}>
+        <CaretBtn onPress={() => setModal(!modal)}>
           <MaterialCommunityIcons
             name="dots-vertical"
             size={24}
