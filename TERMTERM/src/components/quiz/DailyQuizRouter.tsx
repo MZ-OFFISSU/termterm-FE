@@ -46,7 +46,7 @@ const DailyQuizRouter = ({ navigation }: ScreenProps) => {
           style={{ marginTop: 13 }}
         />
         <Title>Daily 용어 퀴즈를 시작해 볼까요?</Title>
-        <TouchableOpacity onPress={() => navigation.navigate("DailyQuiz")}>
+        <TouchableOpacity onPress={() => navigation.navigate("TermDetail")}>
           <AutoSizedImage
             source={require("@assets/arrow-button.png")}
             width={btnWidth}

@@ -12,6 +12,8 @@ import {
   MakeFolder,
   FolderDetailGlance,
   FolderDetailCollapse,
+  TermDetail,
+  TermDiscussion,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
@@ -131,6 +133,42 @@ const Container = () => {
                     props.navigation.navigate("FolderDetailGlance", { id: 0 })
                   }
                   bookmarkBar={true}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="TermDetail"
+          component={TermDetail}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <IconBar
+                  onBack={() => props.navigation.pop()}
+                  icon={Icon.collapse}
+                  onPress={() =>
+                    props.navigation.navigate("TermDetail", { id: 0 })
+                  }
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="TermDiscussion"
+          component={TermDiscussion}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <IconBar
+                  onBack={() => props.navigation.pop()}
+                  icon={Icon.collapse}
+                  onPress={() =>
+                    props.navigation.navigate("TermDiscussion", { id: 0 })
+                  }
                 />
               );
             },

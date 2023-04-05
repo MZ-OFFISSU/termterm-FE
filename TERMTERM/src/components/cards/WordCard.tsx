@@ -5,12 +5,13 @@ import {
   ImageBackground,
   ImageSourcePropType,
 } from "react-native";
-import { DARK_COLOR_STYLE, LIGHT_COLOR_STYLE, TEXT_STYLES, TEXT_STYLE_SIZE, TEXT_STYLE_WEIGHT } from "@style/designSystem";
-import { UrlText, NonScrollContainer, CustomButton, BUTTON_TYPE, BUTTON_STATE } from "@components/index";
+import { DARK_COLOR_STYLE, LIGHT_COLOR_STYLE } from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
+
+export type ScreenProps = StackScreenProps<RootStackParamList, "ToolBar">;
 
 interface Props extends TouchableOpacityProps {
   title: string;
@@ -18,7 +19,7 @@ interface Props extends TouchableOpacityProps {
   isFocused: boolean;
 }
 
-const WordCard = () => {
+const WordCard = ({ navigation }: ScreenProps) => {
   const [width, setWidth] = useState(83);
   /** 북마크 여부 상태 */
   const [bookmarkBool, setBookmarkBool] = useState(false);
@@ -62,7 +63,7 @@ const WordCard = () => {
           state={BUTTON_STATE.active}
         /> */}
 
-        <WordButton>
+        <WordButton onPress={() => navigation.navigate("TermDetail")}>
           <ButtonText>북마크 하러 가기 〉 </ButtonText>
         </WordButton>
       </Card>
