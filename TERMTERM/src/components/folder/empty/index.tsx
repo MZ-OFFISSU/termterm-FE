@@ -4,19 +4,26 @@ import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import FolderInfo from "../FolderInfo";
 
 interface Props {
-  type: string;
+  title: string;
+  subtitle: string;
 }
 
 /**
- * 북마크 유도하는 컴포넌트 (용어나 큐레이션의 북마크가 비어있을 때 보여주는)
+ * 폴더 내부에서 -> 아카이빙을 하지 않으셨군요!
  */
-const GotoBookmark = ({ type }: Props) => {
+const Empty = ({ title, subtitle }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const navigation = useNavigation();
   return (
     <Container>
+      <FolderInfo
+        title={title}
+        subtitle={subtitle}
+        style={{ position: "absolute", top: 0, left: 0 }}
+      />
       <AutoSizedImage
         width={115}
         source={require("@assets/bookmark-character.png")}
@@ -25,7 +32,7 @@ const GotoBookmark = ({ type }: Props) => {
       <Subtitle COLOR={COLOR}>
         {"아카이빙을 하면 "}
         <Subtitle COLOR={COLOR} style={{ fontWeight: `900` }}>
-          {type} 아카이브
+          {title} 아카이브
         </Subtitle>
         {`를\n더욱 잘 활용할 수 있어요`}
       </Subtitle>
@@ -51,7 +58,9 @@ const Container = styled.View`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 20px;
+  position: relative;
+  padding: 30px 0px;
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
@@ -61,6 +70,7 @@ const Title = styled.Text<{ COLOR: colorTheme }>`
   text-align: center;
   white-space: pre-line;
   margin-top: 20px;
+  line-height: 32px;
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
@@ -97,4 +107,4 @@ const BtnInner = styled.Text<{ COLOR: colorTheme }>`
   color: ${(props) => props.COLOR.Text.lighten};
 `;
 
-export default GotoBookmark;
+export default Empty;
