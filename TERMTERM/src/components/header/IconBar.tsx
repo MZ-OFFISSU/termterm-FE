@@ -40,17 +40,6 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
     null;
   };
 
-  // const Fold = () => {
-  //   return mode ? (
-  //     <AutoSizedImage source={require("@assets/icon/fold.png")} height={22} />
-  //   ) : (
-  //     <AutoSizedImage
-  //       source={require("@assets/icon/fold-dark.png")}
-  //       height={22}
-  //     />
-  //   );
-  // };
-
   const Fold = useCallback(() => {
     return mode ? (
       <AutoSizedImage source={require("@assets/icon/fold.png")} height={22} />
@@ -61,20 +50,6 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
       />
     );
   }, []);
-
-  // const Collapse = () => {
-  //   return mode ? (
-  //     <AutoSizedImage
-  //       source={require("@assets/icon/collapse.png")}
-  //       height={24}
-  //     />
-  //   ) : (
-  //     <AutoSizedImage
-  //       source={require("@assets/icon/collapse-dark.png")}
-  //       height={24}
-  //     />
-  //   );
-  // };
 
   const Collapse = useCallback(() => {
     return mode ? (
