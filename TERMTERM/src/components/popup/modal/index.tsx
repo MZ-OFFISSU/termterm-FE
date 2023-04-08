@@ -102,7 +102,7 @@ const BtnWrapper = styled.View`
 `;
 
 const Button = styled.TouchableOpacity`
-  width: 125px;
+  width: 140px;
   height: 44px;
   border-radius: 30px;
   display: flex;

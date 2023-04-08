@@ -84,9 +84,7 @@ const CustomButton = styled.TouchableOpacity<{
   justify-content: center;
   border-radius: 100px;
   background-color: ${(props) =>
-    props.mode
-      ? props.COLOR.THEME.primary[130]
-      : props.COLOR.Background.onSurface};
+    props.mode ? props.COLOR.Neutral[100] : props.COLOR.Background.onSurface};
 
   margin-top: 60px;
 `;
