@@ -1,4 +1,5 @@
-import { TEXT_STYLES } from "@style/designSystem";
+import AutoSizedImage from "@components/common/AutoSizedImage";
+import { LIGHT_COLOR_STYLE, TEXT_STYLES } from "@style/designSystem";
 import {
   BaseToast,
   ErrorToast,
@@ -32,13 +33,33 @@ export const toastConfig = {
   ),
 
   light: ({ text1 }: BaseToastProps) => (
-    <ToastContainer style={{ backgroundColor: "#F0F0F1" }}>
+    <ToastContainer
+      style={{
+        backgroundColor: LIGHT_COLOR_STYLE.THEME.secondary[20],
+        borderWidth: 1,
+        borderColor: LIGHT_COLOR_STYLE.THEME.secondary[40],
+      }}
+    >
+      <AutoSizedImage
+        source={require("@assets/icon/toast-light.png")}
+        width={36}
+      />
       <ToastMessage style={{ color: "#0D0D0D" }}>{text1}</ToastMessage>
     </ToastContainer>
   ),
 
   dark: ({ text1 }: BaseToastProps) => (
-    <ToastContainer style={{ backgroundColor: "#46494B" }}>
+    <ToastContainer
+      style={{
+        backgroundColor: "#46494bee",
+        borderWidth: 1,
+        borderColor: LIGHT_COLOR_STYLE.Background.inputBorderFocus,
+      }}
+    >
+      <AutoSizedImage
+        source={require("@assets/icon/toast-dark.png")}
+        width={36}
+      />
       <ToastMessage style={{ color: "#FFFFFF" }}>{text1}</ToastMessage>
     </ToastContainer>
   ),
@@ -48,12 +69,16 @@ const ToastContainer = styled.View`
   width: 90%;
   height: 65px;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   border-radius: 10px;
+  padding: 0px 20px;
 `;
 
 const ToastMessage = styled.Text`
   font-size: ${TEXT_STYLES.md2.Bd?.fontSize}px;
   font-weight: ${TEXT_STYLES.md2.Bd?.fontWeight};
+  white-space: pre-line;
+  margin-left: 20px;
 `;
