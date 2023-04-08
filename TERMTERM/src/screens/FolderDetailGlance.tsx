@@ -35,7 +35,10 @@ const FolderDetailGlance = ({ navigation, route }: Props) => {
             {modal ? <HeaderModal id={FOLDER_ID} /> : <></>}
           </>
         ) : (
-          <Empty title={contents.title} subtitle={contents.subtitle} />
+          <>
+            <Empty title={contents.title} subtitle={contents.subtitle} />
+            {modal ? <HeaderModal id={FOLDER_ID} /> : <></>}
+          </>
         )}
       </Container>
     </ModalBackground>

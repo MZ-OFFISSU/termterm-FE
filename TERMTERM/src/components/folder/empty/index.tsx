@@ -17,6 +17,7 @@ interface Props {
 const Empty = ({ title, subtitle }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const navigation = useNavigation();
+
   return (
     <Container>
       <FolderInfo
