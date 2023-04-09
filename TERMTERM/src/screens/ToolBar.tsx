@@ -129,7 +129,10 @@ const ToolBar = ({ ...props }: Props) => {
         name="My"
         component={My}
         options={{
-          headerShown: false,
+          headerShown: true,
+          header: (props) => {
+            return <TitleBar title="My" icon={0} point={10000} />;
+          },
           title: "MY",
           tabBarIcon: ({ focused }) => (
             <Ionicons
