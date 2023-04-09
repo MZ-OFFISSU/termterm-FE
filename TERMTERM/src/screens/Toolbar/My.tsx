@@ -3,19 +3,25 @@ import { colorTheme } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import ProfileBox from "@components/my/ProfileBox";
 import Button from "@components/my/Button";
+import { DefaultList } from "@components/my/MenuList";
 
 const My = () => {
   const [COLOR, mode] = useThemeStyle();
 
   return (
     <Container COLOR={COLOR}>
-      <InnerContainer>
-        <ProfileBox />
-        <Button
-          title={"프로필 수정"}
-          isActivated={false}
-          style={{ marginTop: 30 }}
-        />
+      <InnerContainer style={{ paddingTop: 20, paddingBottom: 20 }}>
+        <InnerContainer style={{ paddingLeft: 16, paddingRight: 16 }}>
+          <ProfileBox />
+          <Button
+            title={"프로필 수정"}
+            isActivated={false}
+            style={{ marginTop: 30 }}
+          />
+        </InnerContainer>
+        <InnerContainer style={{ marginTop: 15 }}>
+          <DefaultList />
+        </InnerContainer>
       </InnerContainer>
     </Container>
   );
@@ -33,7 +39,6 @@ const InnerContainer = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 20px 16px;
 `;
 
 export default My;
