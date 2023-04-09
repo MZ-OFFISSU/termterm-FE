@@ -25,6 +25,7 @@ interface TextType {
 const Home = ({ navigation, route }: Props) => {
   const [isArchive, setIsArchive] = useState<boolean>(false);
   const [COLOR, mode] = useThemeStyle();
+  const [name, setName] = useState("루시사랑해");
 
   return (
     <SafeAreaView>
@@ -33,7 +34,7 @@ const Home = ({ navigation, route }: Props) => {
           {isArchive ? (
             <>
               <TitleContainer
-                username={"세원"}
+                username={name}
                 title={"님, 오늘도 파이팅👏"}
                 subtitle={"아카이빙한 용어를 확인해보세요!"}
               />
@@ -42,7 +43,7 @@ const Home = ({ navigation, route }: Props) => {
           ) : (
             <>
               <TitleContainer
-                username={"세원"}
+                username={name}
                 title={"님, 오늘도 파이팅"}
                 subtitle={"아카이빙한 용어가 없습니다."}
               />
@@ -55,9 +56,20 @@ const Home = ({ navigation, route }: Props) => {
           <DailyQuizRouter navigation={navigation} route={route} />
           <FlexContainer>
             <CurationTitleBox>
-              <MenuTitle COLOR={COLOR}>
-                {"세원"}님을 위한 추천 큐레이션
-              </MenuTitle>
+              <MenuTitleWrapper>
+                <MenuTitle COLOR={COLOR}>
+                  <MenuTitle
+                    COLOR={COLOR}
+                    style={{ color: COLOR.THEME.primary[160] }}
+                  >
+                    {name}
+                  </MenuTitle>
+                  님을 위한,
+                </MenuTitle>
+                <MenuTitle COLOR={COLOR} style={{ marginTop: 3 }}>
+                  업무 용어 추천 큐레이션
+                </MenuTitle>
+              </MenuTitleWrapper>
               <CurationViewBtn onPress={() => navigation.push("Curation")}>
                 <CurationViewBtnContent COLOR={COLOR}>
                   전체보기
@@ -139,6 +151,13 @@ const Title = styled.Text<{ COLOR: colorTheme }>`
   font-weight: ${TEXT_STYLES.xl.Bd?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
   opacity: 0.95;
+`;
+
+const MenuTitleWrapper = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 `;
 
 const MenuTitle = styled.Text<{ COLOR: colorTheme }>`
