@@ -1,16 +1,8 @@
 import styled from "styled-components/native";
 import { useState, useEffect } from "react";
-import {
-  TouchableOpacityProps,
-  ImageBackground,
-  ImageSourcePropType,
-} from "react-native";
-import { DARK_COLOR_STYLE, LIGHT_COLOR_STYLE, TEXT_STYLES, TEXT_STYLE_SIZE, TEXT_STYLE_WEIGHT } from "@style/designSystem";
-import { UrlText, NonScrollContainer, CustomButton, BUTTON_TYPE, BUTTON_STATE } from "@components/index";
+import { TouchableOpacityProps, ImageSourcePropType } from "react-native";
+import { DARK_COLOR_STYLE, LIGHT_COLOR_STYLE } from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
-import AutoSizedImage from "@components/common/AutoSizedImage";
-import { StackScreenProps } from "@react-navigation/stack";
-import { RootStackParamList } from "@interfaces/RootStackParamList";
 
 interface Props extends TouchableOpacityProps {
   title: string;
@@ -44,19 +36,19 @@ const WordCard = () => {
     calcWidth();
   }, []);
 
-    return (
-      <Card>
-        <TitleBox>
-          <Title>아직 북마크를 하지 않으셨군요!</Title>
-          <SubTitle>북마크를 하면 용어를 더욱</SubTitle>
-          <SubTitle>쉽게 다시 볼 수 있어요</SubTitle>
-        </TitleBox>
-      </Card>
-    )
-}
+  return (
+    <Card>
+      <TitleBox>
+        <Title>아직 북마크를 하지 않으셨군요!</Title>
+        <SubTitle>북마크를 하면 용어를 더욱</SubTitle>
+        <SubTitle>쉽게 다시 볼 수 있어요</SubTitle>
+      </TitleBox>
+    </Card>
+  );
+};
 
 const Card = styled.View`
-  width: 358px;
+  width: 100%;
   height: 358px;
   margin: 5px;
   border-radius: 10px;

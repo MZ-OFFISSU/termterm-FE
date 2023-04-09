@@ -1,16 +1,11 @@
 import styled from "styled-components/native";
 import { useState, useEffect } from "react";
-import {
-  TouchableOpacityProps,
-  ImageBackground,
-  ImageSourcePropType,
-} from "react-native";
-import { DARK_COLOR_STYLE, LIGHT_COLOR_STYLE, TEXT_STYLES, TEXT_STYLE_SIZE, TEXT_STYLE_WEIGHT } from "@style/designSystem";
-import { UrlText, NonScrollContainer, CustomButton, BUTTON_TYPE, BUTTON_STATE } from "@components/index";
+import { TouchableOpacityProps, ImageSourcePropType } from "react-native";
+import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { StackScreenProps } from "@react-navigation/stack";
-import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { Fontisto } from "@expo/vector-icons";
+import { useThemeStyle } from "@hooks/useThemeStyle";
 
 interface Props extends TouchableOpacityProps {
   title: string;
@@ -19,6 +14,7 @@ interface Props extends TouchableOpacityProps {
 }
 
 const EmptyWordCard = () => {
+  const [COLOR, mode] = useThemeStyle();
   const [width, setWidth] = useState(83);
   /** 북마크 여부 상태 */
   const [bookmarkBool, setBookmarkBool] = useState(false);
@@ -44,35 +40,44 @@ const EmptyWordCard = () => {
     calcWidth();
   }, []);
 
-    return (
-      <Card>
-        <AutoSizedImage
-          source={require("@assets/bookmark-character.png")}
-          width={width}
+  return (
+    <Card COLOR={COLOR} mode={mode}>
+      <AutoSizedImage
+        source={require("@assets/bookmark-character.png")}
+        width={width}
+      />
+      <TitleBox>
+        <Title COLOR={COLOR}>아직 아카이빙을 하지 않으셨군요!</Title>
+        <SubTitle
+          COLOR={COLOR}
+        >{`아카이빙을 하면 용어를 더욱\n쉽게 다시 볼 수 있어요`}</SubTitle>
+      </TitleBox>
+      <WordButton COLOR={COLOR}>
+        <ButtonText COLOR={COLOR}>아카이빙 하러 가기</ButtonText>
+        <Fontisto
+          name="angle-right"
+          size={TEXT_STYLES["2xsm"].Reg?.fontSize}
+          color={COLOR.Text.lighten}
+          style={{ marginLeft: 10 }}
         />
-        <TitleBox>
-          <Title>아직 북마크를 하지 않으셨군요!</Title>
-          <SubTitle>북마크를 하면 용어를 더욱</SubTitle>
-          <SubTitle>쉽게 다시 볼 수 있어요</SubTitle>
-        </TitleBox>
-        <WordButton>
-          <ButtonText>북마크 하러 가기 〉 </ButtonText>
-        </WordButton>
-      </Card>
-    )
-}
+      </WordButton>
+    </Card>
+  );
+};
 
-const Card = styled.View`
-  width: 358px;
+const Card = styled.View<{ COLOR: colorTheme; mode: boolean }>`
+  width: 100%;
   height: 358px;
-  margin: 5px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background-color: ${LIGHT_COLOR_STYLE.THEME.primary[10]};
-  margin-bottom: 30px;
+  background-color: ${(props) =>
+    props.mode
+      ? props.COLOR.THEME.primary[10]
+      : props.COLOR.Background.onSurface};
+  margin-top: 10px;
 `;
 
 const TitleBox = styled.View`
@@ -82,48 +87,42 @@ const TitleBox = styled.View`
   margin-top: 35px;
 `;
 
-// const Title = styled.Text`
-//   font-size: ${TEXT_STYLE_SIZE.md1};
-//   font-weight: ${TEXT_STYLE_WEIGHT.Eb};
-//   color: ${LIGHT_COLOR_STYLE.Text.active};
-//   text-align: center;
-// `;
-const Title = styled.Text`
-  font-size: 20px;
-  font-weight: 900;
-  color: #0d0d0d;
+const Title = styled.Text<{ COLOR: colorTheme }>`
+  font-size: ${TEXT_STYLES.md1.Eb?.fontSize}px;
+  font-weight: ${TEXT_STYLES.md1.Eb?.fontWeight};
+  color: ${(props) => props.COLOR.Text.active};
   text-align: center;
 `;
 
-// const SubTitle = styled.Text`
-//   font-size: ${TEXT_STYLE_SIZE.sm};
-//   font-weight: ${TEXT_STYLE_WEIGHT.Reg};
-//   color: ${LIGHT_COLOR_STYLE.Text.default};
-//   text-align: center;
-// `;
-const SubTitle = styled.Text`
-  font-size: 15px;
-  font-weight: 500;
-  color: #565656;
+const SubTitle = styled.Text<{ COLOR: colorTheme }>`
+  font-size: ${TEXT_STYLES.sm.Reg?.fontSize}px;
+  font-weight: ${TEXT_STYLES.sm.Reg?.fontWeight};
+  color: ${(props) => props.COLOR.Text.default};
   text-align: center;
-  margin: 3px 0;
+  margin-top: 10px;
+  line-height: 23px;
 `;
 
-const WordButton = styled.TouchableOpacity`
-  width: 318px;
-  height: 44px;
+const WordButton = styled.TouchableOpacity<{ COLOR: colorTheme }>`
+  width: 90%;
+  max-width: 318px;
+  height: 45px;
   z-index: 2;
-  background-color: #19d24d;
+  background-color: ${(props) => props.COLOR.THEME.primary[130]};
   border-radius: 50%;
   margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
-const ButtonText = styled.Text`
-  font-size: 18px;
-  font-weight: 600;
+const ButtonText = styled.Text<{ COLOR: colorTheme }>`
+  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
+  font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
   text-align: center;
   margin: auto 0;
-  color: ${DARK_COLOR_STYLE.Text.active};
+  color: ${(props) => props.COLOR.Text.lighten};
 `;
 
 export default EmptyWordCard;
