@@ -15,8 +15,12 @@ const HomeBar = ({ onSearch }: Props) => {
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <AutoSizedImage
-        source={require("@assets/icon/header-icon.png")}
-        height={24}
+        source={
+          mode
+            ? require("@assets/icon/logo-word.png")
+            : require("@assets/icon/logo-word-dark.png")
+        }
+        height={13}
         style={{ marginLeft: 20 }}
       />
       <CaretBtn onPress={() => onSearch()} style={{ marginRight: 20 }}>

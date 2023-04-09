@@ -1,29 +1,11 @@
 import styled from "styled-components/native";
-import { useState, useEffect } from "react";
-import {
-  TouchableOpacityProps,
-  ImageSourcePropType,
-  Image,
-} from "react-native";
-import {
-  DARK_COLOR_STYLE,
-  LIGHT_COLOR_STYLE,
-  TEXT_STYLES,
-  TEXT_STYLE_SIZE,
-  TEXT_STYLE_WEIGHT,
-} from "@style/designSystem";
-import {
-  UrlText,
-  NonScrollContainer,
-  CustomButton,
-  BUTTON_TYPE,
-  BUTTON_STATE,
-} from "@components/index";
-import { screenWidth } from "@style/dimensions";
+import { TouchableOpacityProps, ImageSourcePropType } from "react-native";
+import { colorTheme, LIGHT_COLOR_STYLE } from "@style/designSystem";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useThemeStyle } from "@hooks/useThemeStyle";
 
 export type ScreenProps = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -34,58 +16,53 @@ interface Props extends TouchableOpacityProps {
 }
 
 const DailyQuizRouter = ({ navigation }: ScreenProps) => {
-  const [width, setWidth] = useState(20);
-  const [btnWidth, setBtnWidth] = useState(40);
-
+  const [COLOR, mode] = useThemeStyle();
   return (
-    <Container>
-      <FlexContainer>
+    <Container COLOR={COLOR} mode={mode}>
+      <LeftBox>
+        <AutoSizedImage source={require("@assets/test.png")} width={24} />
+        <Title COLOR={COLOR} style={{ marginLeft: 5 }}>
+          Daily 용어 퀴즈를 시작해 볼까요?
+        </Title>
+      </LeftBox>
+      <TouchableOpacity onPress={() => navigation.navigate("DailyQuiz")}>
         <AutoSizedImage
-          source={require("@assets/test.png")}
-          width={width}
-          style={{ marginTop: 13 }}
+          source={require("@assets/arrow-button.png")}
+          width={40}
         />
-        <Title>Daily 용어 퀴즈를 시작해 볼까요?</Title>
-        <TouchableOpacity onPress={() => navigation.navigate("DailyQuiz")}>
-          <AutoSizedImage
-            source={require("@assets/arrow-button.png")}
-            width={btnWidth}
-          />
-        </TouchableOpacity>
-      </FlexContainer>
+      </TouchableOpacity>
     </Container>
   );
 };
 
-const Container = styled.View`
-  width: 358px;
-  height: 115px;
-  margin-bottom: 40px;
+const Container = styled.View<{ COLOR: colorTheme; mode: boolean }>`
+  width: 100%;
+  height: 100px;
   border-radius: 10px;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
   overflow: hidden;
-  background-color: ${LIGHT_COLOR_STYLE.THEME.secondary[20]};
+  background-color: ${(props) =>
+    props.mode
+      ? props.COLOR.THEME.secondary[20]
+      : props.COLOR.Background.onSurface};
+  margin-top: 10px;
 `;
 
-const FlexContainer = styled.View`
-  width: 300px;
+const LeftBox = styled.View`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  margin: auto 0;
   align-items: center;
+  justify-content: flex-start;
 `;
 
-const Title = styled.Text`
+const Title = styled.Text<{ COLOR: colorTheme }>`
   font-size: 15px;
   font-weight: 500;
-  color: #0d0d0d;
+  color: ${(props) => props.COLOR.Text.active};
   text-align: center;
-  margin-top: 15px;
 `;
-
-const ArrowButton = styled.TouchableOpacity``;
 
 export default DailyQuizRouter;
