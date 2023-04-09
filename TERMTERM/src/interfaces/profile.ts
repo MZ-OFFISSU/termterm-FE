@@ -5,4 +5,5 @@ export interface ProfileProps {
   career: string;
   interests: Array<string>;
   img: string;
+  intro?: string;
 }

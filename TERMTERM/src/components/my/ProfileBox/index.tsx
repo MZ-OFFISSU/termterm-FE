@@ -1,41 +1,43 @@
 import styled from "styled-components/native";
 import { ProfileProps } from "@interfaces/profile";
-import { useState } from "react";
 import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import InterestBadge from "./InterestBadge";
 
+interface Props {
+  profile: ProfileProps;
+}
+
 /**
  * 프로필 스크린 최상단 프로필 미리보기 컴포넌트
  */
-const ProfileBox = () => {
-  const [info, setInfo] = useState(dummyProfile);
+const ProfileBox = ({ profile }: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
   return (
     <Container>
       <ProfileImageWrapper>
-        <ProfileImage source={{ uri: info.img }} />
+        <ProfileImage source={{ uri: profile.img }} />
       </ProfileImageWrapper>
       <InfoWrapper>
-        <Name COLOR={COLOR}>{info.name}</Name>
+        <Name COLOR={COLOR}>{profile.name}</Name>
         <DetailWrapper>
-          <Detail COLOR={COLOR}>{info.domain}</Detail>
+          <Detail COLOR={COLOR}>{profile.domain}</Detail>
           <Detail COLOR={COLOR} style={{ marginLeft: 4 }}>
             |
           </Detail>
           <Detail COLOR={COLOR} style={{ marginLeft: 4 }}>
-            {info.job}
+            {profile.job}
           </Detail>
           <Detail COLOR={COLOR} style={{ marginLeft: 4 }}>
             |
           </Detail>
           <Detail COLOR={COLOR} style={{ marginLeft: 4 }}>
-            {info.career}
+            {profile.career}
           </Detail>
         </DetailWrapper>
         <DetailWrapper>
-          {info.interests.map((interest, idx) => (
+          {profile.interests.map((interest, idx) => (
             <InterestBadge
               key={interest}
               interest={interest}
@@ -102,12 +104,3 @@ const Detail = styled.Text<{ COLOR: colorTheme }>`
 `;
 
 export default ProfileBox;
-
-const dummyProfile: ProfileProps = {
-  name: "왈왈이",
-  domain: "비바리퍼블리카",
-  job: "프론트엔드 개발자",
-  career: "1년 미만",
-  interests: ["개발", "디자인", "비즈니스", "IT"],
-  img: "https://i.pinimg.com/564x/42/08/6e/42086e93481fff0f923cb0ab0d3784dc.jpg",
-};
