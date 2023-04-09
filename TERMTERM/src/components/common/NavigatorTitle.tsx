@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 
 /**
  * 헤더에 들어가는 타이틀
@@ -12,9 +12,10 @@ export const NavigatorTitle = styled.Text`
 /**
  * 헤더에 들어가는 현황 수
  */
-export const NavigatorPager = styled.Text`
+export const NavigatorPager = styled.Text<{ COLOR: colorTheme }>`
   font-size: 14px;
   font-weight: 400;
+  color: ${(props) => props.COLOR.Text.active};
 `;
 
 /**

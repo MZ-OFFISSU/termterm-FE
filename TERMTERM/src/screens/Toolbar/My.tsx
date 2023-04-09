@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 import { colorTheme } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import ProfileBox from "@components/my/ProfileBox";
+import Button from "@components/my/Button";
 
 const My = () => {
   const [COLOR, mode] = useThemeStyle();
@@ -10,6 +11,11 @@ const My = () => {
     <Container COLOR={COLOR}>
       <InnerContainer>
         <ProfileBox />
+        <Button
+          title={"프로필 수정"}
+          isActivated={false}
+          style={{ marginTop: 30 }}
+        />
       </InnerContainer>
     </Container>
   );

@@ -47,7 +47,7 @@ const TitleBar = ({ title, icon, point, onPress }: Props) => {
             source={require("@assets/icon/points.png")}
             height={24}
           />
-          <NavigatorPager style={{ marginLeft: 5 }}>
+          <NavigatorPager COLOR={COLOR} style={{ marginLeft: 5 }}>
             {point!.toLocaleString()}
           </NavigatorPager>
         </PointBox>
