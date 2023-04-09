@@ -14,6 +14,7 @@ import styled from "styled-components/native";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { iconHeaderState, modalState } from "@recoil/iconHeaderState";
 import { useRecoilValue, useRecoilState } from "recoil";
+import { useCallback, useMemo } from "react";
 
 export enum Icon {
   fold,
@@ -39,7 +40,7 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
     null;
   };
 
-  const Fold = () => {
+  const Fold = useCallback(() => {
     return mode ? (
       <AutoSizedImage source={require("@assets/icon/fold.png")} height={22} />
     ) : (
@@ -48,9 +49,9 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
         height={22}
       />
     );
-  };
+  }, []);
 
-  const Collapse = () => {
+  const Collapse = useCallback(() => {
     return mode ? (
       <AutoSizedImage
         source={require("@assets/icon/collapse.png")}
@@ -62,7 +63,7 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
         height={24}
       />
     );
-  };
+  }, []);
 
   const Bookmark = () => {
     return (
