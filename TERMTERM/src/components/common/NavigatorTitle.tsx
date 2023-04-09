@@ -5,8 +5,8 @@ import { colorTheme, TEXT_STYLES } from "@style/designSystem";
  * 헤더에 들어가는 타이틀
  */
 export const NavigatorTitle = styled.Text`
-  font-size: ${TEXT_STYLES.md1.Sb?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md1.Sb?.fontWeight};
+  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
+  font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
 `;
 
 /**

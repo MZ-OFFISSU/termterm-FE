@@ -7,8 +7,12 @@ import { DefaultList } from "@components/my/MenuList";
 import { ProfileProps } from "@interfaces/profile";
 import { useState } from "react";
 import IntroBox from "@components/my/IntroBox";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
 
-const My = () => {
+export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
+
+const My = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [info, setInfo] = useState(dummyProfile);
 
@@ -25,7 +29,8 @@ const My = () => {
           <Button
             title={"프로필 수정"}
             isActivated={false}
-            style={{ marginTop: 30 }}
+            style={{ marginTop: 24 }}
+            onPress={() => navigation.push("EditProfile")}
           />
         </InnerContainer>
         <InnerContainer style={{ marginTop: 15 }}>

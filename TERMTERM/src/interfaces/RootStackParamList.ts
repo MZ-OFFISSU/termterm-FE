@@ -19,4 +19,5 @@ export type RootStackParamList = {
   MakeFolder: undefined;
   FolderDetailGlance: { id: number };
   FolderDetailCollapse: { id: number };
+  EditProfile: undefined;
 };

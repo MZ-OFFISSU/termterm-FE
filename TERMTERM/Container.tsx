@@ -12,6 +12,7 @@ import {
   MakeFolder,
   FolderDetailGlance,
   FolderDetailCollapse,
+  EditProfile,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
@@ -131,6 +132,21 @@ const Container = () => {
                     props.navigation.navigate("FolderDetailGlance", { id: 0 })
                   }
                   bookmarkBar={true}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="EditProfile"
+          component={EditProfile}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <BackBar
+                  title="프로필 수정"
+                  onBack={() => props.navigation.pop()}
                 />
               );
             },

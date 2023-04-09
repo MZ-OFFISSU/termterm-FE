@@ -6,7 +6,6 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { SafeAreaView } from "react-native";
 import { CurationItem } from "@components/curation";
 import { CurationItemProps } from "@interfaces/curation";
-import { TouchableOpacity, Text } from "react-native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { Fontisto } from "@expo/vector-icons";

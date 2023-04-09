@@ -8,6 +8,7 @@ import CurationDetail from "./CurationDetail";
 import MakeFolder from "./MakeFolder";
 import FolderDetailGlance from "./FolderDetailGlance";
 import FolderDetailCollapse from "./FolderDetailCollapse";
+import EditProfile from "./EditProfile";
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   MakeFolder,
   FolderDetailGlance,
   FolderDetailCollapse,
+  EditProfile,
 };

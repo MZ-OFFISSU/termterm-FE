@@ -34,7 +34,7 @@ const IntroBoxContainer = styled.View<{ COLOR: colorTheme }>`
   align-items: flex-start;
   justify-content: flex-start;
   background-color: ${(props) => props.COLOR.Background.surface};
-  margin-top: 20px;
+  margin-top: 24px;
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
