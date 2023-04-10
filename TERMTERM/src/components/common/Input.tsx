@@ -40,6 +40,7 @@ const CustomInput = ({ value, max, inevitable, ...props }: Props) => {
           COLOR={COLOR}
           maxLength={max}
           placeholderTextColor={COLOR.Text.disabled}
+          value={value}
           {...props}
         />
         <Maximum style={{ color: borderColor, right: 0, top: 7 }}>
