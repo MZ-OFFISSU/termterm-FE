@@ -9,6 +9,7 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useRef, useMemo, useCallback } from "react";
 import BottomSheet from "@gorhom/bottom-sheet";
 import AutoSizedImage from "@components/common/AutoSizedImage";
+import { DiscussionProps } from "@interfaces/discussion";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -16,10 +17,16 @@ const TermDiscussion = ({ navigation, route }: Props) => {
     return (
         <>
             <Container>
-                <RowFlexBox>
+                <TitleFlexBox>
                     <Title>용어에 대한 다른 생각</Title>
                     <Text>좋아요 순</Text>
-                </RowFlexBox>
+                </TitleFlexBox>
+{/* 
+                {dummy.map((item, idx) => (
+                    <DiscussionBox
+                        {...item}
+                    />
+                ))} */}
             </Container>
         </>
     )
@@ -34,7 +41,7 @@ const Container = styled.View`
     background-color: white;
 `;
 
-const RowFlexBox = styled.View`
+const TitleFlexBox = styled.View`
     display: flex;
     flex-direction: row;
     padding: 5px 20px;
@@ -48,8 +55,3 @@ const Title = styled.Text`
     font-size: ${TEXT_STYLES.md1.Bd?.fontSize}px;
     font-weight: ${TEXT_STYLES.md1.Bd?.fontWeight};
 `;
-
-const DiscussionBox = styled.View`
-
-`;
-
