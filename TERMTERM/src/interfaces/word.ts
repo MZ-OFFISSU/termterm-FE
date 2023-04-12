@@ -5,11 +5,9 @@ import { Category, Comment } from "./term";
 */
 export interface WordProps {
     id: number,
-    korWord?: string,
-    engWord?: string,
+    name: string,
     description: string,
     source: string,
-    bookmarked?: boolean,
-    categories: Array<Category>;
-    comments: Array<Comment>;
+    categories: Array<Category>,
+    comments: Array<Comment>,
 }
