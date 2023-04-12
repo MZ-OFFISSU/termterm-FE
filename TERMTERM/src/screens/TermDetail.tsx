@@ -14,7 +14,7 @@ import Button from "@components/curation/detail/term/Button";
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
 const TermDetail = ({ navigation, route }: Props) => {
-    const { expand } = useBottomSheet();
+    // const { expand } = useBottomSheet();
     const [COLOR, mode] = useThemeStyle();
 
     return (

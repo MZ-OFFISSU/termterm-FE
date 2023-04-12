@@ -6,7 +6,7 @@ import Container from "./Container";
 import { RecoilRoot } from "recoil";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "@components/popup/toast";
-import BottomSheet from "@gorhom/bottom-sheet";
+// import BottomSheet from "@gorhom/bottom-sheet";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -48,13 +48,13 @@ export default function App() {
 
       /** BottomSheet 관련 내용 */
       /** ref */
-      const bottomSheetRef = useRef<BottomSheet>(null);
-      /** variables */
-      const snapPoints = useMemo(() => ['25%', '50%'], []);
-      /** callBack */
-      const handleSheetChanges = useCallback((index: number) => {
-          console.log('handleSheetChanges', index);
-      }, []);
+      // const bottomSheetRef = useRef<BottomSheet>(null);
+      // /** variables */
+      // const snapPoints = useMemo(() => ['25%', '50%'], []);
+      // /** callBack */
+      // const handleSheetChanges = useCallback((index: number) => {
+      //     console.log('handleSheetChanges', index);
+      // }, []);
 
   return (
     <View onLayout={onLayoutRootView} style={{ flex: 1, width: "100%" }}>
@@ -62,7 +62,7 @@ export default function App() {
         <Container />
       </RecoilRoot>
       <Toast position="top" topOffset={40} config={toastConfig} />
-      <BottomSheet
+      {/* <BottomSheet
         ref={bottomSheetRef}
         index={1}
         snapPoints={snapPoints}
@@ -71,7 +71,7 @@ export default function App() {
           <View>
               <Text>Awesome 🎉</Text>
           </View>
-      </BottomSheet>
+      </BottomSheet> */}
     </View>
   );
 }
