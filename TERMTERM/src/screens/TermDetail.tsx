@@ -7,21 +7,15 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useRef, useMemo, useCallback } from "react";
-import BottomSheet from "@gorhom/bottom-sheet";
+import { useBottomSheet } from '@gorhom/bottom-sheet';
 import AutoSizedImage from "@components/common/AutoSizedImage";
+import Button from "@components/curation/detail/term/Button";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
 const TermDetail = ({ navigation, route }: Props) => {
+    const { expand } = useBottomSheet();
     const [COLOR, mode] = useThemeStyle();
-    /** ref */
-    const bottomSheetRef = useRef<BottomSheet>(null);
-    /** variables */
-    const snapPoints = useMemo(() => ['25%', '50%'], []);
-    /** callBack */
-    const handleSheetChanges = useCallback((index: number) => {
-        console.log('handleSheetChanges', index);
-    }, []);
 
     return (
         <>
@@ -41,23 +35,16 @@ const TermDetail = ({ navigation, route }: Props) => {
                     </SourceText>
                 </Card>
 
-                {/* <BottomSheet
-                    ref={bottomSheetRef}
-                    index={1}
-                    snapPoints={snapPoints}
-                    onChange={handleSheetChanges}
-                >
-                    <View>
-                        <Text>Awesome 🎉</Text>
-                    </View>
-                </BottomSheet> */}
-
-                <FlexBox onPress={() => navigation.navigate("TermDiscussion")}>
+                <FlexBox>
                     <AutoSizedImage 
                         source={require("@assets/arrow-differterm.png")}
                         width={30}
                     />
                     <DifferText>용어에 대한 다른 생각</DifferText>
+                    {/* <Button
+                        onPress={expand}
+                        title='temp button'
+                    /> */}
                 </FlexBox>
             </Container>
         </>
@@ -139,7 +126,7 @@ const FlexBox = styled.TouchableOpacity`
     margin-top: 200px;
 `;
 
-const DifferText = styled.Text`
+const DifferText = styled.TouchableOpacity`
     font-size: ${TEXT_STYLES.xsm.Md?.fontSize}px;
     font-weight: ${TEXT_STYLES.xsm.Md?.fontWeight};
     color: ${LIGHT_COLOR_STYLE.THEME.primary[130]};

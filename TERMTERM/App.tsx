@@ -1,11 +1,12 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import * as Font from "expo-font";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import Container from "./Container";
 import { RecoilRoot } from "recoil";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "@components/popup/toast";
+import BottomSheet from "@gorhom/bottom-sheet";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,12 +46,32 @@ export default function App() {
     return null;
   }
 
+      /** BottomSheet 관련 내용 */
+      /** ref */
+      const bottomSheetRef = useRef<BottomSheet>(null);
+      /** variables */
+      const snapPoints = useMemo(() => ['25%', '50%'], []);
+      /** callBack */
+      const handleSheetChanges = useCallback((index: number) => {
+          console.log('handleSheetChanges', index);
+      }, []);
+
   return (
     <View onLayout={onLayoutRootView} style={{ flex: 1, width: "100%" }}>
       <RecoilRoot>
         <Container />
       </RecoilRoot>
       <Toast position="top" topOffset={40} config={toastConfig} />
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={1}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+      >
+          <View>
+              <Text>Awesome 🎉</Text>
+          </View>
+      </BottomSheet>
     </View>
   );
 }
