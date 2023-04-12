@@ -19,6 +19,7 @@ import BookmarkWordCard from "./cards/BookmarkWordCard";
 import DailyQuizRouter from "./quiz/DailyQuizRouter";
 import ArchiveSelector from "./archive/ArchiveSelector";
 import Input from "./common/Input";
+import DiscussionItem from "./discussion/DiscussionItem";
 
 export { BUTTON_STATE, BUTTON_TYPE };
 export { NavigatorTitle, NavigatorPager, CaretBtn };
