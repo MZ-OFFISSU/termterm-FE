@@ -6,6 +6,8 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import ProfileImageSelector from "@components/my/EditProfile/ProfileImageSelector";
 import { ProfileProps } from "@interfaces/profile";
 import InfoSelector from "@components/my/EditProfile/InfoSelector";
+import { useState, useRef } from "react";
+import { ScrollView } from "react-native";
 
 export type Props = StackScreenProps<RootStackParamList, "EditProfile">;
 
@@ -14,11 +16,22 @@ export type Props = StackScreenProps<RootStackParamList, "EditProfile">;
  */
 const EditProfile = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
+  const [profile, setProfile] = useState<ProfileProps>(dummyProfile);
+  const scrollViewRef = useRef<ScrollView>(null);
+
+  const scrollToBottom = () => {
+    scrollViewRef.current?.scrollToEnd({ animated: true });
+  };
+
   return (
-    <Container COLOR={COLOR}>
+    <Container ref={scrollViewRef} COLOR={COLOR}>
       <InnerContainer>
-        <ProfileImageSelector img={dummyProfile.img} />
-        <InfoSelector profile={dummyProfile} style={{ marginTop: 35 }} />
+        <ProfileImageSelector img={profile.img} />
+        <InfoSelector
+          profile={profile}
+          scrollToBottom={scrollToBottom}
+          style={{ marginTop: 35 }}
+        />
       </InnerContainer>
     </Container>
   );
@@ -27,7 +40,6 @@ const EditProfile = ({ navigation }: Props) => {
 const Container = styled.ScrollView<{ COLOR: colorTheme }>`
   width: 100%;
   background-color: ${(props) => props.COLOR.Background.surface};
-  padding: 20px 32px;
 `;
 
 const InnerContainer = styled.View`
@@ -36,6 +48,7 @@ const InnerContainer = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 20px 32px;
 `;
 
 export default EditProfile;

@@ -36,7 +36,7 @@ const Container = styled.View`
 
 const Input = styled.TextInput<{ COLOR: colorTheme }>`
   width: 100%;
-  height: 140px;
+  min-height: 140px;
   border-radius: 6px;
   background-color: ${(props) => props.COLOR.Background.input};
   color: ${(props) => props.COLOR.Text.active};
@@ -55,6 +55,7 @@ const Maximum = styled.Text<{ COLOR: colorTheme }>`
   font-size: 11px;
   font-weight: 400;
   color: ${(props) => props.COLOR.Text.muted};
+  margin-top: 5px;
 `;
 
 export default CustomTextarea;

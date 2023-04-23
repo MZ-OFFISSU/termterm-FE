@@ -3,19 +3,48 @@ import Wrapper from "./Wrapper";
 import { Input } from "@components/index";
 import { useState } from "react";
 import { ProfileProps } from "@interfaces/profile";
-import { ViewProps } from "react-native";
+import { ViewProps, Keyboard } from "react-native";
 import { CustomSelector } from "@components/index";
 import CustomTextarea from "@components/common/CustomTextarea";
+import { useEffect } from "react";
 
 interface Props extends ViewProps {
   profile: ProfileProps;
+  scrollToBottom: () => void;
 }
 
 /**
  * 닉네임 / 도메인 / 직업 / 연차 / 자기소개 입력 콘테이너
  */
-const InfoSelector = ({ profile, ...props }: Props) => {
+const InfoSelector = ({ profile, scrollToBottom, ...props }: Props) => {
   const [input, setInput] = useState<ProfileProps>(profile);
+  const [keyboardHeight, setKeyboardHeight] = useState(50);
+  const [keyboard, setKeyboard] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      (e) => {
+        setKeyboardHeight(e.endCoordinates.height);
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardHeight(0);
+      }
+    );
+
+    // Clean up function
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [keyboard]);
 
   // 연차 세팅 관련 상태들
   const [open, setOpen] = useState(false);
@@ -51,7 +80,7 @@ const InfoSelector = ({ profile, ...props }: Props) => {
   };
 
   return (
-    <Container {...props}>
+    <Container keybaord={keyboard} keyboardHeight={keyboardHeight} {...props}>
       <Wrapper title="닉네임">
         <Input
           value={input.name}
@@ -93,17 +122,25 @@ const InfoSelector = ({ profile, ...props }: Props) => {
         />
       </Wrapper>
       <Wrapper title="자기소개" style={{ marginTop: 40 }}>
-        <CustomTextarea value={profile.intro} max={100} />
+        <CustomTextarea
+          value={input.intro}
+          max={100}
+          onChangeText={(text) => onChangeInput("intro", text)}
+          onFocus={() => setKeyboard(true)}
+          onBlur={() => setKeyboard(false)}
+        />
       </Wrapper>
     </Container>
   );
 };
 
-const Container = styled.View`
+const Container = styled.View<{ keybaord: boolean; keyboardHeight: number }>`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: ${(props) =>
+    props.keybaord ? `${props.keyboardHeight}px` : `0px`};
 `;
 
 export default InfoSelector;
