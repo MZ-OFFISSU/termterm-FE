@@ -8,6 +8,10 @@ import { ProfileProps } from "@interfaces/profile";
 import InfoSelector from "@components/my/EditProfile/InfoSelector";
 import { useState, useRef } from "react";
 import { ScrollView } from "react-native";
+import { CustomButton } from "@components/index";
+import { BUTTON_STATE, BUTTON_TYPE } from "@components/index";
+import { useDebounce } from "@hooks/useDebounce";
+import { screenWidth } from "@style/dimensions";
 
 export type Props = StackScreenProps<RootStackParamList, "EditProfile">;
 
@@ -16,21 +20,53 @@ export type Props = StackScreenProps<RootStackParamList, "EditProfile">;
  */
 const EditProfile = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const [profile, setProfile] = useState<ProfileProps>(dummyProfile);
+  const [input, setInput] = useState<ProfileProps>(dummyProfile);
   const scrollViewRef = useRef<ScrollView>(null);
+  const [changed, setChanged] = useState(false);
 
   const scrollToBottom = () => {
     scrollViewRef.current?.scrollToEnd({ animated: true });
   };
 
+  const [loading] = useDebounce(
+    () => {
+      if (JSON.stringify(dummyProfile) !== JSON.stringify(input))
+        setChanged(true);
+      else setChanged(false);
+    },
+    JSON.stringify(input),
+    500
+  );
+
   return (
     <Container ref={scrollViewRef} COLOR={COLOR}>
       <InnerContainer>
-        <ProfileImageSelector img={profile.img} />
+        <ProfileImageSelector input={input} setInput={setInput} />
         <InfoSelector
-          profile={profile}
+          input={input}
+          setInput={setInput}
           scrollToBottom={scrollToBottom}
           style={{ marginTop: 35 }}
+        />
+
+        <CustomButton
+          title="완료"
+          theme={mode}
+          type={BUTTON_TYPE.primary}
+          state={
+            loading
+              ? BUTTON_STATE.loading
+              : changed
+              ? BUTTON_STATE.active
+              : BUTTON_STATE.default
+          }
+          onPress={() => null}
+          style={{
+            width: screenWidth - 32,
+            alignSelf: "center",
+            marginTop: 50,
+            marginBottom: 30,
+          }}
         />
       </InnerContainer>
     </Container>

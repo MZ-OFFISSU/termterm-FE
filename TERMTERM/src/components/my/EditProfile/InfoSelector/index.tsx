@@ -1,51 +1,25 @@
 import styled from "styled-components/native";
 import Wrapper from "./Wrapper";
 import { Input } from "@components/index";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { ProfileProps } from "@interfaces/profile";
-import { ViewProps, Keyboard } from "react-native";
+import { ViewProps } from "react-native";
 import { CustomSelector } from "@components/index";
 import CustomTextarea from "@components/common/CustomTextarea";
-import { useEffect } from "react";
+import { JOB_TYPE } from "@screens/Onboarding/Third";
+import { JobCard } from "@components/index";
+import { screenWidth } from "@style/dimensions";
 
 interface Props extends ViewProps {
-  profile: ProfileProps;
+  input: ProfileProps;
+  setInput: Dispatch<SetStateAction<ProfileProps>>;
   scrollToBottom: () => void;
 }
 
 /**
  * 닉네임 / 도메인 / 직업 / 연차 / 자기소개 입력 콘테이너
  */
-const InfoSelector = ({ profile, scrollToBottom, ...props }: Props) => {
-  const [input, setInput] = useState<ProfileProps>(profile);
-  const [keyboardHeight, setKeyboardHeight] = useState(50);
-  const [keyboard, setKeyboard] = useState(false);
-
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
-      (e) => {
-        setKeyboardHeight(e.endCoordinates.height);
-      }
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
-      () => {
-        setKeyboardHeight(0);
-      }
-    );
-
-    // Clean up function
-    return () => {
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
-    };
-  }, []);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [keyboard]);
-
+const InfoSelector = ({ input, setInput, scrollToBottom, ...props }: Props) => {
   // 연차 세팅 관련 상태들
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([
@@ -58,7 +32,7 @@ const InfoSelector = ({ profile, scrollToBottom, ...props }: Props) => {
     { label: "5년 이상", value: "5년 이상" },
     { label: "시니어", value: "시니어" },
   ]);
-  const [career, setCareer] = useState(profile.career);
+  const [career, setCareer] = useState(input.career);
 
   const onChangeInput = (name: string, value: string) => {
     switch (name) {
@@ -74,13 +48,22 @@ const InfoSelector = ({ profile, scrollToBottom, ...props }: Props) => {
       case "intro":
         setInput({ ...input, intro: value });
         break;
+      case "interests":
+        if (input.interests.includes(value))
+          setInput({
+            ...input,
+            interests: input.interests.filter((interest) => interest !== value),
+          });
+        else if (input.interests.length < 4)
+          setInput({ ...input, interests: [...input.interests, value] });
+        break;
       default:
         break;
     }
   };
 
   return (
-    <Container keybaord={keyboard} keyboardHeight={keyboardHeight} {...props}>
+    <Container {...props}>
       <Wrapper title="닉네임">
         <Input
           value={input.name}
@@ -126,21 +109,41 @@ const InfoSelector = ({ profile, scrollToBottom, ...props }: Props) => {
           value={input.intro}
           max={100}
           onChangeText={(text) => onChangeInput("intro", text)}
-          onFocus={() => setKeyboard(true)}
-          onBlur={() => setKeyboard(false)}
         />
+      </Wrapper>
+      <Wrapper
+        title="관심사"
+        subtitle="최소 1개에서 최대 4개까지 선택해주세요."
+        style={{ marginTop: 40 }}
+      >
+        <ButtonContainer>
+          {JOB_TYPE.map((job) => (
+            <JobCard
+              key={job.title}
+              isFocused={input.interests.includes(job.title)}
+              onPress={() => onChangeInput("interests", job.title)}
+              {...job}
+            />
+          ))}
+        </ButtonContainer>
       </Wrapper>
     </Container>
   );
 };
 
-const Container = styled.View<{ keybaord: boolean; keyboardHeight: number }>`
+const Container = styled.View`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: ${(props) =>
-    props.keybaord ? `${props.keyboardHeight}px` : `0px`};
+`;
+const ButtonContainer = styled.View`
+  width: ${screenWidth - 32}px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-self: center;
+  margin-top: 20px;
 `;
 
 export default InfoSelector;
