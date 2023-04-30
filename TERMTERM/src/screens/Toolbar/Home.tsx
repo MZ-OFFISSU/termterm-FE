@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
-import { useState } from "react";
-import { EmptyWordCard, DailyQuizRouter, WordCard } from "@components/index";
+import { useEffect, useState } from "react";
+import { EmptyWordCard, DailyQuizRouter } from "@components/index";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { SafeAreaView } from "react-native";
@@ -9,6 +9,9 @@ import { CurationItemProps } from "@interfaces/curation";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { Fontisto } from "@expo/vector-icons";
+import { WordProps } from "@interfaces/word";
+import { dummyWords } from "@assets/dummyWord";
+import WordCard from "@components/terms/WordCard";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -22,22 +25,27 @@ interface TextType {
  * 필요시 수정가능합니다.
  */
 const Home = ({ navigation, route }: Props) => {
-  const [isArchive, setIsArchive] = useState<boolean>(false);
+  const [curation, setCuration] = useState<Array<WordProps> | null>();
   const [COLOR, mode] = useThemeStyle();
   const [name, setName] = useState("루시사랑해");
+
+  useEffect(() => {
+    //TODO: 큐레이션 용어 받아오는 로직. 없으면 null
+    setCuration(dummyWords);
+  }, []);
 
   return (
     <SafeAreaView>
       <Container COLOR={COLOR}>
         <InnerContainer>
-          {isArchive ? (
+          {curation ? (
             <>
               <TitleContainer
                 username={name}
                 title={"님, 오늘도 파이팅👏"}
                 subtitle={"아카이빙한 용어를 확인해보세요!"}
               />
-              <WordCard />
+              <WordCard word={curation[0]} style={{ marginTop: 20 }} />
             </>
           ) : (
             <>
@@ -46,7 +54,7 @@ const Home = ({ navigation, route }: Props) => {
                 title={"님, 오늘도 파이팅"}
                 subtitle={"아카이빙한 용어가 없습니다."}
               />
-              <EmptyWordCard />
+              <EmptyWordCard style={{ marginTop: 20 }} />
             </>
           )}
           <TitleBox style={{ marginTop: 50 }}>
@@ -126,7 +134,7 @@ const InnerContainer = styled.View`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 25px 16px;
+  padding: 20px 16px;
 `;
 
 const FlexContainer = styled.View`

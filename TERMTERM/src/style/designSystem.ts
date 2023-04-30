@@ -12,7 +12,7 @@ export const TEXT_STYLE_SIZE = {
 } as const;
 
 export type TextStyleSize =
-  typeof TEXT_STYLE_SIZE[keyof typeof TEXT_STYLE_SIZE];
+  (typeof TEXT_STYLE_SIZE)[keyof typeof TEXT_STYLE_SIZE];
 
 export const TEXT_STYLE_WEIGHT = {
   default: "default",
@@ -24,7 +24,7 @@ export const TEXT_STYLE_WEIGHT = {
 } as const;
 
 export type TextStyleWeight =
-  typeof TEXT_STYLE_WEIGHT[keyof typeof TEXT_STYLE_WEIGHT];
+  (typeof TEXT_STYLE_WEIGHT)[keyof typeof TEXT_STYLE_WEIGHT];
 
 interface TextStyle {
   fontSize: number;
@@ -40,6 +40,10 @@ export const TEXT_STYLES: Record<
   Partial<Record<TextStyleWeight, TextStyle>>
 > = {
   [TEXT_STYLE_SIZE.xxl]: {
+    [TEXT_STYLE_WEIGHT.Eb]: {
+      fontSize: 32,
+      fontWeight: 800,
+    },
     [TEXT_STYLE_WEIGHT.default]: {
       fontSize: 32,
       fontWeight: 800,

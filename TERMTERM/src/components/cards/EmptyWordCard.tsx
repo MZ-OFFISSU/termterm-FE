@@ -1,19 +1,13 @@
 import styled from "styled-components/native";
 import { useState, useEffect } from "react";
-import { TouchableOpacityProps, ImageSourcePropType } from "react-native";
+import { TouchableOpacityProps } from "react-native";
 import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { Fontisto } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 
-interface Props extends TouchableOpacityProps {
-  title: string;
-  img: ImageSourcePropType;
-  isFocused: boolean;
-}
-
-const EmptyWordCard = () => {
+const EmptyWordCard = ({ ...props }: TouchableOpacityProps) => {
   const [COLOR, mode] = useThemeStyle();
   const [width, setWidth] = useState(83);
   /** 북마크 여부 상태 */
@@ -41,7 +35,7 @@ const EmptyWordCard = () => {
   }, []);
 
   return (
-    <Card COLOR={COLOR} mode={mode}>
+    <Card COLOR={COLOR} mode={mode} {...props}>
       <AutoSizedImage
         source={require("@assets/bookmark-character.png")}
         width={width}
