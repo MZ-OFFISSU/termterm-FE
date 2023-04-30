@@ -27,7 +27,11 @@ const CustomModal = ({
 }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   return (
-    <Modal isVisible={visible}>
+    <Modal
+      isVisible={visible}
+      animationIn={"bounceIn"}
+      animationOut={"bounceOut"}
+    >
       <Container COLOR={COLOR} mode={mode}>
         <Title COLOR={COLOR}>{title}</Title>
         {subtitle ? <Subtitle COLOR={COLOR}>{subtitle}</Subtitle> : <></>}

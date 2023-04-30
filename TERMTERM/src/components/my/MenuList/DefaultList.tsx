@@ -4,6 +4,8 @@ import Divider from "../MenuBox/Divider";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
+import CustomModal from "@components/popup/modal";
+import { useState } from "react";
 
 interface MenuProps {
   title: string;
@@ -16,7 +18,7 @@ interface MenuProps {
  */
 const DefaultList = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-
+  const [isModal, setIsModal] = useState(false);
   const MENU_LIST: Array<Array<MenuProps>> = [
     [
       { title: "알림 설정", onPress: () => navigation.push("Notification") },
@@ -32,10 +34,18 @@ const DefaultList = () => {
       { title: "개인정보 처리방침", onPress: () => null },
     ],
     [
-      { title: "로그아웃", onPress: () => null },
+      { title: "로그아웃", onPress: () => setIsModal(true) },
       { title: "탈퇴하기", onPress: () => null },
     ],
   ];
+
+  const logout = () => {
+    //TODO 로그아웃 로직 추가
+    setIsModal(false);
+    navigation.reset({
+      routes: [{ name: "Login" }],
+    });
+  };
 
   return (
     <>
@@ -47,6 +57,13 @@ const DefaultList = () => {
           {idx === MENU_LIST.length - 1 ? <></> : <Divider />}
         </MenusWrapper>
       ))}
+      <CustomModal
+        visible={isModal}
+        title="정말 로그아웃 하시겠습니까?"
+        btnTitle={["취소", "로그아웃"]}
+        onClose={() => setIsModal(false)}
+        onNext={() => logout()}
+      />
     </>
   );
 };

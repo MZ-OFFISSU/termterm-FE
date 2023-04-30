@@ -46,7 +46,7 @@ const Onboarding = ({ navigation }: Props) => {
           <NavigatorTitle style={{ color: COLOR.Text.active }}>
             회원가입
           </NavigatorTitle>
-          <NavigatorPager style={{ color: COLOR.Text.active }}>
+          <NavigatorPager style={{ color: COLOR.Text.active }} COLOR={COLOR}>
             {stage + 1} / 3
           </NavigatorPager>
         </NavigationBar>
