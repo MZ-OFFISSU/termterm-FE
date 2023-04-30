@@ -27,7 +27,7 @@ const BackBar = ({ title, onBack, maxNum, curNum }: Props) => {
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 15 }}>
-        <AntDesign name="left" size={24} color={COLOR.Text.active} />
+        <AntDesign name="left" size={20} color={COLOR.Text.active} />
       </CaretBtn>
       {title ? (
         <TitleWrapper>
@@ -42,7 +42,10 @@ const BackBar = ({ title, onBack, maxNum, curNum }: Props) => {
       ) : (
         <></>
       )}
-      <NavigatorPager style={{ color: COLOR.Text.active, marginRight: 20 }}>
+      <NavigatorPager
+        style={{ color: COLOR.Text.active, marginRight: 20 }}
+        COLOR={COLOR}
+      >
         {maxNum && curNum ? `${curNum}/${maxNum}` : ""}
       </NavigatorPager>
     </HeaderWrapper>

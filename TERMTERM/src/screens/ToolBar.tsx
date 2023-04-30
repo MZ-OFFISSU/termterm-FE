@@ -124,12 +124,21 @@ const ToolBar = ({ ...props }: Props) => {
           ),
         }}
       />
-
       <Tab.Screen
         name="My"
-        component={My}
+        children={() => <My {...props} />}
         options={{
-          headerShown: false,
+          headerShown: true,
+          header: (props) => {
+            return (
+              <TitleBar
+                title="My"
+                icon={0}
+                point={10000}
+                onPress={() => props.navigation.navigate("MyPoint")}
+              />
+            );
+          },
           title: "MY",
           tabBarIcon: ({ focused }) => (
             <Ionicons

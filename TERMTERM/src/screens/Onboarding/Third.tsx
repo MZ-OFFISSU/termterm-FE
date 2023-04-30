@@ -19,7 +19,7 @@ interface JobType {
   img: ImageSourcePropType;
 }
 
-const JOB_TYPE: Array<JobType> = [
+export const JOB_TYPE: Array<JobType> = [
   {
     title: "기획",
     img: require("@assets/card/plan.png"),

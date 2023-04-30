@@ -8,6 +8,11 @@ import CurationDetail from "./CurationDetail";
 import MakeFolder from "./MakeFolder";
 import FolderDetailGlance from "./FolderDetailGlance";
 import FolderDetailCollapse from "./FolderDetailCollapse";
+import EditProfile from "./EditProfile";
+import MyPoint from "./MyPoint";
+import Notification from "./Notification";
+import ThemeSelect from "./ThemeSelect";
+import DeleteAccount from "./DeleteAccount";
 
 export {
   Home,
@@ -20,4 +25,9 @@ export {
   MakeFolder,
   FolderDetailGlance,
   FolderDetailCollapse,
+  EditProfile,
+  MyPoint,
+  Notification,
+  ThemeSelect,
+  DeleteAccount,
 };

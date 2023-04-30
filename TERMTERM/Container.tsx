@@ -12,6 +12,11 @@ import {
   MakeFolder,
   FolderDetailGlance,
   FolderDetailCollapse,
+  EditProfile,
+  MyPoint,
+  Notification,
+  ThemeSelect,
+  DeleteAccount,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
@@ -131,6 +136,81 @@ const Container = () => {
                     props.navigation.navigate("FolderDetailGlance", { id: 0 })
                   }
                   bookmarkBar={true}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="EditProfile"
+          component={EditProfile}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <BackBar
+                  title="프로필 수정"
+                  onBack={() => props.navigation.pop()}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="MyPoint"
+          component={MyPoint}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <BackBar
+                  title="내 포인트"
+                  onBack={() => props.navigation.pop()}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="Notification"
+          component={Notification}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <BackBar
+                  title="알림 설정"
+                  onBack={() => props.navigation.pop()}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="ThemeSelect"
+          component={ThemeSelect}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <BackBar
+                  title="테마 변경"
+                  onBack={() => props.navigation.pop()}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="DeleteAccount"
+          component={DeleteAccount}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <BackBar
+                  title="탈퇴하기"
+                  onBack={() => props.navigation.pop()}
                 />
               );
             },

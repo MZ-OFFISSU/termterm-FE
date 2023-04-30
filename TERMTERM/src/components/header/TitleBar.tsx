@@ -42,12 +42,14 @@ const TitleBar = ({ title, icon, point, onPress }: Props) => {
         {title}
       </NavigatorTitle>
       {icon === Icon.point ? (
-        <PointBox>
+        <PointBox onPress={() => onPress!()}>
           <AutoSizedImage
             source={require("@assets/icon/points.png")}
             height={24}
           />
-          <NavigatorPager style={{ marginLeft: 5 }}>{point!}</NavigatorPager>
+          <NavigatorPager COLOR={COLOR} style={{ marginLeft: 5 }}>
+            {point!.toLocaleString()}
+          </NavigatorPager>
         </PointBox>
       ) : icon === Icon.folder ? (
         <FolderBtn onPress={() => onPress!()}>
@@ -60,7 +62,7 @@ const TitleBar = ({ title, icon, point, onPress }: Props) => {
   );
 };
 
-const PointBox = styled.View`
+const PointBox = styled.TouchableOpacity`
   display: flex;
   height: 100%;
   flex-direction: row;
