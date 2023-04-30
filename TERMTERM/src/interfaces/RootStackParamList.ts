@@ -23,4 +23,5 @@ export type RootStackParamList = {
   EditProfile: undefined;
   MyPoint: undefined;
   Notification: undefined;
+  ThemeSelect: undefined;
 };

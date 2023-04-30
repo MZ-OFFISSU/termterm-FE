@@ -11,6 +11,7 @@ import FolderDetailCollapse from "./FolderDetailCollapse";
 import EditProfile from "./EditProfile";
 import MyPoint from "./MyPoint";
 import Notification from "./Notification";
+import ThemeSelect from "./ThemeSelect";
 
 export {
   Home,
@@ -26,4 +27,5 @@ export {
   EditProfile,
   MyPoint,
   Notification,
+  ThemeSelect,
 };

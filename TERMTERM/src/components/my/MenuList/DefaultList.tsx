@@ -20,7 +20,7 @@ const DefaultList = () => {
   const MENU_LIST: Array<Array<MenuProps>> = [
     [
       { title: "알림 설정", onPress: () => navigation.push("Notification") },
-      { title: "테마 변경", onPress: () => null },
+      { title: "테마 변경", onPress: () => navigation.push("ThemeSelect") },
     ],
     [
       { title: "문의 사항", onPress: () => null },
