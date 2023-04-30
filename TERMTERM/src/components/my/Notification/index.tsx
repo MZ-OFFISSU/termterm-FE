@@ -33,7 +33,7 @@ const Container = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 25px 20px;
+  padding: 18px 20px;
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
