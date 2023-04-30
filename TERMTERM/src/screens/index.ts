@@ -9,6 +9,7 @@ import MakeFolder from "./MakeFolder";
 import FolderDetailGlance from "./FolderDetailGlance";
 import FolderDetailCollapse from "./FolderDetailCollapse";
 import EditProfile from "./EditProfile";
+import MyPoint from "./MyPoint";
 
 export {
   Home,
@@ -22,4 +23,5 @@ export {
   FolderDetailGlance,
   FolderDetailCollapse,
   EditProfile,
+  MyPoint,
 };

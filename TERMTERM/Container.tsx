@@ -13,6 +13,7 @@ import {
   FolderDetailGlance,
   FolderDetailCollapse,
   EditProfile,
+  MyPoint,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
@@ -146,6 +147,21 @@ const Container = () => {
               return (
                 <BackBar
                   title="프로필 수정"
+                  onBack={() => props.navigation.pop()}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="MyPoint"
+          component={MyPoint}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <BackBar
+                  title="내 포인트"
                   onBack={() => props.navigation.pop()}
                 />
               );

@@ -12,6 +12,7 @@ export type RootStackParamList = {
   Home: undefined;
   Search: undefined;
   Archive: undefined;
+  My: undefined;
   ArchiveBookmark: undefined;
   DailyQuiz: undefined;
   CompleteQuiz: undefined;
@@ -20,4 +21,5 @@ export type RootStackParamList = {
   FolderDetailGlance: { id: number };
   FolderDetailCollapse: { id: number };
   EditProfile: undefined;
+  MyPoint: undefined;
 };
