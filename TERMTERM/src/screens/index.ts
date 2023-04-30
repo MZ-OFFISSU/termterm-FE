@@ -12,6 +12,7 @@ import EditProfile from "./EditProfile";
 import MyPoint from "./MyPoint";
 import Notification from "./Notification";
 import ThemeSelect from "./ThemeSelect";
+import DeleteAccount from "./DeleteAccount";
 
 export {
   Home,
@@ -28,4 +29,5 @@ export {
   MyPoint,
   Notification,
   ThemeSelect,
+  DeleteAccount,
 };

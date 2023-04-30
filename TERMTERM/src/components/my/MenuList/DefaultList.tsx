@@ -35,7 +35,7 @@ const DefaultList = () => {
     ],
     [
       { title: "로그아웃", onPress: () => setIsModal(true) },
-      { title: "탈퇴하기", onPress: () => null },
+      { title: "탈퇴하기", onPress: () => navigation.push("DeleteAccount") },
     ],
   ];
 

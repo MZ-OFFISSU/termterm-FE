@@ -24,4 +24,5 @@ export type RootStackParamList = {
   MyPoint: undefined;
   Notification: undefined;
   ThemeSelect: undefined;
+  DeleteAccount: undefined;
 };
