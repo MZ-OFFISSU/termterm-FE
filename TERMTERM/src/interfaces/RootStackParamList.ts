@@ -22,4 +22,5 @@ export type RootStackParamList = {
   FolderDetailCollapse: { id: number };
   EditProfile: undefined;
   MyPoint: undefined;
+  Notification: undefined;
 };

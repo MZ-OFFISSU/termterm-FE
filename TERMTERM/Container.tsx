@@ -14,6 +14,7 @@ import {
   FolderDetailCollapse,
   EditProfile,
   MyPoint,
+  Notification,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
@@ -162,6 +163,21 @@ const Container = () => {
               return (
                 <BackBar
                   title="내 포인트"
+                  onBack={() => props.navigation.pop()}
+                />
+              );
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="Notification"
+          component={Notification}
+          options={{
+            headerShown: true,
+            header: (props) => {
+              return (
+                <BackBar
+                  title="알림 설정"
                   onBack={() => props.navigation.pop()}
                 />
               );
