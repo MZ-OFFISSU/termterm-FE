@@ -46,11 +46,7 @@ const Home = ({ navigation, route }: Props) => {
                 subtitle={"아카이빙한 용어를 확인해보세요!"}
               />
               {/* TODO:캐러셀로 변경할거임 건들지마세요 여기 */}
-              <WordCard
-                word={curation[0]}
-                quiz={true}
-                style={{ marginTop: 20 }}
-              />
+              <WordCard word={curation[0]} style={{ marginTop: 20 }} />
             </>
           ) : (
             <>
