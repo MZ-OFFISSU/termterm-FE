@@ -4,14 +4,20 @@ import {
   ContentsHeader,
   ResultWrapper,
 } from "@components/search";
+import { SearchResultProps } from "@interfaces/search";
 
-const dummyResults = ["기획", "기획", "기획"];
+interface Props extends ViewProps {
+  results: Array<SearchResultProps>;
+}
 
-const ResultList = ({ ...props }: ViewProps) => {
+/**
+ * 검색페이지에서 검색 결과 부분의 Wrapper 컴포넌트
+ */
+const ResultList = ({ results, ...props }: Props) => {
   return (
     <ContentsWrapper {...props}>
       <ContentsHeader title="용어" style={{ marginBottom: 8 }} />
-      <ResultWrapper results={dummyResults} />
+      <ResultWrapper results={results} />
     </ContentsWrapper>
   );
 };
