@@ -45,7 +45,12 @@ const Home = ({ navigation, route }: Props) => {
                 title={"님, 오늘도 파이팅👏"}
                 subtitle={"아카이빙한 용어를 확인해보세요!"}
               />
-              <WordCard word={curation[0]} style={{ marginTop: 20 }} />
+              {/* TODO:캐러셀로 변경할거임 건들지마세요 여기 */}
+              <WordCard
+                word={curation[0]}
+                quiz={true}
+                style={{ marginTop: 20 }}
+              />
             </>
           ) : (
             <>

@@ -11,6 +11,9 @@ export function useWordReg(source: string): SplitResult {
     if (match.length > 1) {
       setSub(match[0]);
       setMain(match[1]);
+    } else {
+      setSub(null);
+      setMain(source);
     }
   }, [source]);
 
