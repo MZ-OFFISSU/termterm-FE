@@ -11,7 +11,7 @@ import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { Fontisto } from "@expo/vector-icons";
 import { WordProps } from "@interfaces/word";
 import { dummyWords } from "@assets/dummyWord";
-import WordCard from "@components/terms/WordCard";
+import WordCarousel from "@components/terms/WordCarousel";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -45,8 +45,7 @@ const Home = ({ navigation, route }: Props) => {
                 title={"님, 오늘도 파이팅👏"}
                 subtitle={"아카이빙한 용어를 확인해보세요!"}
               />
-              {/* TODO:캐러셀로 변경할거임 건들지마세요 여기 */}
-              <WordCard word={curation[0]} style={{ marginTop: 20 }} />
+              <WordCarousel words={curation} dots={true} />
             </>
           ) : (
             <>

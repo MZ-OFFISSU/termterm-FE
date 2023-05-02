@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme } from "@style/designSystem";
-import WordCardCarousel from "@components/terms/WordCardCarousel";
+import WordCarousel from "@components/terms/WordCarousel";
 
 /**
  * 단일 용어 설명 페이지
@@ -9,11 +9,7 @@ import WordCardCarousel from "@components/terms/WordCardCarousel";
 const TermDetail = () => {
   const [COLOR, mode] = useThemeStyle();
 
-  return (
-    <Container COLOR={COLOR}>
-      <WordCardCarousel />
-    </Container>
-  );
+  return <Container COLOR={COLOR}>{/* <WordCarousel words={} /> */}</Container>;
 };
 
 const Container = styled.View<{ COLOR: colorTheme }>`

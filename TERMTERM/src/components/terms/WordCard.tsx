@@ -54,7 +54,7 @@ const Container = styled.TouchableOpacity<{
   mode: boolean;
   quiz?: boolean;
 }>`
-  width: ${screenWidth - 32}px;
+  width: 100%;
   height: 355px;
   border-radius: 10px;
   background-color: ${(props) =>
