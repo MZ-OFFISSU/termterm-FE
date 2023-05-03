@@ -108,6 +108,7 @@ const First = ({ onEnd }: Props) => {
               onChangeText={handleTextChange}
               placeholder="문의하고 싶으신 내용을 편안하게 적어주세요."
               maxLength={1000}
+              multiline
             />
           </TextAreaBox>
           <LengthCounter isTextEmpty={textLength > 0}>
@@ -153,7 +154,6 @@ const LargeTitle = styled.Text`
   position: relative;
 `;
 
-
 const Title = styled.Text`
   font-size: ${TEXT_STYLE_SIZE.xsm};
   color: ${LIGHT_COLOR_STYLE.Text.darken};
@@ -173,12 +173,12 @@ const InputWrapper = styled.View`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 30px;
+  margin-top: 20px;
 `;
 
 const TextAreaBox = styled.View`
   width: 100%;
-  height: 241px;
+  height: 200px;
   margin-top: 10px;
   border-radius: 6px;
   background-color: ${LIGHT_COLOR_STYLE.Background.input};
