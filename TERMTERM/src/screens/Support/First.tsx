@@ -1,13 +1,22 @@
 import styled from "styled-components/native";
 import { View, Keyboard, Text, TextInput } from "react-native";
-import { LIGHT_COLOR_STYLE, TEXT_STYLES, TEXT_STYLE_SIZE, TEXT_STYLE_WEIGHT } from "@style/designSystem";
+import { 
+  LIGHT_COLOR_STYLE, 
+  TEXT_STYLES, 
+  TEXT_STYLE_SIZE, 
+  TEXT_STYLE_WEIGHT } from "@style/designSystem";
 import { useState, useEffect } from "react";
 import { screenWidth } from "@style/dimensions";
 import { useRecoilState } from "recoil";
 import { themeState } from "@recoil/themeState";
 import { Props } from "@interfaces/support";
 import { Value } from "react-native-reanimated";
-import { BUTTON_STATE, BUTTON_TYPE, CustomButton, CustomSelector, CustomTextInput } from "@components/index";
+import { 
+  BUTTON_STATE, 
+  BUTTON_TYPE, 
+  CustomButton, 
+  CustomSelector, 
+  CustomTextInput } from "@components/index";
 
 const First = ({ onEnd }: Props) => {
   const [theme, setTheme] = useRecoilState(themeState);
