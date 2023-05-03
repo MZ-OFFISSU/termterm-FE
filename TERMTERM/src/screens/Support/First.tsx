@@ -8,7 +8,6 @@ import { themeState } from "@recoil/themeState";
 import { Props } from "@interfaces/support";
 import { Value } from "react-native-reanimated";
 import { CustomSelector, CustomTextInput } from "@components/index";
-import CustomTextarea from "@components/common/CustomTextarea";
 
 const First = ({ onEnd }: Props) => {
   const [theme, setTheme] = useRecoilState(themeState);
@@ -29,6 +28,7 @@ const First = ({ onEnd }: Props) => {
     inquiryType: '',
     inquiryContent: '',
   });
+  const MAX_LENGTH = 1000;
 
   const nextStage = () => {
     if (onEnd && email !== "" && inquiryContent !== "") {
@@ -40,6 +40,12 @@ const First = ({ onEnd }: Props) => {
         onEnd();
     }
   }
+
+  const handleTextChange = (value: string) => {
+    if (value.length <= MAX_LENGTH) {
+      setInquiryContent(value);
+    }
+  };
 
   return (
     <View
@@ -97,4 +103,8 @@ const InputWrapper = styled.View`
   flex-direction: column;
   align-items: flex-start;
   margin-top: 30px;
+`;
+
+const CustomTextArea = styled.TextInput`
+    
 `;
