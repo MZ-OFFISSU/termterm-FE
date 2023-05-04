@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { View, Keyboard, Text, TextInput } from "react-native";
+import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { 
   LIGHT_COLOR_STYLE, 
   TEXT_STYLES, 
@@ -60,6 +60,7 @@ const First = ({ onEnd }: Props) => {
   }
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <View
       style={{
         position: "relative",
@@ -134,7 +135,8 @@ const First = ({ onEnd }: Props) => {
         }}
       />
     </View>
-  );
+    </TouchableWithoutFeedback>
+    );
 };
 
 export default First;
