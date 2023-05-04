@@ -96,7 +96,7 @@ const SubTitle = styled.Text`
     font-size: 17px;
     font-weight: 500;
     color: #303030;
-    marginTop: 5px;
+    margin-top: 5px;
     opacity: 0.95;
 `;
 
