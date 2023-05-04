@@ -16,7 +16,7 @@ import { CheckBox } from '@rneui/themed';
 const Second = ({ onEnd }: Props) => {
   const [theme, setTheme] = useRecoilState(themeState);
   const [btnPosition, setBtnPosiition] = useState(30);
-  const [checkState, setCheckState] = useState(true);
+  const [checkState, setCheckState] = useState(false);
 
   const nextStage = () => {
     if (onEnd && checkState !== false) {
