@@ -109,6 +109,7 @@ const First = ({ onEnd }: Props) => {
               placeholder="문의하고 싶으신 내용을 편안하게 적어주세요."
               maxLength={1000}
               multiline
+              scrollEnabled={false}
             />
           </TextAreaBox>
           <LengthCounter isTextEmpty={textLength > 0}>

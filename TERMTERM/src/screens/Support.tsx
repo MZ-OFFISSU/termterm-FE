@@ -45,7 +45,7 @@ const Support = ({ navigation }: Props) => {
           </CaretBtn>
           {/* TODO : margin 임의 설정 값 해결하기 */}
           <NavigatorTitle style={{ color: COLOR.Text.active, marginRight: '40%' }}>
-            문의사항
+            문의하기
           </NavigatorTitle>
         </NavigationBar>
         <Contents>
