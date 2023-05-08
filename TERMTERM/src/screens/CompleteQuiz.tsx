@@ -6,12 +6,15 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BackBar } from "@components/header";
-import { LIGHT_COLOR_STYLE } from "@style/designSystem";
+import { colorTheme } from "@style/designSystem";
+import { useThemeStyle } from "@hooks/useThemeStyle";
 
 export type Props = StackScreenProps<RootStackParamList, "CompleteQuiz">;
 
 const CompleteQuiz = ({ navigation }: Props) => {
     const [width, setWidth] = useState(112);
+    const [COLOR, mode] = useThemeStyle();
+    const [allCorrect, setAllCorrect] = useState(false);
 
         /** 아이콘 너비 계산 함수 */
         const calcWidth = () => {
@@ -35,24 +38,35 @@ const CompleteQuiz = ({ navigation }: Props) => {
         }, []);
 
     return (
-        <SafeAreaView style={{ backgroundColor: "white"}}>
-            <Container>
-                <BackBar title="Daily 용어 퀴즈 완료" onBack={() => navigation.pop()} />
+        <SafeAreaView style={{ marginTop: "-15%" }}>
+            <BackBar title="Daily 용어 퀴즈" onBack={() => navigation.pop()} />
+            <Container COLOR={COLOR}>
                 <ContentWrapper>
                     <AutoSizedImage
-                        source={require("@assets/complete-quiz.png")}
+                        source={allCorrect 
+                            ? require("@assets/complete-quiz.png") 
+                            : require("@assets/done-quiz.png")}
                         width={width}
                         style={{ marginTop: 70}}
                     />
                     <TitleBox>
-                        <Title>Daily 용어 퀴즈 완료 🎉</Title>
-                        <SubTitle>Daily 용어 퀴즈를 모두 맞추셨어요!</SubTitle>
-                        <SubTitle>200포인트를 얻었습니다.</SubTitle>
+                        <Title COLOR={COLOR}>Daily 용어 퀴즈 완료 🎉</Title>
+                        <SubTitle COLOR={COLOR}>
+                            {allCorrect 
+                            ? `Daily 용어 퀴즈를 모두 맞추셨어요!\n`
+                            : `Daily 용어 퀴즈를 응시하셨어요!\n`}
+                            <SubTitle COLOR={COLOR} style={{ fontWeight: "900"}}>
+                            {allCorrect ? `200` : `100`}포인트
+                            </SubTitle>
+                            를 얻었습니다
+                        </SubTitle>
                     </TitleBox>
                         <CompleteButton
-                            onPress={() => navigation.push("Home")}
+                            COLOR={COLOR}
+                            mode={mode}
+                            onPress={() => navigation.navigate("Home")}
                         >
-                            <ButtonText>홈으로 돌아가기 〉 </ButtonText>
+                            <ButtonText COLOR={COLOR} mode={mode}>홈으로 돌아가기 〉 </ButtonText>
                         </CompleteButton>
                 </ContentWrapper>
             </Container>
@@ -60,10 +74,10 @@ const CompleteQuiz = ({ navigation }: Props) => {
     )
 }
 
-const Container = styled.View`
+const Container = styled.View<{ COLOR: colorTheme}>`
     width: 100%;
     height: 100%;
-    margin: 5px;
+    background-color: ${(props) => props.COLOR.Background.surface};
 `;
 
 const ContentWrapper = styled.View`
@@ -84,37 +98,45 @@ const TitleBox = styled.View`
     margin: 20px 0;
 `;
 
-const Title = styled.Text`
+const Title = styled.Text<{ COLOR: colorTheme }>`
     font-size: 25px;
     font-weight: 900;
-    color: #0d0d0d;
-    opacity: 0.95;
+    color: ${(props) => props.COLOR.Text.active};
     margin-bottom: 5px;
 `;
 
-const SubTitle = styled.Text`
+const SubTitle = styled.Text<{ COLOR: colorTheme }>`
     font-size: 17px;
     font-weight: 500;
-    color: #303030;
-    marginTop: 5px;
-    opacity: 0.95;
+    color: ${(props) => props.COLOR.Text.default};
+    margin-top: 10px;
+    text-align: center;
+    line-height: 25px;
 `;
 
-const CompleteButton = styled.TouchableOpacity`
+const CompleteButton = styled.TouchableOpacity<{
+    COLOR: colorTheme;
+    mode: boolean;
+}>`
     width: 318px;
     height: 44px;
     z-index: 2;
-    background-color: #1b1b1c;
+    background-color: ${(props) => props.mode 
+    ? props.COLOR.Neutral[100] 
+    : props.COLOR.Background.onSurface};
     border-radius: 50%;
-    margin-top: 30px;
+    margin-top: 60px;
 `;
 
-const ButtonText = styled.Text`
+const ButtonText = styled.Text<{
+    COLOR: colorTheme;
+    mode: boolean;
+}>`
     font-size: 18px;
     font-weight: 600;
     text-align: center;
     margin: auto 0;
-    color: ${LIGHT_COLOR_STYLE.Text.lighten};
+    color: ${(props) => props.COLOR.Text.lighten};
 `;
 
 export default CompleteQuiz;
