@@ -2,9 +2,8 @@ import styled from "styled-components/native";
 import { useState, useEffect } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { LIGHT_COLOR_STYLE, colorTheme, TEXT_STYLE_SIZE, TEXT_STYLE_WEIGHT } from "@style/designSystem";
+import { colorTheme, TEXT_STYLE_SIZE, TEXT_STYLE_WEIGHT } from "@style/designSystem";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { DailyQuizItemProps } from "@interfaces/dailyquiz";
 import QuizCard from "@components/quiz/QuizCard";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { BackBar } from "@components/header";
@@ -12,20 +11,25 @@ import { dummyWord, dummyWords } from "@assets/dummyWord";
 import QuizButton from "@components/quiz/QuizButton";
 import { useWordReg } from "@hooks/useWordReg";
 import WordCard from "@components/terms/WordCard";
-import CustomButton, { BUTTON_STATE, BUTTON_TYPE } from "@components/buttons/CustomButton";
 
 export type Props = StackScreenProps<RootStackParamList, "DailyQuiz">;
 
 const DailyQuiz = ({ navigation }: Props) => {
   const [idx, setIdx] = useState(0);
+  /** 테마에 따른 디자인 상태 변수 */
   const [COLOR, mode] = useThemeStyle();
+  /** 데일리 퀴즈 / 리뷰 퀴즈 상태 변수 */
+  const [quizType, setQuizType] = useState<'daily' | 'review'>('daily');
+  /** 클릭된 버튼의 인덱스 */
   const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null);
   const [words, setWords] = useState(dummyWords);
+  /** 퀴즈의 답이 체크 되었는지 & 체크되지 않았는지를 체크하는 변수 */
   const [quizState, setQuizState] = useState<'question' | 'answer'>('question');
 
+  // TODO : 버튼 클릭 시 실행되는 함수 디버깅
   const handlePress = () => {
     if (selectedButtonIndex !== null) {
-      const isCorrect = words[idx].name === useWordReg(words[idx].name)[1];
+      const isCorrect = words[idx].name === useWordReg(words[idx].name)[0];
       if (isCorrect) {
         setIdx(idx + 1);
         setSelectedButtonIndex(null);
@@ -34,6 +38,7 @@ const DailyQuiz = ({ navigation }: Props) => {
     }
   };
 
+  /** 버튼 내부 텍스트 변경 */
   const getButtonText = (index: number) => {
     const [sub, main] = useWordReg(words[idx].name);
     if (index === 1) {
@@ -47,12 +52,12 @@ const DailyQuiz = ({ navigation }: Props) => {
   useEffect(() => {
     if (selectedButtonIndex !== null) {
       setQuizState('answer');
+      // handlePress();
     }
   }, [selectedButtonIndex]);
 
   return (
     <SafeAreaView style={{ marginTop: "-15%" }}>
-      {/*  */}
       <BackBar title={`${idx + 1}/${words.length}`} onBack={() => navigation.pop()} />
       <Container COLOR={COLOR}>
         {quizState === 'question' ? (
@@ -97,7 +102,7 @@ const DailyQuiz = ({ navigation }: Props) => {
                   <ButtonText COLOR={COLOR} mode={mode}>{getButtonText(index)}</ButtonText>
                 </QuizButton>
                 ))}
-                <ConfirmButton COLOR={COLOR} mode={mode}>
+                <ConfirmButton COLOR={COLOR} mode={mode} onPress={() => setIdx(idx + 1)}>
                   <ConfirmText COLOR={COLOR} mode={mode}>확인</ConfirmText>
                 </ConfirmButton>
               </ButtonContainer>
