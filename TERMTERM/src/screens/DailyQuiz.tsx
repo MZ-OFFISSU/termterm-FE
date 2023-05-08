@@ -37,10 +37,10 @@ const DailyQuiz = ({ navigation }: Props) => {
   const getButtonText = (index: number) => {
     const [sub, main] = useWordReg(words[idx].name);
     if (index === 1) {
-      return main || "바보";
+      return main;
     } else {
       // TODO : 정답이 아닌 다른 값 랜덤으로 가져오는 기능 추가
-      return sub ? `Not ${main}` : `Button ${index}`;
+      return `NOT ANSWER`;
     }
   };
 
@@ -48,11 +48,12 @@ const DailyQuiz = ({ navigation }: Props) => {
     if (selectedButtonIndex !== null) {
       setQuizState('answer');
     }
-  }, []);
+  }, [selectedButtonIndex]);
 
   return (
     <SafeAreaView style={{ marginTop: "-15%" }}>
-      <BackBar title={`${idx + 1}/5`} onBack={() => navigation.pop()} />
+      {/*  */}
+      <BackBar title={`${idx + 1}/${words.length}`} onBack={() => navigation.pop()} />
       <Container COLOR={COLOR}>
         {quizState === 'question' ? (
           <>
@@ -74,7 +75,7 @@ const DailyQuiz = ({ navigation }: Props) => {
                     onPress={() => setSelectedButtonIndex(index)}
                   >
                     <ButtonText COLOR={COLOR} mode={mode}>
-                      {getButtonText(index)} + {index} + {selectedButtonIndex === index ? 'true' : 'false'} + {selectedButtonIndex}
+                      {getButtonText(index)} {index} {selectedButtonIndex === index ? 'true' : 'false'} {selectedButtonIndex}
                     </ButtonText>
                   </QuizButton>
                 ))}
@@ -87,7 +88,7 @@ const DailyQuiz = ({ navigation }: Props) => {
               <WordCard word={dummyWord} quiz={true} />
               <ButtonContainer>
                 {/* TODO : 이 부분 디버깅 빨리!!!! */}
-                {/* {Array.from({ length: 3 }, (_, index) => (
+                {Array.from({ length: 3 }, (_, index) => (
                 <QuizButton
                   key={index}
                   active={selectedButtonIndex === index}
@@ -95,8 +96,8 @@ const DailyQuiz = ({ navigation }: Props) => {
                 >
                   <ButtonText COLOR={COLOR} mode={mode}>{getButtonText(index)}</ButtonText>
                 </QuizButton>
-                ))} */}
-                <ConfirmButton COLOR={COLOR} mode={mode} >
+                ))}
+                <ConfirmButton COLOR={COLOR} mode={mode}>
                   <ConfirmText COLOR={COLOR} mode={mode}>확인</ConfirmText>
                 </ConfirmButton>
               </ButtonContainer>
