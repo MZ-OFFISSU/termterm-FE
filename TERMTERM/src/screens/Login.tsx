@@ -67,6 +67,7 @@ const Login = ({ navigation }: Props) => {
             color: "#6E7277",
             marginTop: 20,
           }}
+          onPress={() => navigation.navigate("Walkthrough")}
         />
       </Container>
       <QuestionBox>
