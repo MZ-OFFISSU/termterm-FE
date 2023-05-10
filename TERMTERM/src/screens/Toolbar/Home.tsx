@@ -57,7 +57,7 @@ const Home = ({ navigation, route }: Props) => {
               <TitleContainer
                 username={name}
                 title={"님, 오늘도 파이팅"}
-                subtitle={"지금 용어를 아카이빙 해 보세요!"}
+                subtitle={"지금 용어를 아카이빙 해보세요!"}
               />
               <EmptyWordCard style={{ marginTop: 20 }} />
             </>
