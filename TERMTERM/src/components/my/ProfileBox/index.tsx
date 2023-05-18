@@ -20,15 +20,9 @@ const ProfileBox = ({ profile }: Props) => {
         <ProfileImage source={{ uri: profile.img }} />
       </ProfileImageWrapper>
       <InfoWrapper>
-        <Name COLOR={COLOR}>{profile.name}</Name>
+        <Name COLOR={COLOR}>{profile.name} | {profile.job}</Name>
         <DetailWrapper>
           <Detail COLOR={COLOR}>{profile.domain}</Detail>
-          <Detail COLOR={COLOR} style={{ marginLeft: 4 }}>
-            |
-          </Detail>
-          <Detail COLOR={COLOR} style={{ marginLeft: 4 }}>
-            {profile.job}
-          </Detail>
           <Detail COLOR={COLOR} style={{ marginLeft: 4 }}>
             |
           </Detail>
