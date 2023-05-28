@@ -70,16 +70,7 @@ const Home = ({ navigation, route }: Props) => {
             <CurationTitleBox>
               <MenuTitleWrapper>
                 <MenuTitle COLOR={COLOR}>
-                  <MenuTitle
-                    COLOR={COLOR}
-                    style={{ color: COLOR.THEME.primary[160] }}
-                  >
-                    {name}
-                  </MenuTitle>
-                  님을 위한,
-                </MenuTitle>
-                <MenuTitle COLOR={COLOR} style={{ marginTop: 3 }}>
-                  업무 용어 추천 큐레이션
+                  나를 위한 추천 큐레이션
                 </MenuTitle>
               </MenuTitleWrapper>
               <CurationViewBtn onPress={() => navigation.push("Curation")}>
