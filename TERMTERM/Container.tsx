@@ -276,7 +276,17 @@ const Container = () => {
           <RootStack.Screen
             name="Support"
             component={Support}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="문의하기"
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
           />
         </RootStack.Navigator>
       </NavigationContainer>
