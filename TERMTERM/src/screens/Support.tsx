@@ -29,41 +29,44 @@ const Support = ({ navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView
-      style={{ flex: 0, backgroundColor: COLOR.Background.surface }}
-    >
-      <Wrapper>
-        <NavigationBar
-          style={{
-            paddingLeft: 17,
-            paddingRight: 17,
-            justifyContent: 'space-between',
-          }}
-        >
-          <CaretBtn onPress={() => navigation.pop()}>
-            <AntDesign name="left" size={20} color={COLOR.Text.active} />
-          </CaretBtn>
-          {/* TODO : margin 임의 설정 값 해결하기 */}
-          <NavigatorTitle style={{ color: COLOR.Text.active, marginRight: '40%' }}>
-            문의하기
-          </NavigatorTitle>
-        </NavigationBar>
-        <Contents>
-          <CurrentPage onEnd={() => onEnd()} />
-        </Contents>
-      </Wrapper>
-    </SafeAreaView>
+      <Container>
+        <InnerContainer>
+          <NavigationBar
+            style={{
+              paddingLeft: 17,
+              paddingRight: 17,
+              justifyContent: 'space-between',
+            }}
+          >
+            <CaretBtn onPress={() => navigation.pop()}>
+              <AntDesign name="left" size={20} color={COLOR.Text.active} />
+            </CaretBtn>
+            {/* TODO : margin 임의 설정 값 해결하기 */}
+            <NavigatorTitle style={{ color: COLOR.Text.active, marginRight: '40%' }}>
+              문의하기
+            </NavigatorTitle>
+          </NavigationBar>
+          <Contents>
+            <CurrentPage onEnd={() => onEnd()} />
+          </Contents>
+        </InnerContainer>
+      </Container>
   );
 };
 
-const Wrapper = styled.View`
+const Container = styled.ScrollView`
+  width: 100%;
+  background-color: ${LIGHT_COLOR_STYLE.Background.surface};
+`;
+
+const InnerContainer = styled.View`
   width: 100%;
   height: 100%;
   display: flex;
   background-color: ${LIGHT_COLOR_STYLE.Background.surface};
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: flex-start;
   position: relative;
 `;
 
