@@ -1,36 +1,56 @@
 import styled from "styled-components/native";
-import { TouchableOpacityProps, ImageSourcePropType } from "react-native";
-import { colorTheme, LIGHT_COLOR_STYLE, TEXT_STYLES } from "@style/designSystem";
-import AutoSizedImage from "@components/common/AutoSizedImage";
+import { colorTheme } from "@style/designSystem";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { isTimeExpired } from "@utils/timeCheck";
+import { Start, Clear, Fail } from "./Types";
+
+const STAGES = [Start, Clear, Fail];
+
+/**
+ * async storage에 저장되는 퀴즈 현재 상태
+ */
+enum QuizState {
+  /** 시작하지 않은 상테 */
+  start = "start",
+  /** 모두 정답인 상태 */
+  clear = "clear",
+  /** 오답이 있는 상태 */
+  fail = "fail",
+}
 
 export type ScreenProps = StackScreenProps<RootStackParamList, "ToolBar">;
 
-interface Props extends TouchableOpacityProps {
-  title: string;
-  img: ImageSourcePropType;
-  isFocused: boolean;
-}
-
 const DailyQuizRouter = ({ navigation }: ScreenProps) => {
   const [COLOR, mode] = useThemeStyle();
+  const [stage, setStage] = useState(0);
+  const [quizState, setQuizState] = useState<string>(QuizState.start);
+  const [retakeTime, setRetakeTime] = useState("");
+
+  const CurStage = STAGES[stage];
+
+  useEffect(() => {
+    AsyncStorage.getItem("quiz_state")
+      .then((value) => {
+        if (value) setQuizState(value);
+      })
+      .catch((err) => console.log(err));
+
+    AsyncStorage.getItem("retake_time")
+      .then((value) => {
+        if (value && !isTimeExpired(value)) {
+          setRetakeTime(value);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <Container COLOR={COLOR} mode={mode}>
-      <LeftBox>
-        <AutoSizedImage source={require("@assets/test.png")} width={24} />
-        <Title COLOR={COLOR} style={{ marginLeft: 5 }}>
-          Daily 용어 퀴즈를 시작해 볼까요?
-        </Title>
-      </LeftBox>
-      <TouchableOpacity onPress={() => navigation.navigate("DailyQuiz")}>
-        <AutoSizedImage
-          source={require("@assets/arrow-button.png")}
-          width={40}
-        />
-      </TouchableOpacity>
+      <CurStage navigate={() => navigation.navigate("DailyQuiz")} />
     </Container>
   );
 };
@@ -49,20 +69,6 @@ const Container = styled.View<{ COLOR: colorTheme; mode: boolean }>`
       ? props.COLOR.THEME.secondary[20]
       : props.COLOR.Background.onSurface};
   margin-top: 10px;
-`;
-
-const LeftBox = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-`;
-
-const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Md?.fontSize}px;
-  font-weight: 500;
-  color: ${(props) => props.COLOR.Text.active};
-  text-align: center;
 `;
 
 export default DailyQuizRouter;

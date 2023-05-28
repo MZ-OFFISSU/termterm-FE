@@ -2,8 +2,8 @@ import styled from "styled-components/native";
 
 export const BookmarkButton = styled.TouchableOpacity`
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 8px;
+  right: 10px;
   width: 38px;
   height: 38px;
   border-radius: 100%;
