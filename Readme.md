@@ -5,7 +5,7 @@
 $ expo start
 ```
 
-### Front-End Text Stack
+### Front-End Tech Stack
 **Stack**|**Version**|
 :-------:|:---------:|
 React|`18.1.0`|
