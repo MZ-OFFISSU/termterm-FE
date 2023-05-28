@@ -11,6 +11,7 @@ import { BookmarkBar, HomeBar, TitleBar } from "@components/header";
 import { Icon } from "@components/header/TitleBar";
 import { useState } from "react";
 import TermDetail from "./TermDetail";
+import { useSafeColor } from "@hooks/useSafeColor";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -21,6 +22,7 @@ const ToolBar = ({ ...props }: Props) => {
   /** tabNavigator 생성 */
   const Tab = createBottomTabNavigator();
   const [COLOR, mode] = useThemeStyle();
+  useSafeColor();
 
   //아카이브 스크린에서 사용할 모달 관련 state
   const [archiveModal, setArchiveModal] = useState(false);

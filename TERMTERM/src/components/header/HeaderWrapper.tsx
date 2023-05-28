@@ -2,7 +2,6 @@ import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { ViewProps } from "react-native";
 import { colorTheme } from "@style/designSystem";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 interface Props extends ViewProps {
   children: React.ReactNode;
@@ -15,11 +14,9 @@ const HeaderWrapper = ({ children, ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
   return (
-    <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
-      <Container COLOR={COLOR} mode={mode} {...props}>
-        {children}
-      </Container>
-    </SafeAreaView>
+    <Container COLOR={COLOR} mode={mode} {...props}>
+      {children}
+    </Container>
   );
 };
 
