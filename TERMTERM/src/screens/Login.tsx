@@ -6,12 +6,13 @@ import AutoSizedImage from "@components/common/AutoSizedImage";
 import SocialLoginButton from "@components/buttons/SocialLogin";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { useSafeColor } from "@hooks/useSafeColor";
 
 export type Props = StackScreenProps<RootStackParamList, "Login">;
 
 const Login = ({ navigation }: Props) => {
   const [width, setWidth] = useState(140);
-  const [btnWidth, setBtnWidth] = useState(60);
+  useSafeColor();
 
   /**로고 너비 계산 함수 */
   const calculWidth = () => {
@@ -54,8 +55,8 @@ const Login = ({ navigation }: Props) => {
             type="google"
             onPress={() => navigation.navigate("ToolBar")}
           />
-          <SocialLoginButton 
-            type="apple" 
+          <SocialLoginButton
+            type="apple"
             onPress={() => navigation.navigate("Support")}
           />
         </ButtonBox>
