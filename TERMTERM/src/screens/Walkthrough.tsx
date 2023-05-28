@@ -60,7 +60,7 @@ const Walkthrough = ({ navigation }: Props) => {
           type={BUTTON_TYPE.primary}
           state={BUTTON_STATE.active}
           // TODO : Home으로 이동하도록 navigation 수정
-          onPress={() => navigation.push("Home")}
+          // onPress={() => navigation.push("Home")}
           style={{ width: "90%" }}
         />
         <CustomButton
@@ -92,7 +92,8 @@ const ButtonWrapper = styled.View`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  bottom: 10%;
+  bottom: 5%;
+  background-color: ${LIGHT_COLOR_STYLE.Background.surface};
 `;
 
 export default Walkthrough;
