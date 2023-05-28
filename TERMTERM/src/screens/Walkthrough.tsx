@@ -8,12 +8,10 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { LIGHT_COLOR_STYLE } from "@style/designSystem";
 import { Text } from "react-native";
-import AutoSizedImage from "@components/common/AutoSizedImage";
 import CustomButton, {
   BUTTON_STATE,
   BUTTON_TYPE,
 } from "@components/buttons/CustomButton";
-import { WordCarousel } from "@components/terms";
 import WalkthroughCarousel from "@components/terms/WalkthroughCarousel";
 
 export type Props = StackScreenProps<RootStackParamList, "Walkthrough">;
@@ -62,6 +60,7 @@ const Walkthrough = ({ navigation }: Props) => {
           type={BUTTON_TYPE.primary}
           state={BUTTON_STATE.active}
           // TODO : Home으로 이동하도록 navigation 수정
+          onPress={() => navigation.push("Home")}
           style={{ width: "90%" }}
         />
         <CustomButton
