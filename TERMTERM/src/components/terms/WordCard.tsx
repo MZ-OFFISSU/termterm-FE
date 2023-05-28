@@ -112,8 +112,8 @@ const MainName = styled.Text<{
 `;
 
 const Content = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  font-size: ${TEXT_STYLES.sm.Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES.sm.Reg?.fontWeight};
+  font-size: ${TEXT_STYLES.md2.Reg?.fontSize}px;
+  font-weight: ${TEXT_STYLES.md2.Reg?.fontWeight};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
   white-space: pre-line;
@@ -127,6 +127,7 @@ const Source = styled.Text<{
 }>`
   font-size: ${TEXT_STYLES["3xsm"].Md?.fontSize}px;
   font-weight: ${TEXT_STYLES["3xsm"].Md?.fontWeight};
+  margin-right: auto;
   color: ${(props) =>
     props.mode
       ? props.quiz

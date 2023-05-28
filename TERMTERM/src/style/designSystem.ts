@@ -1,3 +1,23 @@
+import { Dimensions, Platform, PixelRatio } from "react-native";
+
+export const {
+  width: SCREEN_WIDTH,
+  height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
+
+/** iPhone 5s 기준 값 */
+export const scale = SCREEN_WIDTH / 370;
+
+/** 모바일 기기 크기에 따른 design System 차등 적용 함수 */
+export function normalize(size: number) {
+  const newSize = size * scale 
+  if (Platform.OS === 'ios') {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize))
+  } else {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize)) + 2
+  }
+}
+
 export const TEXT_STYLE_SIZE = {
   xxl: "2xl",
   xl: "xl",
@@ -41,125 +61,125 @@ export const TEXT_STYLES: Record<
 > = {
   [TEXT_STYLE_SIZE.xxl]: {
     [TEXT_STYLE_WEIGHT.Eb]: {
-      fontSize: 32,
+      fontSize: normalize(32),
       fontWeight: 800,
     },
     [TEXT_STYLE_WEIGHT.default]: {
-      fontSize: 32,
+      fontSize: normalize(32),
       fontWeight: 800,
     },
   },
   [TEXT_STYLE_SIZE.xl]: {
     [TEXT_STYLE_WEIGHT.Bd]: {
-      fontSize: 24,
+      fontSize: normalize(24),
       fontWeight: 700,
     },
     [TEXT_STYLE_WEIGHT.default]: {
-      fontSize: 24,
+      fontSize: normalize(24),
       fontWeight: 700,
     },
   },
   [TEXT_STYLE_SIZE.lg]: {
     [TEXT_STYLE_WEIGHT.default]: {
-      fontSize: 21,
+      fontSize: normalize(21),
       fontWeight: 500,
     },
     [TEXT_STYLE_WEIGHT.Bd]: {
-      fontSize: 21,
+      fontSize: normalize(21),
       fontWeight: 700,
     },
     [TEXT_STYLE_WEIGHT.Eb]: {
-      fontSize: 21,
+      fontSize: normalize(21),
       fontWeight: 800,
     },
   },
   [TEXT_STYLE_SIZE.md1]: {
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 18,
+      fontSize: normalize(18),
       fontWeight: 500,
     },
     [TEXT_STYLE_WEIGHT.Sb]: {
-      fontSize: 18,
+      fontSize: normalize(18),
       fontWeight: 600,
     },
     [TEXT_STYLE_WEIGHT.Bd]: {
-      fontSize: 18,
+      fontSize: normalize(18),
       fontWeight: 700,
     },
     [TEXT_STYLE_WEIGHT.Eb]: {
-      fontSize: 18,
+      fontSize: normalize(18),
       fontWeight: 800,
     },
   },
   [TEXT_STYLE_SIZE.md2]: {
     [TEXT_STYLE_WEIGHT.Reg]: {
-      fontSize: 16,
+      fontSize: normalize(16),
       fontWeight: 400,
     },
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 16,
+      fontSize: normalize(16),
       fontWeight: 500,
     },
     [TEXT_STYLE_WEIGHT.Sb]: {
-      fontSize: 16,
+      fontSize: normalize(16),
       fontWeight: 600,
     },
     [TEXT_STYLE_WEIGHT.Bd]: {
-      fontSize: 16,
+      fontSize: normalize(16),
       fontWeight: 700,
     },
   },
   [TEXT_STYLE_SIZE.sm]: {
     [TEXT_STYLE_WEIGHT.Reg]: {
-      fontSize: 15,
+      fontSize: normalize(15),
       fontWeight: 400,
     },
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 15,
+      fontSize: normalize(15),
       fontWeight: 500,
     },
   },
   [TEXT_STYLE_SIZE.xsm]: {
     [TEXT_STYLE_WEIGHT.Reg]: {
-      fontSize: 14,
+      fontSize: normalize(14),
       fontWeight: 400,
     },
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 14,
+      fontSize: normalize(14),
       fontWeight: 500,
     },
     [TEXT_STYLE_WEIGHT.Bd]: {
-      fontSize: 14,
+      fontSize: normalize(14),
       fontWeight: 700,
     },
   },
   [TEXT_STYLE_SIZE.xxsm]: {
     [TEXT_STYLE_WEIGHT.default]: {
-      fontSize: 12,
+      fontSize: normalize(12),
       fontWeight: 500,
     },
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 12,
+      fontSize: normalize(12),
       fontWeight: 500,
     },
     [TEXT_STYLE_WEIGHT.Reg]: {
-      fontSize: 12,
+      fontSize: normalize(12),
       fontWeight: 400,
     },
   },
   [TEXT_STYLE_SIZE.xxxsm]: {
     [TEXT_STYLE_WEIGHT.Reg]: {
-      fontSize: 10,
+      fontSize: normalize(10),
       fontWeight: 400,
     },
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 10,
+      fontSize: normalize(10),
       fontWeight: 500,
     },
   },
   [TEXT_STYLE_SIZE.xxxxsm]: {
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 10,
+      fontSize: normalize(10),
       fontWeight: 500,
     },
   },
