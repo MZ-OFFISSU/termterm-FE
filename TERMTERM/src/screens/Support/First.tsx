@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { View, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native";
 import {
   LIGHT_COLOR_STYLE,
   TEXT_STYLES,
@@ -81,7 +81,7 @@ const First = ({ onEnd }: Props) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View
+      <ScrollView
         style={{
           position: "relative",
           width: "100%",
@@ -89,7 +89,7 @@ const First = ({ onEnd }: Props) => {
           paddingTop: 40,
         }}
       >
-        <Highlight style={{ top: 52, left: 0 }} />
+        <Highlight style={{ top: 10, left: 0 }} />
         <LargeTitle>문의하고 싶은 내용이 있으신가요?</LargeTitle>
         <Title>
           {`\n휴일을 제외한 평일 하루이내에 답변을 드릴게요.\n휴일을 제외한 하루가 지나도 답변이 오지 않는다면,\n스팸 메일함에 답변이 있을 수 있으니\n스팸 메일함을 확인해주세요.
@@ -154,7 +154,7 @@ const First = ({ onEnd }: Props) => {
             bottom: btnPosition - 90,
           }}
         />
-      </View>
+      </ScrollView>
     </TouchableWithoutFeedback>
   );
 };

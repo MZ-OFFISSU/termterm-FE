@@ -35,7 +35,7 @@ const Support = ({ navigation }: Props) => {
   );
 };
 
-const Container = styled.ScrollView`
+const Container = styled.View`
   width: 100%;
   background-color: ${LIGHT_COLOR_STYLE.Background.surface};
 `;
