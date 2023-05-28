@@ -2,8 +2,8 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useWordReg } from "@hooks/useWordReg";
 import { WordProps } from "@interfaces/word";
 import { TEXT_STYLES, colorTheme } from "@style/designSystem";
-import { screenWidth } from "@style/dimensions";
 import { TouchableOpacityProps } from "react-native";
+import { Text } from "react-native-svg";
 import styled from "styled-components/native";
 
 interface Props extends TouchableOpacityProps {
@@ -54,7 +54,7 @@ const Container = styled.TouchableOpacity<{
   mode: boolean;
   quiz?: boolean;
 }>`
-  width: ${screenWidth - 32}px;
+  width: 100%;
   height: 355px;
   border-radius: 10px;
   background-color: ${(props) =>

@@ -14,6 +14,8 @@ import Notification from "./Notification";
 import ThemeSelect from "./ThemeSelect";
 import DeleteAccount from "./DeleteAccount";
 import Walkthrough from "./Walkthrough";
+import Support from "./Support";
+import TermDetail from "./TermDetail";
 
 export {
   Home,
@@ -32,4 +34,6 @@ export {
   ThemeSelect,
   DeleteAccount,
   Walkthrough,
+  TermDetail,
+  Support,
 };

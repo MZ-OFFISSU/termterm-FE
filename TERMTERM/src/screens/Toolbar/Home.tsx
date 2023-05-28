@@ -11,7 +11,7 @@ import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { Fontisto } from "@expo/vector-icons";
 import { WordProps } from "@interfaces/word";
 import { dummyWords } from "@assets/dummyWord";
-import WordCard from "@components/terms/WordCard";
+import { WordCarousel } from "@components/terms/";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -45,19 +45,14 @@ const Home = ({ navigation, route }: Props) => {
                 title={"님, 오늘도 파이팅👏"}
                 subtitle={"아카이빙한 용어를 확인해보세요!"}
               />
-              {/* TODO:캐러셀로 변경할거임 건들지마세요 여기 */}
-              <WordCard
-                word={curation[0]}
-                quiz={true}
-                style={{ marginTop: 20 }}
-              />
+              <WordCarousel words={curation} dots={true} />
             </>
           ) : (
             <>
               <TitleContainer
                 username={name}
                 title={"님, 오늘도 파이팅"}
-                subtitle={"아카이빙한 용어가 없습니다."}
+                subtitle={"지금 용어를 아카이빙 해보세요!"}
               />
               <EmptyWordCard style={{ marginTop: 20 }} />
             </>
@@ -70,16 +65,7 @@ const Home = ({ navigation, route }: Props) => {
             <CurationTitleBox>
               <MenuTitleWrapper>
                 <MenuTitle COLOR={COLOR}>
-                  <MenuTitle
-                    COLOR={COLOR}
-                    style={{ color: COLOR.THEME.primary[160] }}
-                  >
-                    {name}
-                  </MenuTitle>
-                  님을 위한,
-                </MenuTitle>
-                <MenuTitle COLOR={COLOR} style={{ marginTop: 3 }}>
-                  업무 용어 추천 큐레이션
+                  나를 위한 추천 큐레이션
                 </MenuTitle>
               </MenuTitleWrapper>
               <CurationViewBtn onPress={() => navigation.push("Curation")}>

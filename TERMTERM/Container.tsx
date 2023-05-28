@@ -18,7 +18,7 @@ import {
   ThemeSelect,
   DeleteAccount,
   Walkthrough,
-  
+  Support,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
@@ -222,6 +222,11 @@ const Container = () => {
               );
             },
           }}
+        />
+        <RootStack.Screen
+          name="Support"
+          component={Support}
+          options={{ headerShown: false }}
         />
       </RootStack.Navigator>
     </NavigationContainer>

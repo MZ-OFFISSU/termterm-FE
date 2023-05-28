@@ -4,6 +4,8 @@ import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
 
 interface Props {
   type: string;
@@ -14,7 +16,8 @@ interface Props {
  */
 const GotoBookmark = ({ type }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
   return (
     <Container>
       <AutoSizedImage
@@ -32,7 +35,6 @@ const GotoBookmark = ({ type }: Props) => {
       <CustomButton
         COLOR={COLOR}
         mode={mode}
-        //여기 에러나는데 그냥 무시해도 됨
         onPress={() => navigation.navigate("Search")}
       >
         <BtnInner COLOR={COLOR}>아카이빙 하러가기</BtnInner>
