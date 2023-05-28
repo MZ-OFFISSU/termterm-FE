@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { View, Keyboard } from "react-native";
+import { View, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { LIGHT_COLOR_STYLE } from "@style/designSystem";
 import {
   CustomTextInput,
@@ -59,71 +59,73 @@ const Second = ({ onEnd }: Props) => {
   }, []);
 
   return (
-    <View
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100%",
-        paddingTop: 50,
-      }}
-    >
-      <InputWrapper>
-        <Subtitle>도메인</Subtitle>
-        <CustomTextInput
-          value={domain}
-          onChangeText={(text) => setDomain(text)}
-          maxLength={20}
-          placeholder="예시) 교육, 커머스, 여행, 소셜, AI 등"
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <Subtitle>직업</Subtitle>
-        <CustomTextInput
-          value={job}
-          onChangeText={(text) => setJob(text)}
-          maxLength={20}
-          placeholder="예시) 서비스 기획자, UX 디자이너, 개발자 등"
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <Subtitle>연차</Subtitle>
-        <CustomSelector
-          open={open}
-          value={value}
-          items={items}
-          setOpen={setOpen}
-          setValue={setValue}
-          setItems={setItems}
-          placeholder="연차를 선택해주세요."
-          listMode="MODAL"
-          modalProps={{
-            animationType: "fade",
-          }}
-          modalTitle="연차를 선택해주세요."
-        />
-      </InputWrapper>
-
-      <Warning style={{ alignSelf: "center", bottom: btnPosition + 55 }}>
-        도메인, 직업, 연차는 추후에 'MY'의 내 계정에서 수정할 수 있어요.
-      </Warning>
-      <CustomButton
-        title="확인"
-        theme={theme}
-        type={BUTTON_TYPE.primary}
-        state={
-          job === "" || domain === "" || value === ""
-            ? BUTTON_STATE.default
-            : BUTTON_STATE.active
-        }
-        onPress={() => nextStage()}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View
         style={{
-          width: screenWidth - 32,
-          alignSelf: "center",
-          position: "absolute",
-          bottom: btnPosition,
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          paddingTop: 50,
         }}
-      />
-    </View>
+      >
+        <InputWrapper>
+          <Subtitle>도메인</Subtitle>
+          <CustomTextInput
+            value={domain}
+            onChangeText={(text) => setDomain(text)}
+            maxLength={20}
+            placeholder="예시) 교육, 커머스, 여행, 소셜, AI 등"
+          />
+        </InputWrapper>
+        <InputWrapper>
+          <Subtitle>직업</Subtitle>
+          <CustomTextInput
+            value={job}
+            onChangeText={(text) => setJob(text)}
+            maxLength={20}
+            placeholder="예시) 서비스 기획자, UX 디자이너, 개발자 등"
+          />
+        </InputWrapper>
+        <InputWrapper>
+          <Subtitle>연차</Subtitle>
+          <CustomSelector
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            placeholder="연차를 선택해주세요."
+            listMode="MODAL"
+            modalProps={{
+              animationType: "fade",
+            }}
+            modalTitle="연차를 선택해주세요."
+          />
+        </InputWrapper>
+
+        <Warning style={{ alignSelf: "center", bottom: btnPosition + 55 }}>
+          도메인, 직업, 연차는 추후에 'MY'의 내 계정에서 수정할 수 있어요.
+        </Warning>
+        <CustomButton
+          title="확인"
+          theme={theme}
+          type={BUTTON_TYPE.primary}
+          state={
+            job === "" || domain === "" || value === ""
+              ? BUTTON_STATE.default
+              : BUTTON_STATE.active
+          }
+          onPress={() => nextStage()}
+          style={{
+            width: screenWidth - 32,
+            alignSelf: "center",
+            position: "absolute",
+            bottom: btnPosition,
+          }}
+        />
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
