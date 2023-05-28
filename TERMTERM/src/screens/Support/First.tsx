@@ -13,7 +13,7 @@ import {
   BUTTON_TYPE,
   CustomButton,
   CustomSelector,
-  CustomTextInput,
+  CustomEmailInput,
 } from "@components/index";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 
@@ -77,7 +77,7 @@ const First = ({ onEnd }: Props) => {
 
         <InputWrapper>
           <Subtitle>답변을 받으실 이메일</Subtitle>
-          <CustomTextInput
+          <CustomEmailInput
             value={email}
             onChangeText={(text) => setEmail(text)}
             placeholder="termterm@email.com"
