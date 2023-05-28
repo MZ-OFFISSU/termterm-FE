@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { TouchableOpacityProps, ImageSourcePropType } from "react-native";
-import { colorTheme, LIGHT_COLOR_STYLE, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
