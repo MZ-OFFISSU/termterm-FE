@@ -1,35 +1,32 @@
 import styled from "styled-components/native";
-import { View, Keyboard, Text } from "react-native";
+import { View } from "react-native";
 import { useState, useEffect } from "react";
 import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { useRecoilState } from "recoil";
-import { themeState } from "@recoil/themeState";
 import { LIGHT_COLOR_STYLE } from "@style/designSystem";
 
 const Third = () => {
-  const [theme, setTheme] = useRecoilState(themeState);
   const [width, setWidth] = useState(90);
 
   /** 아이콘 너비 계산 함수 */
   const calcWidth = () => {
     if (screenWidth < 390) return;
     if (screenWidth < 435) {
-        setWidth(90);
-        return;
+      setWidth(90);
+      return;
     }
     if (screenWidth < 500) {
-        setWidth(130);
-        return;
+      setWidth(130);
+      return;
     }
     if (screenWidth > 500) {
-        setWidth(170);
-        return;
+      setWidth(170);
+      return;
     }
   };
 
   useEffect(() => {
-      calcWidth();
+    calcWidth();
   }, []);
 
   return (
@@ -45,12 +42,10 @@ const Third = () => {
         <AutoSizedImage
           source={require("@assets/bookmark-character.png")}
           width={width}
-          style={{ marginTop: 70}}
+          style={{ marginTop: 70 }}
         />
         <TitleBox>
-          <Title>
-            문의가 정상적으로 접수되었습니다.
-          </Title>
+          <Title>문의가 정상적으로 접수되었습니다.</Title>
           <SubTitle>
             {`더 좋은 경험을 선사하는 termterm이\n될 수 있도록 끊임없이 노력할게요🙌🏻`}
           </SubTitle>
@@ -63,28 +58,28 @@ const Third = () => {
 export default Third;
 
 const ContentWrapper = styled.View`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 25px 20px 50px 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 20px 50px 20px;
 `;
 
 const TitleBox = styled.View`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
 `;
 
 const Title = styled.Text`
-    font-size: 18px;
-    font-weight: 900;
-    color: ${LIGHT_COLOR_STYLE.Text.active};
-    margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: 900;
+  color: ${LIGHT_COLOR_STYLE.Text.active};
+  margin-bottom: 5px;
 `;
 
 const SubTitle = styled.Text`

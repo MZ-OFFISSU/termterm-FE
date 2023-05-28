@@ -86,175 +86,175 @@ const dummyData: FolderDetailProps = {
   title: "기획",
   subtitle: "기획 관련 용어들의 모음",
   terms: [
-    // {
-    //   id: 0,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: false,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 1,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 2,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: false,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 3,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 4,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: false,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 5,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 6,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: false,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 7,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 8,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 9,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 10,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 11,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 12,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 13,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 14,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 15,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
-    // {
-    //   id: 16,
-    //   name: "기획자",
-    //   description:
-    //     "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-    //   bookmarked: true,
-    //   source: "https://github.com/",
-    //   categories: [{ id: 0, name: "기획" }],
-    //   comments: [],
-    // },
+    {
+      id: 0,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: false,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 1,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 2,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: false,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 3,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 4,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: false,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 5,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 6,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: false,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 7,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 8,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 9,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 10,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 11,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 12,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 13,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 14,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 15,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
+    {
+      id: 16,
+      name: "기획자",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
+      bookmarked: true,
+      source: "https://github.com/",
+      categories: [{ id: 0, name: "기획" }],
+      comments: [],
+    },
   ],
 };

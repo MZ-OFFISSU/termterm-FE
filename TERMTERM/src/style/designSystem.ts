@@ -193,7 +193,14 @@ export interface colorTheme {
       160: string;
       variant: string;
     };
-    negative: string;
+    negative: {
+      10: string;
+      100: string;
+    };
+    positive: {
+      10: string;
+      100: string;
+    };
   };
   Neutral: {
     100: string;
@@ -259,7 +266,14 @@ export const LIGHT_COLOR_STYLE: colorTheme = {
       160: "#F6CF00",
       variant: "#E4E2AF",
     },
-    negative: "#FF5454",
+    negative: {
+      10: "#FFEDED",
+      100: "#FF5454",
+    },
+    positive: {
+      10: "#ECF8FF",
+      100: "#31B5FF",
+    },
   },
   Neutral: {
     100: "#1B1B1C",
@@ -325,7 +339,14 @@ export const DARK_COLOR_STYLE: colorTheme = {
       160: "#F6CF00",
       variant: "#E4E2AF",
     },
-    negative: "#FF5454",
+    negative: {
+      10: "#FFEDED",
+      100: "#FF5454",
+    },
+    positive: {
+      10: "#ECF8FF",
+      100: "#31B5FF",
+    },
   },
   Neutral: {
     100: "#FFFFFF",
