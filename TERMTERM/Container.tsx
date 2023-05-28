@@ -81,7 +81,7 @@ const Container = () => {
       style={{ flex: 1, width: "100%", backgroundColor: safeColor }}
     >
       <NavigationContainer>
-        <RootStack.Navigator initialRouteName="Login">
+        <RootStack.Navigator initialRouteName="Walkthrough">
           <RootStack.Screen
             name="Login"
             component={Login}
