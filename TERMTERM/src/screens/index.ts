@@ -13,6 +13,7 @@ import MyPoint from "./MyPoint";
 import Notification from "./Notification";
 import ThemeSelect from "./ThemeSelect";
 import DeleteAccount from "./DeleteAccount";
+import Support from "./Support";
 import TermDetail from "./TermDetail";
 
 export {
@@ -32,4 +33,5 @@ export {
   ThemeSelect,
   DeleteAccount,
   TermDetail,
+  Support,
 };

@@ -52,7 +52,7 @@ const Home = ({ navigation, route }: Props) => {
               <TitleContainer
                 username={name}
                 title={"님, 오늘도 파이팅"}
-                subtitle={"아카이빙한 용어가 없습니다."}
+                subtitle={"지금 용어를 아카이빙 해보세요!"}
               />
               <EmptyWordCard style={{ marginTop: 20 }} />
             </>
@@ -65,16 +65,7 @@ const Home = ({ navigation, route }: Props) => {
             <CurationTitleBox>
               <MenuTitleWrapper>
                 <MenuTitle COLOR={COLOR}>
-                  <MenuTitle
-                    COLOR={COLOR}
-                    style={{ color: COLOR.THEME.primary[160] }}
-                  >
-                    {name}
-                  </MenuTitle>
-                  님을 위한,
-                </MenuTitle>
-                <MenuTitle COLOR={COLOR} style={{ marginTop: 3 }}>
-                  업무 용어 추천 큐레이션
+                  나를 위한 추천 큐레이션
                 </MenuTitle>
               </MenuTitleWrapper>
               <CurationViewBtn onPress={() => navigation.push("Curation")}>
