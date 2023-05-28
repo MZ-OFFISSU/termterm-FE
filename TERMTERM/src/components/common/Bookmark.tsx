@@ -23,6 +23,15 @@ export const PreviewBookmark = styled.TouchableOpacity`
   justify-content: center;
 `;
 
+export const BookmarkWrapper = styled.TouchableOpacity`
+  width: 38px;
+  height: 38px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 interface Props {
   dark: boolean;
   fill: boolean;
@@ -35,7 +44,7 @@ export const BookmarkButtonComponent = ({ fill, dark }: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
   return (
-    <BookmarkButton
+    <BookmarkWrapper
       style={{ backgroundColor: dark ? "#2c2c2c7a" : "#e2e2e279" }}
     >
       {fill ? (
@@ -47,6 +56,6 @@ export const BookmarkButtonComponent = ({ fill, dark }: Props) => {
       ) : (
         <Ionicons name="ios-bookmark-outline" size={22} color="white" />
       )}
-    </BookmarkButton>
+    </BookmarkWrapper>
   );
 };

@@ -12,6 +12,7 @@ import { Fontisto } from "@expo/vector-icons";
 import { WordProps } from "@interfaces/word";
 import { dummyWords } from "@assets/dummyWord";
 import { WordCarousel } from "@components/terms/";
+import DailyTermContainer from "@components/home/DailyTermContainer";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -66,7 +67,7 @@ const Home = ({ navigation, route }: Props) => {
               <MenuTitleWrapper>
                 <MenuTitle COLOR={COLOR}>오늘의 용어</MenuTitle>
               </MenuTitleWrapper>
-              <CurationViewBtn onPress={() => navigation.push("Curation")}>
+              <CurationViewBtn onPress={() => navigation.push("AllTerms")}>
                 <CurationViewBtnContent COLOR={COLOR}>
                   전체보기
                 </CurationViewBtnContent>
@@ -79,6 +80,7 @@ const Home = ({ navigation, route }: Props) => {
               </CurationViewBtn>
             </CurationTitleBox>
           </FlexContainer>
+          <DailyTermContainer />
           <FlexContainer>
             <CurationTitleBox>
               <MenuTitleWrapper>

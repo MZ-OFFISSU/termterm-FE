@@ -1,7 +1,7 @@
 import { useRoute } from "@react-navigation/native";
 import { safeAreaColorState } from "@recoil/safeAreaColor";
 import { themeState } from "@recoil/themeState";
-import { LIGHT_COLOR_STYLE } from "@style/designSystem";
+import { DARK_COLOR_STYLE, LIGHT_COLOR_STYLE } from "@style/designSystem";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -13,7 +13,7 @@ export const useSafeColor = () => {
   useEffect(() => {
     switch (route.name) {
       case "Login":
-        setSafeColor("#1F1F1F");
+        setSafeColor(DARK_COLOR_STYLE.Background.surface);
         break;
       case "Support":
         setSafeColor(LIGHT_COLOR_STYLE.Background.surface);
@@ -23,7 +23,9 @@ export const useSafeColor = () => {
         break;
       default:
         setSafeColor(
-          curTheme ? LIGHT_COLOR_STYLE.Background.surface : "#1F1F1F"
+          curTheme
+            ? LIGHT_COLOR_STYLE.Background.surface
+            : DARK_COLOR_STYLE.Background.surface
         );
         break;
     }

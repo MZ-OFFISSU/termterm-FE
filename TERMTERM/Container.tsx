@@ -29,6 +29,7 @@ import { useState, useEffect, useCallback } from "react";
 import * as Font from "expo-font";
 import { SafeAreaView } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
+import AllTerms from "@screens/AllTerms";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -277,6 +278,21 @@ const Container = () => {
             name="Support"
             component={Support}
             options={{ headerShown: false }}
+          />
+          <RootStack.Screen
+            name="AllTerms"
+            component={AllTerms}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="전체 용어"
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
           />
         </RootStack.Navigator>
       </NavigationContainer>

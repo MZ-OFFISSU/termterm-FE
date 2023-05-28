@@ -53,8 +53,8 @@ const Search = ({ navigation }: Props) => {
           value={keyword}
           onChangeText={(text) => setKeyword(text)}
         />
-        <ResultList results={results} />
-        {/* <RecentSearched /> */}
+        {/* <ResultList results={results} /> */}
+        <RecentSearched />
         <RecommendKeyword />
         <RecommendList navigation={navigation} />
       </CotentsArea>
