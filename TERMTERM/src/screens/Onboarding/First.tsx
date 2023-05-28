@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { View, Keyboard } from "react-native";
+import { View, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { LIGHT_COLOR_STYLE } from "@style/designSystem";
 import {
   CustomTextInput,
@@ -13,12 +13,21 @@ import { Props } from "@interfaces/onboarding";
 import { useRecoilState } from "recoil";
 import { themeState } from "@recoil/themeState";
 import { infoState } from "@recoil/signupState";
+import { nicknameReg } from "@utils/reg";
 
 const First = ({ onEnd }: Props) => {
   const [theme, setTheme] = useRecoilState(themeState);
   const [info, setInfo] = useRecoilState(infoState);
   const [name, setName] = useState("");
   const [btnPosition, setBtnPosiition] = useState(30);
+
+  const inputName = (text: string) => {
+    if (nicknameReg(text)) setName(text);
+  };
+
+  useEffect(() => {
+    console.log(name);
+  }, [name]);
 
   const nextStage = () => {
     if (onEnd && name !== "") {
@@ -43,49 +52,51 @@ const First = ({ onEnd }: Props) => {
   }, []);
 
   return (
-    <View
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100%",
-        paddingTop: 80,
-      }}
-    >
-      <Highlight style={{ top: 97, left: 0 }} />
-      <Title>
-        <Title style={{ fontWeight: "900", zIndex: 1 }}>
-          원할한 커뮤니케이션
-        </Title>
-        {`을 위한\n준비를 시작해볼까요?`}
-      </Title>
-
-      <Subtitle>닉네임</Subtitle>
-      <CustomTextInput
-        value={name}
-        onChangeText={(text) => setName(text)}
-        maxLength={20}
-      />
-      {name === "" ? (
-        <Warning>
-          한글, 영어, 숫자, 특수문자(. , ! ? _ - ~)로만 구성할 수 있어요.
-        </Warning>
-      ) : (
-        <></>
-      )}
-      <CustomButton
-        title="확인"
-        theme={theme}
-        type={BUTTON_TYPE.primary}
-        state={name === "" ? BUTTON_STATE.default : BUTTON_STATE.active}
-        onPress={() => nextStage()}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View
         style={{
-          width: screenWidth - 32,
-          alignSelf: "center",
-          position: "absolute",
-          bottom: btnPosition,
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          paddingTop: 80,
         }}
-      />
-    </View>
+      >
+        <Highlight style={{ top: 97, left: 0 }} />
+        <Title>
+          <Title style={{ fontWeight: "900", zIndex: 1 }}>
+            원할한 커뮤니케이션
+          </Title>
+          {`을 위한\n준비를 시작해볼까요?`}
+        </Title>
+
+        <Subtitle>닉네임</Subtitle>
+        <CustomTextInput
+          value={name}
+          onChangeText={(text) => inputName(text)}
+          maxLength={20}
+        />
+        {name === "" ? (
+          <Warning>
+            한글, 영어, 숫자, 특수문자(. , ! ? _ - ~)로만 구성할 수 있어요.
+          </Warning>
+        ) : (
+          <></>
+        )}
+        <CustomButton
+          title="확인"
+          theme={theme}
+          type={BUTTON_TYPE.primary}
+          state={name === "" ? BUTTON_STATE.default : BUTTON_STATE.active}
+          onPress={() => nextStage()}
+          style={{
+            width: screenWidth - 32,
+            alignSelf: "center",
+            position: "absolute",
+            bottom: btnPosition,
+          }}
+        />
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

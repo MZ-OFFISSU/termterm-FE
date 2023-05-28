@@ -27,6 +27,7 @@ const CustomTextInput = ({ value, ...props }: Props) => {
         onBlur={() =>
           value === "" ? setBorderColor(LIGHT_COLOR_STYLE.Neutral[20]) : null
         }
+        value={value}
         {...props}
       />
       <Maximum style={{ color: borderColor, right: 0, top: 7 }}>
