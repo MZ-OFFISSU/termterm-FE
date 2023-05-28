@@ -28,7 +28,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
   const showToast = () => {
     Toast.show({
       type: mode ? "light" : "dark",
-      text1: "이제 마음껏 큐레이션을 볼 수 있어요!😍",
+      text1: "이제 마음껏 큐레이션을 볼 수 있어요!",
     });
   };
 

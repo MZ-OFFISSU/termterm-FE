@@ -41,7 +41,7 @@ const TagWrapper = styled.View`
 `;
 
 const Tag = styled.View<{ COLOR: colorTheme }>`
-  height: 48px;
+  height: 42px;
   padding: 0px 22px;
   border-radius: 100px;
   background-color: ${(props) => props.COLOR.Background.input};
