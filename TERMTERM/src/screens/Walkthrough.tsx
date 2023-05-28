@@ -60,7 +60,7 @@ const Walkthrough = ({ navigation }: Props) => {
           type={BUTTON_TYPE.primary}
           state={BUTTON_STATE.active}
           // TODO : Home으로 이동하도록 navigation 수정
-          // onPress={() => navigation.push("Home")}
+          onPress={() => navigation.push("Login")}
           style={{ width: "90%" }}
         />
         <CustomButton
