@@ -13,51 +13,43 @@ import CustomButton, { BUTTON_STATE, BUTTON_TYPE } from "@components/buttons/Cus
 import HTML from 'react-native-render-html';
 
 export type Props = StackScreenProps<RootStackParamList, "Walkthrough">;
-
-export type Part = {
-  type: 'highlight' | 'normal';
-  text: string;
-};
-
-interface BProps {
-  children: ReactNode;
+interface WtProps {
+  title: string;
+  children: React.ReactNode;
+  image: any;
 }
 
-const walkthroughInfo = [
+const walkthroughInfo: Array<WtProps> = [
   { 
     title: "Daily Quiz", 
-    text: `<B>매일 용어 퀴즈</B>를 풀고\n<B>모르는 용어는 복습</B>해요`,
+    children: <Text><Text style={{ fontWeight: "900" }}>매일 용어 퀴즈</Text>를 풀고{"\n"}
+      <Text style={{ fontWeight: "900" }}>모르는 용어는 복습</Text>해요</Text>,
     image: require("../../assets/walkthrough/quiz.png") 
   },
   { 
     title: "Archive", 
-    text: `중요하다고 생각하는\n<B>용어를 한 곳에서 모아</B>볼 수 있어요`, 
+    children: <Text>중요하다고 생각하는{"\n"}
+      <Text style={{ fontWeight: "900" }}>용어를 한 곳에서 모아</Text>볼 수 있어요</Text>, 
     image: require("../../assets/walkthrough/archive.png") 
   },
   { 
     title: "Curation", 
-    text: `<B>다양한 용어 큐레이션</B>을 통해\n지금 내게 딱 필요한 용어를 보아요`, 
-    mage: require("../../assets/walkthrough/curation.png") 
+    children: <Text><Text style={{ fontWeight: "900" }}>다양한 용어 큐레이션</Text>을 통해{"\n"}
+    지금 내게 딱 필요한 용어를 보아요</Text>, 
+    image: require("../../assets/walkthrough/curation.png") 
   },
   { 
     title: "Point", 
-    text: `<B>차곡차곡 쌓이는 포인트</B>로\n더 많은 혜택을 누릴 수 있어요`, 
+    children: <Text><Text style={{ fontWeight: "900" }}>차곡차곡 쌓이는 포인트</Text>로{"\n"}
+      더 많은 혜택을 누릴 수 있어요</Text>, 
     image: require("../../assets/walkthrough/point.png") 
   },
 ];
-
 
 const Walkthrough = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [step, setStep] = useState(0);
   const [width, setWidth] = useState(300);
-  const text = walkthroughInfo[step].text;
-  const parts = text.split(/<\/?B>/g);
-
-  const B: React.FC<BProps> = ({ children }) => (
-    <Text style={{ fontWeight: 'bold' }}>{children}</Text>
-  );
-  
 
   const nextStep = () => {
     if (step < walkthroughInfo.length - 1) {
@@ -98,55 +90,13 @@ const Walkthrough = ({ navigation }: Props) => {
     calcWidth();
   }, []);
 
-  /** bold 처리가 필요한 텍스트를 선별하는 함수 */
-  // TODO : 함수 디버깅 (폰트 bold 처리 로직 검토)
-  const renderTextWithHighlight = (text: string): Part[] => {
-    const pattern = /@head@(.*?)@tail@/g;
-    const parts = text.split(pattern);
-    const html = walkthroughInfo[step].text;
-  
-    return parts.map((part, index) => {
-      if (part.startsWith('@head@') && part.endsWith('@tail@')) {
-        const highlightedText = part.slice('@head@'.length, -'@tail@'.length);
-        return {
-          type: 'highlight',
-          text: highlightedText,
-        };
-      } else {
-        return {
-          type: 'normal',
-          text: part,
-        };
-      }
-    });
-  };
-
-  const renderHtml = (html: string) => {
-    return {
-      html: html,
-      renderers: {
-        b: (htmlAttribs: any, children: React.ReactNode, convertedCSSStyles: any, passProps: any) => {
-          return <B>{children}</B>;
-        },
-      },
-    };
-  };
-
   return (
     <SafeAreaView
       style={{ flex: 0, backgroundColor: COLOR.Background.surface }}
     >
       <Wrapper>
         <Title>{walkthroughInfo[step].title}</Title>
-        <SubText>I am in <B>bold</B> yo.</SubText>
-        <Text>
-          <HTML {...renderHtml(html)} />
-        </Text>
-        {/* {renderTextWithHighlight(walkthroughInfo[step].text).map((part, index) => (
-          <SubTitle key={index} type={part.type}>
-            {part.text}
-          </SubTitle>
-        ))} */}
+        <SubText>{walkthroughInfo[step].children}</SubText>
         <AutoSizedImage
           source={walkthroughInfo[step].image}
           width={width}
