@@ -1,6 +1,5 @@
 import styled from "styled-components/native";
-import { View } from "react-native";
-import { LIGHT_COLOR_STYLE, TEXT_STYLES, TEXT_STYLE_SIZE } from "@style/designSystem";
+import { LIGHT_COLOR_STYLE, TEXT_STYLES } from "@style/designSystem";
 import { CustomButton, BUTTON_STATE, BUTTON_TYPE } from "@components/index";
 import { useState } from "react";
 import { screenWidth } from "@style/dimensions";

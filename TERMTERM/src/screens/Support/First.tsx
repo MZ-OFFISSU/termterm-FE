@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { View, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native";
+import { TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native";
 import {
   LIGHT_COLOR_STYLE,
   TEXT_STYLES,
@@ -39,10 +39,6 @@ const First = ({ onEnd }: Props) => {
     inquiryType: "",
     inquiryContent: "",
   });
-
-  const inputEmail = (email: string) => {
-    if (emailReg(email)) setEmail(email);
-  }
 
   const nextStage = () => {
     if (onEnd && email !== "" && value !== "" && inquiryContent !== "") {
