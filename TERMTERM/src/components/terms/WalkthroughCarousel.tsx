@@ -1,4 +1,5 @@
 import { View, ViewProps, Text } from "react-native";
+import styled from "styled-components/native";
 import Animated, {
   Extrapolate,
   interpolate,
@@ -6,7 +7,7 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 import Carousel from "react-native-reanimated-carousel";
-import { screenWidth } from "@style/dimensions";
+import { screenWidth, screenHeight } from "@style/dimensions";
 import { WtProps } from "@interfaces/walkthrough";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import Walkthrough from "./Walkthrough";
@@ -26,17 +27,40 @@ const WalkthroughCarousel = ({ walkthrough, dots, ...props }: Props) => {
   const baseOptions = {
     vertical: false,
     width: screenWidth,
-    height: 650,
+    height: 700,
   } as const;
 
   return (
     <View
       style={{
-        alignItems: "center",
-        marginTop: 30,
+        alignItems: "center",  
       }}
       {...props}
     >
+      {dots && (
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: 50,
+            marginTop: 30,
+            alignSelf: "center",
+          }}
+        >
+          {walkthrough.map((_, index) => {
+            return (
+              <PaginationItem
+                backgroundColor={COLOR.THEME.primary[130]}
+                animValue={progressValue}
+                index={index}
+                key={index}
+                isRotate={false}
+                length={walkthrough.length}
+              />
+            );
+          })}
+        </View>
+      )}
       <Carousel
         {...baseOptions}
         style={{
@@ -56,29 +80,6 @@ const WalkthroughCarousel = ({ walkthrough, dots, ...props }: Props) => {
         data={walkthrough}
         renderItem={({ index }) => <Walkthrough walkthrough={walkthrough[index]} />}
       />
-      {dots && (
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            width: 100,
-            alignSelf: "center",
-          }}
-        >
-          {walkthrough.map((_, index) => {
-            return (
-              <PaginationItem
-                backgroundColor={COLOR.THEME.primary[130]}
-                animValue={progressValue}
-                index={index}
-                key={index}
-                isRotate={false}
-                length={walkthrough.length}
-              />
-            );
-          })}
-        </View>
-      )}
     </View>
   );
 };
@@ -121,7 +122,6 @@ const PaginationItem: React.FC<{
         backgroundColor: "#bdbdbd51",
         width,
         height: width,
-        marginTop: 100,
         borderRadius: 50,
         overflow: "hidden",
         transform: [
