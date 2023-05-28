@@ -11,7 +11,7 @@ import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { Fontisto } from "@expo/vector-icons";
 import { WordProps } from "@interfaces/word";
 import { dummyWords } from "@assets/dummyWord";
-import WordCarousel from "@components/terms/WordCarousel";
+import { WordCarousel } from "@components/terms/";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 

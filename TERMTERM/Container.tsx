@@ -17,7 +17,6 @@ import {
   Notification,
   ThemeSelect,
   DeleteAccount,
-  TermDetail,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
@@ -212,23 +211,6 @@ const Container = () => {
                 <BackBar
                   title="탈퇴하기"
                   onBack={() => props.navigation.pop()}
-                />
-              );
-            },
-          }}
-        />
-        <RootStack.Screen
-          name="TermDetail"
-          component={TermDetail}
-          options={{
-            headerShown: true,
-            header: (props) => {
-              return (
-                <BookmarkBar
-                  onBack={() => props.navigation.pop()}
-                  onBookmark={() => null}
-                  onShare={() => null}
-                  bookmarked={false}
                 />
               );
             },

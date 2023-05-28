@@ -23,7 +23,7 @@ const ResultWrapper = ({ results, ...props }: Props) => {
           title={result.name}
           marked={false}
           key={`${result.id}`}
-          onPress={() => navigation.push("TermDetail", { id: result.id })}
+          onPress={() => navigation.navigate("TermDetail", { id: result.id })}
         ></TermBox>
       ))}
     </Container>
