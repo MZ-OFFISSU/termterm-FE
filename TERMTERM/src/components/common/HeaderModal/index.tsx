@@ -66,7 +66,7 @@ const ModalMenu = styled.TouchableOpacity`
 `;
 
 const Menu = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}px;
+  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES["2xsm"].Md?.fontWeight};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};

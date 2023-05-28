@@ -45,7 +45,7 @@ const InnerBox = styled.View`
 
 const BtnText = styled.Text<{ COLOR: colorTheme }>`
   color: ${(props) => props.COLOR.Text.lighten};
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
   margin-right: 6px;
 `;

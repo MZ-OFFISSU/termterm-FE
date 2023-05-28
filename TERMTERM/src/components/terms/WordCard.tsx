@@ -84,7 +84,7 @@ const SubName = styled.Text<{
   mode: boolean;
   quiz?: boolean;
 }>`
-  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}px;
+  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES["2xsm"].Md?.fontWeight};
   color: ${(props) =>
     props.mode
@@ -100,7 +100,7 @@ const MainName = styled.Text<{
   mode: boolean;
   quiz?: boolean;
 }>`
-  font-size: ${TEXT_STYLES["2xl"].Eb?.fontSize}px;
+  font-size: ${TEXT_STYLES["2xl"].Eb?.fontSize}rem;
   font-weight: ${TEXT_STYLES["2xl"].Eb?.fontWeight};
   color: ${(props) =>
     props.mode
@@ -112,12 +112,12 @@ const MainName = styled.Text<{
 `;
 
 const Content = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  font-size: ${TEXT_STYLES.sm.Reg?.fontSize}px;
+  font-size: ${TEXT_STYLES.sm.Reg?.fontSize}rem;
   font-weight: ${TEXT_STYLES.sm.Reg?.fontWeight};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
   white-space: pre-line;
-  line-height: ${TEXT_STYLES.sm.Reg?.fontSize! * 1.6}px;
+  line-height: ${TEXT_STYLES.sm.Reg?.fontSize! * 1.6}rem;
 `;
 
 const Source = styled.Text<{
@@ -125,7 +125,7 @@ const Source = styled.Text<{
   mode: boolean;
   quiz?: boolean;
 }>`
-  font-size: ${TEXT_STYLES["3xsm"].Md?.fontSize}px;
+  font-size: ${TEXT_STYLES["3xsm"].Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES["3xsm"].Md?.fontWeight};
   color: ${(props) =>
     props.mode

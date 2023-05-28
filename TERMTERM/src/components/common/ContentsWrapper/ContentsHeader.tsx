@@ -29,7 +29,7 @@ const HeaderContainer = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md1.Bd?.fontSize}px;
+  font-size: ${TEXT_STYLES.md1.Bd?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md1.Bd?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
 `;

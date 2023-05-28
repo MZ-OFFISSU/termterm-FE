@@ -47,7 +47,7 @@ const Input = styled.TextInput<{ COLOR: colorTheme }>`
   outline: none;
   border: none;
   text-align: start;
-  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
+  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
 `;
 

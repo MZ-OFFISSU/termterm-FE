@@ -40,7 +40,7 @@ const RecentSearched = ({ ...props }: ViewProps) => {
 const RemoveButton = styled.TouchableOpacity``;
 
 const RemoveText = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES["3xsm"].Md?.fontSize}px;
+  font-size: ${TEXT_STYLES["3xsm"].Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES["3xsm"].Md?.fontWeight};
   color: ${(props) => props.COLOR.Text.default};
 `;

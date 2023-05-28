@@ -36,7 +36,7 @@ const Item = styled.Text<{ focused: boolean; COLOR: colorTheme }>`
   font-size: ${(props) =>
     props.focused
       ? TEXT_STYLES.md2.Bd?.fontSize
-      : TEXT_STYLES.md2.Reg?.fontSize}px;
+      : TEXT_STYLES.md2.Reg?.fontSize}rem;
   font-weight: ${(props) =>
     props.focused
       ? TEXT_STYLES.md2.Bd?.fontWeight

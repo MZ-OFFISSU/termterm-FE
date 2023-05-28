@@ -37,7 +37,7 @@ const Container = styled.View`
 `;
 
 const DateText = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Md?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Md?.fontWeight};
   color: ${(props) => props.COLOR.Text.default};
   align-self: flex-start;
@@ -53,7 +53,7 @@ const ContentLine = styled.View`
 `;
 
 const ContentText = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}px;
+  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xsm.Md?.fontWeight};
   color: ${(props) => props.COLOR.Text.default};
 `;

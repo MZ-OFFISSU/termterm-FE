@@ -38,13 +38,13 @@ const IntroBoxContainer = styled.View<{ COLOR: colorTheme }>`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}px;
+  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES["2xsm"].Md?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES["2xsm"].Reg?.fontSize}px;
+  font-size: ${TEXT_STYLES["2xsm"].Reg?.fontSize}rem;
   font-weight: ${TEXT_STYLES["2xsm"].Reg?.fontWeight};
   color: ${(props) => props.COLOR.Text.default};
   margin-top: 8px;

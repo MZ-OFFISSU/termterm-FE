@@ -68,13 +68,13 @@ const TitleBox = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md1.Bd?.fontSize}px;
+  font-size: ${TEXT_STYLES.md1.Bd?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md1.Bd?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Reg?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Reg?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Reg?.fontWeight};
   color: ${(props) => props.COLOR.Text.default};
   margin-top: 10px;

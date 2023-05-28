@@ -79,7 +79,7 @@ const InfoWrapper = styled.View`
 `;
 
 const Name = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Bd?.fontSize}px;
+  font-size: ${TEXT_STYLES.xsm.Bd?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xsm.Bd?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
 `;
@@ -92,7 +92,7 @@ const DetailWrapper = styled.View`
 `;
 
 const Detail = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES["2xsm"].Reg?.fontSize}px;
+  font-size: ${TEXT_STYLES["2xsm"].Reg?.fontSize}rem;
   font-weight: ${TEXT_STYLES["2xsm"].Reg?.fontWeight};
   color: ${(props) => props.COLOR.Text.default};
 `;

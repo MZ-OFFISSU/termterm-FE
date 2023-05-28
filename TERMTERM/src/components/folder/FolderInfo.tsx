@@ -34,7 +34,7 @@ const Container = styled.View`
 `;
 
 const Text = styled.Text`
-  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}px;
+  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES["2xsm"].Md?.fontWeight};
 `;
 

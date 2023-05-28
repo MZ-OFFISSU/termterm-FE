@@ -77,7 +77,7 @@ const Button = styled.TouchableOpacity`
 `;
 
 const Title = styled.Text`
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
 `;
 

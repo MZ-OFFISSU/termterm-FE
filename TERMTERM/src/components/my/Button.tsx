@@ -55,7 +55,7 @@ const ButtonTitle = styled.Text<{
   font-size: ${(props) =>
     props.isActivated
       ? TEXT_STYLES.md2.Sb?.fontSize
-      : TEXT_STYLES.xsm.Md?.fontSize}px;
+      : TEXT_STYLES.xsm.Md?.fontSize}rem;
   font-weight: ${(props) =>
     props.isActivated
       ? TEXT_STYLES.md2.Sb?.fontWeight

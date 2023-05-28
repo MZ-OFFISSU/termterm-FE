@@ -145,7 +145,7 @@ const TitleBox = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xl.Bd?.fontSize}px;
+  font-size: ${TEXT_STYLES.xl.Bd?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xl.Bd?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
   opacity: 0.95;
@@ -159,13 +159,13 @@ const MenuTitleWrapper = styled.View`
 `;
 
 const MenuTitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.lg.Bd?.fontSize}px;
+  font-size: ${TEXT_STYLES.lg.Bd?.fontSize}rem;
   font-weight: ${TEXT_STYLES.lg.Bd?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
 const SubTitle = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}px;
+  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xsm.Md?.fontWeight};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
@@ -189,7 +189,7 @@ const CurationViewBtn = styled.TouchableOpacity`
 `;
 
 const CurationViewBtnContent = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}px;
+  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xsm.Md?.fontWeight};
   color: ${(props) => props.COLOR.Text.default};
 `;

@@ -30,7 +30,7 @@ const LogBtn = styled.TouchableOpacity<{ COLOR: colorTheme }>`
 `;
 
 const LogTitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
+  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
   margin-right: 5px;

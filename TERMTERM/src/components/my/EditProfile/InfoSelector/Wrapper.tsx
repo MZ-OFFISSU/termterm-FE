@@ -33,13 +33,13 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md1.Md?.fontSize}px;
+  font-size: ${TEXT_STYLES.md1.Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md1.Md?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}px;
+  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES["2xsm"].Md?.fontWeight};
   color: ${(props) => props.COLOR.Text.default};
   margin-top: 5px;

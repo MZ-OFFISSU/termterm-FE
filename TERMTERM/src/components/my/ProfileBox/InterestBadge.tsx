@@ -64,7 +64,7 @@ const Badge = styled.View<{ bg: string }>`
 `;
 
 const BadgeContent = styled.Text`
-  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}px;
+  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES["2xsm"].Md?.fontWeight};
   color: ${LIGHT_COLOR_STYLE.Text.lighten};
 `;

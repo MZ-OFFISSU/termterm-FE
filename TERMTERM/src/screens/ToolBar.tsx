@@ -180,7 +180,7 @@ const ToolBar = ({ ...props }: Props) => {
 };
 
 const Label = styled.Text<{ focused: boolean; COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES["4xsm"].Md?.fontSize}px;
+  font-size: ${TEXT_STYLES["4xsm"].Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES["4xsm"].Md?.fontWeight};
   color: ${(props) =>
     props.focused ? props.COLOR.Neutral[100] : props.COLOR.Neutral[40]};

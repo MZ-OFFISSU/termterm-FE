@@ -82,14 +82,14 @@ const TitleBox = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md1.Eb?.fontSize}px;
+  font-size: ${TEXT_STYLES.md1.Eb?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md1.Eb?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
   text-align: center;
 `;
 
 const SubTitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.sm.Reg?.fontSize}px;
+  font-size: ${TEXT_STYLES.sm.Reg?.fontSize}rem;
   font-weight: ${TEXT_STYLES.sm.Reg?.fontWeight};
   color: ${(props) => props.COLOR.Text.default};
   text-align: center;
@@ -112,7 +112,7 @@ const WordButton = styled.TouchableOpacity<{ COLOR: colorTheme }>`
 `;
 
 const ButtonText = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
   text-align: center;
   margin: auto 0;

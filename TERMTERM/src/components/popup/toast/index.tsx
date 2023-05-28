@@ -77,7 +77,7 @@ const ToastContainer = styled.View`
 `;
 
 const ToastMessage = styled.Text`
-  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Bd?.fontWeight};
   white-space: pre-line;
   margin-left: 20px;

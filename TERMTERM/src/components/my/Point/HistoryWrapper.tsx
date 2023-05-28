@@ -84,7 +84,7 @@ const Container = styled.View`
 const TitleBox = styled.Text<{ COLOR: colorTheme }>`
   width: 100%;
   text-align: start;
-  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Bd?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
 `;
@@ -117,7 +117,7 @@ const Button = styled.TouchableOpacity<{ COLOR: colorTheme; mode: boolean }>`
 `;
 
 const ButtonContent = styled.Text`
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
   color: ${LIGHT_COLOR_STYLE.Text.lighten};
 `;

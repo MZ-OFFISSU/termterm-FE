@@ -70,15 +70,15 @@ const UpperBox = styled.View`
 `;
 
 const Job = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Bd?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
 const Description = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
+  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
-  line-height: ${TEXT_STYLES.xsm.Reg?.fontSize! + 5}px;
+  line-height: ${TEXT_STYLES.xsm.Reg?.fontSize! + 5}rem;
   color: ${(props) => props.COLOR.Text.default};
   margin-top: 10px;
   white-space: pre-line;

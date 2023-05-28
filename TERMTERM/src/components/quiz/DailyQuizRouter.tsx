@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { TouchableOpacityProps, ImageSourcePropType } from "react-native";
-import { colorTheme, LIGHT_COLOR_STYLE } from "@style/designSystem";
+import { colorTheme, LIGHT_COLOR_STYLE, TEXT_STYLES } from "@style/designSystem";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
@@ -59,7 +59,7 @@ const LeftBox = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: 15px;
+  font-size: ${TEXT_STYLES.md2.Md?.fontSize}rem;
   font-weight: 500;
   color: ${(props) => props.COLOR.Text.active};
   text-align: center;

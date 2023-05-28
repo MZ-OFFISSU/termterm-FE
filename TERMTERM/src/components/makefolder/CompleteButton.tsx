@@ -48,7 +48,7 @@ const ButtonBox = styled.TouchableOpacity<{
 `;
 
 const ButtonContent = styled.Text<{ COLOR: colorTheme; ready: boolean }>`
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
   color: ${(props) =>
     props.ready ? props.COLOR.Text.lighten : props.COLOR.Text.default};

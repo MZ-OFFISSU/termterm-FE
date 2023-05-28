@@ -57,7 +57,7 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xl.Bd?.fontSize}px;
+  font-size: ${TEXT_STYLES.xl.Bd?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xl.Bd?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
   text-align: center;
@@ -66,7 +66,7 @@ const Title = styled.Text<{ COLOR: colorTheme }>`
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md1.Eb?.fontSize}px;
+  font-size: ${TEXT_STYLES.md1.Eb?.fontSize}rem;
   color: ${(props) => props.COLOR.Text.default};
   text-align: center;
   white-space: pre-line;
@@ -92,7 +92,7 @@ const CustomButton = styled.TouchableOpacity<{
 `;
 
 const BtnInner = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
   color: ${(props) => props.COLOR.Text.lighten};
 `;

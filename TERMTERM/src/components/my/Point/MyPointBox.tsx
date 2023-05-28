@@ -40,7 +40,7 @@ const Box = styled.View<{ COLOR: colorTheme }>`
 `;
 
 const Title = styled.Text`
-  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Bd?.fontWeight};
   color: ${LIGHT_COLOR_STYLE.Text.lighten};
 `;

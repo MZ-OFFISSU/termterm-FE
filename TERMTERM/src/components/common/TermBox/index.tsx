@@ -52,7 +52,7 @@ const ResultBtn = styled.TouchableOpacity<{ COLOR: colorTheme; mode: boolean }>`
 `;
 
 const ResultTitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}px;
+  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xsm.Md?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
 `;

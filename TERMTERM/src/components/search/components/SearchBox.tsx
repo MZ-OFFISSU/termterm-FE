@@ -40,7 +40,7 @@ const InnerTextInput = styled.TextInput<{ COLOR: colorTheme }>`
   width: 90%;
   height: 44px;
   color: ${(props) => props.COLOR.Text.active};
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
   margin-left: 8px;
 `;

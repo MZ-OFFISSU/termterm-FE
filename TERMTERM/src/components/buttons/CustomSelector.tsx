@@ -92,7 +92,7 @@ const SelectorBox = styled.TouchableOpacity<{
 
 const SelectorTitle = styled.Text<{ color: string }>`
   color: ${(props) => props.color};
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
 `;
 

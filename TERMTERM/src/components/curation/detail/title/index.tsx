@@ -48,20 +48,20 @@ const InfoWrapper = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.lg.Bd?.fontSize}px;
+  font-size: ${TEXT_STYLES.lg.Bd?.fontSize}rem;
   font-weight: ${TEXT_STYLES.lg.Bd?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
   text-align: center;
 `;
 
 const Count = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}px;
+  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xsm.Md?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
+  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
   color: ${(props) => props.COLOR.Text.default};
   text-align: center;

@@ -38,7 +38,7 @@ const RecommendBtn = styled.TouchableOpacity<{
 `;
 
 const RecommendTitle = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
+  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
 `;

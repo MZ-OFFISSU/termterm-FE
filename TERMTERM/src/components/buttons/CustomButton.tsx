@@ -92,7 +92,7 @@ const ButtonTitle = styled.Text<{
   type: BUTTON_TYPE;
   state?: BUTTON_STATE;
 }>`
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
   color: ${(props) =>
     props.theme

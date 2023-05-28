@@ -129,7 +129,7 @@ const Type = styled.Text<{ selected: boolean }>`
   font-size: ${(props) =>
     props.selected
       ? TEXT_STYLES.md2.Bd?.fontSize
-      : TEXT_STYLES.md2.Reg?.fontSize}px;
+      : TEXT_STYLES.md2.Reg?.fontSize}rem;
   font-weight: ${(props) =>
     props.selected
       ? TEXT_STYLES.md2.Bd?.fontWeight

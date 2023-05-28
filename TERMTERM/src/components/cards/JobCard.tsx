@@ -50,7 +50,7 @@ const Card = styled.TouchableOpacity`
 `;
 
 const Title = styled.Text`
-  font-size: ${TEXT_STYLES.md2.Md?.fontSize}px;
+  font-size: ${TEXT_STYLES.md2.Md?.fontSize}rem;
   font-weight: ${TEXT_STYLES.md2.Md?.fontWeight};
 `;
 

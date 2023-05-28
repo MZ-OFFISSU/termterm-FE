@@ -34,7 +34,7 @@ const FolderWrapper = styled.TouchableOpacity`
 `;
 
 const FolderInfo = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Bd?.fontSize}px;
+  font-size: ${TEXT_STYLES.xsm.Bd?.fontSize}rem;
   font-weight: ${TEXT_STYLES.xsm.Bd?.fontWeight};
   color: ${(props) => props.COLOR.Text.active};
   margin-top: 10px;
