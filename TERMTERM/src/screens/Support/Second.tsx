@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { View } from "react-native";
-import { LIGHT_COLOR_STYLE, TEXT_STYLE_SIZE } from "@style/designSystem";
+import { LIGHT_COLOR_STYLE, TEXT_STYLES, TEXT_STYLE_SIZE } from "@style/designSystem";
 import { CustomButton, BUTTON_STATE, BUTTON_TYPE } from "@components/index";
 import { useState } from "react";
 import { screenWidth } from "@style/dimensions";
@@ -20,18 +20,13 @@ const Second = ({ onEnd }: Props) => {
   };
 
   return (
-    <View
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100%",
-        paddingTop: 80,
-      }}
-    >
-      <Title>개인정보 수집 및 이용에 대한 안내</Title>
-      <SubTitle>
-        {`O'MZ는 이용자 문의를 처리하기 위해 다음과 같이 개인\n정보를 수집 및 이용하며, 이용자의 개인정보를 안전하게\n취급하는데 최선을 다하고 있습니다.`}
-      </SubTitle>
+    <Container>
+      <TitleWrapper>
+        <Title>개인정보 수집 및 이용에 대한 안내</Title>
+        <SubTitle>
+          O'MZ는 이용자 문의를 처리하기 위해 다음과 같이 개인 정보를 수집 및 이용하며, 이용자의 개인정보를 안전하게 취급하는데 최선을 다하고 있습니다.
+        </SubTitle>
+        </TitleWrapper>
       <TextWrapper>
         <InfoTitle>수집항목</InfoTitle>
         <InfoContent>
@@ -68,7 +63,7 @@ const Second = ({ onEnd }: Props) => {
         </RowBox>
       </TextWrapper>
       <CustomButton
-        title="다음"
+        title="제출하기"
         theme={theme}
         type={BUTTON_TYPE.primary}
         state={
@@ -79,26 +74,44 @@ const Second = ({ onEnd }: Props) => {
           width: screenWidth - 32,
           alignSelf: "center",
           position: "absolute",
-          bottom: btnPosition,
+          bottom: btnPosition - 110,
         }}
       />
-    </View>
+    </Container>
   );
 };
 
 export default Second;
 
+const Container = styled.View`
+  width: 100%;
+  height: 100%;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+`;
+
+const TitleWrapper = styled.View`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 30px;
+`;
+
 const Title = styled.Text`
-  font-size: 20px;
-  font-weight: 900;
+  font-size: ${TEXT_STYLES.md1.Eb?.fontSize}px;
+  font-weight: ${TEXT_STYLES.md1.Eb?.fontWeight};
   z-index: 1;
   color: ${LIGHT_COLOR_STYLE.Text.active};
   white-space: pre-line;
-  position: relative;
 `;
 
 const SubTitle = styled.Text`
-  font-size: ${TEXT_STYLE_SIZE.xsm};
+  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
+  font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
   color: ${LIGHT_COLOR_STYLE.Text.darken};
   white-space: pre-line;
   position: relative;
@@ -118,7 +131,7 @@ const InfoTitle = styled.Text`
   color: ${LIGHT_COLOR_STYLE.Text.default};
   font-size: 16px;
   font-weight: 800;
-  margin: 5px 0;
+  margin: 10px 0;
 `;
 
 const InfoContent = styled.Text`
@@ -135,8 +148,8 @@ const RowBox = styled.View`
 `;
 
 const AgreeText = styled.Text`
-  font-size: 18px;
-  font-weight: 900;
+  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}px;
+  font-weight: ${TEXT_STYLES.md2.Bd?.fontWeight};
   margin: 17px 0 0 -15px;
   color: ${LIGHT_COLOR_STYLE.Text.active};
 `;

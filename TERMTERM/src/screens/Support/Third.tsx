@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { useState, useEffect } from "react";
 import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { LIGHT_COLOR_STYLE } from "@style/designSystem";
+import { LIGHT_COLOR_STYLE, TEXT_STYLES } from "@style/designSystem";
 
 const Third = () => {
   const [width, setWidth] = useState(90);
@@ -76,15 +76,15 @@ const TitleBox = styled.View`
 `;
 
 const Title = styled.Text`
-  font-size: 18px;
-  font-weight: 900;
+  font-size: ${TEXT_STYLES.md1.Eb?.fontSize}px;
+  font-weight: ${TEXT_STYLES.md1.Eb?.fontWeight};
   color: ${LIGHT_COLOR_STYLE.Text.active};
   margin-bottom: 5px;
 `;
 
 const SubTitle = styled.Text`
-  font-size: 15px;
-  font-weight: 500;
+  font-size: ${TEXT_STYLES.sm.Md?.fontSize}px;
+  font-weight: ${TEXT_STYLES.sm.Md?.fontWeight};
   color: ${LIGHT_COLOR_STYLE.Text.darken};
-  line-height: 20px;
+  line-height: 25px;
 `;

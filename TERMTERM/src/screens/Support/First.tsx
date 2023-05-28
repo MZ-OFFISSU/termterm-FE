@@ -2,10 +2,9 @@ import styled from "styled-components/native";
 import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
 import {
   LIGHT_COLOR_STYLE,
-  TEXT_STYLE_SIZE,
-  TEXT_STYLE_WEIGHT,
+  TEXT_STYLES,
 } from "@style/designSystem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { screenWidth } from "@style/dimensions";
 import { Props } from "@interfaces/support";
 import {
@@ -13,9 +12,10 @@ import {
   BUTTON_TYPE,
   CustomButton,
   CustomSelector,
-  CustomTextInput,
+  CustomEmailInput,
 } from "@components/index";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import { emailReg } from "@utils/reg";
 
 const First = ({ onEnd }: Props) => {
   const [COLOR, theme] = useThemeStyle();
@@ -32,6 +32,7 @@ const First = ({ onEnd }: Props) => {
   const [value, setValue] = useState("");
   const [inquiryContent, setInquiryContent] = useState("");
   const [textLength, setTextLength] = useState(0);
+  const [isEmailValid, setIsEmailValid] = useState(false);
 
   const [inquiryInfo, setInquiryInfo] = useState({
     email: "",
@@ -39,17 +40,37 @@ const First = ({ onEnd }: Props) => {
     inquiryContent: "",
   });
 
+  const inputEmail = (email: string) => {
+    if (emailReg(email)) setEmail(email);
+  }
+
   const nextStage = () => {
-    if (onEnd && email !== "" && inquiryContent !== "") {
-      setInquiryInfo({
-        email: email,
-        inquiryType: value,
-        inquiryContent: inquiryContent,
-      });
-      onEnd();
+    if (onEnd && email !== "" && value !== "" && inquiryContent !== "") {
+      if (!emailReg(email)) {
+        setIsEmailValid(false);
+      } else {
+        setIsEmailValid(true);
+        setInquiryInfo({
+          email: email,
+          inquiryType: value,
+          inquiryContent: inquiryContent,
+        });
+        onEnd();
+      }
     }
   };
 
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardWillShow", (e) => {
+      setBtnPosiition(10 + e.endCoordinates.height);
+    });
+    const hideSubscription = Keyboard.addListener("keyboardWillHide", () => {
+      setBtnPosiition(30);
+    });
+
+    showSubscription;
+    hideSubscription;
+  }, []);
   /**
    * inquiryContent 1000자 제한 함수
    */
@@ -65,10 +86,10 @@ const First = ({ onEnd }: Props) => {
           position: "relative",
           width: "100%",
           height: "100%",
-          paddingTop: 80,
+          paddingTop: 40,
         }}
       >
-        <Highlight style={{ top: 92, left: 0 }} />
+        <Highlight style={{ top: 52, left: 0 }} />
         <LargeTitle>문의하고 싶은 내용이 있으신가요?</LargeTitle>
         <Title>
           {`\n휴일을 제외한 평일 하루이내에 답변을 드릴게요.\n휴일을 제외한 하루가 지나도 답변이 오지 않는다면,\n스팸 메일함에 답변이 있을 수 있으니\n스팸 메일함을 확인해주세요.
@@ -77,7 +98,7 @@ const First = ({ onEnd }: Props) => {
 
         <InputWrapper>
           <Subtitle>답변을 받으실 이메일</Subtitle>
-          <CustomTextInput
+          <CustomEmailInput
             value={email}
             onChangeText={(text) => setEmail(text)}
             placeholder="termterm@email.com"
@@ -130,7 +151,7 @@ const First = ({ onEnd }: Props) => {
             width: screenWidth - 32,
             alignSelf: "center",
             position: "absolute",
-            bottom: btnPosition,
+            bottom: btnPosition - 90,
           }}
         />
       </View>
@@ -148,8 +169,8 @@ const Highlight = styled.View`
 `;
 
 const LargeTitle = styled.Text`
-  font-size: 18px;
-  font-weight: 900;
+  font-size: ${TEXT_STYLES.md1.Eb?.fontSize}px;
+  font-weight: ${TEXT_STYLES.md1.Eb?.fontWeight};
   z-index: 1;
   color: ${LIGHT_COLOR_STYLE.Text.active};
   white-space: pre-line;
@@ -157,7 +178,8 @@ const LargeTitle = styled.Text`
 `;
 
 const Title = styled.Text`
-  font-size: ${TEXT_STYLE_SIZE.xsm};
+  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize};
+  font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
   color: ${LIGHT_COLOR_STYLE.Text.darken};
   white-space: pre-line;
   position: relative;
@@ -165,7 +187,8 @@ const Title = styled.Text`
 `;
 
 const Subtitle = styled.Text`
-  font-size: 18px;
+  font-size: ${TEXT_STYLES.md1.Md?.fontSize}px;
+  font-weight: ${TEXT_STYLES.md1.Md?.fontWeight};
   color: ${LIGHT_COLOR_STYLE.Text.active};
   font-weight: 500;
 `;
@@ -188,8 +211,8 @@ const TextAreaBox = styled.View`
 
 const CustomTextArea = styled.TextInput`
   color: ${LIGHT_COLOR_STYLE.Text.active};
-  font-size: ${TEXT_STYLE_SIZE.xsm}px;
-  font-weight: ${TEXT_STYLE_WEIGHT.Reg};
+  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
+  font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
   padding: 20px;
 
   &::placeholder {
@@ -202,6 +225,7 @@ const LengthCounter = styled.Text<{ isTextEmpty: boolean }>`
     props.isTextEmpty
       ? `${LIGHT_COLOR_STYLE.Text.active}`
       : `${LIGHT_COLOR_STYLE.Text.muted}`};
-  font-size: 12px;
+  font-size: ${TEXT_STYLES["3xsm"].Md?.fontSize}px;
+  font-weight: ${TEXT_STYLES["3xsm"].Md?.fontWeight};
   left: 88%;
 `;
