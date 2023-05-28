@@ -41,125 +41,125 @@ export const TEXT_STYLES: Record<
 > = {
   [TEXT_STYLE_SIZE.xxl]: {
     [TEXT_STYLE_WEIGHT.Eb]: {
-      fontSize: 32,
+      fontSize: 3.2,
       fontWeight: 800,
     },
     [TEXT_STYLE_WEIGHT.default]: {
-      fontSize: 32,
+      fontSize: 3.2,
       fontWeight: 800,
     },
   },
   [TEXT_STYLE_SIZE.xl]: {
     [TEXT_STYLE_WEIGHT.Bd]: {
-      fontSize: 24,
+      fontSize: 2.4,
       fontWeight: 700,
     },
     [TEXT_STYLE_WEIGHT.default]: {
-      fontSize: 24,
+      fontSize: 2.4,
       fontWeight: 700,
     },
   },
   [TEXT_STYLE_SIZE.lg]: {
     [TEXT_STYLE_WEIGHT.default]: {
-      fontSize: 21,
+      fontSize: 2.1,
       fontWeight: 500,
     },
     [TEXT_STYLE_WEIGHT.Bd]: {
-      fontSize: 21,
+      fontSize: 2.1,
       fontWeight: 700,
     },
     [TEXT_STYLE_WEIGHT.Eb]: {
-      fontSize: 21,
+      fontSize: 2.1,
       fontWeight: 800,
     },
   },
   [TEXT_STYLE_SIZE.md1]: {
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 18,
+      fontSize: 1.8,
       fontWeight: 500,
     },
     [TEXT_STYLE_WEIGHT.Sb]: {
-      fontSize: 18,
+      fontSize: 1.8,
       fontWeight: 600,
     },
     [TEXT_STYLE_WEIGHT.Bd]: {
-      fontSize: 18,
+      fontSize: 1.8,
       fontWeight: 700,
     },
     [TEXT_STYLE_WEIGHT.Eb]: {
-      fontSize: 18,
+      fontSize: 1.8,
       fontWeight: 800,
     },
   },
   [TEXT_STYLE_SIZE.md2]: {
     [TEXT_STYLE_WEIGHT.Reg]: {
-      fontSize: 16,
+      fontSize: 1.6,
       fontWeight: 400,
     },
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 16,
+      fontSize: 1.6,
       fontWeight: 500,
     },
     [TEXT_STYLE_WEIGHT.Sb]: {
-      fontSize: 16,
+      fontSize: 1.6,
       fontWeight: 600,
     },
     [TEXT_STYLE_WEIGHT.Bd]: {
-      fontSize: 16,
+      fontSize: 1.6,
       fontWeight: 700,
     },
   },
   [TEXT_STYLE_SIZE.sm]: {
     [TEXT_STYLE_WEIGHT.Reg]: {
-      fontSize: 15,
+      fontSize: 1.5,
       fontWeight: 400,
     },
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 15,
+      fontSize: 1.5,
       fontWeight: 500,
     },
   },
   [TEXT_STYLE_SIZE.xsm]: {
     [TEXT_STYLE_WEIGHT.Reg]: {
-      fontSize: 14,
+      fontSize: 1.4,
       fontWeight: 400,
     },
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 14,
+      fontSize: 1.4,
       fontWeight: 500,
     },
     [TEXT_STYLE_WEIGHT.Bd]: {
-      fontSize: 14,
+      fontSize: 1.4,
       fontWeight: 700,
     },
   },
   [TEXT_STYLE_SIZE.xxsm]: {
     [TEXT_STYLE_WEIGHT.default]: {
-      fontSize: 12,
+      fontSize: 1.2,
       fontWeight: 500,
     },
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 12,
+      fontSize: 1.2,
       fontWeight: 500,
     },
     [TEXT_STYLE_WEIGHT.Reg]: {
-      fontSize: 12,
+      fontSize: 1.2,
       fontWeight: 400,
     },
   },
   [TEXT_STYLE_SIZE.xxxsm]: {
     [TEXT_STYLE_WEIGHT.Reg]: {
-      fontSize: 10,
+      fontSize: 1,
       fontWeight: 400,
     },
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 10,
+      fontSize: 1,
       fontWeight: 500,
     },
   },
   [TEXT_STYLE_SIZE.xxxxsm]: {
     [TEXT_STYLE_WEIGHT.Md]: {
-      fontSize: 10,
+      fontSize: 1,
       fontWeight: 500,
     },
   },
