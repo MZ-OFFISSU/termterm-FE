@@ -75,6 +75,10 @@ const First = ({ onEnd }: Props) => {
     setTextLength(text.length);
   };
 
+  const handleReturnKeyPress = (): void => {
+    Keyboard.dismiss();
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <ScrollView
@@ -98,6 +102,8 @@ const First = ({ onEnd }: Props) => {
             value={email}
             onChangeText={(text) => setEmail(text)}
             placeholder="termterm@email.com"
+            returnKeyType="done"
+            onSubmitEditing={handleReturnKeyPress}
           />
         </InputWrapper>
         <InputWrapper>
@@ -127,6 +133,8 @@ const First = ({ onEnd }: Props) => {
               maxLength={1000}
               multiline
               scrollEnabled={false}
+              returnKeyType="done"
+              onSubmitEditing={handleReturnKeyPress}
             />
           </TextAreaBox>
           <LengthCounter isTextEmpty={textLength > 0}>
