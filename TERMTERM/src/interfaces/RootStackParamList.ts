@@ -26,4 +26,5 @@ export type RootStackParamList = {
   ThemeSelect: undefined;
   DeleteAccount: undefined;
   Support: undefined;
+  TermDetail: { id: number };
 };
