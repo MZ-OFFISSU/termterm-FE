@@ -25,6 +25,7 @@ export type RootStackParamList = {
   Notification: undefined;
   ThemeSelect: undefined;
   DeleteAccount: undefined;
+  Walkthrough: undefined;
   Support: undefined;
   TermDetail: { id: number };
 };

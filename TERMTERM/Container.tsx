@@ -17,6 +17,7 @@ import {
   Notification,
   ThemeSelect,
   DeleteAccount,
+  Walkthrough,
   Support,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
@@ -56,6 +57,11 @@ const Container = () => {
         <RootStack.Screen
           name="CompleteQuiz"
           component={CompleteQuiz}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name="Walkthrough"
+          component={Walkthrough}
           options={{ headerShown: false }}
         />
         <RootStack.Screen

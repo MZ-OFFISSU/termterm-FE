@@ -13,6 +13,7 @@ import MyPoint from "./MyPoint";
 import Notification from "./Notification";
 import ThemeSelect from "./ThemeSelect";
 import DeleteAccount from "./DeleteAccount";
+import Walkthrough from "./Walkthrough";
 import Support from "./Support";
 import TermDetail from "./TermDetail";
 
@@ -32,6 +33,7 @@ export {
   Notification,
   ThemeSelect,
   DeleteAccount,
+  Walkthrough,
   TermDetail,
   Support,
 };
