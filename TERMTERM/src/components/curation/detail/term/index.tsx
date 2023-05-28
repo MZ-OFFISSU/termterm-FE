@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import Button from "./Button";
 import TermPreviewBox from "./TermPreviewBox";
 
-interface Preview {
+export interface Preview {
   id: number;
   name: string;
   description: string;

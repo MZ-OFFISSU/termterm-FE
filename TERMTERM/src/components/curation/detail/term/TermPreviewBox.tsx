@@ -4,6 +4,8 @@ import { colorTheme, TEXT_STYLES } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { PreviewBookmark } from "@components/common/Bookmark";
 import { Ionicons } from "@expo/vector-icons";
+import { truncateString } from "@utils/wordCutter";
+import { useWordReg } from "@hooks/useWordReg";
 
 interface Props extends TouchableOpacityProps {
   name: string;
@@ -16,6 +18,7 @@ interface Props extends TouchableOpacityProps {
  */
 const TermPreviewBox = ({ name, description, bookmarked, ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
+  const [sub, main] = useWordReg(name);
 
   return (
     <Container
@@ -29,7 +32,7 @@ const TermPreviewBox = ({ name, description, bookmarked, ...props }: Props) => {
       {...props}
     >
       <UpperBox>
-        <Job COLOR={COLOR}>{name}</Job>
+        <Job COLOR={COLOR}>{main}</Job>
         <PreviewBookmark>
           {bookmarked ? (
             <Ionicons
@@ -46,7 +49,7 @@ const TermPreviewBox = ({ name, description, bookmarked, ...props }: Props) => {
           )}
         </PreviewBookmark>
       </UpperBox>
-      <Description COLOR={COLOR}>{description}</Description>
+      <Description COLOR={COLOR}>{truncateString(description, 60)}</Description>
     </Container>
   );
 };

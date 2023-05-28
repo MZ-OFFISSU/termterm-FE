@@ -36,7 +36,7 @@ const Login = ({ navigation }: Props) => {
   }, []);
 
   return (
-    <NonScrollContainer bgColor={"#000000"}>
+    <NonScrollContainer bgColor={"#121212"}>
       <Container>
         <AutoSizedImage
           source={require("@assets/termtermlogo.png")}

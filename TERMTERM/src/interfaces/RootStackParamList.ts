@@ -28,4 +28,5 @@ export type RootStackParamList = {
   Walkthrough: undefined;
   Support: undefined;
   TermDetail: { id: number };
+  AllTerms: undefined;
 };
