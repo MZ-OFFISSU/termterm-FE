@@ -9,6 +9,7 @@ import { WordProps } from "@interfaces/word";
 import { dummyWord } from "@assets/dummyWord";
 import { screenWidth } from "@style/dimensions";
 import OtherThink from "@components/OtherThink";
+import LottieAnimation from "@components/OtherThink/LottieAnimation";
 
 export type Props = StackScreenProps<RootStackParamList, "TermDetail">;
 
@@ -30,6 +31,7 @@ const TermDetail = ({ navigation, route }: Props) => {
       {word ? (
         <>
           <WordCard word={word} style={{ width: screenWidth - 32 }} />
+          <LottieAnimation />
           <OtherThink word={word} />
         </>
       ) : (
@@ -47,7 +49,7 @@ const Container = styled.View<{ COLOR: colorTheme }>`
   align-items: center;
   justify-content: space-between;
   background-color: ${(props) => props.COLOR.Background.surface};
-  padding: 20px 0px;
+  padding: 20px 0px 100px 0px;
 `;
 
 export default TermDetail;
