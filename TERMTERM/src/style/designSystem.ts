@@ -1,20 +1,20 @@
 import { Dimensions, Platform, PixelRatio } from "react-native";
+import { FlattenSimpleInterpolation } from "styled-components";
+import { css } from "styled-components/native";
 
-export const {
-  width: SCREEN_WIDTH,
-  height: SCREEN_HEIGHT,
-} = Dimensions.get('window');
+export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } =
+  Dimensions.get("window");
 
 /** iPhone 5s 기준 값 */
 export const scale = SCREEN_WIDTH / 370;
 
 /** 모바일 기기 크기에 따른 design System 차등 적용 함수 */
 export function normalize(size: number) {
-  const newSize = size * scale 
-  if (Platform.OS === 'ios') {
-    return Math.round(PixelRatio.roundToNearestPixel(newSize))
+  const newSize = size * scale;
+  if (Platform.OS === "ios") {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
   } else {
-    return Math.round(PixelRatio.roundToNearestPixel(newSize)) + 2
+    return Math.round(PixelRatio.roundToNearestPixel(newSize)) + 2;
   }
 }
 
@@ -182,6 +182,137 @@ export const TEXT_STYLES: Record<
       fontSize: normalize(10),
       fontWeight: 500,
     },
+  },
+};
+
+/** 이걸로 변경해야함 */
+export const TYPO: Record<
+  TextStyleSize,
+  Partial<Record<TextStyleWeight, FlattenSimpleInterpolation>>
+> = {
+  [TEXT_STYLE_SIZE.xxl]: {
+    [TEXT_STYLE_WEIGHT.Eb]: css`
+      font-family: "SUIT-ExtraBold";
+      font-size: ${normalize(32)}px;
+    `,
+    [TEXT_STYLE_WEIGHT.default]: css`
+      font-size: ${normalize(32)};
+      font-family: "SUIT-ExtraBold";
+    `,
+  },
+  [TEXT_STYLE_SIZE.xl]: {
+    [TEXT_STYLE_WEIGHT.Bd]: css`
+      font-size: ${normalize(24)};
+      font-family: "SUIT-Bold";
+    `,
+    [TEXT_STYLE_WEIGHT.default]: css`
+      font-size: ${normalize(24)};
+      font-family: "SUIT-Bold";
+    `,
+  },
+  [TEXT_STYLE_SIZE.lg]: {
+    [TEXT_STYLE_WEIGHT.default]: css`
+      font-size: ${normalize(21)};
+      font-family: "SUIT-Medium";
+    `,
+    [TEXT_STYLE_WEIGHT.Bd]: css`
+      font-size: ${normalize(21)};
+      font-family: "SUIT-Bold";
+    `,
+    [TEXT_STYLE_WEIGHT.Eb]: css`
+      font-size: ${normalize(21)};
+      font-family: "SUIT-ExtraBold";
+    `,
+  },
+  [TEXT_STYLE_SIZE.md1]: {
+    [TEXT_STYLE_WEIGHT.Md]: css`
+      font-size: ${normalize(18)};
+      font-family: "SUIT-Medium";
+    `,
+    [TEXT_STYLE_WEIGHT.Sb]: css`
+      font-size: ${normalize(18)};
+      font-family: "SUIT-SemiBold";
+    `,
+    [TEXT_STYLE_WEIGHT.Bd]: css`
+      font-size: ${normalize(18)};
+      font-family: "SUIT-Bold";
+    `,
+    [TEXT_STYLE_WEIGHT.Eb]: css`
+      font-size: ${normalize(18)};
+      font-family: "SUIT-ExtraBold";
+    `,
+  },
+  [TEXT_STYLE_SIZE.md2]: {
+    [TEXT_STYLE_WEIGHT.Reg]: css`
+      font-size: ${normalize(16)};
+      font-family: "SUIT-Regular";
+    `,
+    [TEXT_STYLE_WEIGHT.Md]: css`
+      font-size: ${normalize(16)};
+      font-family: "SUIT-Medium";
+    `,
+    [TEXT_STYLE_WEIGHT.Sb]: css`
+      font-size: ${normalize(16)};
+      font-family: "SUIT-SemiBold";
+    `,
+    [TEXT_STYLE_WEIGHT.Bd]: css`
+      font-size: ${normalize(16)};
+      font-family: "SUIT-Bold";
+    `,
+  },
+  [TEXT_STYLE_SIZE.sm]: {
+    [TEXT_STYLE_WEIGHT.Reg]: css`
+      font-size: ${normalize(15)};
+      font-family: "SUIT-Regular";
+    `,
+    [TEXT_STYLE_WEIGHT.Md]: css`
+      font-size: ${normalize(15)};
+      font-family: "SUIT-Medium";
+    `,
+  },
+  [TEXT_STYLE_SIZE.xsm]: {
+    [TEXT_STYLE_WEIGHT.Reg]: css`
+      font-size: ${normalize(14)};
+      font-family: "SUIT-Regular";
+    `,
+    [TEXT_STYLE_WEIGHT.Md]: css`
+      font-size: ${normalize(14)};
+      font-family: "SUIT-Medium";
+    `,
+    [TEXT_STYLE_WEIGHT.Bd]: css`
+      font-size: ${normalize(14)};
+      font-family: "SUIT-Bold";
+    `,
+  },
+  [TEXT_STYLE_SIZE.xxsm]: {
+    [TEXT_STYLE_WEIGHT.default]: css`
+      font-size: ${normalize(12)};
+      font-family: "SUIT-Medium";
+    `,
+    [TEXT_STYLE_WEIGHT.Md]: css`
+      font-size: ${normalize(12)};
+      font-family: "SUIT-Medium";
+    `,
+    [TEXT_STYLE_WEIGHT.Reg]: css`
+      font-size: ${normalize(12)};
+      font-family: "SUIT-Regular";
+    `,
+  },
+  [TEXT_STYLE_SIZE.xxxsm]: {
+    [TEXT_STYLE_WEIGHT.Reg]: css`
+      font-size: ${normalize(10)};
+      font-family: "SUIT-Regular";
+    `,
+    [TEXT_STYLE_WEIGHT.Md]: css`
+      font-size: ${normalize(10)};
+      font-family: "SUIT-Medium";
+    `,
+  },
+  [TEXT_STYLE_SIZE.xxxxsm]: {
+    [TEXT_STYLE_WEIGHT.Md]: css`
+      font-size: ${normalize(10)};
+      font-family: "SUIT-Medium";
+    `,
   },
 };
 

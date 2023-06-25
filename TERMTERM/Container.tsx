@@ -46,7 +46,15 @@ const Container = () => {
 
   const getFonts = async () => {
     await Font.loadAsync({
-      SUIT: require("./assets/fonts/SUIT-Variable.ttf"),
+      "SUIT-Thin": require("./assets/fonts/SUIT-Thin.ttf"),
+      "SUIT-ExtraLight": require("./assets/fonts/SUIT-ExtraLight.ttf"),
+      "SUIT-Light": require("./assets/fonts/SUIT-Light.ttf"),
+      "SUIT-Regular": require("./assets/fonts/SUIT-Regular.ttf"),
+      "SUIT-Medium": require("./assets/fonts/SUIT-Medium.ttf"),
+      "SUIT-SemiBold": require("./assets/fonts/SUIT-SemiBold.ttf"),
+      "SUIT-Bold": require("./assets/fonts/SUIT-Bold.ttf"),
+      "SUIT-ExtraBold": require("./assets/fonts/SUIT-ExtraBold.ttf"),
+      "SUIT-Heavy": require("./assets/fonts/SUIT-Heavy.ttf"),
     });
   };
 
