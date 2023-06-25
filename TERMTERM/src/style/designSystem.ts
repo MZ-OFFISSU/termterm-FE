@@ -316,6 +316,130 @@ export const TYPO: Record<
   },
 };
 
+/** 찐막.. 타이포 토큰 */
+export const TYPO_STYLE = {
+  Heading: {
+    1: {
+      ExtraBold: css`
+        font-family: "SUIT-ExtraBold";
+        font-size: ${normalize(32)}px;
+      `,
+    },
+    2: {
+      Bold: css`
+        font-family: "SUIT-Bold";
+        font-size: ${normalize(24)}px;
+      `,
+    },
+    3: {
+      ExtraBold: css`
+        font-family: "SUIT-ExtraBold";
+        font-size: ${normalize(21)}px;
+      `,
+      Bold: css`
+        font-family: "SUIT-Bold";
+        font-size: ${normalize(21)}px;
+      `,
+      Mendium: css`
+        font-family: "SUIT-Medium";
+        font-size: ${normalize(21)}px;
+      `,
+    },
+  },
+  Subheading: {
+    1: {
+      Bold: css`
+        font-family: "SUIT-Bold";
+        font-size: ${normalize(14)}px;
+      `,
+      Mendium: css`
+        font-family: "SUIT-Medium";
+        font-size: ${normalize(14)}px;
+      `,
+      Regular: css`
+        font-family: "SUIT-Regular";
+        font-size: ${normalize(14)}px;
+      `,
+    },
+  },
+  Body: {
+    1: {
+      ExtraBold: css`
+        font-family: "SUIT-ExtraBold";
+        font-size: ${normalize(18)}px;
+      `,
+      Bold: css`
+        font-family: "SUIT-Bold";
+        font-size: ${normalize(18)}px;
+      `,
+      SemiBold: css`
+        font-family: "SUIT-SemiBold";
+        font-size: ${normalize(18)}px;
+      `,
+      Mendium: css`
+        font-family: "SUIT-Medium";
+        font-size: ${normalize(18)}px;
+      `,
+    },
+    2: {
+      Bold: css`
+        font-family: "SUIT-Bold";
+        font-size: ${normalize(16)}px;
+      `,
+      SemiBold: css`
+        font-family: "SUIT-SemiBold";
+        font-size: ${normalize(16)}px;
+      `,
+      Mendium: css`
+        font-family: "SUIT-Medium";
+        font-size: ${normalize(16)}px;
+      `,
+      Regular: css`
+        font-family: "SUIT-Regular";
+        font-size: ${normalize(16)}px;
+      `,
+    },
+    3: {
+      Mendium: css`
+        font-family: "SUIT-Medium";
+        font-size: ${normalize(15)}px;
+      `,
+      Regular: css`
+        font-family: "SUIT-Regular";
+        font-size: ${normalize(15)}px;
+      `,
+    },
+  },
+  Caption: {
+    1: {
+      Mendium: css`
+        font-family: "SUIT-Medium";
+        font-size: ${normalize(12)}px;
+      `,
+      Regular: css`
+        font-family: "SUIT-Regular";
+        font-size: ${normalize(12)}px;
+      `,
+    },
+    2: {
+      Mendium: css`
+        font-family: "SUIT-Medium";
+        font-size: ${normalize(10)}px;
+      `,
+      Regular: css`
+        font-family: "SUIT-Regular";
+        font-size: ${normalize(10)}px;
+      `,
+    },
+    3: {
+      Mendium: css`
+        font-family: "SUIT-Medium";
+        font-size: ${normalize(8)}px;
+      `,
+    },
+  },
+};
+
 export interface colorTheme {
   THEME: {
     primary: {

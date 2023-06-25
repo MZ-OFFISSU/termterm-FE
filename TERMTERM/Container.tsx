@@ -305,7 +305,7 @@ const Container = () => {
           />
           <RootStack.Screen
             name="TermDetail"
-            children={() => <TermDetail />}
+            component={TermDetail}
             options={{
               headerShown: true,
               header: (props) => {
