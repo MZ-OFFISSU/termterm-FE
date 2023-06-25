@@ -19,12 +19,13 @@ import {
   DeleteAccount,
   Walkthrough,
   Support,
+  TermDetail,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
 import { IconBar, Icon } from "@components/header";
 import { safeAreaColorState } from "@recoil/safeAreaColor";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { useState, useEffect, useCallback } from "react";
 import * as Font from "expo-font";
 import { SafeAreaView } from "react-native";
@@ -52,7 +53,7 @@ const Container = () => {
   useEffect(() => {
     async function prepare() {
       try {
-        getFonts();
+        await getFonts();
         await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
@@ -289,6 +290,23 @@ const Container = () => {
                   <BackBar
                     title="전체 용어"
                     onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="TermDetail"
+            children={() => <TermDetail />}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BookmarkBar
+                    onBack={() => props.navigation.goBack()}
+                    onBookmark={() => null}
+                    onShare={() => null}
+                    bookmarked={false}
                   />
                 );
               },

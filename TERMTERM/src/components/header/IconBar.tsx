@@ -14,7 +14,7 @@ import styled from "styled-components/native";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { iconHeaderState, modalState } from "@recoil/iconHeaderState";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 
 export enum Icon {
   fold,
