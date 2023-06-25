@@ -23,6 +23,9 @@ export const dummyWord: WordProps = {
         "기획자는 기획을 사람입니다. 기획자는 블라블라블라블라블라블라블라블라블라블라블라블블라 블라블블라 블라블블라",
       likeCnt: 4,
       authorName: "왈왈이",
+      source: "https://www.youtube.com/watch?v=Ii6uzQbLsTM",
+      authorProfileImageUrl:
+        "https://i.pinimg.com/564x/61/10/8a/61108ac0d0bd452b033466f83eabacd8.jpg",
       authorJob: "기획자",
       createdDate: "2023-03-16T16:41:23.468137",
     },
@@ -32,6 +35,9 @@ export const dummyWord: WordProps = {
         "기획자는 기획을 사람입니다. 기획자는 블라블라블라블라블라블라블라블라블라블라블라블블라 블라블블라 블라블블라",
       likeCnt: 2,
       authorName: "왈왈이",
+      source: "https://www.youtube.com/watch?v=Ii6uzQbLsTM",
+      authorProfileImageUrl:
+        "https://i.pinimg.com/564x/61/10/8a/61108ac0d0bd452b033466f83eabacd8.jpg",
       authorJob: "기획자",
       createdDate: "2023-03-16T16:41:23.468137",
     },
@@ -41,6 +47,57 @@ export const dummyWord: WordProps = {
         "기획자는 기획을 사람입니다. 기획자는 블라블라블라블라블라블라블라블라블라블라블라블블라 블라블블라 블라블블라",
       likeCnt: 2,
       authorName: "왈왈이",
+      source: "https://www.youtube.com/watch?v=Ii6uzQbLsTM",
+      authorProfileImageUrl:
+        "https://i.pinimg.com/564x/61/10/8a/61108ac0d0bd452b033466f83eabacd8.jpg",
+      authorJob: "기획자",
+      createdDate: "2023-03-16T16:41:23.468137",
+    },
+    {
+      id: 3,
+      content:
+        "기획자는 기획을 사람입니다. 기획자는 블라블라블라블라블라블라블라블라블라블라블라블블라 블라블블라 블라블블라",
+      likeCnt: 2,
+      authorName: "왈왈이",
+      source: "https://www.youtube.com/watch?v=Ii6uzQbLsTM",
+      authorProfileImageUrl:
+        "https://i.pinimg.com/564x/61/10/8a/61108ac0d0bd452b033466f83eabacd8.jpg",
+      authorJob: "기획자",
+      createdDate: "2023-03-16T16:41:23.468137",
+    },
+    {
+      id: 4,
+      content:
+        "기획자는 기획을 사람입니다. 기획자는 블라블라블라블라블라블라블라블라블라블라블라블블라 블라블블라 블라블블라",
+      likeCnt: 2,
+      authorName: "왈왈이",
+      source: "https://www.youtube.com/watch?v=Ii6uzQbLsTM",
+      authorProfileImageUrl:
+        "https://i.pinimg.com/564x/61/10/8a/61108ac0d0bd452b033466f83eabacd8.jpg",
+      authorJob: "기획자",
+      createdDate: "2023-03-16T16:41:23.468137",
+    },
+    {
+      id: 5,
+      content:
+        "기획자는 기획을 사람입니다. 기획자는 블라블라블라블라블라블라블라블라블라블라블라블블라 블라블블라 블라블블라",
+      likeCnt: 2,
+      authorName: "왈왈이",
+      source: "https://www.youtube.com/watch?v=Ii6uzQbLsTM",
+      authorProfileImageUrl:
+        "https://i.pinimg.com/564x/61/10/8a/61108ac0d0bd452b033466f83eabacd8.jpg",
+      authorJob: "기획자",
+      createdDate: "2023-03-16T16:41:23.468137",
+    },
+    {
+      id: 6,
+      content:
+        "기획자는 기획을 사람입니다. 기획자는 블라블라블라블라블라블라블라블라블라블라블라블블라 블라블블라 블라블블라",
+      likeCnt: 2,
+      authorName: "왈왈이",
+      source: "https://www.youtube.com/watch?v=Ii6uzQbLsTM",
+      authorProfileImageUrl:
+        "https://i.pinimg.com/564x/61/10/8a/61108ac0d0bd452b033466f83eabacd8.jpg",
       authorJob: "기획자",
       createdDate: "2023-03-16T16:41:23.468137",
     },
