@@ -66,8 +66,8 @@ const Title = styled.Text`
 
 const SubText = styled.Text`
   color: ${LIGHT_COLOR_STYLE.Text.active};
-  ${TYPO_STYLE.Heading[3].ExtraBold};
-  color: ${LIGHT_COLOR_STYLE.Text.active};
+  font-size: 21px;
+  font-weight: 500;
   text-align: center;
   margin-top: 20px;
   line-height: 35px;
