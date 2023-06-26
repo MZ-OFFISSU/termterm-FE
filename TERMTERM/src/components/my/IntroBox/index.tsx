@@ -1,5 +1,5 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES, TYPO_STYLE } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { ViewProps } from "react-native";
 import styled from "styled-components/native";
 

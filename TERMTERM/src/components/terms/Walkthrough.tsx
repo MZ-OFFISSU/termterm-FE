@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import { useEffect, useState } from "react";
 import { screenWidth } from "@style/dimensions";
-import { LIGHT_COLOR_STYLE, TEXT_STYLES, TYPO_STYLE } from "@style/designSystem";
+import { LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { WtProps } from "@interfaces/walkthrough";
 

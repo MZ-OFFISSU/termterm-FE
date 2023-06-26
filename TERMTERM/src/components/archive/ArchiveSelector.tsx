@@ -1,4 +1,4 @@
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { TouchableOpacity } from "react-native";
@@ -33,14 +33,10 @@ const Selectors = styled.View`
 `;
 
 const Item = styled.Text<{ focused: boolean; COLOR: colorTheme }>`
-  font-size: ${(props) =>
+  ${(props) =>
     props.focused
-      ? TEXT_STYLES.md2.Bd?.fontSize
-      : TEXT_STYLES.md2.Reg?.fontSize}px;
-  font-weight: ${(props) =>
-    props.focused
-      ? TEXT_STYLES.md2.Bd?.fontWeight
-      : TEXT_STYLES.md2.Reg?.fontWeight};
+      ? TYPO_STYLE.Body[2].Bold
+      : TYPO_STYLE.Body[2].Regular};
   color: ${(props) =>
     props.focused ? props.COLOR.Text.active : props.COLOR.Text.muted};
   margin-right: 10px;

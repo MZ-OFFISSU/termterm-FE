@@ -1,7 +1,6 @@
 import styled from "styled-components/native";
 import { TouchableOpacityProps, ActivityIndicator } from "react-native";
 import {
-  TEXT_STYLES,
   LIGHT_COLOR_STYLE,
   DARK_COLOR_STYLE,
   TYPO_STYLE,

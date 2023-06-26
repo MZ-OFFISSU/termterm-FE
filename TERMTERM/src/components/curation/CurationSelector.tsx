@@ -1,4 +1,4 @@
-import { colorTheme, TEXT_STYLES, TYPO_STYLE } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { TouchableOpacity } from "react-native";
