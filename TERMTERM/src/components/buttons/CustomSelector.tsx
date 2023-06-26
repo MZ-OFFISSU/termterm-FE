@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { LIGHT_COLOR_STYLE, TEXT_STYLES } from "@style/designSystem";
+import { LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import DropDownPicker from "react-native-dropdown-picker";
 import { DropDownPickerProps, ValueType } from "react-native-dropdown-picker";
 import { AntDesign } from "@expo/vector-icons";
@@ -92,8 +92,7 @@ const SelectorBox = styled.TouchableOpacity<{
 
 const SelectorTitle = styled.Text<{ color: string }>`
   color: ${(props) => props.color};
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
+  ${TYPO_STYLE.Body[2].SemiBold};
 `;
 
 export default CustomSelector;

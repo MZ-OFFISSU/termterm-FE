@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native";
 import { CurationItem } from "@components/curation";
 import { CurationItemProps } from "@interfaces/curation";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TEXT_STYLES, TYPO_STYLE } from "@style/designSystem";
 import { Fontisto } from "@expo/vector-icons";
 import { WordProps } from "@interfaces/word";
 import { dummyWords } from "@assets/dummyWord";
@@ -73,6 +73,7 @@ const Home = ({ navigation, route }: Props) => {
                 </CurationViewBtnContent>
                 <Fontisto
                   name="angle-right"
+                  //TODO : size 수정
                   size={TEXT_STYLES["3xsm"].Reg?.fontSize}
                   color={COLOR.Text.default}
                   style={{ marginLeft: 5 }}
@@ -92,6 +93,7 @@ const Home = ({ navigation, route }: Props) => {
                 </CurationViewBtnContent>
                 <Fontisto
                   name="angle-right"
+                  //TODO : size 수정
                   size={TEXT_STYLES["3xsm"].Reg?.fontSize}
                   color={COLOR.Text.default}
                   style={{ marginLeft: 5 }}
@@ -163,8 +165,7 @@ const TitleBox = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xl.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xl.Bd?.fontWeight};
+  ${TYPO_STYLE.Heading[2].Bold};
   color: ${(props) => props.COLOR.Text.active};
   opacity: 0.95;
 `;
@@ -177,14 +178,12 @@ const MenuTitleWrapper = styled.View`
 `;
 
 const MenuTitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.lg.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.lg.Bd?.fontWeight};
+  ${TYPO_STYLE.Heading[3].Bold};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
 const SubTitle = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Md?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Medium};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
   opacity: 0.95;
@@ -207,8 +206,7 @@ const CurationViewBtn = styled.TouchableOpacity`
 `;
 
 const CurationViewBtnContent = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Md?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Medium};
   color: ${(props) => props.COLOR.Text.default};
 `;
 

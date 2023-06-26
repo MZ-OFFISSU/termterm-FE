@@ -1,6 +1,6 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { PointHistory } from "@interfaces/point";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { ViewProps } from "react-native";
 import styled from "styled-components/native";
 
@@ -37,8 +37,7 @@ const Container = styled.View`
 `;
 
 const DateText = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Md?.fontWeight};
+  ${TYPO_STYLE.Body[2].Medium};
   color: ${(props) => props.COLOR.Text.default};
   align-self: flex-start;
 `;
@@ -53,8 +52,7 @@ const ContentLine = styled.View`
 `;
 
 const ContentText = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Md?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Medium};
   color: ${(props) => props.COLOR.Text.default};
 `;
 

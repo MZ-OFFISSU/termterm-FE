@@ -2,7 +2,7 @@ import { BookmarkButtonComponent } from "@components/common/Bookmark";
 import { Preview } from "@components/curation/detail/term";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useWordReg } from "@hooks/useWordReg";
-import { TEXT_STYLES, colorTheme } from "@style/designSystem";
+import { TEXT_STYLES, colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { truncateString } from "@utils/wordCutter";
 import styled from "styled-components/native";
 
@@ -40,17 +40,16 @@ const Container = styled.TouchableOpacity`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  font-size: ${TEXT_STYLES.xsm.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Bd?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Bold};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.active : props.COLOR.THEME.primary[100]};
   text-align: center;
 `;
 
 const Content = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES["2xsm"].Reg?.fontSize}px;
+  ${TYPO_STYLE.Caption[1].Regular};
+  //TODO : line-height 수정
   line-height: ${TEXT_STYLES["2xsm"].Reg?.fontSize! + 3}px;
-  font-weight: ${TEXT_STYLES["2xsm"].Reg?.fontWeight};
   color: ${(props) => props.COLOR.Text.default};
   text-align: start;
   white-space: pre-line;

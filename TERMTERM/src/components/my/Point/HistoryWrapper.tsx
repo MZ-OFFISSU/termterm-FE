@@ -3,7 +3,7 @@ import { PointHistory } from "@interfaces/point";
 import {
   colorTheme,
   LIGHT_COLOR_STYLE,
-  TEXT_STYLES,
+  TYPO_STYLE,
 } from "@style/designSystem";
 import { useEffect, useState } from "react";
 import { ViewProps } from "react-native";
@@ -84,8 +84,7 @@ const Container = styled.View`
 const TitleBox = styled.Text<{ COLOR: colorTheme }>`
   width: 100%;
   text-align: start;
-  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Bd?.fontWeight};
+  ${TYPO_STYLE.Body[2].Bold};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
@@ -117,8 +116,7 @@ const Button = styled.TouchableOpacity<{ COLOR: colorTheme; mode: boolean }>`
 `;
 
 const ButtonContent = styled.Text`
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
+  ${TYPO_STYLE.Body[2].SemiBold};
   color: ${LIGHT_COLOR_STYLE.Text.lighten};
 `;
 

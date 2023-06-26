@@ -1,6 +1,5 @@
 import styled from "styled-components/native";
 import { LIGHT_COLOR_STYLE } from "@style/designSystem";
-import { View, Keyboard, Text, TextInput } from "react-native";
 import { First, Second, Third } from "./Support/index";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useThemeStyle } from "@hooks/useThemeStyle";

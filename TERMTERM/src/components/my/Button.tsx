@@ -1,5 +1,5 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { TouchableOpacityProps } from "react-native";
 import styled from "styled-components/native";
 
@@ -52,14 +52,10 @@ const ButtonTitle = styled.Text<{
   isActivated: boolean;
   mode: boolean;
 }>`
-  font-size: ${(props) =>
+  ${(props) =>
     props.isActivated
-      ? TEXT_STYLES.md2.Sb?.fontSize
-      : TEXT_STYLES.xsm.Md?.fontSize}px;
-  font-weight: ${(props) =>
-    props.isActivated
-      ? TEXT_STYLES.md2.Sb?.fontWeight
-      : TEXT_STYLES.xsm.Md?.fontWeight};
+      ? TYPO_STYLE.Body[2].SemiBold
+      : TYPO_STYLE.Subheading[1].Medium};
   color: ${(props) =>
     props.mode && props.isActivated
       ? props.COLOR.Text.lighten

@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { ContentsHeader, ContentsWrapper } from "@components/search";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 
 interface Props {
@@ -52,8 +52,7 @@ const Tag = styled.View<{ COLOR: colorTheme }>`
 `;
 
 const TagContent = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Regular};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
 `;

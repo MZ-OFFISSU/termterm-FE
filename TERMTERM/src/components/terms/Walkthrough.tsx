@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import { useEffect, useState } from "react";
 import { screenWidth } from "@style/dimensions";
-import { LIGHT_COLOR_STYLE, TEXT_STYLES } from "@style/designSystem";
+import { LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { WtProps } from "@interfaces/walkthrough";
 
@@ -61,15 +61,13 @@ const Wrapper = styled.View`
 
 const Title = styled.Text`
   color: ${LIGHT_COLOR_STYLE.THEME.primary[130]};
-  font-size: ${TEXT_STYLES.lg.Eb?.fontSize}px;
-  font-weight: ${TEXT_STYLES.lg.Eb?.fontWeight};
+  ${TYPO_STYLE.Heading[3].ExtraBold};
 `;
 
 const SubText = styled.Text`
   color: ${LIGHT_COLOR_STYLE.Text.active};
-  font-size: ${TEXT_STYLES.lg.Eb?.fontSize}px;
+  font-size: 21px;
   font-weight: 500;
-  color: ${LIGHT_COLOR_STYLE.Text.active};
   text-align: center;
   margin-top: 20px;
   line-height: 35px;

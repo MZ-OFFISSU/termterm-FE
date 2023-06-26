@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TEXT_STYLES, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -40,6 +40,7 @@ const GotoBookmark = ({ type }: Props) => {
         <BtnInner COLOR={COLOR}>아카이빙 하러가기</BtnInner>
         <Entypo
           name="chevron-right"
+          //TODO : size 해결
           size={TEXT_STYLES.md2.Sb?.fontSize}
           color={COLOR.Text.lighten}
         />
@@ -57,8 +58,7 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xl.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xl.Bd?.fontWeight};
+  ${TYPO_STYLE.Heading[2].Bold};
   color: ${(props) => props.COLOR.Text.active};
   text-align: center;
   white-space: pre-line;
@@ -66,7 +66,7 @@ const Title = styled.Text<{ COLOR: colorTheme }>`
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md1.Eb?.fontSize}px;
+  ${TYPO_STYLE.Body[3].Regular};
   color: ${(props) => props.COLOR.Text.default};
   text-align: center;
   white-space: pre-line;
@@ -92,8 +92,7 @@ const CustomButton = styled.TouchableOpacity<{
 `;
 
 const BtnInner = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
+  ${TYPO_STYLE.Body[2].SemiBold};
   color: ${(props) => props.COLOR.Text.lighten};
 `;
 

@@ -1,4 +1,4 @@
-import { LIGHT_COLOR_STYLE, TEXT_STYLES } from "@style/designSystem";
+import { LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import { ViewProps } from "react-native";
 import styled from "styled-components/native";
 import { useState, useEffect } from "react";
@@ -64,8 +64,7 @@ const Badge = styled.View<{ bg: string }>`
 `;
 
 const BadgeContent = styled.Text`
-  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES["2xsm"].Md?.fontWeight};
+  ${TYPO_STYLE.Caption[1].Medium};
   color: ${LIGHT_COLOR_STYLE.Text.lighten};
 `;
 

@@ -132,7 +132,7 @@ const Content = styled.Text<{ COLOR: colorTheme }>`
 `;
 
 const Source = styled.Text<{ COLOR: colorTheme }>`
-  ${TYPO_STYLE.Caption[2].Mendium};
+  ${TYPO_STYLE.Caption[2].Medium};
   text-align: start;
   color: ${(props) => props.COLOR.Text.disabled};
   margin-top: 7px;
@@ -170,14 +170,14 @@ const CustomImage = styled.Image`
 `;
 
 const ProfileTitle = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  ${TYPO_STYLE.Caption[1].Mendium};
+  ${TYPO_STYLE.Caption[1].Medium};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
   margin-left: 7px;
 `;
 
 const Date = styled.Text<{ COLOR: colorTheme }>`
-  ${TYPO_STYLE.Caption[2].Mendium};
+  ${TYPO_STYLE.Caption[2].Medium};
   color: ${(props) => props.COLOR.Text.muted};
   margin-left: 7px;
 `;
@@ -190,7 +190,7 @@ const ThumbUpWrapper = styled.View`
 `;
 
 const Likes = styled.Text<{ COLOR: colorTheme }>`
-  ${TYPO_STYLE.Subheading[1].Mendium};
+  ${TYPO_STYLE.Subheading[1].Medium};
   color: ${(props) => props.COLOR.Text.active};
 `;
 

@@ -1,5 +1,5 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import styled from "styled-components/native";
 import { TouchableOpacityProps } from "react-native";
 
@@ -48,8 +48,7 @@ const ButtonBox = styled.TouchableOpacity<{
 `;
 
 const ButtonContent = styled.Text<{ COLOR: colorTheme; ready: boolean }>`
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
+  ${TYPO_STYLE.Body[2].SemiBold};
   color: ${(props) =>
     props.ready ? props.COLOR.Text.lighten : props.COLOR.Text.default};
 `;

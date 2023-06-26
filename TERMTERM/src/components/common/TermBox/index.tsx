@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { TouchableOpacityProps } from "react-native";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -52,8 +52,7 @@ const ResultBtn = styled.TouchableOpacity<{ COLOR: colorTheme; mode: boolean }>`
 `;
 
 const ResultTitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Md?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Medium};
   color: ${(props) => props.COLOR.Text.active};
 `;
 

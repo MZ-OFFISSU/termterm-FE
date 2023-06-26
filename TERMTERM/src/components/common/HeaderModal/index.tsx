@@ -1,5 +1,5 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import styled from "styled-components/native";
 import { ViewProps, Platform } from "react-native";
 
@@ -66,8 +66,7 @@ const ModalMenu = styled.TouchableOpacity`
 `;
 
 const Menu = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES["2xsm"].Md?.fontWeight};
+  ${TYPO_STYLE.Caption[1].Medium};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
 `;

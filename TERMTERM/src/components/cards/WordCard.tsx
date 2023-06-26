@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { useState, useEffect } from "react";
 import { TouchableOpacityProps, ImageSourcePropType } from "react-native";
-import { DARK_COLOR_STYLE, LIGHT_COLOR_STYLE } from "@style/designSystem";
+import { DARK_COLOR_STYLE, LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
 
 interface Props extends TouchableOpacityProps {
@@ -67,28 +67,14 @@ const TitleBox = styled.View`
   margin-top: 35px;
 `;
 
-// const Title = styled.Text`
-//   font-size: ${TEXT_STYLE_SIZE.md1};
-//   font-weight: ${TEXT_STYLE_WEIGHT.Eb};
-//   color: ${LIGHT_COLOR_STYLE.Text.active};
-//   text-align: center;
-// `;
 const Title = styled.Text`
-  font-size: 20px;
-  font-weight: 900;
+  ${TYPO_STYLE.Body[1].ExtraBold};
   color: #0d0d0d;
   text-align: center;
 `;
 
-// const SubTitle = styled.Text`
-//   font-size: ${TEXT_STYLE_SIZE.sm};
-//   font-weight: ${TEXT_STYLE_WEIGHT.Reg};
-//   color: ${LIGHT_COLOR_STYLE.Text.default};
-//   text-align: center;
-// `;
 const SubTitle = styled.Text`
-  font-size: 15px;
-  font-weight: 500;
+  ${TYPO_STYLE.Body[3].Regular};
   color: #565656;
   text-align: center;
   margin: 3px 0;
@@ -104,8 +90,7 @@ const WordButton = styled.TouchableOpacity`
 `;
 
 const ButtonText = styled.Text`
-  font-size: 18px;
-  font-weight: 600;
+  ${TYPO_STYLE.Body[2].SemiBold};
   text-align: center;
   margin: auto 0;
   color: ${DARK_COLOR_STYLE.Text.active};

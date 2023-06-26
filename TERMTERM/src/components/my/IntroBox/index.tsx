@@ -1,5 +1,5 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { ViewProps } from "react-native";
 import styled from "styled-components/native";
 
@@ -38,14 +38,12 @@ const IntroBoxContainer = styled.View<{ COLOR: colorTheme }>`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES["2xsm"].Md?.fontWeight};
+  ${TYPO_STYLE.Caption[1].Medium};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES["2xsm"].Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES["2xsm"].Reg?.fontWeight};
+  ${TYPO_STYLE.Caption[1].Regular};
   color: ${(props) => props.COLOR.Text.default};
   margin-top: 8px;
   white-space: pre-line;

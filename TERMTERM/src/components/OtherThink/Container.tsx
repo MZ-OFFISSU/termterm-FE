@@ -70,7 +70,7 @@ const FilterPreviewBox = styled.TouchableOpacity`
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  ${TYPO_STYLE.Caption[1].Mendium};
+  ${TYPO_STYLE.Caption[1].Medium};
   color: ${(props) => props.COLOR.Text.active};
   margin-left: 5px;
 `;

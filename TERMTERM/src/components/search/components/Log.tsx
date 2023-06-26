@@ -1,7 +1,7 @@
 import { TouchableOpacityProps } from "react-native";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { Feather } from "@expo/vector-icons";
 
 interface Props extends TouchableOpacityProps {
@@ -30,8 +30,7 @@ const LogBtn = styled.TouchableOpacity<{ COLOR: colorTheme }>`
 `;
 
 const LogTitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Regular};
   color: ${(props) => props.COLOR.Text.active};
   margin-right: 5px;
 `;

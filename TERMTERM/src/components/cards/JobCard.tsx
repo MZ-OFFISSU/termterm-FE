@@ -4,7 +4,7 @@ import {
   ImageBackground,
   ImageSourcePropType,
 } from "react-native";
-import { LIGHT_COLOR_STYLE, TEXT_STYLES } from "@style/designSystem";
+import { LIGHT_COLOR_STYLE, TYPO_STYLE, } from "@style/designSystem";
 
 interface Props extends TouchableOpacityProps {
   title: string;
@@ -50,8 +50,7 @@ const Card = styled.TouchableOpacity`
 `;
 
 const Title = styled.Text`
-  font-size: ${TEXT_STYLES.md2.Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Md?.fontWeight};
+  ${TYPO_STYLE.Body[2].Medium};
 `;
 
 export default JobCard;

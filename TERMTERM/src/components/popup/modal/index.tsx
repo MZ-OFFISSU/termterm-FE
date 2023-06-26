@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import Modal from "react-native-modal";
-import { TEXT_STYLES } from "@style/designSystem";
+import { TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme } from "@style/designSystem";
 
@@ -82,15 +82,13 @@ const Container = styled.View<{ COLOR: colorTheme; mode: boolean }>`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Bd?.fontWeight};
+  ${TYPO_STYLE.Body[2].Bold};
   color: ${(props) => props.COLOR.Text.active};
   text-align: center;
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Regular};
   color: ${(props) => props.COLOR.Text.default};
   white-space: pre-line;
   text-align: center;
@@ -125,8 +123,7 @@ const OneButton = styled.TouchableOpacity`
 `;
 
 const ButtonTitle = styled.Text`
-  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Md?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Medium};
   color: white;
 `;
 

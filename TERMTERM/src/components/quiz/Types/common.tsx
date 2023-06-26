@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 
 export interface ChildrenProps {
   navigate: () => void;
@@ -13,8 +13,7 @@ export const LeftBox = styled.View`
 `;
 
 export const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Md?.fontSize}px;
-  font-weight: 500;
+  ${TYPO_STYLE.Body[2].Medium};
   color: ${(props) => props.COLOR.Text.active};
   text-align: center;
 `;

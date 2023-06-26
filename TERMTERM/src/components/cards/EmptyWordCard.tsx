@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { useState, useEffect } from "react";
 import { TouchableOpacityProps } from "react-native";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TEXT_STYLES, TYPO_STYLE } from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { Fontisto } from "@expo/vector-icons";
@@ -50,6 +50,7 @@ const EmptyWordCard = ({ ...props }: TouchableOpacityProps) => {
         <ButtonText COLOR={COLOR}>아카이빙 하러 가기</ButtonText>
         <Fontisto
           name="angle-right"
+          // TODO : size 해결
           size={TEXT_STYLES["2xsm"].Reg?.fontSize}
           color={COLOR.Text.lighten}
           style={{ marginLeft: 10 }}
@@ -82,15 +83,13 @@ const TitleBox = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md1.Eb?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md1.Eb?.fontWeight};
+  ${TYPO_STYLE.Body[1].ExtraBold};
   color: ${(props) => props.COLOR.Text.active};
   text-align: center;
 `;
 
 const SubTitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.sm.Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES.sm.Reg?.fontWeight};
+  ${TYPO_STYLE.Body[3].Regular};
   color: ${(props) => props.COLOR.Text.default};
   text-align: center;
   margin-top: 10px;
@@ -112,8 +111,7 @@ const WordButton = styled.TouchableOpacity<{ COLOR: colorTheme }>`
 `;
 
 const ButtonText = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
+  ${TYPO_STYLE.Body[2].SemiBold};
   text-align: center;
   margin: auto 0;
   color: ${(props) => props.COLOR.Text.lighten};

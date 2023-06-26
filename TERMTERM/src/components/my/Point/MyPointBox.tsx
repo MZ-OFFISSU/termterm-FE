@@ -3,7 +3,7 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import {
   colorTheme,
   LIGHT_COLOR_STYLE,
-  TEXT_STYLES,
+  TYPO_STYLE,
 } from "@style/designSystem";
 import styled from "styled-components/native";
 
@@ -40,8 +40,7 @@ const Box = styled.View<{ COLOR: colorTheme }>`
 `;
 
 const Title = styled.Text`
-  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Bd?.fontWeight};
+  ${TYPO_STYLE.Body[2].Bold};
   color: ${LIGHT_COLOR_STYLE.Text.lighten};
 `;
 

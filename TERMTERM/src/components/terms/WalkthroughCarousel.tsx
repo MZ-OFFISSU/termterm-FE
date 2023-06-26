@@ -1,4 +1,4 @@
-import { View, ViewProps, Text } from "react-native";
+import { View, ViewProps } from "react-native";
 import styled from "styled-components/native";
 import Animated, {
   Extrapolate,
@@ -7,7 +7,7 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 import Carousel from "react-native-reanimated-carousel";
-import { screenWidth, screenHeight } from "@style/dimensions";
+import { screenWidth } from "@style/dimensions";
 import { WtProps } from "@interfaces/walkthrough";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import Walkthrough from "./Walkthrough";

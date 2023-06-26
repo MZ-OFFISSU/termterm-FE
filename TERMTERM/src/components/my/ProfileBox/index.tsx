@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { ProfileProps } from "@interfaces/profile";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import InterestBadge from "./InterestBadge";
 
@@ -79,8 +79,7 @@ const InfoWrapper = styled.View`
 `;
 
 const Name = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Bd?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Bold};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
@@ -92,8 +91,7 @@ const DetailWrapper = styled.View`
 `;
 
 const Detail = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES["2xsm"].Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES["2xsm"].Reg?.fontWeight};
+  ${TYPO_STYLE.Caption[1].Regular};
   color: ${(props) => props.COLOR.Text.default};
 `;
 

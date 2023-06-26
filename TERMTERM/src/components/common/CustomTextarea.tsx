@@ -1,5 +1,5 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { TextInputProps } from "react-native";
 import styled from "styled-components/native";
 
@@ -47,8 +47,7 @@ const Input = styled.TextInput<{ COLOR: colorTheme }>`
   outline: none;
   border: none;
   text-align: start;
-  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Regular};
 `;
 
 const Maximum = styled.Text<{ COLOR: colorTheme }>`
