@@ -1,5 +1,5 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { TEXT_STYLES, colorTheme } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { Switch, SwitchProps } from "react-native";
 import styled from "styled-components/native";
 
@@ -37,8 +37,7 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Md?.fontWeight};
+  ${TYPO_STYLE.Body[2].Medium};
   color: ${(props) => props.COLOR.Text.active};
 `;
 

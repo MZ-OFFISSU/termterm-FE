@@ -1,4 +1,4 @@
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { TouchableOpacityProps } from "react-native";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
@@ -42,13 +42,11 @@ const MenuContainer = styled.TouchableOpacity`
 `;
 
 const Title = styled.Text`
-  font-size: ${TEXT_STYLES.md2.Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Md?.fontWeight};
+  ${TYPO_STYLE.Body[2].Medium};
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Md?.fontWeight};
+  ${TYPO_STYLE.Body[2].Medium};
   color: ${(props) => props.COLOR.Text.default};
 `;
 
