@@ -340,7 +340,7 @@ export const TYPO_STYLE = {
         font-family: "SUIT-Bold";
         font-size: ${normalize(21)}px;
       `,
-      Mendium: css`
+      Medium: css`
         font-family: "SUIT-Medium";
         font-size: ${normalize(21)}px;
       `,
@@ -352,7 +352,7 @@ export const TYPO_STYLE = {
         font-family: "SUIT-Bold";
         font-size: ${normalize(14)}px;
       `,
-      Mendium: css`
+      Medium: css`
         font-family: "SUIT-Medium";
         font-size: ${normalize(14)}px;
       `,
@@ -376,7 +376,7 @@ export const TYPO_STYLE = {
         font-family: "SUIT-SemiBold";
         font-size: ${normalize(18)}px;
       `,
-      Mendium: css`
+      Medium: css`
         font-family: "SUIT-Medium";
         font-size: ${normalize(18)}px;
       `,
@@ -390,7 +390,7 @@ export const TYPO_STYLE = {
         font-family: "SUIT-SemiBold";
         font-size: ${normalize(16)}px;
       `,
-      Mendium: css`
+      Medium: css`
         font-family: "SUIT-Medium";
         font-size: ${normalize(16)}px;
       `,
@@ -400,7 +400,7 @@ export const TYPO_STYLE = {
       `,
     },
     3: {
-      Mendium: css`
+      Medium: css`
         font-family: "SUIT-Medium";
         font-size: ${normalize(15)}px;
       `,
@@ -412,7 +412,7 @@ export const TYPO_STYLE = {
   },
   Caption: {
     1: {
-      Mendium: css`
+      Medium: css`
         font-family: "SUIT-Medium";
         font-size: ${normalize(12)}px;
       `,
@@ -422,7 +422,7 @@ export const TYPO_STYLE = {
       `,
     },
     2: {
-      Mendium: css`
+      Medium: css`
         font-family: "SUIT-Medium";
         font-size: ${normalize(10)}px;
       `,
@@ -432,7 +432,7 @@ export const TYPO_STYLE = {
       `,
     },
     3: {
-      Mendium: css`
+      Medium: css`
         font-family: "SUIT-Medium";
         font-size: ${normalize(8)}px;
       `,
