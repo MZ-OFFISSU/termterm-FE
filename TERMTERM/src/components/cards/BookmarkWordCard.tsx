@@ -1,16 +1,7 @@
 import styled from "styled-components/native";
 import { useState, useEffect } from "react";
-import {
-    TouchableOpacityProps,
-    ImageBackground,
-    ImageSourcePropType,
-} from "react-native";
-import { DARK_COLOR_STYLE, LIGHT_COLOR_STYLE, TEXT_STYLES, TEXT_STYLE_SIZE, TEXT_STYLE_WEIGHT } from "@style/designSystem";
-import { UrlText, NonScrollContainer, CustomButton, BUTTON_TYPE, BUTTON_STATE } from "@components/index";
+import { LIGHT_COLOR_STYLE } from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
-import AutoSizedImage from "@components/common/AutoSizedImage";
-import { StackScreenProps } from "@react-navigation/stack";
-import { RootStackParamList } from "@interfaces/RootStackParamList";
 
 interface WordCardProps {
     explain: string;
