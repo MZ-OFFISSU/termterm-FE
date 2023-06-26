@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { ViewProps } from "react-native";
-import { TEXT_STYLES } from "@style/designSystem";
+import { TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 
 interface Props extends ViewProps {
@@ -34,8 +34,7 @@ const Container = styled.View`
 `;
 
 const Text = styled.Text`
-  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES["2xsm"].Md?.fontWeight};
+  ${TYPO_STYLE.Caption[1].Medium};
 `;
 
 export default FolderInfo;
