@@ -1,7 +1,7 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useWordReg } from "@hooks/useWordReg";
 import { WordProps } from "@interfaces/word";
-import { TEXT_STYLES, TYPO, colorTheme } from "@style/designSystem";
+import { TEXT_STYLES, TYPO, colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { TouchableOpacityProps } from "react-native";
 import styled from "styled-components/native";
 
@@ -83,8 +83,7 @@ const SubName = styled.Text<{
   mode: boolean;
   quiz?: boolean;
 }>`
-  font-size: ${TEXT_STYLES["2xsm"].Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES["2xsm"].Md?.fontWeight};
+  ${TYPO_STYLE.Caption[1].Medium};
   color: ${(props) =>
     props.mode
       ? props.quiz
@@ -110,11 +109,11 @@ const MainName = styled.Text<{
 `;
 
 const Content = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  font-size: ${TEXT_STYLES.md2.Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Reg?.fontWeight};
+  ${TYPO_STYLE.Body[2].Regular};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
   white-space: pre-line;
+  //TODO : line-height 수정
   line-height: ${TEXT_STYLES.sm.Reg?.fontSize! * 1.6}px;
 `;
 
@@ -123,8 +122,7 @@ const Source = styled.Text<{
   mode: boolean;
   quiz?: boolean;
 }>`
-  font-size: ${TEXT_STYLES["3xsm"].Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES["3xsm"].Md?.fontWeight};
+  ${TYPO_STYLE.Caption[2].Medium};
   margin-right: auto;
   color: ${(props) =>
     props.mode
