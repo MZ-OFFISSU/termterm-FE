@@ -19,12 +19,13 @@ import {
   DeleteAccount,
   Walkthrough,
   Support,
+  TermDetail,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
 import { IconBar, Icon } from "@components/header";
 import { safeAreaColorState } from "@recoil/safeAreaColor";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { useState, useEffect, useCallback } from "react";
 import * as Font from "expo-font";
 import { SafeAreaView } from "react-native";
@@ -45,14 +46,22 @@ const Container = () => {
 
   const getFonts = async () => {
     await Font.loadAsync({
-      SUIT: require("./assets/fonts/SUIT-Variable.ttf"),
+      "SUIT-Thin": require("./assets/fonts/SUIT-Thin.ttf"),
+      "SUIT-ExtraLight": require("./assets/fonts/SUIT-ExtraLight.ttf"),
+      "SUIT-Light": require("./assets/fonts/SUIT-Light.ttf"),
+      "SUIT-Regular": require("./assets/fonts/SUIT-Regular.ttf"),
+      "SUIT-Medium": require("./assets/fonts/SUIT-Medium.ttf"),
+      "SUIT-SemiBold": require("./assets/fonts/SUIT-SemiBold.ttf"),
+      "SUIT-Bold": require("./assets/fonts/SUIT-Bold.ttf"),
+      "SUIT-ExtraBold": require("./assets/fonts/SUIT-ExtraBold.ttf"),
+      "SUIT-Heavy": require("./assets/fonts/SUIT-Heavy.ttf"),
     });
   };
 
   useEffect(() => {
     async function prepare() {
       try {
-        getFonts();
+        await getFonts();
         await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
@@ -289,6 +298,23 @@ const Container = () => {
                   <BackBar
                     title="전체 용어"
                     onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="TermDetail"
+            component={TermDetail}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BookmarkBar
+                    onBack={() => props.navigation.goBack()}
+                    onBookmark={() => null}
+                    onShare={() => null}
+                    bookmarked={false}
                   />
                 );
               },

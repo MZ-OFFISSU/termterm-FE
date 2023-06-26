@@ -10,6 +10,9 @@ import { screenWidth } from "@style/dimensions";
 import { WordProps } from "@interfaces/word";
 import WordCard from "./WordCard";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 interface Props extends ViewProps {
   words: Array<WordProps>;
@@ -28,6 +31,13 @@ const WordCarousel = ({ words, dots, ...props }: Props) => {
     width: screenWidth,
     height: 355,
   } as const;
+
+  /**---네비게이션 관련 ---*/
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
+  const navigateToTermDetail = (id: number) => {
+    navigation.push("TermDetail", { id: id });
+  };
 
   return (
     <View
@@ -53,7 +63,12 @@ const WordCarousel = ({ words, dots, ...props }: Props) => {
           parallaxScrollingOffset: 45,
         }}
         data={words}
-        renderItem={({ index }) => <WordCard word={words[index]} />}
+        renderItem={({ index }) => (
+          <WordCard
+            word={words[index]}
+            onPress={() => navigateToTermDetail(words[index].id)}
+          />
+        )}
       />
       {dots && (
         <View

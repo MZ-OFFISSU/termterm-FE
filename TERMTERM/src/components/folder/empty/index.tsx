@@ -5,6 +5,8 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import FolderInfo from "../FolderInfo";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
 
 interface Props {
   title: string;
@@ -16,7 +18,7 @@ interface Props {
  */
 const Empty = ({ title, subtitle }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return (
     <Container>
@@ -40,7 +42,6 @@ const Empty = ({ title, subtitle }: Props) => {
       <CustomButton
         COLOR={COLOR}
         mode={mode}
-        //여기 에러나는데 그냥 무시해도 됨
         onPress={() => navigation.navigate("Search")}
       >
         <BtnInner COLOR={COLOR}>아카이빙 하러가기</BtnInner>

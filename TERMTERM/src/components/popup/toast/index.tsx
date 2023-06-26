@@ -73,7 +73,7 @@ const ToastContainer = styled.View`
   align-items: center;
   justify-content: flex-start;
   border-radius: 10px;
-  padding: 0px 20px;
+  padding: 0px 12px;
 `;
 
 const ToastMessage = styled.Text`

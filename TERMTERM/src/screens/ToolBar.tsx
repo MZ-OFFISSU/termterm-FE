@@ -7,10 +7,9 @@ import { Home, Search, Archive, My } from "./Toolbar/index";
 import { TEXT_STYLES } from "@style/designSystem";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { BookmarkBar, HomeBar, TitleBar } from "@components/header";
+import { HomeBar, TitleBar } from "@components/header";
 import { Icon } from "@components/header/TitleBar";
 import { useState } from "react";
-import TermDetail from "./TermDetail";
 import { useSafeColor } from "@hooks/useSafeColor";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
@@ -157,24 +156,6 @@ const ToolBar = ({ ...props }: Props) => {
               MY
             </Label>
           ),
-        }}
-      />
-      <Tab.Screen
-        name="TermDetail"
-        children={() => <TermDetail />}
-        options={{
-          headerShown: true,
-          header: (props) => {
-            return (
-              <BookmarkBar
-                onBack={() => props.navigation.goBack()}
-                onBookmark={() => null}
-                onShare={() => null}
-                bookmarked={false}
-              />
-            );
-          },
-          tabBarButton: () => null,
         }}
       />
     </Tab.Navigator>

@@ -1,9 +1,8 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useWordReg } from "@hooks/useWordReg";
 import { WordProps } from "@interfaces/word";
-import { TEXT_STYLES, colorTheme } from "@style/designSystem";
+import { TEXT_STYLES, TYPO, colorTheme } from "@style/designSystem";
 import { TouchableOpacityProps } from "react-native";
-import { Text } from "react-native-svg";
 import styled from "styled-components/native";
 
 interface Props extends TouchableOpacityProps {
@@ -100,8 +99,7 @@ const MainName = styled.Text<{
   mode: boolean;
   quiz?: boolean;
 }>`
-  font-size: ${TEXT_STYLES["2xl"].Eb?.fontSize}px;
-  font-weight: ${TEXT_STYLES["2xl"].Eb?.fontWeight};
+  ${TYPO["2xl"].Eb};
   color: ${(props) =>
     props.mode
       ? props.COLOR.Text.active
