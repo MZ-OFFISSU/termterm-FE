@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { TouchableOpacity } from "react-native";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BookmarkedCurations, BookmarkedTerms } from "@components/archive";
@@ -126,14 +126,10 @@ const TypeSelector = styled.View`
 `;
 
 const Type = styled.Text<{ selected: boolean }>`
-  font-size: ${(props) =>
+  ${(props) =>
     props.selected
-      ? TEXT_STYLES.md2.Bd?.fontSize
-      : TEXT_STYLES.md2.Reg?.fontSize}px;
-  font-weight: ${(props) =>
-    props.selected
-      ? TEXT_STYLES.md2.Bd?.fontWeight
-      : TEXT_STYLES.md2.Reg?.fontWeight};
+      ? TYPO_STYLE.Body[2].Bold
+      : TYPO_STYLE.Body[2].Regular};
 `;
 
 export default Archive;

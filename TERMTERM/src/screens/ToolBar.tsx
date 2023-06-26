@@ -1,10 +1,9 @@
 import styled from "styled-components/native";
-import { colorTheme } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { Home, Search, Archive, My } from "./Toolbar/index";
-import { TEXT_STYLES } from "@style/designSystem";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { HomeBar, TitleBar } from "@components/header";
@@ -163,8 +162,7 @@ const ToolBar = ({ ...props }: Props) => {
 };
 
 const Label = styled.Text<{ focused: boolean; COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES["4xsm"].Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES["4xsm"].Md?.fontWeight};
+  ${TYPO_STYLE.Caption[3].Medium};
   color: ${(props) =>
     props.focused ? props.COLOR.Neutral[100] : props.COLOR.Neutral[40]};
 `;

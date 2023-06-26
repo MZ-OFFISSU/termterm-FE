@@ -2,7 +2,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { FolderDetailProps } from "@interfaces/folderDetail";
 import TermDetailGlance from "@components/folder/glance";
 import { useModal } from "@hooks/useModal";
@@ -68,14 +68,12 @@ const TitleBox = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md1.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md1.Bd?.fontWeight};
+  ${TYPO_STYLE.Body[1].Bold};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Reg?.fontWeight};
+  ${TYPO_STYLE.Body[2].Regular};
   color: ${(props) => props.COLOR.Text.default};
   margin-top: 10px;
 `;

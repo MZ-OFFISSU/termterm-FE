@@ -4,10 +4,7 @@ import AutoSizedImage from "@components/common/AutoSizedImage";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import {
-  DARK_COLOR_STYLE,
   LIGHT_COLOR_STYLE,
-  TEXT_STYLE_SIZE,
-  TEXT_STYLE_WEIGHT,
 } from "@style/designSystem";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DailyQuizItemProps } from "@interfaces/dailyquiz";
