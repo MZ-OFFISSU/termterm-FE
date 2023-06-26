@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { TextProps } from "react-native";
-import { TEXT_STYLES } from "@style/designSystem";
+import { TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme } from "@style/designSystem";
 
@@ -29,8 +29,7 @@ const HeaderContainer = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md1.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md1.Bd?.fontWeight};
+  ${TYPO_STYLE.Body[2].SemiBold};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
