@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { View } from "react-native";
-import { LIGHT_COLOR_STYLE, TEXT_STYLE_SIZE } from "@style/designSystem";
+import { LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import { CustomButton, BUTTON_STATE, BUTTON_TYPE } from "@components/index";
 import { useState } from "react";
 import { screenWidth } from "@style/dimensions";
@@ -89,8 +89,7 @@ const Second = ({ onEnd }: Props) => {
 export default Second;
 
 const Title = styled.Text`
-  font-size: 20px;
-  font-weight: 900;
+  ${TYPO_STYLE.Heading[3].ExtraBold};
   z-index: 1;
   color: ${LIGHT_COLOR_STYLE.Text.active};
   white-space: pre-line;
@@ -98,7 +97,7 @@ const Title = styled.Text`
 `;
 
 const SubTitle = styled.Text`
-  font-size: ${TEXT_STYLE_SIZE.xsm};
+  ${TYPO_STYLE.Subheading[1].Medium};
   color: ${LIGHT_COLOR_STYLE.Text.darken};
   white-space: pre-line;
   position: relative;
@@ -116,15 +115,13 @@ const TextWrapper = styled.View`
 
 const InfoTitle = styled.Text`
   color: ${LIGHT_COLOR_STYLE.Text.default};
-  font-size: 16px;
-  font-weight: 800;
+  ${TYPO_STYLE.Body[2].SemiBold};
   margin: 5px 0;
 `;
 
 const InfoContent = styled.Text`
   color: ${LIGHT_COLOR_STYLE.Text.default};
-  font-weight: 400;
-  font-size: 14px;
+  ${TYPO_STYLE.Subheading[1].Regular};
   line-height: 20px;
 `;
 
@@ -135,8 +132,7 @@ const RowBox = styled.View`
 `;
 
 const AgreeText = styled.Text`
-  font-size: 18px;
-  font-weight: 900;
+  ${TYPO_STYLE.Body[1].ExtraBold};
   margin: 17px 0 0 -15px;
   color: ${LIGHT_COLOR_STYLE.Text.active};
 `;

@@ -1,9 +1,7 @@
 import styled from "styled-components/native";
 import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
 import {
-  LIGHT_COLOR_STYLE,
-  TEXT_STYLE_SIZE,
-  TEXT_STYLE_WEIGHT,
+  LIGHT_COLOR_STYLE, TYPO_STYLE,
 } from "@style/designSystem";
 import { useState } from "react";
 import { screenWidth } from "@style/dimensions";
@@ -148,8 +146,7 @@ const Highlight = styled.View`
 `;
 
 const LargeTitle = styled.Text`
-  font-size: 18px;
-  font-weight: 900;
+  ${TYPO_STYLE.Body[1].Bold};
   z-index: 1;
   color: ${LIGHT_COLOR_STYLE.Text.active};
   white-space: pre-line;
@@ -157,7 +154,7 @@ const LargeTitle = styled.Text`
 `;
 
 const Title = styled.Text`
-  font-size: ${TEXT_STYLE_SIZE.xsm};
+  ${TYPO_STYLE.Subheading[1].Medium};
   color: ${LIGHT_COLOR_STYLE.Text.darken};
   white-space: pre-line;
   position: relative;
@@ -165,9 +162,8 @@ const Title = styled.Text`
 `;
 
 const Subtitle = styled.Text`
-  font-size: 18px;
+  ${TYPO_STYLE.Body[1].SemiBold};
   color: ${LIGHT_COLOR_STYLE.Text.active};
-  font-weight: 500;
 `;
 
 const InputWrapper = styled.View`
@@ -188,8 +184,7 @@ const TextAreaBox = styled.View`
 
 const CustomTextArea = styled.TextInput`
   color: ${LIGHT_COLOR_STYLE.Text.active};
-  font-size: ${TEXT_STYLE_SIZE.xsm}px;
-  font-weight: ${TEXT_STYLE_WEIGHT.Reg};
+  ${TYPO_STYLE.Subheading[1].Regular};
   padding: 20px;
 
   &::placeholder {
@@ -202,6 +197,6 @@ const LengthCounter = styled.Text<{ isTextEmpty: boolean }>`
     props.isTextEmpty
       ? `${LIGHT_COLOR_STYLE.Text.active}`
       : `${LIGHT_COLOR_STYLE.Text.muted}`};
-  font-size: 12px;
+  ${TYPO_STYLE.Caption[1].Medium};
   left: 88%;
 `;
