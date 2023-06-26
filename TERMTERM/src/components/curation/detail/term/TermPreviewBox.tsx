@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { TouchableOpacityProps } from "react-native";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TEXT_STYLES, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { PreviewBookmark } from "@components/common/Bookmark";
 import { Ionicons } from "@expo/vector-icons";
@@ -73,14 +73,13 @@ const UpperBox = styled.View`
 `;
 
 const Job = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Bd?.fontWeight};
+  ${TYPO_STYLE.Body[2].Bold};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
 const Description = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Regular};
+  //TODO : line-height 수정
   line-height: ${TEXT_STYLES.xsm.Reg?.fontSize! + 5}px;
   color: ${(props) => props.COLOR.Text.default};
   margin-top: 10px;

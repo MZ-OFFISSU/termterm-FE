@@ -1,6 +1,6 @@
 import { CurationItemProps } from "@interfaces/curation";
 import styled from "styled-components/native";
-import { TEXT_STYLES } from "@style/designSystem";
+import { TEXT_STYLES, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme } from "@style/designSystem";
 import { Ionicons } from "@expo/vector-icons";
@@ -50,8 +50,7 @@ const ItemContainer = styled.View`
 `;
 
 const CurationTitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Md?.fontWeight};
+  ${TYPO_STYLE.Body[2].Medium};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
@@ -76,8 +75,7 @@ const WordsNum = styled.Text`
   position: absolute;
   bottom: 10px;
   right: 15px;
-  font-size: ${TEXT_STYLES["2xsm"].default?.fontSize}px;
-  font-weight: ${TEXT_STYLES["2xsm"].default?.fontWeight};
+  ${TYPO_STYLE.Caption[1].Medium};
   color: white;
 `;
 

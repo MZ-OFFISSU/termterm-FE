@@ -1,4 +1,4 @@
-import { TEXT_STYLES } from "@style/designSystem";
+import { TYPO_STYLE } from "@style/designSystem";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme } from "@style/designSystem";
@@ -48,21 +48,18 @@ const InfoWrapper = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.lg.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.lg.Bd?.fontWeight};
+  ${TYPO_STYLE.Heading[3].Bold};
   color: ${(props) => props.COLOR.Text.active};
   text-align: center;
 `;
 
 const Count = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Md?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Medium};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Regular};
   color: ${(props) => props.COLOR.Text.default};
   text-align: center;
   white-space: pre-line;

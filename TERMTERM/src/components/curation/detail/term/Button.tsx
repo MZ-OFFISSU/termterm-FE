@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TEXT_STYLES, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { Entypo } from "@expo/vector-icons";
 import { TouchableOpacityProps } from "react-native";
@@ -17,6 +17,7 @@ const Button = ({ title, ...props }: Props) => {
         <BtnText COLOR={COLOR}>{title}</BtnText>
         <Entypo
           name="chevron-down"
+          //TODO : size 해결
           size={TEXT_STYLES.md2.Sb?.fontSize}
           color={COLOR.Text.lighten}
         />
@@ -45,8 +46,7 @@ const InnerBox = styled.View`
 
 const BtnText = styled.Text<{ COLOR: colorTheme }>`
   color: ${(props) => props.COLOR.Text.lighten};
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
+  ${TYPO_STYLE.Body[2].SemiBold};
   margin-right: 6px;
 `;
 
