@@ -1,5 +1,5 @@
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { LIGHT_COLOR_STYLE, TEXT_STYLES } from "@style/designSystem";
+import { LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import {
   BaseToast,
   ErrorToast,
@@ -77,8 +77,7 @@ const ToastContainer = styled.View`
 `;
 
 const ToastMessage = styled.Text`
-  font-size: ${TEXT_STYLES.md2.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Bd?.fontWeight};
+  ${TYPO_STYLE.Body[2].Bold};
   white-space: pre-line;
   margin-left: 20px;
 `;

@@ -34,7 +34,7 @@ const Container = styled.View`
 `;
 
 const Content = styled.Text<{ COLOR: colorTheme }>`
-  ${TYPO_STYLE.Subheading[1].Mendium};
+  ${TYPO_STYLE.Subheading[1].Medium};
   color: ${(props) => props.COLOR.THEME.primary[130]};
   margin-top: 15px;
 `;
