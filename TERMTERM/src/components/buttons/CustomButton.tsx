@@ -4,6 +4,7 @@ import {
   TEXT_STYLES,
   LIGHT_COLOR_STYLE,
   DARK_COLOR_STYLE,
+  TYPO_STYLE,
 } from "@style/designSystem";
 
 export enum BUTTON_TYPE {
@@ -92,8 +93,7 @@ const ButtonTitle = styled.Text<{
   type: BUTTON_TYPE;
   state?: BUTTON_STATE;
 }>`
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
+  ${TYPO_STYLE.Body[2].SemiBold};
   color: ${(props) =>
     props.theme
       ? props.type === BUTTON_TYPE.secondary

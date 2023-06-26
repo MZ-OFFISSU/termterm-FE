@@ -1,6 +1,7 @@
 import { TouchableOpacityProps } from "react-native";
 import styled from "styled-components/native";
 import AutoSizedImage from "@components/common/AutoSizedImage";
+import { TYPO_STYLE } from "@style/designSystem";
 
 const SOCIAL_TYPE: Record<string, string> = {
   kakao: "#FEE500",
@@ -64,8 +65,7 @@ const InnerView = styled.View`
 `;
 
 const SocialText = styled.Text`
-  font-size: 16px;
-  font-weight: 600;
+  ${TYPO_STYLE.Body[2].SemiBold};
   color: #0d0d0d;
   margin-left: 10px;
 `;
