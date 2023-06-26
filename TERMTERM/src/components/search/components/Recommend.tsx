@@ -1,7 +1,7 @@
 import { TouchableOpacityProps } from "react-native";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 
 interface Props extends TouchableOpacityProps {
   title: string;
@@ -38,8 +38,7 @@ const RecommendBtn = styled.TouchableOpacity<{
 `;
 
 const RecommendTitle = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  font-size: ${TEXT_STYLES.xsm.Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Reg?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Regular};
   color: ${(props) => props.COLOR.Text.active};
 `;
 

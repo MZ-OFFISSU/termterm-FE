@@ -6,7 +6,7 @@ import {
   NotResult,
 } from "@components/search";
 import styled from "styled-components/native";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useSearch } from "@hooks/useSearch";
 /**
@@ -40,8 +40,7 @@ const RecentSearched = ({ ...props }: ViewProps) => {
 const RemoveButton = styled.TouchableOpacity``;
 
 const RemoveText = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES["3xsm"].Md?.fontSize}px;
-  font-weight: ${TEXT_STYLES["3xsm"].Md?.fontWeight};
+  ${TYPO_STYLE.Caption[3].Medium};
   color: ${(props) => props.COLOR.Text.default};
 `;
 

@@ -1,13 +1,9 @@
-import { DailyQuizItemProps } from "@interfaces/dailyquiz";
 import styled from "styled-components/native";
 import {
   LIGHT_COLOR_STYLE,
-  TEXT_STYLES,
-  TEXT_STYLE_SIZE,
-  TEXT_STYLE_WEIGHT,
+  TYPO_STYLE,
 } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme } from "@style/designSystem";
 
 interface QuizCardProps {
   title?: string;
@@ -36,9 +32,7 @@ const CardContainer = styled.View`
 
 const CardText = styled.Text`
   color: ${LIGHT_COLOR_STYLE.Text.darken};
-  // font-size: ${TEXT_STYLE_SIZE.sm};
-  font-size: 16px;
-  font-weight: ${TEXT_STYLE_WEIGHT.Reg};
+  ${TYPO_STYLE.Body[2].Regular};
   line-height: 25px;
   text-align: center;
   margin: auto 0;

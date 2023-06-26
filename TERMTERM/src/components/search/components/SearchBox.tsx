@@ -1,7 +1,7 @@
 import { TextInputProps } from "react-native";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { Entypo } from "@expo/vector-icons";
 
 interface Props extends TextInputProps {}
@@ -40,8 +40,7 @@ const InnerTextInput = styled.TextInput<{ COLOR: colorTheme }>`
   width: 90%;
   height: 44px;
   color: ${(props) => props.COLOR.Text.active};
-  font-size: ${TEXT_STYLES.md2.Sb?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Sb?.fontWeight};
+  ${TYPO_STYLE.Body[2].SemiBold};
   margin-left: 8px;
 `;
 

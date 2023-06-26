@@ -1,4 +1,4 @@
-import { TEXT_STYLES } from "@style/designSystem";
+import { TYPO_STYLE } from "@style/designSystem";
 import { ViewProps } from "react-native";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
@@ -29,14 +29,12 @@ const ResultBox = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md1.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md1.Bd?.fontWeight};
+  ${TYPO_STYLE.Body[1].Bold};
   color: ${(props) => props.COLOR.Text.active};
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.md2.Reg?.fontSize}px;
-  font-weight: ${TEXT_STYLES.md2.Reg?.fontWeight};
+  ${TYPO_STYLE.Body[2].Regular};
   color: ${(props) => props.COLOR.Text.active};
   margin-top: 14px;
 `;
