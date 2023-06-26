@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { colorTheme, TEXT_STYLES } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { FolderProps } from "@interfaces/bookmark";
 
@@ -34,8 +34,7 @@ const FolderWrapper = styled.TouchableOpacity`
 `;
 
 const FolderInfo = styled.Text<{ COLOR: colorTheme }>`
-  font-size: ${TEXT_STYLES.xsm.Bd?.fontSize}px;
-  font-weight: ${TEXT_STYLES.xsm.Bd?.fontWeight};
+  ${TYPO_STYLE.Subheading[1].Bold};
   color: ${(props) => props.COLOR.Text.active};
   margin-top: 10px;
 `;
