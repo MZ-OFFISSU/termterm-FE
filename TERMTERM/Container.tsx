@@ -20,6 +20,7 @@ import {
   Walkthrough,
   Support,
   TermDetail,
+  ReportWord,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
@@ -315,6 +316,21 @@ const Container = () => {
                     onBookmark={() => null}
                     onShare={() => null}
                     bookmarked={false}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="ReportWord"
+            component={ReportWord}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="의견 신고"
+                    onBack={() => props.navigation.pop()}
                   />
                 );
               },

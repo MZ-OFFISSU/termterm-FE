@@ -16,6 +16,7 @@ import DeleteAccount from "./DeleteAccount";
 import Walkthrough from "./Walkthrough";
 import Support from "./Support";
 import TermDetail from "./TermDetail";
+import ReportWord from "./ReportWord";
 
 export {
   Home,
@@ -36,4 +37,5 @@ export {
   Walkthrough,
   TermDetail,
   Support,
+  ReportWord,
 };

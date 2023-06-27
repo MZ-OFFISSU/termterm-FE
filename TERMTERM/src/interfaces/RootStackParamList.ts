@@ -27,6 +27,8 @@ export type RootStackParamList = {
   DeleteAccount: undefined;
   Walkthrough: undefined;
   Support: undefined;
-  TermDetail: { id: number };
+  TermDetail: { id: number }; //검색 후 들어가는 등, 단일 용어에 대한 상세 페이지
+  TermsDetail: { id: number }; //폴더 및 큐레이션 등, 여러 용어에 대한 상세 페이지
   AllTerms: undefined;
+  ReportWord: { id: number };
 };
