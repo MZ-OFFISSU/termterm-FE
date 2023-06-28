@@ -31,4 +31,5 @@ export type RootStackParamList = {
   TermsDetail: { id: number }; //폴더 및 큐레이션 등, 여러 용어에 대한 상세 페이지
   AllTerms: undefined;
   ReportWord: { id: number };
+  MyWordApply: { id: number };
 };

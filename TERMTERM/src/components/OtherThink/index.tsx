@@ -8,11 +8,17 @@ import styled from "styled-components/native";
 import Container from "./Container";
 import { Entypo } from "@expo/vector-icons";
 import { useWordReg } from "@hooks/useWordReg";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 interface HandleProps {
   contents: string;
 }
 
+interface FooterProps {
+  id: number;
+}
 interface Props {
   word: WordProps;
 }
@@ -30,11 +36,17 @@ const CustomHandle = ({ contents }: HandleProps) => {
 };
 
 /** 커스텀 푸터 컴포넌트 (바텀시트 내부) */
-const CustomFooter = () => {
+const CustomFooter = ({ id }: FooterProps) => {
   const [COLOR] = useThemeStyle();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
+  const navigate = () => {
+    navigation.push("MyWordApply", { id: id });
+  };
+
   return (
     <CustomFooterWrapper>
-      <FooterButton COLOR={COLOR}>
+      <FooterButton onPress={navigate} COLOR={COLOR}>
         <FooterContent COLOR={COLOR}>
           나만의 설명을 남기고 싶어요!
         </FooterContent>
@@ -68,7 +80,7 @@ const OtherThink = ({ word }: Props) => {
       snapPoints={snapPoints}
       handleComponent={() => <CustomHandle contents={contents[curIdx]!} />}
       onChange={handleSheetChanges}
-      footerComponent={CustomFooter}
+      footerComponent={() => <CustomFooter id={word.id} />}
     >
       <Container comments={word.comments} />
     </BottomSheet>
