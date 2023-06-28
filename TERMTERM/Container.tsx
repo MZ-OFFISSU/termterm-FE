@@ -20,6 +20,8 @@ import {
   Walkthrough,
   Support,
   TermDetail,
+  ReportWord,
+  MyWordApply,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar } from "@components/header";
@@ -315,6 +317,36 @@ const Container = () => {
                     onBookmark={() => null}
                     onShare={() => null}
                     bookmarked={false}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="ReportWord"
+            component={ReportWord}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="의견 신고"
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="MyWordApply"
+            component={MyWordApply}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="용어 설명 신청"
+                    onBack={() => props.navigation.pop()}
                   />
                 );
               },

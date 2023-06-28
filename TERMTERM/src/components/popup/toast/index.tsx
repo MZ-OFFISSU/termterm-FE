@@ -77,7 +77,7 @@ const ToastContainer = styled.View`
 `;
 
 const ToastMessage = styled.Text`
-  ${TYPO_STYLE.Body[2].Bold};
+  ${TYPO_STYLE.Subheading[1].Bold};
   white-space: pre-line;
   margin-left: 20px;
 `;

@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import * as Haptics from "expo-haptics";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
 
 interface LikeProps {
   liked: boolean;
@@ -52,6 +55,7 @@ const LikeButton = ({ liked }: LikeProps) => {
 const CommentComponent = ({ comment }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const { showActionSheetWithOptions } = useActionSheet();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const openActionSheet = () => {
     const options = ["신고하기", "닫기"];
@@ -69,9 +73,8 @@ const CommentComponent = ({ comment }: Props) => {
       (selectedIndex) => {
         switch (selectedIndex) {
           case destructiveButtonIndex:
-            // 신고하기
+            navigation.push("ReportWord", { id: comment.id });
             break;
-
           case cancelButtonIndex:
           // 닫기
         }
