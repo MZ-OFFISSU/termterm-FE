@@ -5,6 +5,7 @@ import { useState } from "react";
 
 interface Props extends TextInputProps {
   value: string;
+  max?: boolean;
 }
 
 /**
@@ -12,7 +13,7 @@ interface Props extends TextInputProps {
  * 이유는 온보딘 스크린에서는 라이트모드 고정이기에
  * 디자인 토큰을 유동적으로 적용하기가 어려움
  */
-const CustomTextInput = ({ value, ...props }: Props) => {
+const CustomTextInput = ({ value, max = true, ...props }: Props) => {
   const [borderColor, setBorderColor] = useState(LIGHT_COLOR_STYLE.Neutral[20]);
 
   return (
@@ -30,9 +31,13 @@ const CustomTextInput = ({ value, ...props }: Props) => {
         value={value}
         {...props}
       />
-      <Maximum style={{ color: borderColor, right: 0, top: 7 }}>
-        {value.length}/20
-      </Maximum>
+      {max ? (
+        <Maximum style={{ color: borderColor, right: 0, top: 7 }}>
+          {value.length}/20
+        </Maximum>
+      ) : (
+        <></>
+      )}
     </InputBox>
   );
 };

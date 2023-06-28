@@ -99,6 +99,7 @@ export const CheckBoxContent = styled.Text<{ COLOR: colorTheme }>`
 `;
 
 export const ContentBox = styled.View`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

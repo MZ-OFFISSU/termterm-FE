@@ -5,6 +5,7 @@ import { useState } from "react";
 import { InputApply, StandardApply } from "@components/apply";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { StackScreenProps } from "@react-navigation/stack";
+import Toast from "react-native-toast-message";
 
 type Props = StackScreenProps<RootStackParamList, "MyWordApply">;
 
@@ -19,8 +20,20 @@ const MyWordApply = ({ navigation, route }: Props) => {
 
   const CurComponent = COMPONENTS[curIdx];
 
+  //토스트메시지 보여주는 함수
+  const showToast = () => {
+    Toast.show({
+      type: mode ? "light" : "dark",
+      text1: "신청이 완료되었어요!\n검토 후 승인여부를 알려드릴게요!",
+    });
+  };
+
   const nextStage = () => {
     if (curIdx < COMPONENTS.length - 1) setCurIdx((prev) => prev + 1);
+    else {
+      showToast();
+      navigation.pop();
+    }
   };
 
   return (
