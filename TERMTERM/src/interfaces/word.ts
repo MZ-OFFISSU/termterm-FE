@@ -8,6 +8,7 @@ interface WordProps {
   source: string;
   categories: Array<Category>;
   comments: Array<Comment>;
+  bookmarked: "YES" | null;
 }
 
 interface Category {

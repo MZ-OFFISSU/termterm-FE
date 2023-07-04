@@ -17,13 +17,21 @@ import { StackNavigationProp } from "@react-navigation/stack";
 interface Props extends ViewProps {
   words: Array<WordProps>;
   dots?: boolean;
+  snap?: (idx: number) => void;
+  touchable?: boolean;
 }
 
 /**
  * 단어 캐러셀 컴포넌트
  * dots가 있으면 좋겠다면, true
  */
-const WordCarousel = ({ words, dots, ...props }: Props) => {
+const WordCarousel = ({
+  words,
+  dots,
+  snap,
+  touchable = true,
+  ...props
+}: Props) => {
   const progressValue = useSharedValue<number>(0);
   const [COLOR, mode] = useThemeStyle();
   const baseOptions = {
@@ -36,7 +44,11 @@ const WordCarousel = ({ words, dots, ...props }: Props) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const navigateToTermDetail = (id: number) => {
-    navigation.push("TermDetail", { id: id });
+    navigation.push("TermsDetail", { id: id });
+  };
+
+  const moveToDetail = (index: number) => {
+    if (touchable) navigateToTermDetail(words[index].id);
   };
 
   return (
@@ -57,6 +69,7 @@ const WordCarousel = ({ words, dots, ...props }: Props) => {
         onProgressChange={(_, absoluteProgress) =>
           (progressValue.value = absoluteProgress)
         }
+        onSnapToItem={snap}
         mode="parallax"
         modeConfig={{
           parallaxScrollingScale: 0.9,
@@ -64,10 +77,7 @@ const WordCarousel = ({ words, dots, ...props }: Props) => {
         }}
         data={words}
         renderItem={({ index }) => (
-          <WordCard
-            word={words[index]}
-            onPress={() => navigateToTermDetail(words[index].id)}
-          />
+          <WordCard word={words[index]} onPress={() => moveToDetail(index)} />
         )}
       />
       {dots && (

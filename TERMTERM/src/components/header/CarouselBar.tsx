@@ -3,22 +3,20 @@ import { NavigatorTitle, CaretBtn } from "../common/NavigatorTitle";
 import styled from "styled-components/native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { useRecoilValue } from "recoil";
-import { iconHeaderState } from "@recoil/iconHeaderState";
+import { useHeader } from "@hooks/useHeader";
 
 interface Props {
   onBack: () => void;
   onBookmark: () => void;
   onShare: () => void;
-  bookmarked: boolean;
 }
 
 /**
  * 북마크 아이콘이 있는 헤더
  */
-const CarouselBar = ({ onBack, onBookmark, onShare, bookmarked }: Props) => {
+const CarouselBar = ({ onBack, onBookmark, onShare }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const headerState = useRecoilValue(iconHeaderState);
+  const { headerState, bookmarkHandler } = useHeader();
 
   return (
     <HeaderWrapper
@@ -36,8 +34,8 @@ const CarouselBar = ({ onBack, onBookmark, onShare, bookmarked }: Props) => {
         >{`${headerState.curNum}/${headerState.maxNum}`}</NavigatorTitle>
       </TitleWrapper>
       <ElementWrapper style={{ marginRight: 20 }}>
-        <CaretBtn onPress={() => onBookmark()} style={{ marginRight: 20 }}>
-          {bookmarked ? (
+        <CaretBtn onPress={bookmarkHandler} style={{ marginRight: 20 }}>
+          {headerState.bookmarked ? (
             <Ionicons
               name="md-bookmark"
               size={24}

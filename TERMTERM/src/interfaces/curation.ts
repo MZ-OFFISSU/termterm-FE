@@ -11,3 +11,29 @@ export interface CurationItemProps extends ViewProps {
   counts: number;
   marked: boolean;
 }
+
+export interface TermSimple {
+  id: number;
+  name: string;
+  description: string;
+  bookmarked: string;
+}
+
+export interface MoreRecommendedCuration {
+  curationId: number;
+  bookmarked: string | null;
+  title: string;
+  cnt: number;
+  description: string;
+}
+
+export interface CurationData {
+  title: string;
+  cnt: number;
+  description: string;
+  bookmarked: string;
+  paid: boolean;
+  termSimples: TermSimple[];
+  moreRecommendedCurations: MoreRecommendedCuration[];
+  tags: string[];
+}
