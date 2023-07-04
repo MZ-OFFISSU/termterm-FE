@@ -31,13 +31,7 @@ const BackBar = ({ title, onBack, maxNum, curNum }: Props) => {
       </CaretBtn>
       {title ? (
         <TitleWrapper>
-          <NavigatorTitle
-            style={{
-              color: COLOR.Text.active,
-            }}
-          >
-            {title}
-          </NavigatorTitle>
+          <NavigatorTitle COLOR={COLOR}>{title}</NavigatorTitle>
         </TitleWrapper>
       ) : (
         <></>

@@ -18,6 +18,7 @@ import Support from "./Support";
 import TermDetail from "./TermDetail";
 import ReportWord from "./ReportWord";
 import MyWordApply from "./MyWordApply";
+import TermsDetail from "./TermsDetail";
 
 export {
   Home,
@@ -40,4 +41,5 @@ export {
   Support,
   ReportWord,
   MyWordApply,
+  TermsDetail,
 };

@@ -38,7 +38,7 @@ const TitleBar = ({ title, icon, point, onPress }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
-      <NavigatorTitle style={{ color: COLOR.Text.active, marginLeft: 20 }}>
+      <NavigatorTitle COLOR={COLOR} style={{ marginLeft: 20 }}>
         {title}
       </NavigatorTitle>
       {icon === Icon.point ? (

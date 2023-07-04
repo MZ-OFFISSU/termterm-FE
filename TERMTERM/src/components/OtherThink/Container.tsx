@@ -23,7 +23,9 @@ const Container = ({ comments }: Props) => {
   );
 
   return (
-    <BottomSheetScrollView contentContainerStyle={styles.container}>
+    <BottomSheetScrollView
+      style={{ backgroundColor: COLOR.Background.surface }}
+    >
       <FilterBox>
         <Title COLOR={COLOR}>용어에 대한 다른 생각</Title>
         <FilterPreviewBox>
@@ -50,12 +52,6 @@ const FilterBox = styled.View`
   align-items: center;
   justify-content: space-between;
 `;
-
-const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-  },
-});
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Body[1].Bold};

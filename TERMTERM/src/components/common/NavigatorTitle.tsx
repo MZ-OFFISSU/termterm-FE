@@ -4,8 +4,9 @@ import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 /**
  * 헤더에 들어가는 타이틀
  */
-export const NavigatorTitle = styled.Text`
+export const NavigatorTitle = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Body[2].SemiBold};
+  color: ${(props) => props.COLOR.Text.active};
 `;
 
 /**

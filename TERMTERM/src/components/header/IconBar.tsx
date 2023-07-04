@@ -95,7 +95,7 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
       </CaretBtn>
       {bookmarkBar ? (
         <TitleWrapper>
-          <NavigatorTitle style={{ color: COLOR.Text.active }}>
+          <NavigatorTitle COLOR={COLOR}>
             {`${headerState.curNum}/${headerState.maxNum}`}
           </NavigatorTitle>
         </TitleWrapper>

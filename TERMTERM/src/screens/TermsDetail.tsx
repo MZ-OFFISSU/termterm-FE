@@ -11,15 +11,12 @@ import LottieAnimation from "@components/OtherThink/LottieAnimation";
 import { useHeader } from "@hooks/useHeader";
 import { dummyWords } from "@assets/dummyWord";
 
-export type Props = StackScreenProps<
-  RootStackParamList,
-  "FolderDetailCollapse"
->;
+export type Props = StackScreenProps<RootStackParamList, "TermsDetail">;
 
 /**
  * 여러 용어 설명 페이지
  */
-const FolderDetailCollapse = ({ navigation, route }: Props) => {
+const TermsDetail = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [words, setWords] = useState<Array<WordProps>>();
   const [curIdx, setCurIdx] = useState(0);
@@ -30,7 +27,7 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
     const defaultHeaderState = {
       id: route.params.id,
       maxNum: words.length,
-      curNum: curIdx + 1,
+      curNum: curIdx,
       bookmarked: words[curIdx].bookmarked ? true : false,
     };
     setHeaderState(defaultHeaderState);
@@ -78,4 +75,4 @@ const Container = styled.View<{ COLOR: colorTheme }>`
   padding: 20px 0px 100px 0px;
 `;
 
-export default FolderDetailCollapse;
+export default TermsDetail;

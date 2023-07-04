@@ -22,9 +22,10 @@ import {
   TermDetail,
   ReportWord,
   MyWordApply,
+  TermsDetail,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
-import { BackBar, BookmarkBar } from "@components/header";
+import { BackBar, BookmarkBar, CarouselBar } from "@components/header";
 import { IconBar, Icon } from "@components/header";
 import { safeAreaColorState } from "@recoil/safeAreaColor";
 import { useRecoilValue } from "recoil";
@@ -347,6 +348,22 @@ const Container = () => {
                   <BackBar
                     title="용어 설명 신청"
                     onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="TermsDetail"
+            component={TermsDetail}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <CarouselBar
+                    onBack={() => props.navigation.pop()}
+                    onBookmark={() => null}
+                    onShare={() => null}
                   />
                 );
               },

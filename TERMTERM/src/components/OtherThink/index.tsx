@@ -45,7 +45,7 @@ const CustomFooter = ({ id }: FooterProps) => {
   };
 
   return (
-    <CustomFooterWrapper>
+    <CustomFooterWrapper COLOR={COLOR}>
       <FooterButton onPress={navigate} COLOR={COLOR}>
         <FooterContent COLOR={COLOR}>
           나만의 설명을 남기고 싶어요!
@@ -124,12 +124,13 @@ const Title = styled.Text<{ COLOR: colorTheme }>`
   margin-top: 10px;
 `;
 
-const CustomFooterWrapper = styled.View`
+const CustomFooterWrapper = styled.View<{ COLOR: colorTheme }>`
   width: 100%;
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${(props) => props.COLOR.Background.surface};
 `;
 
 const FooterButton = styled.TouchableOpacity<{ COLOR: colorTheme }>`

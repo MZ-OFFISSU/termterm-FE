@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { TouchableOpacityProps, ActivityIndicator } from "react-native";
 import {
   LIGHT_COLOR_STYLE,
@@ -9,6 +9,7 @@ import {
 export enum BUTTON_TYPE {
   primary,
   secondary,
+  tertiary,
 }
 
 export enum BUTTON_STATE {
@@ -27,7 +28,7 @@ interface Props extends TouchableOpacityProps {
 
 const CustomButton = ({ title, theme, type, state, ...props }: Props) => {
   return (
-    <ButtonBox {...props} type={type} state={state} theme={theme}>
+    <ButtonBox {...props} type={type} state={state} mode={theme}>
       {state === BUTTON_STATE.loading ? (
         <ActivityIndicator
           size="small"
@@ -37,7 +38,7 @@ const CustomButton = ({ title, theme, type, state, ...props }: Props) => {
       ) : (
         <></>
       )}
-      <ButtonTitle type={type} state={state} theme={theme}>
+      <ButtonTitle type={type} state={state} mode={theme}>
         {title}
       </ButtonTitle>
     </ButtonBox>
@@ -45,7 +46,7 @@ const CustomButton = ({ title, theme, type, state, ...props }: Props) => {
 };
 
 const ButtonBox = styled.TouchableOpacity<{
-  theme: boolean;
+  mode: boolean;
   type: BUTTON_TYPE;
   state?: BUTTON_STATE;
 }>`
@@ -55,46 +56,82 @@ const ButtonBox = styled.TouchableOpacity<{
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) =>
-    props.theme
-      ? props.type === BUTTON_TYPE.primary
-        ? props.state === BUTTON_STATE.active ||
-          props.state === BUTTON_STATE.loading
-          ? LIGHT_COLOR_STYLE.Neutral[100]
-          : props.state === BUTTON_STATE.default
-          ? LIGHT_COLOR_STYLE.Neutral[5]
-          : props.state === BUTTON_STATE.disabled
-          ? LIGHT_COLOR_STYLE.Neutral[20]
-          : ""
-        : props.state === BUTTON_STATE.default
-        ? LIGHT_COLOR_STYLE.Background.surface
-        : props.state === BUTTON_STATE.active
-        ? LIGHT_COLOR_STYLE.THEME.secondary[120]
-        : ""
-      : props.type === BUTTON_TYPE.primary
-      ? props.state === BUTTON_STATE.active ||
-        props.state === BUTTON_STATE.loading
-        ? DARK_COLOR_STYLE.THEME.primary[130]
-        : props.state === BUTTON_STATE.default
-        ? DARK_COLOR_STYLE.Neutral[0]
-        : props.state === BUTTON_STATE.disabled
-        ? DARK_COLOR_STYLE.Neutral[20]
-        : ""
-      : props.state === BUTTON_STATE.default
-      ? DARK_COLOR_STYLE.Background.surface
-      : props.state === BUTTON_STATE.active
-      ? LIGHT_COLOR_STYLE.THEME.secondary[120]
-      : ""};
+  ${(props) => {
+    switch (props.type) {
+      case BUTTON_TYPE.primary: {
+        if (props.mode) {
+          switch (props.state) {
+            case BUTTON_STATE.active:
+            case BUTTON_STATE.loading:
+              return css`
+                background-color: ${LIGHT_COLOR_STYLE.Neutral[100]};
+              `;
+            case BUTTON_STATE.default:
+              return css`
+                background-color: ${LIGHT_COLOR_STYLE.Neutral[5]};
+              `;
+            case BUTTON_STATE.disabled:
+              return css`
+                background-color: ${LIGHT_COLOR_STYLE.Neutral[20]};
+              `;
+          }
+        } else {
+          switch (props.state) {
+            case BUTTON_STATE.active:
+            case BUTTON_STATE.loading:
+              return css`
+                background-color: ${DARK_COLOR_STYLE.THEME.primary[130]};
+              `;
+            case BUTTON_STATE.default:
+              return css`
+                background-color: ${DARK_COLOR_STYLE.Neutral[0]};
+              `;
+            case BUTTON_STATE.disabled:
+              return css`
+                background-color: ${DARK_COLOR_STYLE.Neutral[20]};
+              `;
+          }
+        }
+        break;
+      }
+      default: {
+        if (props.mode) {
+          switch (props.state) {
+            case BUTTON_STATE.default:
+              return css`
+                background-color: ${LIGHT_COLOR_STYLE.Background.surface};
+              `;
+            case BUTTON_STATE.active:
+              return css`
+                background-color: ${LIGHT_COLOR_STYLE.THEME.secondary[120]};
+              `;
+          }
+        } else {
+          switch (props.state) {
+            case BUTTON_STATE.default:
+              return css`
+                background-color: ${DARK_COLOR_STYLE.Background.surface};
+              `;
+            case BUTTON_STATE.active:
+              return css`
+                background-color: ${LIGHT_COLOR_STYLE.THEME.secondary[120]};
+              `;
+          }
+        }
+        break;
+      }
+    }
+  }}
 `;
 
 const ButtonTitle = styled.Text<{
-  theme: boolean;
+  mode: boolean;
   type: BUTTON_TYPE;
   state?: BUTTON_STATE;
 }>`
   ${TYPO_STYLE.Body[2].SemiBold};
   color: ${(props) =>
-    props.theme
+    props.mode
       ? props.type === BUTTON_TYPE.secondary
         ? LIGHT_COLOR_STYLE.Text.active
         : props.state === BUTTON_STATE.default

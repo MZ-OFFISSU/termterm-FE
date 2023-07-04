@@ -39,9 +39,7 @@ const Support = ({ navigation }: Props) => {
             <AntDesign name="left" size={20} color={COLOR.Text.active} />
           </CaretBtn>
           {/* TODO : margin 임의 설정 값 해결하기 */}
-          <NavigatorTitle
-            style={{ color: COLOR.Text.active, marginRight: "40%" }}
-          >
+          <NavigatorTitle COLOR={COLOR} style={{ marginRight: "40%" }}>
             문의하기
           </NavigatorTitle>
         </NavigationBar>

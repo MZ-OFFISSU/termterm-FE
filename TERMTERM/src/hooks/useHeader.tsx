@@ -1,27 +1,51 @@
 import { useRecoilState } from "recoil";
-import { iconHeaderState, DEFAULT_VALUE } from "@recoil/iconHeaderState";
-import { useCallback } from "react";
+import { iconHeaderState } from "@recoil/iconHeaderState";
 import { useFocusEffect } from "@react-navigation/native";
 
-export function useHeader(id: number) {
+export function useHeader() {
   const [headerState, setHeaderState] = useRecoilState(iconHeaderState);
 
-  useFocusEffect(
-    useCallback(() => {
-      /**헤더 값 초기화
-       * api연동함수 추가
-       */
-      setHeaderState({
-        id: id,
-        curNum: 1,
-        maxNum: 15,
-        bookmarked: true,
-      });
-      return () => {
-        setHeaderState(DEFAULT_VALUE);
-      };
-    }, [])
-  );
+  /**
+   * 전체 인덱스를 수정하는 함수
+   */
+  const settingMax = (idx: number) => {
+    const newHeaderState = {
+      ...headerState,
+      maxNum: idx,
+    };
 
-  return headerState;
+    setHeaderState(newHeaderState);
+  };
+
+  /**
+   * 현재 인덱스를 수정하는 함수
+   */
+  const settingIdx = (idx: number) => {
+    const newHeaderState = {
+      ...headerState,
+      curNum: idx,
+    };
+
+    setHeaderState(newHeaderState);
+  };
+
+  /**
+   * 북마크 핸들러
+   */
+  const bookmarkHandler = () => {
+    const newHeaderState = {
+      ...headerState,
+      bookmarked: !headerState.bookmarked,
+    };
+
+    setHeaderState(newHeaderState);
+  };
+
+  return {
+    headerState,
+    settingIdx,
+    settingMax,
+    bookmarkHandler,
+    setHeaderState,
+  };
 }
