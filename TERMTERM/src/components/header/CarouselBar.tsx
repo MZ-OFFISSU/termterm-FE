@@ -28,10 +28,9 @@ const CarouselBar = ({ onBack, onBookmark, onShare }: Props) => {
         </CaretBtn>
       </ElementWrapper>
       <TitleWrapper>
-        <NavigatorTitle
-          style={{ marginLeft: 10 }}
-          COLOR={COLOR}
-        >{`${headerState.curNum}/${headerState.maxNum}`}</NavigatorTitle>
+        <NavigatorTitle style={{ marginLeft: 10 }} COLOR={COLOR}>{`${
+          headerState.curNum + 1
+        }/${headerState.maxNum}`}</NavigatorTitle>
       </TitleWrapper>
       <ElementWrapper style={{ marginRight: 20 }}>
         <CaretBtn onPress={bookmarkHandler} style={{ marginRight: 20 }}>

@@ -27,7 +27,7 @@ const TermsDetail = ({ navigation, route }: Props) => {
     const defaultHeaderState = {
       id: route.params.id,
       maxNum: words.length,
-      curNum: curIdx + 1,
+      curNum: curIdx,
       bookmarked: words[curIdx].bookmarked ? true : false,
     };
     setHeaderState(defaultHeaderState);

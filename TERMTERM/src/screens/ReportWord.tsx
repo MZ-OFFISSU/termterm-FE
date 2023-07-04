@@ -112,7 +112,15 @@ const ReportWord = ({ route, navigation }: Props) => {
       <CustomButton
         title="신고하기"
         theme={mode}
-        state={testInvalid() ? BUTTON_STATE.active : BUTTON_STATE.disabled}
+        state={
+          mode
+            ? testInvalid()
+              ? BUTTON_STATE.active
+              : BUTTON_STATE.disabled
+            : testInvalid()
+            ? BUTTON_STATE.active
+            : BUTTON_STATE.default
+        }
         type={BUTTON_TYPE.primary}
         onPress={report}
         style={{

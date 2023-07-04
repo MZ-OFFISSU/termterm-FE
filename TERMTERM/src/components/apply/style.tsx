@@ -46,6 +46,7 @@ export const Content = styled.Text<{ COLOR: colorTheme }>`
   text-align: start;
   white-space: pre-line;
   line-height: 20px;
+  color: ${(props) => props.COLOR.Text.active};
 `;
 
 export const ListItem = styled.View<{ COLOR: colorTheme }>`

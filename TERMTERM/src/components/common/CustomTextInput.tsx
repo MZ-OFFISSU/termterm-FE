@@ -1,7 +1,8 @@
 import { TextInputProps } from "react-native";
 import styled from "styled-components/native";
-import { LIGHT_COLOR_STYLE } from "@style/designSystem";
+import { LIGHT_COLOR_STYLE, colorTheme } from "@style/designSystem";
 import { useState } from "react";
+import { useThemeStyle } from "@hooks/useThemeStyle";
 
 interface Props extends TextInputProps {
   value: string;
@@ -15,6 +16,7 @@ interface Props extends TextInputProps {
  */
 const CustomTextInput = ({ value, max = true, ...props }: Props) => {
   const [borderColor, setBorderColor] = useState(LIGHT_COLOR_STYLE.Neutral[20]);
+  const [COLOR] = useThemeStyle();
 
   return (
     <InputBox
@@ -29,6 +31,7 @@ const CustomTextInput = ({ value, max = true, ...props }: Props) => {
           value === "" ? setBorderColor(LIGHT_COLOR_STYLE.Neutral[20]) : null
         }
         value={value}
+        COLOR={COLOR}
         {...props}
       />
       {max ? (
@@ -49,11 +52,11 @@ const InputBox = styled.View`
   margin-top: 10px;
 `;
 
-const Input = styled.TextInput`
+const Input = styled.TextInput<{ COLOR: colorTheme }>`
   width: 100%;
   height: 100%;
   text-align: start;
-  color: ${LIGHT_COLOR_STYLE.Text.active};
+  color: ${(props) => props.COLOR.Text.active};
   margin-bottom: 2px;
 `;
 
