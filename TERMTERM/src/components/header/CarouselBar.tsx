@@ -3,38 +3,38 @@ import { NavigatorTitle, CaretBtn } from "../common/NavigatorTitle";
 import styled from "styled-components/native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import { useRecoilValue } from "recoil";
+import { iconHeaderState } from "@recoil/iconHeaderState";
 
 interface Props {
   onBack: () => void;
   onBookmark: () => void;
   onShare: () => void;
-  title?: string;
   bookmarked: boolean;
 }
 
 /**
  * 북마크 아이콘이 있는 헤더
  */
-const BookmarkBar = ({
-  onBack,
-  onBookmark,
-  onShare,
-  title,
-  bookmarked,
-}: Props) => {
+const CarouselBar = ({ onBack, onBookmark, onShare, bookmarked }: Props) => {
   const [COLOR, mode] = useThemeStyle();
+  const headerState = useRecoilValue(iconHeaderState);
+
   return (
-    <HeaderWrapper style={{ justifyContent: "space-between" }}>
+    <HeaderWrapper
+      style={{ justifyContent: "space-between", position: "relative" }}
+    >
       <ElementWrapper style={{ marginLeft: 20 }}>
         <CaretBtn onPress={() => onBack()}>
           <AntDesign name="left" size={24} color={COLOR.Text.active} />
         </CaretBtn>
-        {title ? (
-          <NavigatorTitle COLOR={COLOR} style={{ marginLeft: 10 }}>
-            {title}
-          </NavigatorTitle>
-        ) : null}
       </ElementWrapper>
+      <TitleWrapper>
+        <NavigatorTitle
+          style={{ marginLeft: 10 }}
+          COLOR={COLOR}
+        >{`${headerState.curNum}/${headerState.maxNum}`}</NavigatorTitle>
+      </TitleWrapper>
       <ElementWrapper style={{ marginRight: 20 }}>
         <CaretBtn onPress={() => onBookmark()} style={{ marginRight: 20 }}>
           {bookmarked ? (
@@ -69,4 +69,16 @@ const ElementWrapper = styled.View`
   align-items: center;
 `;
 
-export default BookmarkBar;
+const TitleWrapper = styled.View`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+export default CarouselBar;
