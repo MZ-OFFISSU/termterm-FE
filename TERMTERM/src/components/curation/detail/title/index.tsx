@@ -34,17 +34,17 @@ const Container = styled.View`
 
 const Thumbnail = styled.ImageBackground`
   width: 100%;
-  height: 115px;
+  height: 130px;
 `;
 
 const InfoWrapper = styled.View`
   width: 100%;
-  height: 200px;
+  height: 180px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  padding: 20px 0px;
+  padding: 15px 0px;
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`

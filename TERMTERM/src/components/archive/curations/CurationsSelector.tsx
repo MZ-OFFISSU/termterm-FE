@@ -23,7 +23,7 @@ const CurationsSelector = ({ curations }: Props) => {
             {...item}
             onMove={() => navigation.push("CurationDetail", { id: item.id })}
             key={item.img}
-            style={{ marginTop: 20 }}
+            style={{ marginTop: 30 }}
           />
         ))}
       </CurationCardWrapper>
