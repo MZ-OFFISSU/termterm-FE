@@ -1,10 +1,6 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { PointHistory } from "@interfaces/point";
-import {
-  colorTheme,
-  LIGHT_COLOR_STYLE,
-  TYPO_STYLE,
-} from "@style/designSystem";
+import { colorTheme, LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import { useEffect, useState } from "react";
 import { ViewProps } from "react-native";
 import styled from "styled-components/native";
@@ -99,7 +95,7 @@ const Wrapper = styled.View`
 const Line = styled.View<{ COLOR: colorTheme }>`
   width: ${screenWidth}px;
   height: 1px;
-  background-color: ${(props) => props.COLOR.Neutral[20]};
+  background-color: ${(props) => props.COLOR.Neutral[10]};
 `;
 
 const Button = styled.TouchableOpacity<{ COLOR: colorTheme; mode: boolean }>`

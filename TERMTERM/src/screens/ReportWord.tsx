@@ -218,6 +218,7 @@ const Subtitle = styled.Text`
   ${TYPO_STYLE.Subheading[1].Regular};
   white-space: pre-line;
   margin-top: 16px;
+  line-height: 22px;
 `;
 
 export default ReportWord;

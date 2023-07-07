@@ -39,7 +39,7 @@ const InputApply = ({ nextStage }: ApplyProps) => {
   };
 
   const descStyle = {
-    backgroundColor: COLOR.Background.onSurface,
+    backgroundColor: COLOR.Background.input,
   };
 
   return (
@@ -70,7 +70,7 @@ const InputApply = ({ nextStage }: ApplyProps) => {
             max={false}
             onChangeText={changeSource}
           />
-          <ContentCaption COLOR={COLOR} style={{ marginTop: 5 }}>
+          <ContentCaption COLOR={COLOR} style={{ marginTop: 10 }}>
             출처가 있다면 반드시 출처를 밝혀주세요.
           </ContentCaption>
         </ContentBox>
