@@ -27,13 +27,14 @@ import {
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar, CarouselBar } from "@components/header";
 import { IconBar, Icon } from "@components/header";
-import { safeAreaColorState } from "@recoil/safeAreaColor";
-import { useRecoilValue } from "recoil";
 import { useState, useEffect, useCallback } from "react";
 import * as Font from "expo-font";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, StatusBar } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import AllTerms from "@screens/AllTerms";
+import { useSafeColor } from "@hooks/useSafeColor";
+import { useRecoilValue } from "recoil";
+import { safeAreaColorState } from "@recoil/safeAreaColor";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -91,8 +92,9 @@ const Container = () => {
   return (
     <SafeAreaView
       onLayout={onLayoutRootView}
-      style={{ flex: 1, width: "100%", backgroundColor: safeColor }}
+      style={{ flex: 1, width: "100%", backgroundColor: safeColor.bgColor }}
     >
+      <StatusBar barStyle={safeColor.styleColor} />
       <NavigationContainer>
         <RootStack.Navigator initialRouteName="Walkthrough">
           <RootStack.Screen
@@ -289,7 +291,17 @@ const Container = () => {
           <RootStack.Screen
             name="Support"
             component={Support}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="문의하기"
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
           />
           <RootStack.Screen
             name="AllTerms"

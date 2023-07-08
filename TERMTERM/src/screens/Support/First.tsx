@@ -1,8 +1,6 @@
 import styled from "styled-components/native";
-import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
-import {
-  LIGHT_COLOR_STYLE, TYPO_STYLE,
-} from "@style/designSystem";
+import { TouchableWithoutFeedback, Keyboard } from "react-native";
+import { LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import { useState } from "react";
 import { screenWidth } from "@style/dimensions";
 import { Props } from "@interfaces/support";
@@ -57,23 +55,20 @@ const First = ({ onEnd }: Props) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100%",
-          paddingTop: 80,
-        }}
-      >
-        <Highlight style={{ top: 92, left: 0 }} />
-        <LargeTitle>문의하고 싶은 내용이 있으신가요?</LargeTitle>
+    <TouchableWithoutFeedback
+      onPress={Keyboard.dismiss}
+      accessible={false}
+      style={{ width: "100%" }}
+    >
+      <Container>
+        <TitleWrapper>
+          <Highlight style={{ top: 12, left: -2 }} />
+          <LargeTitle>문의하고 싶은 내용이 있으신가요?</LargeTitle>
+        </TitleWrapper>
         <Title>
-          {`\n휴일을 제외한 평일 하루이내에 답변을 드릴게요.\n휴일을 제외한 하루가 지나도 답변이 오지 않는다면,\n스팸 메일함에 답변이 있을 수 있으니\n스팸 메일함을 확인해주세요.
-        `}
+          {`휴일을 제외한 평일 하루이내에 답변을 드릴게요.\n휴일을 제외한 하루가 지나도 답변이 오지 않는다면,\n스팸 메일함에 답변이 있을 수 있으니\n스팸 메일함을 확인해주세요.`}
         </Title>
-
-        <InputWrapper>
+        <InputWrapper style={{ marginTop: 75 }}>
           <Subtitle>답변을 받으실 이메일</Subtitle>
           <CustomTextInput
             value={email}
@@ -81,7 +76,7 @@ const First = ({ onEnd }: Props) => {
             placeholder="termterm@email.com"
           />
         </InputWrapper>
-        <InputWrapper>
+        <InputWrapper style={{ marginTop: 40 }}>
           <Subtitle>문의 유형</Subtitle>
           <CustomSelector
             open={open}
@@ -98,7 +93,7 @@ const First = ({ onEnd }: Props) => {
             modalTitle="문의 유형을 선택해주세요."
           />
         </InputWrapper>
-        <InputWrapper>
+        <InputWrapper style={{ marginTop: 40 }}>
           <Subtitle>문의 내용</Subtitle>
           <TextAreaBox>
             <CustomTextArea
@@ -127,16 +122,26 @@ const First = ({ onEnd }: Props) => {
           style={{
             width: screenWidth - 32,
             alignSelf: "center",
-            position: "absolute",
-            bottom: btnPosition,
+            marginTop: 52,
           }}
         />
-      </View>
+      </Container>
     </TouchableWithoutFeedback>
   );
 };
 
 export default First;
+
+const Container = styled.View`
+  width: 100%;
+  position: relative;
+
+  padding: 34px 32px;
+`;
+
+const TitleWrapper = styled.View`
+  position: relative;
+`;
 
 const Highlight = styled.View`
   width: 215px;
@@ -154,11 +159,13 @@ const LargeTitle = styled.Text`
 `;
 
 const Title = styled.Text`
+  width: 100%;
   ${TYPO_STYLE.Subheading[1].Medium};
   color: ${LIGHT_COLOR_STYLE.Text.darken};
-  white-space: pre-line;
   position: relative;
   line-height: 20px;
+  margin-top: 16px;
+  white-space: pre-line;
 `;
 
 const Subtitle = styled.Text`
