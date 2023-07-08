@@ -55,11 +55,7 @@ const First = ({ onEnd }: Props) => {
   };
 
   return (
-    <TouchableWithoutFeedback
-      onPress={Keyboard.dismiss}
-      accessible={false}
-      style={{ width: "100%" }}
-    >
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <Container>
         <TitleWrapper>
           <Highlight style={{ top: 12, left: -2 }} />
