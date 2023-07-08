@@ -64,7 +64,7 @@ const First = ({ onEnd }: Props) => {
         <Highlight style={{ top: 97, left: 0 }} />
         <Title>
           <Title style={{ fontWeight: "900", zIndex: 1 }}>
-            원할한 커뮤니케이션
+            원활한 커뮤니케이션
           </Title>
           {`을 위한\n준비를 시작해볼까요?`}
         </Title>

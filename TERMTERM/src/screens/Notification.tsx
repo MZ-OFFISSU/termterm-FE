@@ -24,7 +24,7 @@ const MENUS: Array<NotificationMenu> = [
     available: false,
   },
   {
-    title: "데일리 용어 퀴즈",
+    title: "Daily 용어 퀴즈",
     available: false,
   },
 ];

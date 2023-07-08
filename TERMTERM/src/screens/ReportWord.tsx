@@ -154,7 +154,7 @@ const DynamicTitleBox = () => {
     return (
       <LightTitleWrapper>
         <TitleObjet />
-        <Title COLOR={COLOR}>신고 사유를 선택해주세요</Title>
+        <Title COLOR={COLOR}>신고 사유를 선택해주세요.</Title>
       </LightTitleWrapper>
     );
   };
