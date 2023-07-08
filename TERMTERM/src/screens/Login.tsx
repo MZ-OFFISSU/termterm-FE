@@ -12,22 +12,22 @@ import { NonUrl } from "@components/common/UrlText";
 export type Props = StackScreenProps<RootStackParamList, "Login">;
 
 const Login = ({ navigation }: Props) => {
-  const [width, setWidth] = useState(140);
+  const [width, setWidth] = useState(80);
   useSafeColor();
 
   /**로고 너비 계산 함수 */
   const calculWidth = () => {
     if (screenWidth < 390) return;
     if (screenWidth < 435) {
-      setWidth(175);
+      setWidth(80);
       return;
     }
     if (screenWidth < 500) {
-      setWidth(200);
+      setWidth(85);
       return;
     }
     if (screenWidth > 500) {
-      setWidth(240);
+      setWidth(90);
       return;
     }
   };
