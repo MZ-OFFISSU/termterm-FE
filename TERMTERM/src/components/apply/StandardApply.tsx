@@ -95,7 +95,7 @@ interface CheckProps {
   checked: boolean;
 }
 
-const CheckBoxIcon = ({ checked }: CheckProps) => {
+export const CheckBoxIcon = ({ checked }: CheckProps) => {
   const [COLOR, mode] = useThemeStyle();
 
   return checked ? (

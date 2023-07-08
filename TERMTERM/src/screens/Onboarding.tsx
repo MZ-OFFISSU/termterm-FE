@@ -14,6 +14,7 @@ import { useState } from "react";
 import { screenWidth } from "@style/dimensions";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { useSafeColor } from "@hooks/useSafeColor";
 
 export type Props = StackScreenProps<RootStackParamList, "Onboarding">;
 
@@ -23,6 +24,7 @@ const Onboarding = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [stage, setStage] = useState(0);
   const CurrentPage = STAGES[stage];
+  useSafeColor();
 
   const onEnd = () => {
     stage < STAGES.length - 1 ? setStage((prev) => prev + 1) : null;
