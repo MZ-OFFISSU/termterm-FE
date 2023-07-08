@@ -11,15 +11,16 @@ import { useState, useEffect } from "react";
 import { screenWidth } from "@style/dimensions";
 import { Props } from "@interfaces/onboarding";
 import { useRecoilState } from "recoil";
-import { themeState } from "@recoil/themeState";
 import { infoState } from "@recoil/signupState";
 import { nicknameReg } from "@utils/reg";
+import { useThemeStyle } from "@hooks/useThemeStyle";
 
 const First = ({ onEnd }: Props) => {
-  const [theme, setTheme] = useRecoilState(themeState);
+  const [COLOR, mode] = useThemeStyle();
   const [info, setInfo] = useRecoilState(infoState);
   const [name, setName] = useState("");
   const [btnPosition, setBtnPosiition] = useState(30);
+  const [warn, setWarn] = useState(false);
 
   const inputName = (text: string) => {
     if (nicknameReg(text)) setName(text);
@@ -73,18 +74,22 @@ const First = ({ onEnd }: Props) => {
         <CustomTextInput
           value={name}
           onChangeText={(text) => inputName(text)}
-          maxLength={20}
+          maxLength={7}
         />
         {name === "" ? (
           <Warning>
             한글, 영어, 숫자, 특수문자(. , ! ? _ - ~)로만 구성할 수 있어요.
+          </Warning>
+        ) : warn ? (
+          <Warning style={{ color: COLOR.THEME.negative[100] }}>
+            이미 사용중인 닉네임입니다.
           </Warning>
         ) : (
           <></>
         )}
         <CustomButton
           title="확인"
-          theme={theme}
+          theme={mode}
           type={BUTTON_TYPE.primary}
           state={name === "" ? BUTTON_STATE.default : BUTTON_STATE.active}
           onPress={() => nextStage()}

@@ -48,7 +48,7 @@ const CustomSelector = ({ ...props }: ICVDropDownPickerProps) => {
       {...props}
       placeholderStyle={{
         color: LIGHT_COLOR_STYLE.Text.disabled,
-        fontWeight: "bold",
+        fontWeight: "500",
       }}
       arrowIconStyle={{
         width: 20,

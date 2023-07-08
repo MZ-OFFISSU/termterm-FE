@@ -120,14 +120,14 @@ const ButtonContainer = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   align-self: center;
-  margin-top: 20px;
+  margin-top: 34px;
 `;
 
 const Warning = styled.Text`
   font-size: 14px;
   font-weight: 400;
   color: ${LIGHT_COLOR_STYLE.Text.muted};
-  margin-top: 5px;
+  margin-top: 14px;
 `;
 
 export default Third;
