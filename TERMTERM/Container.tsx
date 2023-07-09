@@ -23,18 +23,19 @@ import {
   ReportWord,
   MyWordApply,
   TermsDetail,
+  FilterScreen,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
-import { BackBar, BookmarkBar, CarouselBar } from "@components/header";
+import { BackBar, BookmarkBar, CarouselBar, XBar } from "@components/header";
 import { IconBar, Icon } from "@components/header";
 import { useState, useEffect, useCallback } from "react";
 import * as Font from "expo-font";
 import { SafeAreaView, StatusBar } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import AllTerms from "@screens/AllTerms";
-import { useSafeColor } from "@hooks/useSafeColor";
 import { useRecoilValue } from "recoil";
 import { safeAreaColorState } from "@recoil/safeAreaColor";
+import Filter from "@components/common/Filter";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -313,6 +314,13 @@ const Container = () => {
                   <BackBar
                     title="전체 용어"
                     onBack={() => props.navigation.pop()}
+                    Icon={
+                      <Filter
+                        navigateHandler={() =>
+                          props.navigation.push("FilterScreen")
+                        }
+                      />
+                    }
                   />
                 );
               },
@@ -377,6 +385,18 @@ const Container = () => {
                     onBookmark={() => null}
                     onShare={() => null}
                   />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="FilterScreen"
+            component={FilterScreen}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <XBar title="필터" onBack={() => props.navigation.pop()} />
                 );
               },
             }}

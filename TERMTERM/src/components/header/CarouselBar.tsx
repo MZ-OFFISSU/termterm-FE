@@ -22,11 +22,9 @@ const CarouselBar = ({ onBack, onBookmark, onShare }: Props) => {
     <HeaderWrapper
       style={{ justifyContent: "space-between", position: "relative" }}
     >
-      <ElementWrapper style={{ marginLeft: 20 }}>
-        <CaretBtn onPress={() => onBack()}>
-          <AntDesign name="left" size={24} color={COLOR.Text.active} />
-        </CaretBtn>
-      </ElementWrapper>
+      <CaretBtn onPress={() => onBack()} style={{ marginLeft: 20 }}>
+        <AntDesign name="left" size={24} color={COLOR.Text.active} />
+      </CaretBtn>
       <TitleWrapper>
         <NavigatorTitle style={{ marginLeft: 10 }} COLOR={COLOR}>{`${
           headerState.curNum + 1

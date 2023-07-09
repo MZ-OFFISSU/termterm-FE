@@ -13,6 +13,7 @@ interface Props {
   onBack: () => void;
   maxNum?: number;
   curNum?: number;
+  Icon?: React.ReactNode;
 }
 
 /**
@@ -22,8 +23,9 @@ interface Props {
  * 순서대로 props를 전달하면 된다.
  * 4~6번 컴포넌트
  */
-const BackBar = ({ title, onBack, maxNum, curNum }: Props) => {
+const BackBar = ({ title, onBack, maxNum, curNum, Icon }: Props) => {
   const [COLOR, mode] = useThemeStyle();
+
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 15 }}>
@@ -41,6 +43,7 @@ const BackBar = ({ title, onBack, maxNum, curNum }: Props) => {
         COLOR={COLOR}
       >
         {maxNum && curNum ? `${curNum}/${maxNum}` : ""}
+        {Icon ? Icon : <></>}
       </NavigatorPager>
     </HeaderWrapper>
   );

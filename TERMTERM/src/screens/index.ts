@@ -19,6 +19,7 @@ import TermDetail from "./TermDetail";
 import ReportWord from "./ReportWord";
 import MyWordApply from "./MyWordApply";
 import TermsDetail from "./TermsDetail";
+import FilterScreen from "./FilterScreen";
 
 export {
   Home,
@@ -42,4 +43,5 @@ export {
   ReportWord,
   MyWordApply,
   TermsDetail,
+  FilterScreen,
 };
