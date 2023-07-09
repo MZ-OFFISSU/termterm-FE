@@ -5,15 +5,53 @@ import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import CommentComponent from "./Commnet";
 import { Comment } from "@interfaces/word";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Entypo } from "@expo/vector-icons";
+import * as Haptics from "expo-haptics";
+import { useActionSheet } from "@expo/react-native-action-sheet";
 
 interface Props {
   comments: Array<Comment>;
 }
 
+enum Filter {
+  recent = "최신순",
+  recommend = "추천순",
+}
+
 const Container = ({ comments }: Props) => {
   const [COLOR] = useThemeStyle();
+  const { showActionSheetWithOptions } = useActionSheet();
+
+  const [filter, setFilter] = useState(Filter.recent);
+
+  const openActionSheet = () => {
+    const options = ["최신순", "추천순", "취소"];
+    const cancelButtonIndex = 2;
+
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+      },
+      (selectedIndex) => {
+        switch (selectedIndex) {
+          case 0:
+            //최신순
+            setFilter(Filter.recent);
+            break;
+          case 1:
+            //추천순
+            setFilter(Filter.recommend);
+            break;
+          case cancelButtonIndex:
+          // 닫기
+        }
+      }
+    );
+  };
 
   const renderItem = useCallback(
     (comment: Comment) => (
@@ -28,14 +66,14 @@ const Container = ({ comments }: Props) => {
     >
       <FilterBox>
         <Title COLOR={COLOR}>용어에 대한 다른 생각</Title>
-        <FilterPreviewBox>
+        <FilterPreviewBox onPress={openActionSheet}>
           <Entypo
             name="chevron-down"
             size={18}
             color={COLOR.Text.active}
             style={{ marginBottom: 2 }}
           />
-          <Subtitle COLOR={COLOR}>최신순</Subtitle>
+          <Subtitle COLOR={COLOR}>{filter}</Subtitle>
         </FilterPreviewBox>
       </FilterBox>
       {comments.map(renderItem)}
