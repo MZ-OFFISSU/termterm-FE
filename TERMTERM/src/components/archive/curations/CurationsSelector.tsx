@@ -42,7 +42,6 @@ const CurationCardWrapper = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 10px;
 `;
 
 export default CurationsSelector;
