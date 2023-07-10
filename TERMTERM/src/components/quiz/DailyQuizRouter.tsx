@@ -50,7 +50,7 @@ const DailyQuizRouter = ({ navigation }: ScreenProps) => {
 
   return (
     <Container COLOR={COLOR} mode={mode}>
-      <CurStage navigate={() => navigation.navigate("DailyQuiz")} />
+      <CurStage navigate={() => navigation.navigate("QuizIntro")} />
     </Container>
   );
 };

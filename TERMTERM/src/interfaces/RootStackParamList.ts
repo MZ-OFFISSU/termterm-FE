@@ -32,4 +32,5 @@ export type RootStackParamList = {
   AllTerms: undefined;
   ReportWord: { id: number };
   MyWordApply: { id: number };
+  QuizIntro: undefined;
 };

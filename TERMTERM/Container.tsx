@@ -34,6 +34,7 @@ import * as Font from "expo-font";
 import { SafeAreaView } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import AllTerms from "@screens/AllTerms";
+import QuizIntro from "@screens/QuizIntro";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -365,6 +366,18 @@ const Container = () => {
                     onBookmark={() => null}
                     onShare={() => null}
                   />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="QuizIntro"
+            component={QuizIntro}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar title="" onBack={() => props.navigation.pop()} />
                 );
               },
             }}
