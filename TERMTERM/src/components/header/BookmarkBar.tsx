@@ -3,6 +3,7 @@ import { NavigatorTitle, CaretBtn } from "../common/NavigatorTitle";
 import styled from "styled-components/native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import BackArrowIcon from "@assets/icon/BackArrowIcon";
 
 interface Props {
   onBack: () => void;
@@ -27,7 +28,7 @@ const BookmarkBar = ({
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <ElementWrapper style={{ marginLeft: 20 }}>
         <CaretBtn onPress={() => onBack()}>
-          <AntDesign name="left" size={24} color={COLOR.Text.active} />
+          <BackArrowIcon size={20} color={COLOR.Text.active} />
         </CaretBtn>
         {title ? (
           <NavigatorTitle COLOR={COLOR} style={{ marginLeft: 10 }}>

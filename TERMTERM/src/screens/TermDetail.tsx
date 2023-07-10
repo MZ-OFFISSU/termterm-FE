@@ -31,7 +31,7 @@ const TermDetail = ({ navigation, route }: Props) => {
       {word ? (
         <>
           <WordCard word={word} style={{ width: screenWidth - 32 }} />
-          <LottieAnimation />
+          {/* <LottieAnimation /> */}
           <OtherThink word={word} />
         </>
       ) : (

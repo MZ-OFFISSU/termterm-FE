@@ -13,6 +13,7 @@ import { WordProps } from "@interfaces/word";
 import { dummyWords } from "@assets/dummyWord";
 import { WordCarousel } from "@components/terms/";
 import DailyTermContainer from "@components/home/DailyTermContainer";
+import { Octicons } from "@expo/vector-icons";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -71,12 +72,11 @@ const Home = ({ navigation, route }: Props) => {
                 <CurationViewBtnContent COLOR={COLOR}>
                   전체보기
                 </CurationViewBtnContent>
-                <Fontisto
-                  name="angle-right"
-                  //TODO : size 수정
-                  size={TEXT_STYLES["3xsm"].Reg?.fontSize}
+                <Octicons
+                  name="chevron-right"
+                  size={15}
                   color={COLOR.Text.default}
-                  style={{ marginLeft: 5 }}
+                  style={{ marginLeft: 8 }}
                 />
               </CurationViewBtn>
             </CurationTitleBox>
@@ -91,12 +91,11 @@ const Home = ({ navigation, route }: Props) => {
                 <CurationViewBtnContent COLOR={COLOR}>
                   전체보기
                 </CurationViewBtnContent>
-                <Fontisto
-                  name="angle-right"
-                  //TODO : size 수정
-                  size={TEXT_STYLES["3xsm"].Reg?.fontSize}
+                <Octicons
+                  name="chevron-right"
+                  size={15}
                   color={COLOR.Text.default}
-                  style={{ marginLeft: 5 }}
+                  style={{ marginLeft: 8 }}
                 />
               </CurationViewBtn>
             </CurationTitleBox>

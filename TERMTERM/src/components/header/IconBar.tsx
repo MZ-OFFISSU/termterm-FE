@@ -4,17 +4,17 @@ import {
   CaretBtn,
   TitleWrapper,
 } from "../common/NavigatorTitle";
-import {
-  AntDesign,
-  Ionicons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import styled from "styled-components/native";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { iconHeaderState, modalState } from "@recoil/iconHeaderState";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { iconHeaderState } from "@recoil/iconHeaderState";
+import { useRecoilValue } from "recoil";
 import { useCallback } from "react";
+import { Feather } from "@expo/vector-icons";
+import * as Sharing from "expo-sharing";
+import * as Haptics from "expo-haptics";
+import BackArrowIcon from "@assets/icon/BackArrowIcon";
 
 export enum Icon {
   fold,
@@ -34,7 +34,6 @@ interface Props {
 const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const headerState = useRecoilValue(iconHeaderState);
-  const [modal, setModal] = useRecoilState(modalState);
 
   const onBookmark = (id: number) => {
     null;
@@ -42,11 +41,11 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
 
   const Fold = useCallback(() => {
     return mode ? (
-      <AutoSizedImage source={require("@assets/icon/fold.png")} height={22} />
+      <AutoSizedImage source={require("@assets/icon/fold.png")} height={25} />
     ) : (
       <AutoSizedImage
         source={require("@assets/icon/fold-dark.png")}
-        height={22}
+        height={25}
       />
     );
   }, []);
@@ -88,10 +87,19 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
     );
   };
 
+  const handleShare = async (url: string) => {
+    if (!(await Sharing.isAvailableAsync())) {
+      return;
+    }
+
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+    Sharing.shareAsync(url);
+  };
+
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 20 }}>
-        <AntDesign name="left" size={24} color={COLOR.Text.active} />
+        <BackArrowIcon size={20} color={COLOR.Text.active} />
       </CaretBtn>
       {bookmarkBar ? (
         <TitleWrapper>
@@ -104,15 +112,11 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
       )}
       <ElementWrapper style={{ marginRight: 20 }}>
         {bookmarkBar === undefined ? <></> : <Bookmark />}
-        <CaretBtn onPress={() => onPress()} style={{ marginRight: 15 }}>
+        <CaretBtn onPress={() => onPress()} style={{ marginRight: 13 }}>
           {icon === Icon.fold ? <Fold /> : <Collapse />}
         </CaretBtn>
-        <CaretBtn onPress={() => setModal(!modal)}>
-          <MaterialCommunityIcons
-            name="dots-vertical"
-            size={24}
-            color={COLOR.Text.active}
-          />
+        <CaretBtn onPress={() => handleShare("https://www.naver.com/")}>
+          <Feather name="share-2" size={20} color={COLOR.Text.active} />
         </CaretBtn>
       </ElementWrapper>
     </HeaderWrapper>

@@ -22,7 +22,7 @@ const RecommendCuration = ({ items, onNavigate }: Props) => {
           {...item}
           onMove={onNavigate}
           key={item.id}
-          style={idx !== 0 ? { marginTop: 20 } : {}}
+          style={idx !== 0 ? { marginTop: 30 } : {}}
         />
       ))}
     </ContentsWrapper>

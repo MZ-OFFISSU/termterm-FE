@@ -16,7 +16,7 @@ const FolderList = ({ folders }: Props) => {
       {folders.map((folder) => (
         <Folder
           onOpen={(id: number) =>
-            navigation.push("FolderDetailGlance", { id: id })
+            navigation.push("FolderDetailCollapse", { id: id })
           }
           key={folder.id}
           {...folder}

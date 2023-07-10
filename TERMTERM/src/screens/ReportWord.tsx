@@ -154,7 +154,7 @@ const DynamicTitleBox = () => {
     return (
       <LightTitleWrapper>
         <TitleObjet />
-        <Title COLOR={COLOR}>신고 사유를 선택해주세요</Title>
+        <Title COLOR={COLOR}>신고 사유를 선택해주세요.</Title>
       </LightTitleWrapper>
     );
   };
@@ -218,6 +218,7 @@ const Subtitle = styled.Text`
   ${TYPO_STYLE.Subheading[1].Regular};
   white-space: pre-line;
   margin-top: 16px;
+  line-height: 22px;
 `;
 
 export default ReportWord;

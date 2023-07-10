@@ -41,9 +41,13 @@ const WordCard = ({ word, quiz, ...props }: Props) => {
       <Content COLOR={COLOR} mode={mode}>
         {word.description}
       </Content>
-      <Source COLOR={COLOR} mode={mode} quiz={quiz}>
-        {word.source}
-      </Source>
+      {word.source ? (
+        <Source COLOR={COLOR} mode={mode} quiz={quiz}>
+          {word.source}
+        </Source>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };

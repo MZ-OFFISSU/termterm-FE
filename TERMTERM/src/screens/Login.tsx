@@ -7,26 +7,27 @@ import SocialLoginButton from "@components/buttons/SocialLogin";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useSafeColor } from "@hooks/useSafeColor";
+import { NonUrl } from "@components/common/UrlText";
 
 export type Props = StackScreenProps<RootStackParamList, "Login">;
 
 const Login = ({ navigation }: Props) => {
-  const [width, setWidth] = useState(140);
+  const [width, setWidth] = useState(80);
   useSafeColor();
 
   /**로고 너비 계산 함수 */
   const calculWidth = () => {
     if (screenWidth < 390) return;
     if (screenWidth < 435) {
-      setWidth(175);
+      setWidth(80);
       return;
     }
     if (screenWidth < 500) {
-      setWidth(200);
+      setWidth(85);
       return;
     }
     if (screenWidth > 500) {
-      setWidth(240);
+      setWidth(90);
       return;
     }
   };
@@ -60,17 +61,12 @@ const Login = ({ navigation }: Props) => {
             onPress={() => navigation.navigate("Support")}
           />
         </ButtonBox>
-        <UrlText
-          text={`회원가입시 서비스 이용약관 및 개인정보 처리방침에\n동의하게 됩니다.`}
-          url=""
-          style={{
-            fontSize: 12,
-            fontWeight: "500",
-            color: "#6E7277",
-            marginTop: 20,
-          }}
-          onPress={() => navigation.navigate("Walkthrough")}
-        />
+        <NonUrl style={{ marginTop: 30 }}>
+          {`회원가입시 `}
+          <UrlText text={`서비스 이용약관`} url="" underline={true} /> 및{" "}
+          <UrlText text={`개인정보 처리방침`} url="" underline={true} />
+          {`에\n동의하게 됩니다.`}
+        </NonUrl>
       </Container>
       <QuestionBox>
         <UrlText

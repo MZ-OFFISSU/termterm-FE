@@ -115,7 +115,7 @@ const PaginationItem: React.FC<{
   isRotate?: boolean;
 }> = (props) => {
   const { animValue, index, length, backgroundColor, isRotate } = props;
-  const width = 8;
+  const width = 6;
 
   const animStyle = useAnimatedStyle(() => {
     let inputRange = [index - 1, index, index + 1];
