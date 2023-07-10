@@ -1,20 +1,46 @@
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme } from "@style/designSystem";
+import { TYPO_STYLE, colorTheme } from "@style/designSystem";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { WordCarousel } from "@components/terms/";
 import { useEffect, useState } from "react";
 import { WordProps } from "@interfaces/word";
 import OtherThink from "@components/OtherThink";
-import LottieAnimation from "@components/OtherThink/LottieAnimation";
 import { useHeader } from "@hooks/useHeader";
 import { dummyWords } from "@assets/dummyWord";
+import AutoSizedImage from "@components/common/AutoSizedImage";
+import { screenWidth } from "@style/dimensions";
 
 export type Props = StackScreenProps<
   RootStackParamList,
   "FolderDetailCollapse"
 >;
+
+interface FolderProps {
+  name: string;
+  desc: string;
+}
+
+const defaultProps: FolderProps = {
+  name: "",
+  desc: "",
+};
+
+const FolderInfo = ({ name, desc }: FolderProps) => {
+  const [COLOR, mode] = useThemeStyle();
+
+  return (
+    <FolderInfoWrapper>
+      <AutoSizedImage
+        source={require("@assets/icon/CurFolder.png")}
+        width={18}
+      />
+      <Title COLOR={COLOR}>{name}</Title>
+      <Desc COLOR={COLOR}>{desc}</Desc>
+    </FolderInfoWrapper>
+  );
+};
 
 /**
  * 여러 용어 설명 페이지
@@ -23,6 +49,7 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [words, setWords] = useState<Array<WordProps>>();
   const [curIdx, setCurIdx] = useState(0);
+  const [folderInfo, setFolderInfo] = useState<FolderProps>(defaultProps);
 
   const { setHeaderState, settingIdx } = useHeader();
 
@@ -36,6 +63,15 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
     setHeaderState(defaultHeaderState);
   };
 
+  const settingProps = () => {
+    const dummyInfo: FolderProps = {
+      name: "기획",
+      desc: "기획 관련 용어들의 모음",
+    };
+
+    setFolderInfo(dummyInfo);
+  };
+
   const snap = (idx: number) => {
     setCurIdx(idx);
     settingIdx(idx);
@@ -43,8 +79,10 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
 
   useEffect(() => {
     //TODO : 큐레이션 속 용어 아이디로 용어 상세 받아오기
+    //TODO : 폴더 정보 받아오기
     setWords(dummyWords);
     settingHeader(dummyWords);
+    settingProps();
   }, [route]);
 
   return (
@@ -57,7 +95,7 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
             snap={snap}
             touchable={false}
           />
-          <LottieAnimation />
+          <FolderInfo {...folderInfo} />
           <OtherThink word={words[curIdx]} />
         </>
       ) : (
@@ -76,6 +114,28 @@ const Container = styled.View<{ COLOR: colorTheme }>`
   justify-content: space-between;
   background-color: ${(props) => props.COLOR.Background.surface};
   padding: 20px 0px 100px 0px;
+`;
+
+const FolderInfoWrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  top: ${screenWidth - 8}px;
+  left: 20px;
+`;
+
+const Title = styled.Text<{ COLOR: colorTheme }>`
+  ${TYPO_STYLE.Caption[1].Medium};
+  color: ${(props) => props.COLOR.Text.default};
+  margin-left: 6px;
+`;
+
+const Desc = styled.Text<{ COLOR: colorTheme }>`
+  ${TYPO_STYLE.Caption[1].Regular};
+  color: ${(props) => props.COLOR.Text.muted};
+  margin-left: 6px;
 `;
 
 export default FolderDetailCollapse;
