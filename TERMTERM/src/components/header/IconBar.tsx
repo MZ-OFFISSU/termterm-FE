@@ -14,6 +14,7 @@ import { useCallback } from "react";
 import { Feather } from "@expo/vector-icons";
 import * as Sharing from "expo-sharing";
 import * as Haptics from "expo-haptics";
+import BackArrowIcon from "@assets/icon/BackArrowIcon";
 
 export enum Icon {
   fold,
@@ -98,7 +99,7 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 20 }}>
-        <AntDesign name="left" size={24} color={COLOR.Text.active} />
+        <BackArrowIcon size={20} color={COLOR.Text.active} />
       </CaretBtn>
       {bookmarkBar ? (
         <TitleWrapper>

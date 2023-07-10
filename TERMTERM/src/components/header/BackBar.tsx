@@ -7,6 +7,7 @@ import {
 } from "../common/NavigatorTitle";
 import { AntDesign } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import BackArrowIcon from "@assets/icon/BackArrowIcon";
 
 interface Props {
   title?: string;
@@ -29,7 +30,7 @@ const BackBar = ({ title, onBack, maxNum, curNum, Icon }: Props) => {
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 15 }}>
-        <AntDesign name="left" size={20} color={COLOR.Text.active} />
+        <BackArrowIcon size={20} color={COLOR.Text.active} />
       </CaretBtn>
       {title ? (
         <TitleWrapper>
