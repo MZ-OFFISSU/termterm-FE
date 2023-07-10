@@ -69,6 +69,7 @@ const InputApply = ({ nextStage }: ApplyProps) => {
             placeholder="홈페이지 url 등"
             max={false}
             onChangeText={changeSource}
+            maxLength={100}
           />
           <ContentCaption COLOR={COLOR} style={{ marginTop: 10 }}>
             출처가 있다면 반드시 출처를 밝혀주세요.
