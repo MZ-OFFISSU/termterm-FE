@@ -43,10 +43,19 @@ const QuizIntro = ({ navigation }: Props) => {
             style={{ marginTop: 80 }}
           />
           <TitleBox>
-            <Title COLOR={COLOR} mode={mode}>Daily 용어 퀴즈</Title>
-            <SubTitle COLOR={COLOR} mode={mode}>{`Daily 용어 퀴즈로 용어를 학습하고\n포인트까지 얻어보세요!`}</SubTitle>
+            <Title COLOR={COLOR} mode={mode}>
+              Daily 용어 퀴즈
+            </Title>
+            <SubTitle
+              COLOR={COLOR}
+              mode={mode}
+            >{`Daily 용어 퀴즈로 용어를 학습하고\n포인트까지 얻어보세요!`}</SubTitle>
           </TitleBox>
-          <Button COLOR={COLOR} mode={mode}>
+          <Button
+            COLOR={COLOR}
+            mode={mode}
+            onPress={() => navigation.navigate("DailyQuiz")}
+          >
             <ButtonText COLOR={COLOR} mode={mode}>
               {`퀴즈 응시하기     >`}
             </ButtonText>
