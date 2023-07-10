@@ -69,7 +69,7 @@ const CustomModal = ({
 };
 
 const Container = styled.View<{ COLOR: colorTheme; mode: boolean }>`
-  max-height: 202px;
+  max-height: 220px;
   background-color: ${(props) =>
     props.mode
       ? props.COLOR.Background.surface
@@ -93,6 +93,7 @@ const Subtitle = styled.Text<{ COLOR: colorTheme }>`
   white-space: pre-line;
   text-align: center;
   margin-top: 10px;
+  line-height: 18px;
 `;
 
 const BtnWrapper = styled.View`
