@@ -87,6 +87,7 @@ const WordCarousel = ({
             justifyContent: "space-between",
             width: 100,
             alignSelf: "center",
+            marginTop: 20,
           }}
         >
           {words.map((_, index) => {
