@@ -25,9 +25,10 @@ import {
   TermsDetail,
   QuizIntro,
   QuizResult,
+  QuizReview,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
-import { BackBar, BookmarkBar, CarouselBar } from "@components/header";
+import { BackBar, BookmarkBar, CarouselBar, BookmarkSingleBar } from "@components/header";
 import { IconBar, Icon } from "@components/header";
 import { safeAreaColorState } from "@recoil/safeAreaColor";
 import { useRecoilValue } from "recoil";
@@ -390,7 +391,25 @@ const Container = () => {
               headerShown: true,
               header: (props) => {
                 return (
-                  <BackBar title="정답 확인" onBack={() => props.navigation.pop()} />
+                  <BackBar
+                    title="정답 확인"
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="QuizReview"
+            component={QuizReview}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="용어 퀴즈 리뷰"
+                    onBack={() => props.navigation.pop()}
+                  />
                 );
               },
             }}

@@ -21,6 +21,7 @@ import MyWordApply from "./MyWordApply";
 import TermsDetail from "./TermsDetail";
 import QuizIntro from "./QuizIntro";
 import QuizResult from "./QuizResult";
+import QuizReview from "./QuizReview";
 
 export {
   Home,
@@ -46,4 +47,5 @@ export {
   TermsDetail,
   QuizIntro,
   QuizResult,
+  QuizReview,
 };

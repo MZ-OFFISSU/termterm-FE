@@ -34,4 +34,5 @@ export type RootStackParamList = {
   MyWordApply: { id: number };
   QuizIntro: undefined;
   QuizResult: { id: number };
+  QuizReview: { id: number };
 };
