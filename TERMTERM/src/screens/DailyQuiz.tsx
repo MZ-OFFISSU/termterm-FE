@@ -21,10 +21,7 @@ const DailyQuiz = ({ navigation }: Props) => {
     id3: false,
   });
 
-  const { hiddenExplain } = useHideWord(
-    dummy[idx].explain,
-    dummy[idx].word
-  );
+  const { hiddenExplain } = useHideWord(dummy[idx].explain, dummy[idx].word);
 
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
