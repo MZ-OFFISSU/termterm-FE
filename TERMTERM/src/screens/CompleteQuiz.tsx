@@ -38,7 +38,7 @@ const CompleteQuiz = ({ navigation }: Props) => {
   }, []);
 
   return (
-    <SafeAreaView style={{ backgroundColor: "white" }}>
+    <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
       <Container>
         <BackBar title="Daily 용어 퀴즈 완료" onBack={() => navigation.pop()} />
         <ContentWrapper>
