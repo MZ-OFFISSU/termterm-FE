@@ -1,17 +1,110 @@
 import styled from "styled-components/native";
-import { useState, useEffect } from "react";
-import AutoSizedImage from "@components/common/AutoSizedImage";
+import { useState } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import {
-  LIGHT_COLOR_STYLE,
-} from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DailyQuizItemProps } from "@interfaces/dailyquiz";
 import QuizCard from "@components/quiz/QuizCard";
 import { BackBar } from "@components/header";
+import { useThemeStyle } from "@hooks/useThemeStyle";
+import useHideWord from "@hooks/useHideWord";
 
 export type Props = StackScreenProps<RootStackParamList, "DailyQuiz">;
+
+const DailyQuiz = ({ navigation }: Props) => {
+  const [COLOR, mode] = useThemeStyle();
+  const [idx, setIdx] = useState(0);
+  const [isSelect, setSelect] = useState({
+    id1: false,
+    id2: false,
+    id3: false,
+  });
+
+  const { hiddenExplain } = useHideWord(
+    dummy[idx].explain,
+    dummy[idx].word
+  );
+
+  return (
+    <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
+      <Container>
+        <BackBar title={`${idx + 1}/5`} onBack={() => navigation.pop()} />
+        <Title COLOR={COLOR} mode={mode}>
+          어떤{" "}
+          <BoldTitle COLOR={COLOR} mode={mode}>
+            용어
+          </BoldTitle>
+          에 대한 설명일까요?
+        </Title>
+        <QuizCard explain={hiddenExplain} />
+        {dummy.map((item, idx) => (
+          <QuizButton
+            key={idx}
+            COLOR={COLOR}
+            mode={mode}
+            underlayColor={COLOR.THEME.secondary[70]}
+            onPress={() => navigation.navigate("QuizResult")}
+          >
+            <ButtonText COLOR={COLOR} mode={mode}>
+              {item.word}
+            </ButtonText>
+          </QuizButton>
+        ))}
+      </Container>
+    </SafeAreaView>
+  );
+};
+
+export default DailyQuiz;
+
+const Container = styled.ScrollView`
+  width: 100%;
+  height: 100%;
+`;
+
+const Title = styled.Text<{
+  COLOR: colorTheme;
+  mode: boolean;
+}>`
+  ${TYPO_STYLE.Heading[3].Medium};
+  color: ${(props) => props.COLOR.Text.active};
+  text-align: center;
+  margin: 40px auto;
+`;
+
+const BoldTitle = styled.Text<{
+  COLOR: colorTheme;
+  mode: boolean;
+}>`
+  ${TYPO_STYLE.Heading[3].ExtraBold};
+  color: ${(props) => props.COLOR.Text.active};
+  text-align: center;
+  margin: 40px auto;
+`;
+
+const QuizButton = styled.TouchableHighlight<{
+  COLOR: colorTheme;
+  mode: boolean;
+}>`
+  width: 358px;
+  height: 47px;
+  border-radius: 8px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgray;
+  margin: 10px auto;
+`;
+
+const ButtonText = styled.Text<{
+  COLOR: colorTheme;
+  mode: boolean;
+}>`
+  color: ${(props) => props.COLOR.Text.active};
+  ${TYPO_STYLE.Body[2].SemiBold};
+  text-align: center;
+  margin: auto 0;
+`;
 
 const dummy: Array<DailyQuizItemProps> = [
   {
@@ -30,59 +123,3 @@ const dummy: Array<DailyQuizItemProps> = [
       "얼마나 쉽게 읽을 수 있는지를 나타내는 정도를 뜻하는 말이에요. 프로그래밍에서의 가독성은 소스코드를 보고 코드가 의도하는 동작이나 알고리즘을 얼마나 쉽게 이해할 수 있는지를 뜻해요.",
   },
 ];
-
-const DailyQuiz = ({ navigation }: Props) => {
-  const [idx, setIdx] = useState(0);
-  const [isSelect, setSelect] = useState<unknown>({
-    id1: false,
-    id2: false,
-    id3: false,
-  });
-
-  return (
-    <SafeAreaView style={{ backgroundColor: "white" }}>
-      <Container>
-        <BackBar title={`${idx + 1}/5`} onBack={() => navigation.pop()} />
-        <Title>어떤 용어에 대한 설명일까요?</Title>
-        <QuizCard explain={dummy[idx].explain} />
-        {dummy.map((item, idx) => (
-          <QuizButton onPress={() => navigation.push("CompleteQuiz")}>
-            <ButtonText>{item.word}</ButtonText>
-          </QuizButton>
-        ))}
-      </Container>
-    </SafeAreaView>
-  );
-};
-
-const Container = styled.ScrollView`
-  width: 100%;
-  height: 100%;
-`;
-
-const Title = styled.Text`
-  font-size: 23px;
-  font-weight: 600;
-  color: ${LIGHT_COLOR_STYLE.Text.active};
-  text-align: center;
-  margin: 40px auto;
-`;
-
-const QuizButton = styled.TouchableOpacity`
-  width: 358px;
-  height: 47px;
-  border-radius: 10px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: lightgray;
-  margin: 10px auto;
-`;
-
-const ButtonText = styled.Text`
-  color: ${LIGHT_COLOR_STYLE.Text.active};
-  font-size: 15px;
-  text-align: center;
-  margin: auto 0;
-`;
-
-export default DailyQuiz;
