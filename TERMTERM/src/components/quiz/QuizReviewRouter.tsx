@@ -1,18 +1,16 @@
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { quizReviewProps } from "@interfaces/quizReview";
-import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { StackScreenProps } from "@react-navigation/stack";
+
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
 import { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { CaretBtn } from "..";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
-export type Props = quizReviewProps & StackScreenProps<RootStackParamList, "QuizReview">;
 
-const QuizReviewRouter = ({ id, answer, wordAnswer, userAnswer, navigation, ...props }: Props) => {
+const QuizReviewRouter = ({ id, answer, wordAnswer, userAnswer, onPress, ...props }: quizReviewProps) => {
   const [COLOR, mode] = useThemeStyle();
   const [width, setWidth] = useState(24);
   const calcWidth = () => {
@@ -48,8 +46,7 @@ const QuizReviewRouter = ({ id, answer, wordAnswer, userAnswer, navigation, ...p
       <AnswerText COLOR={COLOR} mode={mode}>
         {wordAnswer}
       </AnswerText>
-      {/* TODO : navigation 연결 */}
-      <CaretBtn onPress={() => navigation.navigate("QuizResult")}>
+      <CaretBtn onPress={() => onPress()}>
         <AntDesign name="right" size={20} color={COLOR.Neutral[90]} />
       </CaretBtn>
     </Container>

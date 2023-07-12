@@ -1,11 +1,15 @@
 import QuizReviewRouter from "@components/quiz/QuizReviewRouter";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { quizReviewProps } from "@interfaces/quizReview";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { StackScreenProps } from "@react-navigation/stack";
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
-const QuizReview = () => {
+export type Props = StackScreenProps<RootStackParamList, "QuizReview">;
+
+const QuizReview = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
   return (
@@ -18,6 +22,7 @@ const QuizReview = () => {
             answer={item.answer}
             wordAnswer={item.wordAnswer}
             userAnswer={item.userAnswer}
+            onPress={() => navigation.navigate("QuizResult")}
           />
         ))}
       </Container>
