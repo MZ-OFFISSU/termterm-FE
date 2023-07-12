@@ -2,7 +2,7 @@ import AutoSizedImage from "@components/common/AutoSizedImage";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { StackScreenProps } from "@react-navigation/stack";
-import { colorTheme, TEXT_STYLES, TYPO_STYLE } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -33,8 +33,9 @@ const QuizIntro = ({ navigation }: Props) => {
   useEffect(() => {
     calcWidth();
   }, []);
+
   return (
-    <SafeAreaView style={{ backgroundColor: "white" }}>
+    <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
       <Container COLOR={COLOR} mode={mode}>
         <ContentWrapper>
           <AutoSizedImage
@@ -57,7 +58,7 @@ const QuizIntro = ({ navigation }: Props) => {
             onPress={() => navigation.navigate("DailyQuiz")}
           >
             <ButtonText COLOR={COLOR} mode={mode}>
-              {`퀴즈 응시하기     >`}
+              {`퀴즈 응시하기    〉`}
             </ButtonText>
           </Button>
         </ContentWrapper>
@@ -74,7 +75,6 @@ const Container = styled.View<{
 }>`
   width: 100%;
   height: 100%;
-  margin: 5px;
 `;
 
 const ContentWrapper = styled.View`
@@ -131,7 +131,6 @@ const ButtonText = styled.Text<{
 }>`
   ${TYPO_STYLE.Body[2].SemiBold};
   color: ${(props) => props.COLOR.Text.lighten};
-  font-size: 15px;
   text-align: center;
   margin: auto 0;
 `;
