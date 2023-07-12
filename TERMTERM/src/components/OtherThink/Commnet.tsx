@@ -86,6 +86,7 @@ const CommentComponent = ({ comment }: Props) => {
     <Wrapper
       onLongPress={openActionSheet}
       delayLongPress={500}
+      activeOpacity={0.8}
       style={{
         borderBottomWidth: 1,
         borderBottomColor: COLOR.Neutral[5],

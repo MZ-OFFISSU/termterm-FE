@@ -21,7 +21,7 @@ interface Comment {
   content: string;
   likeCnt: number;
   authorName: string;
-  source: string;
+  source?: string;
   authorProfileImageUrl: string;
   authorJob: string;
   createdDate: string;

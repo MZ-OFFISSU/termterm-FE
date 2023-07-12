@@ -20,7 +20,13 @@ const WordCard = ({ word, quiz, ...props }: Props) => {
   const [sub, main] = useWordReg(word.name);
 
   return (
-    <Container COLOR={COLOR} mode={mode} quiz={quiz} {...props}>
+    <Container
+      COLOR={COLOR}
+      mode={mode}
+      quiz={quiz}
+      activeOpacity={0.6}
+      {...props}
+    >
       <NameWrapper>
         {sub ? (
           <SubName COLOR={COLOR} quiz={quiz} mode={mode}>
@@ -29,25 +35,13 @@ const WordCard = ({ word, quiz, ...props }: Props) => {
         ) : (
           <></>
         )}
-        <MainName
-          COLOR={COLOR}
-          mode={mode}
-          quiz={quiz}
-          style={{ marginTop: sub ? 5 : 20 }}
-        >
+        <MainName COLOR={COLOR} mode={mode} quiz={quiz}>
           {main}
         </MainName>
       </NameWrapper>
       <Content COLOR={COLOR} mode={mode}>
         {word.description}
       </Content>
-      {word.source ? (
-        <Source COLOR={COLOR} mode={mode} quiz={quiz}>
-          {word.source}
-        </Source>
-      ) : (
-        <></>
-      )}
     </Container>
   );
 };
@@ -57,8 +51,9 @@ const Container = styled.TouchableOpacity<{
   mode: boolean;
   quiz?: boolean;
 }>`
+  min-width: 358px;
   width: 100%;
-  height: 355px;
+  aspect-ratio: 1;
   border-radius: 10px;
   background-color: ${(props) =>
     props.mode
@@ -69,8 +64,8 @@ const Container = styled.TouchableOpacity<{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px;
+  justify-content: flex-start;
+  padding: 36px 22px 22px 22px;
 `;
 
 const NameWrapper = styled.View`
@@ -79,7 +74,6 @@ const NameWrapper = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 10px;
 `;
 
 const SubName = styled.Text<{
@@ -110,6 +104,7 @@ const MainName = styled.Text<{
       ? props.COLOR.THEME.secondary[160]
       : props.COLOR.THEME.primary[100]};
   text-align: center;
+  margin-top: 8px;
 `;
 
 const Content = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
@@ -119,6 +114,7 @@ const Content = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
   white-space: pre-line;
   //TODO : line-height 수정
   line-height: ${TEXT_STYLES.sm.Reg?.fontSize! * 1.6}px;
+  margin-top: 19px;
 `;
 
 const Source = styled.Text<{
