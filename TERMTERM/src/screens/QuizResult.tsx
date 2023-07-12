@@ -27,7 +27,7 @@ const QuizResult = ({ navigation, route }: Props) => {
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
       <Container COLOR={COLOR} mode={mode}>
-        <AnswerReminder />
+        <AnswerReminder answer={false} userAnswer={"Product Manager"} />
         <ContentWrapper>
           <WordCard word={dummyWord} quiz={true} style={{ marginTop: "-15%"}} />
         </ContentWrapper>

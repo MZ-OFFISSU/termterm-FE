@@ -5,11 +5,16 @@ import { screenWidth } from "@style/dimensions";
 import { useEffect, useState } from "react";
 import styled from "styled-components/native";
 
-const AnswerReminder = () => {
+interface AnswerReminderProps {
+  /** 정답 여부 */
+  answer: boolean;
+  /** 사용자가 선택한 답 */
+  userAnswer: string;
+}
+
+const AnswerReminder = ({ answer, userAnswer }: AnswerReminderProps) => {
   const [COLOR, mode] = useThemeStyle();
   const [width, setWidth] = useState(24);
-  const [answer, setAnswer] = useState("Button");
-
   const calcWidth = () => {
     if (screenWidth < 390) return;
     if (screenWidth < 435) {
@@ -31,14 +36,27 @@ const AnswerReminder = () => {
   }, []);
 
   return (
-    <Container COLOR={COLOR} mode={mode}>
+    <Container COLOR={COLOR} mode={mode} answer={answer}>
       <AutoSizedImage
-        source={require("@assets/icon/x-icon.png")}
+        source={
+          answer
+            ? require("@assets/icon/correct-icon.png")
+            : require("@assets/icon/x-icon.png")
+        }
         width={width}
       />
       <AnswerText COLOR={COLOR} mode={mode}>
-        내가 생각한 답은 <BoldText COLOR={COLOR} mode={mode}>{answer}</BoldText>
-        이에요
+        {answer ? (
+          "한 번에 정답을 맞췄어요!"
+        ) : (
+          <>
+            내가 생각한 답은{" "}
+            <BoldText COLOR={COLOR} mode={mode}>
+              {userAnswer}
+            </BoldText>
+            이에요
+          </>
+        )}
       </AnswerText>
     </Container>
   );
@@ -49,10 +67,14 @@ export default AnswerReminder;
 const Container = styled.View<{
   COLOR: colorTheme;
   mode: boolean;
+  answer: boolean;
 }>`
   width: 90%;
   height: 55px;
-  background-color: ${(props) => props.COLOR.THEME.negative[10]};
+  background-color: ${(props) =>
+    props.answer
+      ? props.COLOR.THEME.positive[10]
+      : props.COLOR.THEME.negative[10]};
   display: flex;
   flex-direction: row;
   align-items: center;
