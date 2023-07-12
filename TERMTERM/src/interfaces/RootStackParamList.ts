@@ -33,4 +33,5 @@ export type RootStackParamList = {
   ReportWord: { id: number };
   MyWordApply: { id: number };
   QuizIntro: undefined;
+  QuizResult: { id: number };
 };

@@ -23,6 +23,8 @@ import {
   ReportWord,
   MyWordApply,
   TermsDetail,
+  QuizIntro,
+  QuizResult,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import { BackBar, BookmarkBar, CarouselBar } from "@components/header";
@@ -34,7 +36,6 @@ import * as Font from "expo-font";
 import { SafeAreaView } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import AllTerms from "@screens/AllTerms";
-import QuizIntro from "@screens/QuizIntro";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -378,6 +379,18 @@ const Container = () => {
               header: (props) => {
                 return (
                   <BackBar title="" onBack={() => props.navigation.pop()} />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="QuizResult"
+            component={QuizResult}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar title="정답 확인" onBack={() => props.navigation.pop()} />
                 );
               },
             }}
