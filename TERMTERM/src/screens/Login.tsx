@@ -50,7 +50,8 @@ const Login = ({ navigation }: Props) => {
         <ButtonBox>
           <SocialLoginButton
             type="kakao"
-            onPress={() => navigation.navigate("Onboarding")}
+            // onPress={() => navigation.navigate("Onboarding")}
+            onPress={() => navigation.navigate("Kakao")}
           />
           <SocialLoginButton
             type="google"

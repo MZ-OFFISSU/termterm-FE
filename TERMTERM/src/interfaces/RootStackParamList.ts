@@ -33,4 +33,6 @@ export type RootStackParamList = {
   ReportWord: { id: number };
   MyWordApply: { id: number };
   FilterScreen: undefined;
+  Kakao: undefined;
+  Google: undefined;
 };

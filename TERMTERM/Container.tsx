@@ -36,6 +36,7 @@ import AllTerms from "@screens/AllTerms";
 import { useRecoilValue } from "recoil";
 import { safeAreaColorState } from "@recoil/safeAreaColor";
 import Filter from "@components/common/Filter";
+import KakaoLogin from "@screens/Webview/KakaoLogin";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -399,6 +400,13 @@ const Container = () => {
                   <XBar title="필터" onBack={() => props.navigation.pop()} />
                 );
               },
+            }}
+          />
+          <RootStack.Screen
+            name="Kakao"
+            component={KakaoLogin}
+            options={{
+              headerShown: false,
             }}
           />
         </RootStack.Navigator>
