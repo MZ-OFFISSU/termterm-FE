@@ -14,8 +14,11 @@ import { useRecoilState } from "recoil";
 import { infoState } from "@recoil/signupState";
 import { nicknameReg } from "@utils/reg";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import MemberApi from "@api/MemberApi";
 
 const First = ({ onEnd }: Props) => {
+  const memberApi = new MemberApi();
+
   const [COLOR, mode] = useThemeStyle();
   const [info, setInfo] = useRecoilState(infoState);
   const [name, setName] = useState("");
@@ -26,11 +29,25 @@ const First = ({ onEnd }: Props) => {
     if (nicknameReg(text)) setName(text);
   };
 
-  useEffect(() => {
-    console.log(name);
-  }, [name]);
+  const checkWarn = async (): Promise<boolean> => {
+    try {
+      //닉네임이 중복되지 않음 (사용가능)
+      await memberApi.nicknameDoubleCheck(name);
+      setWarn(false);
+      return true;
+    } catch (err) {
+      //닉네임이 중복됨 (사용불가능)
+      setWarn(true);
+      return false;
+    }
+  };
 
-  const nextStage = () => {
+  const nextStage = async () => {
+    //중복검사 후, 중복되면 함수 중지
+    const check = await checkWarn();
+    if (!check) return;
+
+    //다음 스테이지로
     if (onEnd && name !== "") {
       setInfo({
         ...info,

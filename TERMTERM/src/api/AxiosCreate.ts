@@ -1,19 +1,19 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { CustomAxiosInterface, CommonResponse } from "AxiosCommon";
-import { updateRefreshToken } from "@utils/tokenHandler";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getAccessToken, updateRefreshToken } from "@utils/tokenHandler";
+import { BASE_URL } from "./secret";
 
 const apiClient: CustomAxiosInterface = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  baseURL: `${process.env.REACT_APP_SERVER_HOST}/api`,
+  baseURL: `${BASE_URL}`,
 });
 
 // 요청 interceptor 정의
 apiClient.interceptors.request.use(
   async (config: any) => {
-    const token = await AsyncStorage.getItem("access");
+    const token = await getAccessToken();
     config.headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -31,7 +31,8 @@ apiClient.interceptors.response.use(
     return config;
   },
   async (error: any) => {
-    if (error.response.status === 401) {
+    if (error.response.status === 400) {
+      //JWT 에러 발생시 토큰 갱신
       await updateRefreshToken();
     }
     return Promise.reject(error);
