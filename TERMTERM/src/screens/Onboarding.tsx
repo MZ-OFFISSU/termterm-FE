@@ -15,19 +15,51 @@ import { screenWidth } from "@style/dimensions";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useSafeColor } from "@hooks/useSafeColor";
+import { useRecoilValue } from "recoil";
+import { infoState } from "@recoil/signupState";
+import MemberApi from "@api/MemberApi";
+import { ModifiedMemberInfo } from "Member";
+import { getTypeFromLabel } from "@utils/careerConverter";
+import { registerFailed, registerSucceed } from "@utils/showToast";
 
 export type Props = StackScreenProps<RootStackParamList, "Onboarding">;
 
 const STAGES = [First, Second, Third] as const;
 
 const Onboarding = ({ navigation }: Props) => {
+  const info = useRecoilValue(infoState);
+  const memberApi = new MemberApi();
+
   const [COLOR, mode] = useThemeStyle();
   const [stage, setStage] = useState(0);
   const CurrentPage = STAGES[stage];
   useSafeColor();
 
   const onEnd = () => {
-    stage < STAGES.length - 1 ? setStage((prev) => prev + 1) : null;
+    stage < STAGES.length - 1 ? setStage((prev) => prev + 1) : registerInfo();
+  };
+
+  const registerInfo = async () => {
+    const basicInfo: ModifiedMemberInfo = {
+      domain: info.domain,
+      introduction: "",
+      job: info.job,
+      nickname: info.name,
+      yearCareer: getTypeFromLabel(info.career)!,
+    };
+    const categories: string[] = info.interests;
+
+    try {
+      await memberApi.putInfo(basicInfo);
+      await memberApi.putCategory(categories);
+
+      registerSucceed();
+      navigation.reset({ routes: [{ name: "ToolBar" }] });
+    } catch (err) {
+      console.log(err);
+      registerFailed();
+      navigation.reset({ routes: [{ name: "Login" }] });
+    }
   };
 
   return (
@@ -51,7 +83,7 @@ const Onboarding = ({ navigation }: Props) => {
           </NavigatorPager>
         </NavigationBar>
         <Contents>
-          <CurrentPage onEnd={() => onEnd()} />
+          <CurrentPage onEnd={onEnd} />
         </Contents>
       </Wrapper>
     </SafeAreaView>

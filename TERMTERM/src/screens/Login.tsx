@@ -8,11 +8,14 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useSafeColor } from "@hooks/useSafeColor";
 import { NonUrl } from "@components/common/UrlText";
+import { useMember } from "@hooks/useMember";
 
 export type Props = StackScreenProps<RootStackParamList, "Login">;
 
 const Login = ({ navigation }: Props) => {
   const [width, setWidth] = useState(80);
+  const { user, loading } = useMember();
+
   useSafeColor();
 
   /**로고 너비 계산 함수 */
@@ -32,9 +35,18 @@ const Login = ({ navigation }: Props) => {
     }
   };
 
+  const checkAutoLogin = () => {
+    if (user.isLogined && !loading)
+      navigation.reset({ routes: [{ name: "ToolBar" }] });
+  };
+
   useEffect(() => {
     calculWidth();
   }, []);
+
+  useEffect(() => {
+    checkAutoLogin();
+  }, [user.isLogined, loading]);
 
   return (
     <NonScrollContainer bgColor={"#121212"}>
@@ -50,11 +62,13 @@ const Login = ({ navigation }: Props) => {
         <ButtonBox>
           <SocialLoginButton
             type="kakao"
-            onPress={() => navigation.navigate("Onboarding")}
+            // onPress={() => navigation.navigate("Onboarding")}
+            onPress={() => navigation.navigate("Kakao")}
           />
           <SocialLoginButton
             type="google"
-            onPress={() => navigation.navigate("ToolBar")}
+            // onPress={() => navigation.navigate("ToolBar")}
+            onPress={() => navigation.navigate("Google")}
           />
           <SocialLoginButton
             type="apple"
