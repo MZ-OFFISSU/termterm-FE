@@ -21,7 +21,6 @@ import MemberApi from "@api/MemberApi";
 import { ModifiedMemberInfo } from "Member";
 import { getTypeFromLabel } from "@utils/careerConverter";
 import { registerFailed, registerSucceed } from "@utils/showToast";
-import { getAccessToken } from "@utils/tokenHandler";
 
 export type Props = StackScreenProps<RootStackParamList, "Onboarding">;
 

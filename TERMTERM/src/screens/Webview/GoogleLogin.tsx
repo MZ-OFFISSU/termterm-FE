@@ -9,11 +9,12 @@ import MemberApi from "@api/MemberApi";
 import { MemberInfo } from "Member";
 import { loginFailed, loginSucceed, needRegister } from "@utils/showToast";
 
-export type HomeScreenProps = StackScreenProps<RootStackParamList, "Kakao">;
+export type HomeScreenProps = StackScreenProps<RootStackParamList, "Google">;
 
 const runFirst = `window.ReactNativeWebView.postMessage("this is message from web");`;
 
-const KakaoLogin = ({ navigation }: HomeScreenProps) => {
+//TODO 서버 도메인 등록후 연동 예정
+const GoogleLogin = ({ navigation }: HomeScreenProps) => {
   const authApi = new AuthApi();
   const memberApi = new MemberApi();
 
@@ -40,7 +41,7 @@ const KakaoLogin = ({ navigation }: HomeScreenProps) => {
 
   const getToken = async (code: string) => {
     try {
-      const data = await authApi.postCodeToServer(code, "kakao");
+      const data = await authApi.postCodeToServer(code, "google");
       await setAccessToken(data.access_token);
       await setRefreshToken(data.refresh_token);
 
@@ -72,4 +73,4 @@ const KakaoLogin = ({ navigation }: HomeScreenProps) => {
   );
 };
 
-export default KakaoLogin;
+export default GoogleLogin;
