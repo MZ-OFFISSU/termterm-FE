@@ -10,7 +10,7 @@ class AuthApi {
   ): Promise<AuthResponse> => {
     const data = await axios({
       method: "post",
-      url: `${BASE_URL}v1/auth/${oauth}`,
+      url: `${BASE_URL}/v1/auth/${oauth}`,
       headers: {
         "auth-code": code,
       },

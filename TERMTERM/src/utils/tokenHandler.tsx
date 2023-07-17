@@ -43,7 +43,7 @@ export const updateRefreshToken = async () => {
 
   const data = await axios({
     method: "post",
-    url: `${BASE_URL}v1/auth/token/refresh`,
+    url: `${BASE_URL}/v1/auth/token/refresh`,
     data: {
       access_token: access,
       refresh_token: refresh,

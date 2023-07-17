@@ -4,7 +4,7 @@ import { post, put } from "./AxiosCreate";
 class CommentApi {
   /**나만의 용어 신청 작성 후 등록 */
   registerComment = async (comment: CommentInput): Promise<string> => {
-    const data = await post<string>(`v1/comment`, comment);
+    const data = await post<string>(`/v1/comment`, comment);
     return data;
   };
 
