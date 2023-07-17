@@ -2,6 +2,7 @@ import MemberApi from "@api/MemberApi";
 import { useEffect, useState } from "react";
 import { loginState, LoginState } from "@recoil/loginState";
 import { useRecoilState } from "recoil";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const useMember = () => {
   const memberApi = new MemberApi();
@@ -24,9 +25,16 @@ export const useMember = () => {
     }
   };
 
+  const logout = async () => {
+    setLoading(true);
+    await AsyncStorage.removeItem("access");
+    await AsyncStorage.removeItem("refresh");
+    setLoading(false);
+  };
+
   useEffect(() => {
     checkingLogin();
   }, []);
 
-  return { user, loading };
+  return { user, loading, logout };
 };

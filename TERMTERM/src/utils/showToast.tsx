@@ -36,3 +36,10 @@ export const registerFailed = () => {
     text1: "회원가입에 실패하였습니다.\n다시 시도해주세요.",
   });
 };
+
+export const logoutSucceed = () => {
+  Toast.show({
+    type: "dark",
+    text1: "로그아웃이 완료되었습니다!\n언제든 다시 돌아와주세요 :)",
+  });
+};
