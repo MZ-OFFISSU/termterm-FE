@@ -84,5 +84,5 @@ export {
   Post as post,
   Put as put,
   Patch as patch,
-  Delete as destroy,
+  Delete as remove,
 };

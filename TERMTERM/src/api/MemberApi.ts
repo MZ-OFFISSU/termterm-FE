@@ -1,5 +1,5 @@
 import { MemberInfo, ModifiedMemberInfo } from "Member";
-import { get, put } from "./AxiosCreate";
+import { get, put, remove } from "./AxiosCreate";
 
 class MemberApi {
   /**  사용자 정보 받아오기 */
@@ -29,6 +29,40 @@ class MemberApi {
         nickname: nickname,
       },
     });
+    return data;
+  };
+
+  /** 프로필 이미지 받아오기 */
+  getProfileImage = async (): Promise<string> => {
+    const data = await get<string>(`v1/member/info/profile-image`);
+    return data;
+  };
+
+  /** 프로필 이미지 제거하기 */
+  removeProfileImage = async (): Promise<string> => {
+    const data = await remove<string>(`v1/member/info/profile-image`);
+    return data;
+  };
+
+  /** S3로 이미지 업데이트할 수 있는 URL 발급.
+   * 발급 이후 하단의 syncPresignedUrl로 API 요청을 보내야함
+   */
+  getPresignedUrl = async (): Promise<string> => {
+    const data = await get<string>(
+      `v1/member/info/profile-image/presigned-url`
+    );
+    return data;
+  };
+
+  /** presigned url로 이미지 업데이트 후, 여기로 동기화 */
+  syncPresignedUrl = async (): Promise<string> => {
+    const data = await get<string>(`v1/member/info/profile-image/sync`);
+    return data;
+  };
+
+  /** 회원 탈퇴 */
+  withdraw = async (): Promise<string> => {
+    const data = await get<string>(`v1/member/withdraw`);
     return data;
   };
 }
