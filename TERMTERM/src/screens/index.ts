@@ -20,6 +20,7 @@ import ReportWord from "./ReportWord";
 import MyWordApply from "./MyWordApply";
 import TermsDetail from "./TermsDetail";
 import FilterScreen from "./FilterScreen";
+import CompleteInquiry from "./CompleteInquiry";
 
 export {
   Home,
@@ -44,4 +45,5 @@ export {
   MyWordApply,
   TermsDetail,
   FilterScreen,
+  CompleteInquiry,
 };
