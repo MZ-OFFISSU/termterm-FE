@@ -38,6 +38,7 @@ import { safeAreaColorState } from "@recoil/safeAreaColor";
 import Filter from "@components/common/Filter";
 import KakaoLogin from "@screens/Webview/KakaoLogin";
 import GoogleLogin from "@screens/Webview/GoogleLogin";
+import CompleteInquiry from "@screens/CompleteInquiry";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -415,6 +416,22 @@ const Container = () => {
             component={GoogleLogin}
             options={{
               headerShown: false,
+            }}
+          />
+          <RootStack.Screen
+            name="CompleteInquiry"
+            component={CompleteInquiry}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="문의하기"
+                    // TODO : 로직에 따라 네비게이션 변경
+                    onBack={() => props.navigation.push("Login")}
+                  />
+                );
+              },
             }}
           />
         </RootStack.Navigator>

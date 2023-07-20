@@ -35,4 +35,5 @@ export type RootStackParamList = {
   FilterScreen: undefined;
   Kakao: undefined;
   Google: undefined;
+  CompleteInquiry: undefined;
 };
