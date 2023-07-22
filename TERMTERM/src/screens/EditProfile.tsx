@@ -6,12 +6,18 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import ProfileImageSelector from "@components/my/EditProfile/ProfileImageSelector";
 import { ProfileProps } from "@interfaces/profile";
 import InfoSelector from "@components/my/EditProfile/InfoSelector";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ScrollView } from "react-native";
 import { CustomButton } from "@components/index";
 import { BUTTON_STATE, BUTTON_TYPE } from "@components/index";
 import { useDebounce } from "@hooks/useDebounce";
 import { screenWidth } from "@style/dimensions";
+import MemberApi from "@api/MemberApi";
+import { infoState } from "@recoil/signupState";
+import { useRecoilState } from "recoil";
+import { ModifiedMemberInfo } from "Member";
+import { getTypeFromLabel } from "@utils/careerConverter";
+import { getAccessToken } from "@utils/tokenHandler";
 
 export type Props = StackScreenProps<RootStackParamList, "EditProfile">;
 
@@ -19,10 +25,14 @@ export type Props = StackScreenProps<RootStackParamList, "EditProfile">;
  * 프로필 수정 스크린
  */
 const EditProfile = ({ navigation }: Props) => {
+  const memberApi = new MemberApi();
+  const [info, setInfo] = useRecoilState(infoState);
+
   const [COLOR, mode] = useThemeStyle();
   const [input, setInput] = useState<ProfileProps>(dummyProfile);
   const scrollViewRef = useRef<ScrollView>(null);
   const [changed, setChanged] = useState(false);
+  const [warn, setWarn] = useState(false);
 
   const scrollToBottom = () => {
     scrollViewRef.current?.scrollToEnd({ animated: true });
@@ -37,6 +47,52 @@ const EditProfile = ({ navigation }: Props) => {
     JSON.stringify(input),
     500
   );
+
+  const checkWarn = async (): Promise<boolean> => {
+    try {
+      //닉네임이 중복되지 않음 (사용가능)
+      await memberApi.nicknameDoubleCheck(input.name);
+      setWarn(false);
+      return true;
+    } catch (err) {
+      //닉네임이 중복됨 (사용불가능)
+      setWarn(true);
+      return false;
+    }
+  };
+
+  const editProfileInfo = async () => {
+    const modifiedInfo: ModifiedMemberInfo = {
+      domain: input.domain,
+      introduction: input.intro as string,
+      job: input.job,
+      nickname: input.name,
+      yearCareer: getTypeFromLabel(info.career)!,
+    };
+    setInfo({
+      name: input.name,
+      domain: input.domain,
+      job: input.job,
+      career: input.career,
+      interests: input.interests,
+    })
+    const categories: string[] = input.interests;
+    // const access = getAccessToken();
+
+    try {
+      // 닉네임 중복 검사
+      const check = await checkWarn();
+      if (!check) return;
+
+      await memberApi.putInfo(modifiedInfo);
+      await memberApi.putCategory(categories);
+      // TODO : 프로필 사진 수정 API 추가
+
+      navigation.reset({ routes: [{ name: "My" }] });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Container ref={scrollViewRef} COLOR={COLOR}>
@@ -60,7 +116,7 @@ const EditProfile = ({ navigation }: Props) => {
               ? BUTTON_STATE.active
               : BUTTON_STATE.default
           }
-          onPress={() => null}
+          onPress={() => editProfileInfo()}
           style={{
             width: screenWidth - 32,
             alignSelf: "center",
