@@ -20,6 +20,7 @@ import DailyQuizRouter from "./quiz/DailyQuizRouter";
 import ArchiveSelector from "./archive/ArchiveSelector";
 import Input from "./common/Input";
 import WordCard from "./cards/WordCard";
+import AnswerReminder from "./quiz/AnswerReminder";
 
 export { BUTTON_STATE, BUTTON_TYPE };
 export { NavigatorTitle, NavigatorPager, CaretBtn };
@@ -38,4 +39,5 @@ export {
   TitleWrapper,
   ArchiveSelector,
   Input,
+  AnswerReminder,
 };

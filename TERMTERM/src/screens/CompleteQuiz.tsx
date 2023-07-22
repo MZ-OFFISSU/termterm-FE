@@ -6,12 +6,15 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BackBar } from "@components/header";
-import { LIGHT_COLOR_STYLE } from "@style/designSystem";
+import { colorTheme, LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
+import { useThemeStyle } from "@hooks/useThemeStyle";
 
 export type Props = StackScreenProps<RootStackParamList, "CompleteQuiz">;
 
 const CompleteQuiz = ({ navigation }: Props) => {
+  const [COLOR, mode] = useThemeStyle();
   const [width, setWidth] = useState(112);
+  const [score, setScore] = useState(200);
 
   /** 아이콘 너비 계산 함수 */
   const calcWidth = () => {
@@ -35,7 +38,7 @@ const CompleteQuiz = ({ navigation }: Props) => {
   }, []);
 
   return (
-    <SafeAreaView style={{ backgroundColor: "white" }}>
+    <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
       <Container>
         <BackBar title="Daily 용어 퀴즈 완료" onBack={() => navigation.pop()} />
         <ContentWrapper>
@@ -46,11 +49,18 @@ const CompleteQuiz = ({ navigation }: Props) => {
           />
           <TitleBox>
             <Title>Daily 용어 퀴즈 완료 🎉</Title>
-            <SubTitle>Daily 용어 퀴즈를 모두 맞추셨어요!</SubTitle>
-            <SubTitle>200포인트를 얻었습니다.</SubTitle>
+            <SubTitle COLOR={COLOR} mode={mode}>
+              Daily 용어 퀴즈를 모두 맞춰
+            </SubTitle>
+            <SubTitle COLOR={COLOR} mode={mode}>
+              <BoldSub COLOR={COLOR} mode={mode}>{score}포인트</BoldSub>를 얻었어요!
+            </SubTitle>
+            <SubTitle COLOR={COLOR} mode={mode}>
+              내일도 Daily 용어 퀴즈를 응시해보세요.
+            </SubTitle>
           </TitleBox>
-          <CompleteButton onPress={() => navigation.push("Home")}>
-            <ButtonText>홈으로 돌아가기 〉 </ButtonText>
+          <CompleteButton COLOR={COLOR} mode={mode} onPress={() => navigation.navigate("Home")}>
+            <ButtonText>{`홈으로 돌아가기    〉`}</ButtonText>
           </CompleteButton>
         </ContentWrapper>
       </Container>
@@ -87,24 +97,39 @@ const Title = styled.Text`
   font-weight: 900;
   color: #0d0d0d;
   opacity: 0.95;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 `;
 
-const SubTitle = styled.Text`
-  font-size: 17px;
-  font-weight: 500;
-  color: #303030;
+const SubTitle = styled.Text<{
+  COLOR: colorTheme;
+  mode: boolean;
+}>`
+  ${TYPO_STYLE.Body[2].Regular};
+  color: ${(props) => props.COLOR.Text.default};
   margin-top: 5px;
-  opacity: 0.95;
+  text-align: center;
 `;
 
-const CompleteButton = styled.TouchableOpacity`
+const BoldSub = styled.Text<{
+  COLOR: colorTheme;
+  mode: boolean;
+}>`
+  ${TYPO_STYLE.Body[2].Bold};
+  color: ${(props) => props.COLOR.Text.default};
+  margin-top: 5px;
+  text-align: center;
+`;
+
+const CompleteButton = styled.TouchableOpacity<{
+  COLOR: colorTheme;
+  mode: boolean;
+}>`
   width: 318px;
   height: 44px;
   z-index: 2;
-  background-color: #1b1b1c;
+  background-color: ${(props) => props.COLOR.Neutral[100]};
   border-radius: 50%;
-  margin-top: 30px;
+  margin-top: 40px;
 `;
 
 const ButtonText = styled.Text`

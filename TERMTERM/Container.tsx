@@ -23,10 +23,13 @@ import {
   ReportWord,
   MyWordApply,
   TermsDetail,
+  QuizIntro,
+  QuizResult,
+  QuizReview,
   FilterScreen,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
-import { BackBar, BookmarkBar, CarouselBar, XBar } from "@components/header";
+import { BackBar, BookmarkBar, CarouselBar, BookmarkSingleBar, XBar } from "@components/header";
 import { IconBar, Icon } from "@components/header";
 import { useState, useEffect, useCallback } from "react";
 import * as Font from "expo-font";
@@ -404,6 +407,18 @@ const Container = () => {
             }}
           />
           <RootStack.Screen
+            name="QuizIntro"
+            component={QuizIntro}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar title="" onBack={() => props.navigation.pop()} />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
             name="Kakao"
             component={KakaoLogin}
             options={{
@@ -415,6 +430,37 @@ const Container = () => {
             component={GoogleLogin}
             options={{
               headerShown: false,
+            }}
+          />
+            
+          <RootStack.Screen
+            name="QuizResult"
+            component={QuizResult}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="정답 확인"
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="QuizReview"
+            component={QuizReview}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="용어 퀴즈 리뷰"
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
             }}
           />
         </RootStack.Navigator>
