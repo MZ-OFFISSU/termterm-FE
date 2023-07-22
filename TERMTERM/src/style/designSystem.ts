@@ -432,9 +432,23 @@ export const TYPO_STYLE = {
       `,
     },
     3: {
+      SemiBold: css`
+        font-family: "SUIT-SemiBold";
+        font-size: ${normalize(8)}px;
+      `,
       Medium: css`
         font-family: "SUIT-Medium";
         font-size: ${normalize(8)}px;
+      `,
+    },
+    4: {
+      Bold: css`
+        font-family: "SUIT-Bold";
+        font-size: ${normalize(6)}px;
+      `,
+      Medium: css`
+        font-family: "SUIT-Medium";
+        font-size: ${normalize(6)}px;
       `,
     },
   },

@@ -16,32 +16,39 @@ import { infoState } from "@recoil/signupState";
 
 interface JobType {
   title: string;
+  type: string;
   img: ImageSourcePropType;
 }
 
 export const JOB_TYPE: Array<JobType> = [
   {
     title: "기획",
+    type: "PM",
     img: require("@assets/card/plan.png"),
   },
   {
     title: "마케팅",
+    type: "MARKETING",
     img: require("@assets/card/market.png"),
   },
   {
     title: "개발",
+    type: "DEVELOPMENT",
     img: require("@assets/card/develop.png"),
   },
   {
     title: "디자인",
+    type: "DESIGN",
     img: require("@assets/card/design.png"),
   },
   {
     title: "비즈니스",
+    type: "BUSINESS",
     img: require("@assets/card/business.png"),
   },
   {
     title: "IT",
+    type: "IT",
     img: require("@assets/card/it.png"),
   },
 ];
@@ -86,8 +93,8 @@ const Third = ({ onEnd }: Props) => {
         {JOB_TYPE.map((job) => (
           <JobCard
             key={job.title}
-            isFocused={jobs.includes(job.title)}
-            onPress={() => selectJob(job.title)}
+            isFocused={jobs.includes(job.type)}
+            onPress={() => selectJob(job.type)}
             {...job}
           />
         ))}
@@ -120,14 +127,14 @@ const ButtonContainer = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   align-self: center;
-  margin-top: 20px;
+  margin-top: 34px;
 `;
 
 const Warning = styled.Text`
   font-size: 14px;
   font-weight: 400;
   color: ${LIGHT_COLOR_STYLE.Text.muted};
-  margin-top: 5px;
+  margin-top: 14px;
 `;
 
 export default Third;

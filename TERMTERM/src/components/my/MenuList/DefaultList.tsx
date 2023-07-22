@@ -6,6 +6,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import CustomModal from "@components/popup/modal";
 import { useState } from "react";
+import { useMember } from "@hooks/useMember";
+import { logoutSucceed } from "@utils/showToast";
 
 interface MenuProps {
   title: string;
@@ -17,6 +19,8 @@ interface MenuProps {
  * 프로필 스크린에서 기본으로 보이는 메뉴 리스트
  */
 const DefaultList = () => {
+  const { logout, loading } = useMember();
+
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [isModal, setIsModal] = useState(false);
   const MENU_LIST: Array<Array<MenuProps>> = [
@@ -25,7 +29,7 @@ const DefaultList = () => {
       { title: "테마 변경", onPress: () => navigation.push("ThemeSelect") },
     ],
     [
-      { title: "문의 사항", onPress: () => null },
+      { title: "문의하기", onPress: () => null },
       { title: "앱 공유하기", onPress: () => null },
     ],
     [{ title: "버전 정보", subtitle: "v 1.0", onPress: () => null }],
@@ -39,12 +43,16 @@ const DefaultList = () => {
     ],
   ];
 
-  const logout = () => {
-    //TODO 로그아웃 로직 추가
-    setIsModal(false);
-    navigation.reset({
-      routes: [{ name: "Login" }],
-    });
+  const logoutHandler = async () => {
+    await logout();
+
+    logoutSucceed();
+    if (!loading) {
+      setIsModal(false);
+      navigation.reset({
+        routes: [{ name: "Login" }],
+      });
+    }
   };
 
   return (
@@ -62,7 +70,7 @@ const DefaultList = () => {
         title="정말 로그아웃 하시겠습니까?"
         btnTitle={["취소", "로그아웃"]}
         onClose={() => setIsModal(false)}
-        onNext={() => logout()}
+        onNext={() => logoutHandler()}
       />
     </>
   );

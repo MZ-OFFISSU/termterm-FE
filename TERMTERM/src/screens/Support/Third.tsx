@@ -32,17 +32,14 @@ const Third = () => {
   return (
     <View
       style={{
-        position: "relative",
         width: "100%",
         height: "100%",
-        paddingTop: 80,
       }}
     >
       <ContentWrapper>
         <AutoSizedImage
           source={require("@assets/bookmark-character.png")}
           width={width}
-          style={{ marginTop: 70 }}
         />
         <TitleBox>
           <Title>문의가 정상적으로 접수되었습니다.</Title>
@@ -63,7 +60,7 @@ const ContentWrapper = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 25px 20px 50px 20px;
+  padding: 75px 20px 50px 20px;
 `;
 
 const TitleBox = styled.View`
@@ -84,5 +81,5 @@ const Title = styled.Text`
 const SubTitle = styled.Text`
   ${TYPO_STYLE.Body[3].Medium};
   color: ${LIGHT_COLOR_STYLE.Text.darken};
-  line-height: 20px;
+  line-height: 25px;
 `;

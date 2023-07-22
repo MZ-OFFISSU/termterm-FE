@@ -35,4 +35,7 @@ export type RootStackParamList = {
   QuizIntro: undefined;
   QuizResult: { id: number };
   QuizReview: { id: number };
+  FilterScreen: undefined;
+  Kakao: undefined;
+  Google: undefined;
 };

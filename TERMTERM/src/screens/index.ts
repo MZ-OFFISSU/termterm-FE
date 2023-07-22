@@ -22,6 +22,7 @@ import TermsDetail from "./TermsDetail";
 import QuizIntro from "./QuizIntro";
 import QuizResult from "./QuizResult";
 import QuizReview from "./QuizReview";
+import FilterScreen from "./FilterScreen";
 
 export {
   Home,
@@ -48,4 +49,5 @@ export {
   QuizIntro,
   QuizResult,
   QuizReview,
+  FilterScreen,
 };

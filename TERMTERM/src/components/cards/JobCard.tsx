@@ -4,7 +4,8 @@ import {
   ImageBackground,
   ImageSourcePropType,
 } from "react-native";
-import { LIGHT_COLOR_STYLE, TYPO_STYLE, } from "@style/designSystem";
+import { LIGHT_COLOR_STYLE, TYPO_STYLE, colorTheme } from "@style/designSystem";
+import { useThemeStyle } from "@hooks/useThemeStyle";
 
 interface Props extends TouchableOpacityProps {
   title: string;
@@ -13,8 +14,10 @@ interface Props extends TouchableOpacityProps {
 }
 
 const JobCard = ({ title, img, isFocused, ...props }: Props) => {
+  const [COLOR, mode] = useThemeStyle();
+
   return (
-    <Card {...props}>
+    <Card COLOR={COLOR} {...props}>
       {isFocused ? (
         <ImageBackground
           source={img}
@@ -31,13 +34,13 @@ const JobCard = ({ title, img, isFocused, ...props }: Props) => {
           </Title>
         </ImageBackground>
       ) : (
-        <Title style={{ color: LIGHT_COLOR_STYLE.Text.default }}>{title}</Title>
+        <Title COLOR={COLOR}>{title}</Title>
       )}
     </Card>
   );
 };
 
-const Card = styled.TouchableOpacity`
+const Card = styled.TouchableOpacity<{ COLOR: colorTheme }>`
   width: 47%;
   height: 90px;
   margin: 5px;
@@ -46,11 +49,12 @@ const Card = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background-color: ${LIGHT_COLOR_STYLE.Background.input};
+  background-color: ${(props) => props.COLOR.Background.input};
 `;
 
-const Title = styled.Text`
+const Title = styled.Text<{ COLOR?: colorTheme }>`
   ${TYPO_STYLE.Body[2].Medium};
+  color: ${(props) => (props.COLOR ? props.COLOR.Text.default : "")};
 `;
 
 export default JobCard;

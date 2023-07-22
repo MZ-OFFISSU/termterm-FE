@@ -63,7 +63,7 @@ const RecommendList = ({ navigation, ...props }: Props) => {
           {...item}
           onMove={() => navigation.push("CurationDetail", { id: item.id })}
           key={item.img}
-          style={idx !== 0 ? { marginTop: 20 } : {}}
+          style={idx !== 0 ? { marginTop: 30 } : {}}
         />
       ))}
     </ContentsWrapper>

@@ -33,7 +33,7 @@ const MenuBox = ({ title, subtitle, children, ...props }: Props) => {
 
 const MenuContainer = styled.TouchableOpacity`
   width: 100%;
-  height: 60px;
+  height: 55px;
   padding: 0px 20px;
   display: flex;
   flex-direction: row;

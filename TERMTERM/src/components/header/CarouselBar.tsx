@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useHeader } from "@hooks/useHeader";
+import BackArrowIcon from "@assets/icon/BackArrowIcon";
 
 interface Props {
   onBack: () => void;
@@ -22,11 +23,9 @@ const CarouselBar = ({ onBack, onBookmark, onShare }: Props) => {
     <HeaderWrapper
       style={{ justifyContent: "space-between", position: "relative" }}
     >
-      <ElementWrapper style={{ marginLeft: 20 }}>
-        <CaretBtn onPress={() => onBack()}>
-          <AntDesign name="left" size={24} color={COLOR.Text.active} />
-        </CaretBtn>
-      </ElementWrapper>
+      <CaretBtn onPress={() => onBack()} style={{ marginLeft: 20 }}>
+        <BackArrowIcon size={20} color={COLOR.Text.active} />
+      </CaretBtn>
       <TitleWrapper>
         <NavigatorTitle style={{ marginLeft: 10 }} COLOR={COLOR}>{`${
           headerState.curNum + 1

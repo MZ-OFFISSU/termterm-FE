@@ -2,11 +2,13 @@ import styled from "styled-components/native";
 import { LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import DropDownPicker from "react-native-dropdown-picker";
 import { DropDownPickerProps, ValueType } from "react-native-dropdown-picker";
-import { AntDesign } from "@expo/vector-icons";
+import { useThemeStyle } from "@hooks/useThemeStyle";
 
 type ICVDropDownPickerProps = DropDownPickerProps<ValueType>;
 
 const CustomSelector = ({ ...props }: ICVDropDownPickerProps) => {
+  const [COLOR, mode] = useThemeStyle();
+
   return (
     // 직접 커스터마이징한 셀렉트 박스 코드
     // 라이브러리 사용으로 주석처리
@@ -48,7 +50,7 @@ const CustomSelector = ({ ...props }: ICVDropDownPickerProps) => {
       {...props}
       placeholderStyle={{
         color: LIGHT_COLOR_STYLE.Text.disabled,
-        fontWeight: "bold",
+        fontWeight: "500",
       }}
       arrowIconStyle={{
         width: 20,
@@ -58,15 +60,21 @@ const CustomSelector = ({ ...props }: ICVDropDownPickerProps) => {
         width: 25,
         height: 25,
       }}
+      labelStyle={{
+        color: COLOR.Text.active,
+        marginLeft: 5,
+      }}
       style={{
         borderColor:
           props.value === ""
-            ? LIGHT_COLOR_STYLE.Neutral[20]
-            : LIGHT_COLOR_STYLE.Background.inputBorderFocus,
+            ? COLOR.Neutral[20]
+            : mode
+            ? COLOR.Background.inputBorderFocus
+            : COLOR.Background.inputBorderDefault,
         backgroundColor:
           props.value === ""
-            ? LIGHT_COLOR_STYLE.Background.input
-            : LIGHT_COLOR_STYLE.Background.surface,
+            ? COLOR.Background.input
+            : COLOR.Background.surface,
         height: 44,
         marginTop: 15,
       }}

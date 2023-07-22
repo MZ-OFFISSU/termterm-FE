@@ -23,7 +23,7 @@ const LogBtn = styled.TouchableOpacity<{ COLOR: colorTheme }>`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 10px 15px;
+  padding: 8px 15px;
   border-radius: 500px;
   border: 1px solid ${(props) => props.COLOR.Neutral[20]};
   margin: 0px 0px 7px 7px;

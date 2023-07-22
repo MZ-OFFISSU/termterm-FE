@@ -26,17 +26,21 @@ import {
   QuizIntro,
   QuizResult,
   QuizReview,
+  FilterScreen,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
-import { BackBar, BookmarkBar, CarouselBar, BookmarkSingleBar } from "@components/header";
+import { BackBar, BookmarkBar, CarouselBar, BookmarkSingleBar, XBar } from "@components/header";
 import { IconBar, Icon } from "@components/header";
-import { safeAreaColorState } from "@recoil/safeAreaColor";
-import { useRecoilValue } from "recoil";
 import { useState, useEffect, useCallback } from "react";
 import * as Font from "expo-font";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, StatusBar } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import AllTerms from "@screens/AllTerms";
+import { useRecoilValue } from "recoil";
+import { safeAreaColorState } from "@recoil/safeAreaColor";
+import Filter from "@components/common/Filter";
+import KakaoLogin from "@screens/Webview/KakaoLogin";
+import GoogleLogin from "@screens/Webview/GoogleLogin";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -94,8 +98,9 @@ const Container = () => {
   return (
     <SafeAreaView
       onLayout={onLayoutRootView}
-      style={{ flex: 1, width: "100%", backgroundColor: safeColor }}
+      style={{ flex: 1, width: "100%", backgroundColor: safeColor.bgColor }}
     >
+      <StatusBar barStyle={safeColor.styleColor} />
       <NavigationContainer>
         <RootStack.Navigator initialRouteName="Walkthrough">
           <RootStack.Screen
@@ -292,7 +297,17 @@ const Container = () => {
           <RootStack.Screen
             name="Support"
             component={Support}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="문의하기"
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
           />
           <RootStack.Screen
             name="AllTerms"
@@ -304,6 +319,13 @@ const Container = () => {
                   <BackBar
                     title="전체 용어"
                     onBack={() => props.navigation.pop()}
+                    Icon={
+                      <Filter
+                        navigateHandler={() =>
+                          props.navigation.push("FilterScreen")
+                        }
+                      />
+                    }
                   />
                 );
               },
@@ -373,6 +395,18 @@ const Container = () => {
             }}
           />
           <RootStack.Screen
+            name="FilterScreen"
+            component={FilterScreen}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <XBar title="필터" onBack={() => props.navigation.pop()} />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
             name="QuizIntro"
             component={QuizIntro}
             options={{
@@ -384,6 +418,21 @@ const Container = () => {
               },
             }}
           />
+          <RootStack.Screen
+            name="Kakao"
+            component={KakaoLogin}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <RootStack.Screen
+            name="Google"
+            component={GoogleLogin}
+            options={{
+              headerShown: false,
+            }}
+          />
+            
           <RootStack.Screen
             name="QuizResult"
             component={QuizResult}

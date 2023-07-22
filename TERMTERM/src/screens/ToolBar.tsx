@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, Octicons } from "@expo/vector-icons";
 import { Home, Search, Archive, My } from "./Toolbar/index";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
@@ -51,10 +51,16 @@ const ToolBar = ({ ...props }: Props) => {
             );
           },
           tabBarIcon: ({ focused }) => (
-            <Ionicons
+            <Octicons
               name="home"
               style={{
-                color: focused ? COLOR.Neutral[100] : COLOR.Neutral[40],
+                color: focused
+                  ? mode
+                    ? COLOR.Neutral[100]
+                    : COLOR.Text.active
+                  : mode
+                  ? COLOR.Neutral[40]
+                  : COLOR.Neutral[20],
               }}
               size={24}
             />
@@ -79,7 +85,13 @@ const ToolBar = ({ ...props }: Props) => {
             <Ionicons
               name="search"
               style={{
-                color: focused ? COLOR.Neutral[100] : COLOR.Neutral[40],
+                color: focused
+                  ? mode
+                    ? COLOR.Neutral[100]
+                    : COLOR.Text.active
+                  : mode
+                  ? COLOR.Neutral[40]
+                  : COLOR.Neutral[20],
               }}
               size={24}
             />
@@ -110,10 +122,16 @@ const ToolBar = ({ ...props }: Props) => {
           },
           title: "아카이브",
           tabBarIcon: ({ focused }) => (
-            <Ionicons
-              name="archive"
+            <Octicons
+              name="apps"
               style={{
-                color: focused ? COLOR.Neutral[100] : COLOR.Neutral[40],
+                color: focused
+                  ? mode
+                    ? COLOR.Neutral[100]
+                    : COLOR.Text.active
+                  : mode
+                  ? COLOR.Neutral[40]
+                  : COLOR.Neutral[20],
               }}
               size={24}
             />
@@ -142,10 +160,16 @@ const ToolBar = ({ ...props }: Props) => {
           },
           title: "MY",
           tabBarIcon: ({ focused }) => (
-            <Ionicons
+            <Octicons
               name="person"
               style={{
-                color: focused ? COLOR.Neutral[100] : COLOR.Neutral[40],
+                color: focused
+                  ? mode
+                    ? COLOR.Neutral[100]
+                    : COLOR.Text.active
+                  : mode
+                  ? COLOR.Neutral[40]
+                  : COLOR.Neutral[20],
               }}
               size={24}
             />

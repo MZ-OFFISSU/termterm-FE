@@ -7,6 +7,7 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 interface Props extends TextInputProps {
   value: string;
   max?: boolean;
+  maxLength: number;
 }
 
 /**
@@ -14,7 +15,7 @@ interface Props extends TextInputProps {
  * 이유는 온보딘 스크린에서는 라이트모드 고정이기에
  * 디자인 토큰을 유동적으로 적용하기가 어려움
  */
-const CustomTextInput = ({ value, max = true, ...props }: Props) => {
+const CustomTextInput = ({ value, max = true, maxLength, ...props }: Props) => {
   const [borderColor, setBorderColor] = useState(LIGHT_COLOR_STYLE.Neutral[20]);
   const [COLOR] = useThemeStyle();
 
@@ -32,11 +33,12 @@ const CustomTextInput = ({ value, max = true, ...props }: Props) => {
         }
         value={value}
         COLOR={COLOR}
+        maxLength={maxLength}
         {...props}
       />
       {max ? (
         <Maximum style={{ color: borderColor, right: 0, top: 7 }}>
-          {value.length}/20
+          {value.length}/{maxLength}
         </Maximum>
       ) : (
         <></>

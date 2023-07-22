@@ -54,7 +54,7 @@ const TermsDetail = ({ navigation, route }: Props) => {
             snap={snap}
             touchable={false}
           />
-          <LottieAnimation />
+          {/* <LottieAnimation /> */}
           <OtherThink word={words[curIdx]} />
         </>
       ) : (

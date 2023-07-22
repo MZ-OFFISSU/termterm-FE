@@ -12,7 +12,7 @@ import {
   Title,
   Wrapper,
 } from "./style";
-import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { BUTTON_STATE, BUTTON_TYPE, CustomButton } from "..";
@@ -95,13 +95,17 @@ interface CheckProps {
   checked: boolean;
 }
 
-const CheckBoxIcon = ({ checked }: CheckProps) => {
+export const CheckBoxIcon = ({ checked }: CheckProps) => {
   const [COLOR, mode] = useThemeStyle();
 
   return checked ? (
-    <Ionicons name="md-checkbox" size={24} color={COLOR.Text.active} />
+    <MaterialIcons name="check-box" size={24} color={COLOR.Text.active} />
   ) : (
-    <Ionicons name="ios-checkbox-outline" size={24} color={COLOR.Text.active} />
+    <MaterialIcons
+      name="check-box-outline-blank"
+      size={24}
+      color={COLOR.Text.active}
+    />
   );
 };
 

@@ -27,7 +27,7 @@ const RecommendBtn = styled.TouchableOpacity<{
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 10px 15px;
+  padding: 8px 15px;
   border-radius: 500px;
   border: 1px solid ${(props) => props.COLOR.THEME.primary.variant};
   background-color: ${(props) =>

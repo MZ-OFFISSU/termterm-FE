@@ -26,30 +26,32 @@ const DeleteButtons = () => {
   return (
     <Container>
       <Button
-        onPress={() => setIsModal(true)}
-        style={{
-          backgroundColor: `${mode ? COLOR.Neutral[5] : COLOR.Neutral[0]}`,
-          marginBottom: 10,
-        }}
-      >
-        <Title style={{ color: COLOR.Text.default }}>모든 기록 삭제하기</Title>
-      </Button>
-      <Button
         onPress={() => navigation.pop()}
         style={{
           backgroundColor: `${
             mode ? COLOR.Neutral[100] : COLOR.THEME.primary[130]
           }`,
+          marginBottom: 10,
         }}
       >
         <Title style={{ color: COLOR.Text.lighten }}>
           나의 학습 기록 유지하기
         </Title>
       </Button>
+      <Button
+        onPress={() => setIsModal(true)}
+        style={{
+          backgroundColor: `${mode ? COLOR.Neutral[5] : COLOR.Neutral[0]}`,
+        }}
+      >
+        <Title style={{ color: COLOR.Text.default }}>
+          모든 기록 삭제하고 탈퇴하기
+        </Title>
+      </Button>
       <CustomModal
         visible={isModal}
-        title="정말 탈퇴하실건가요?"
-        subtitle="지금까지 모은 포인트와 기록은 복구할 수 없어요!"
+        title="탈퇴 시 주의사항을 한 번 더 확인해주세요."
+        subtitle={`탈퇴 시 계정의 모든 정보와 학습 기록,\n포인트가 완전히 사라지며 복구할 수 없어요.\n단, 서비스 이용 시 작성한 용어 설명은\n삭제되지 않아요.`}
         btnTitle={["취소", "탈퇴하기"]}
         onClose={() => setIsModal(false)}
         onNext={() => removeAccount()}

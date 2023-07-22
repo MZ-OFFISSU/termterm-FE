@@ -1,6 +1,6 @@
 import HeaderWrapper from "./HeaderWrapper";
 import { CaretBtn } from "../common/NavigatorTitle";
-import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 
@@ -24,7 +24,7 @@ const HomeBar = ({ onSearch }: Props) => {
         style={{ marginLeft: 20 }}
       />
       <CaretBtn onPress={() => onSearch()} style={{ marginRight: 20 }}>
-        <Entypo name="magnifying-glass" size={24} color={COLOR.Text.active} />
+        <AntDesign name="search1" size={24} color={COLOR.Text.active} />
       </CaretBtn>
     </HeaderWrapper>
   );

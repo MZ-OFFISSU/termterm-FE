@@ -1,17 +1,20 @@
 import styled from "styled-components/native";
-import { View } from "react-native";
 import { LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import { CustomButton, BUTTON_STATE, BUTTON_TYPE } from "@components/index";
 import { useState } from "react";
 import { screenWidth } from "@style/dimensions";
 import { Props } from "@interfaces/support";
-import { CheckBox } from "@rneui/themed";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import { CheckBoxContent, CheckBoxWrapper } from "@components/apply/style";
+import { CheckBoxIcon } from "@components/apply/StandardApply";
 
 const Second = ({ onEnd }: Props) => {
   const [COLOR, theme] = useThemeStyle();
-  const [btnPosition, setBtnPosiition] = useState(30);
   const [checkState, setCheckState] = useState(false);
+
+  const onCheck = () => {
+    setCheckState((prev) => !prev);
+  };
 
   const nextStage = () => {
     if (onEnd && checkState !== false) {
@@ -20,14 +23,7 @@ const Second = ({ onEnd }: Props) => {
   };
 
   return (
-    <View
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100%",
-        paddingTop: 80,
-      }}
-    >
+    <Container>
       <Title>개인정보 수집 및 이용에 대한 안내</Title>
       <SubTitle>
         {`O'MZ는 이용자 문의를 처리하기 위해 다음과 같이 개인\n정보를 수집 및 이용하며, 이용자의 개인정보를 안전하게\n취급하는데 최선을 다하고 있습니다.`}
@@ -53,20 +49,13 @@ const Second = ({ onEnd }: Props) => {
       </TextWrapper>
       <TextWrapper>
         <InfoContent style={{ marginTop: "-3%" }}>
-          {`더 자세한 내용에 대해서는 termterm 개인정보 처리방침을\n참고하시기 바랍니다.`}
+          {`더 자세한 내용에 대해서는 termterm 개인정보 처리방침을 참고하시기 바랍니다.`}
         </InfoContent>
-        <RowBox>
-          <CheckBox
-            checked={checkState}
-            onPress={() => setCheckState(!checkState)}
-            iconType="material-community"
-            checkedIcon="checkbox-outline"
-            uncheckedIcon={"checkbox-blank-outline"}
-            checkedColor="#000000"
-          />
-          <AgreeText>위의 내용에 동의합니다.</AgreeText>
-        </RowBox>
       </TextWrapper>
+      <CheckBoxWrapper onPress={onCheck} style={{ marginTop: 36 }}>
+        <CheckBoxIcon checked={checkState} />
+        <CheckBoxContent COLOR={COLOR}>확인하였습니다.</CheckBoxContent>
+      </CheckBoxWrapper>
       <CustomButton
         title="다음"
         theme={theme}
@@ -78,15 +67,21 @@ const Second = ({ onEnd }: Props) => {
         style={{
           width: screenWidth - 32,
           alignSelf: "center",
-          position: "absolute",
-          bottom: btnPosition,
+          marginTop: 52,
         }}
       />
-    </View>
+    </Container>
   );
 };
 
 export default Second;
+
+const Container = styled.View`
+  width: 100%;
+  position: relative;
+
+  padding: 34px 32px;
+`;
 
 const Title = styled.Text`
   ${TYPO_STYLE.Heading[3].ExtraBold};
@@ -128,7 +123,6 @@ const InfoContent = styled.Text`
 const RowBox = styled.View`
   display: flex;
   flex-direction: row;
-  margin: 30px 0 0 -15px;
 `;
 
 const AgreeText = styled.Text`

@@ -82,7 +82,7 @@ export const ListItemCaptionText = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Caption[1].Medium};
   text-align: center;
   color: ${(props) => props.COLOR.Text.default};
-  margin-top: 12px;
+  margin-top: 16px;
 `;
 
 export const CheckBoxWrapper = styled.TouchableOpacity`

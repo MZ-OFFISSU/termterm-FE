@@ -5,47 +5,37 @@ import ContentLine from "@components/my/Notification";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-interface NotificationMenu {
-  title: string;
-  available: boolean;
-}
-
-const MENUS: Array<NotificationMenu> = [
-  {
+const MENUS = {
+  all: {
     title: "전체 알림",
     available: false,
   },
-  {
+  today: {
     title: "오늘의 용어",
     available: false,
   },
-  {
+  repeat: {
     title: "복습",
     available: false,
   },
-  {
-    title: "데일리 용어 퀴즈",
+  quiz: {
+    title: "Daily 용어 퀴즈",
     available: false,
   },
-];
+};
 
 /**
  * 마이페이지 -> 알람설정 스크린
  */
 const Notification = () => {
   const [COLOR, mode] = useThemeStyle();
-  const [menus, setMenus] = useState<Array<NotificationMenu>>();
+  const [menus, setMenus] = useState(MENUS);
 
-  /**
-   * 스위치 온오프 함수
-   */
+  // /**
+  //  * 스위치 온오프 함수
+  //  */
   const onSetting = (idx: number) => {
-    const newMenus =
-      idx === 0
-        ? onAllNoti()
-        : menus?.map((menu, mdx) =>
-            idx === mdx ? { ...menu, available: !menu.available } : menu
-          );
+    const newMenus = idx === 0 ? onAllNoti() : settingSwitch(idx);
     setMenus(newMenus);
     AsyncStorage.setItem("notifications", JSON.stringify(newMenus));
   };
@@ -54,37 +44,134 @@ const Notification = () => {
    * 전체 알림 눌렀을 떄의 함수
    */
   const onAllNoti = () => {
-    const making = menus![0].available;
-    const newMenus = menus?.map((menu) => {
-      return { ...menu, available: !making };
-    });
+    const making = !menus.all.available;
+    const newMenus = {
+      all: {
+        title: "전체 알림",
+        available: making,
+      },
+      today: {
+        title: "오늘의 용어",
+        available: making,
+      },
+      repeat: {
+        title: "복습",
+        available: making,
+      },
+      quiz: {
+        title: "Daily 용어 퀴즈",
+        available: making,
+      },
+    };
     return newMenus;
+  };
+
+  const settingSwitch = (idx: number) => {
+    let newMenus = menus;
+    switch (idx) {
+      case 0:
+        break;
+      case 1:
+        newMenus = {
+          ...menus,
+          today: {
+            title: "오늘의 용어",
+            available: !menus.today.available,
+          },
+        };
+        break;
+      case 2:
+        newMenus = {
+          ...menus,
+          repeat: {
+            title: "복습",
+            available: !menus.repeat.available,
+          },
+        };
+        break;
+      case 3:
+        newMenus = {
+          ...menus,
+          quiz: {
+            title: "Daily 용어 퀴즈",
+            available: !menus.quiz.available,
+          },
+        };
+        break;
+    }
+    return newMenus;
+  };
+
+  const autoController = () => {
+    const checker =
+      menus.quiz.available && menus.repeat.available && menus.today.available;
+
+    if (checker) {
+      const newMenus = {
+        ...menus,
+        all: {
+          title: "전체 알림",
+          available: true,
+        },
+      };
+      setMenus(newMenus);
+      AsyncStorage.setItem("notifications", JSON.stringify(newMenus));
+    } else if (!checker && menus.all.available) {
+      const newMenus = {
+        ...menus,
+        all: {
+          title: "전체 알림",
+          available: false,
+        },
+      };
+      setMenus(newMenus);
+      AsyncStorage.setItem("notifications", JSON.stringify(newMenus));
+    }
   };
 
   useEffect(() => {
     const fetchNotifications = async () => {
       const notiInfo = await AsyncStorage.getItem("notifications");
       if (notiInfo) setMenus(JSON.parse(notiInfo));
-      else setMenus(MENUS);
+      else setMenus({ ...MENUS });
     };
     fetchNotifications();
   }, []);
 
+  useEffect(() => {
+    autoController();
+  }, [menus.quiz.available, menus.repeat.available, menus.today.available]);
+
   return (
     <Container COLOR={COLOR}>
-      {menus ? (
-        menus.map((menu, idx) => (
-          <ContentLine
-            title={menu.title}
-            thumbColor={menu.available ? "#FFFFFF" : "#FFFFFF"}
-            onValueChange={() => onSetting(idx)}
-            value={menu.available}
-            key={menu.title}
-          />
-        ))
-      ) : (
-        <></>
-      )}
+      <ContentLine
+        title={menus.all.title}
+        thumbColor={"#FFFFFF"}
+        onValueChange={() => onSetting(0)}
+        value={menus.all.available}
+        key={menus.all.title}
+      />
+      <ContentLine
+        title={menus.today.title}
+        thumbColor={"#FFFFFF"}
+        onValueChange={() => onSetting(1)}
+        value={menus.today.available}
+        key={menus.today.title}
+      />
+      <ContentLine
+        title={menus.repeat.title}
+        thumbColor={"#FFFFFF"}
+        onValueChange={() => onSetting(2)}
+        value={menus.repeat.available}
+        key={menus.repeat.title}
+      />
+      <ContentLine
+        title={menus.quiz.title}
+        thumbColor={"#FFFFFF"}
+        onValueChange={() => onSetting(3)}
+        value={menus.quiz.available}
+        key={menus.quiz.title}
+      />
     </Container>
   );
 };

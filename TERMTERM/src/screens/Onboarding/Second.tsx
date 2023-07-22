@@ -73,7 +73,7 @@ const Second = ({ onEnd }: Props) => {
           <CustomTextInput
             value={domain}
             onChangeText={(text) => setDomain(text)}
-            maxLength={20}
+            maxLength={10}
             placeholder="예시) 교육, 커머스, 여행, 소셜, AI 등"
           />
         </InputWrapper>
@@ -82,7 +82,7 @@ const Second = ({ onEnd }: Props) => {
           <CustomTextInput
             value={job}
             onChangeText={(text) => setJob(text)}
-            maxLength={20}
+            maxLength={10}
             placeholder="예시) 서비스 기획자, UX 디자이너, 개발자 등"
           />
         </InputWrapper>
@@ -104,7 +104,7 @@ const Second = ({ onEnd }: Props) => {
           />
         </InputWrapper>
 
-        <Warning style={{ alignSelf: "center", bottom: btnPosition + 55 }}>
+        <Warning style={{ alignSelf: "center", bottom: btnPosition + 65 }}>
           도메인, 직업, 연차는 추후에 'MY'의 내 계정에서 수정할 수 있어요.
         </Warning>
         <CustomButton

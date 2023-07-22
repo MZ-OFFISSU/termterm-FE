@@ -11,25 +11,43 @@ import { useState, useEffect } from "react";
 import { screenWidth } from "@style/dimensions";
 import { Props } from "@interfaces/onboarding";
 import { useRecoilState } from "recoil";
-import { themeState } from "@recoil/themeState";
 import { infoState } from "@recoil/signupState";
 import { nicknameReg } from "@utils/reg";
+import { useThemeStyle } from "@hooks/useThemeStyle";
+import MemberApi from "@api/MemberApi";
 
 const First = ({ onEnd }: Props) => {
-  const [theme, setTheme] = useRecoilState(themeState);
+  const memberApi = new MemberApi();
+
+  const [COLOR, mode] = useThemeStyle();
   const [info, setInfo] = useRecoilState(infoState);
   const [name, setName] = useState("");
   const [btnPosition, setBtnPosiition] = useState(30);
+  const [warn, setWarn] = useState(false);
 
   const inputName = (text: string) => {
     if (nicknameReg(text)) setName(text);
   };
 
-  useEffect(() => {
-    console.log(name);
-  }, [name]);
+  const checkWarn = async (): Promise<boolean> => {
+    try {
+      //닉네임이 중복되지 않음 (사용가능)
+      await memberApi.nicknameDoubleCheck(name);
+      setWarn(false);
+      return true;
+    } catch (err) {
+      //닉네임이 중복됨 (사용불가능)
+      setWarn(true);
+      return false;
+    }
+  };
 
-  const nextStage = () => {
+  const nextStage = async () => {
+    //중복검사 후, 중복되면 함수 중지
+    const check = await checkWarn();
+    if (!check) return;
+
+    //다음 스테이지로
     if (onEnd && name !== "") {
       setInfo({
         ...info,
@@ -64,7 +82,7 @@ const First = ({ onEnd }: Props) => {
         <Highlight style={{ top: 97, left: 0 }} />
         <Title>
           <Title style={{ fontWeight: "900", zIndex: 1 }}>
-            원할한 커뮤니케이션
+            원활한 커뮤니케이션
           </Title>
           {`을 위한\n준비를 시작해볼까요?`}
         </Title>
@@ -73,18 +91,22 @@ const First = ({ onEnd }: Props) => {
         <CustomTextInput
           value={name}
           onChangeText={(text) => inputName(text)}
-          maxLength={20}
+          maxLength={7}
         />
         {name === "" ? (
           <Warning>
             한글, 영어, 숫자, 특수문자(. , ! ? _ - ~)로만 구성할 수 있어요.
+          </Warning>
+        ) : warn ? (
+          <Warning style={{ color: COLOR.THEME.negative[100] }}>
+            이미 사용중인 닉네임입니다.
           </Warning>
         ) : (
           <></>
         )}
         <CustomButton
           title="확인"
-          theme={theme}
+          theme={mode}
           type={BUTTON_TYPE.primary}
           state={name === "" ? BUTTON_STATE.default : BUTTON_STATE.active}
           onPress={() => nextStage()}

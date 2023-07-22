@@ -82,7 +82,7 @@ const Curation = ({ navigation }: Props) => {
               {...item}
               onMove={() => navigation.push("CurationDetail", { id: item.id })}
               key={item.img}
-              style={{ marginTop: 25 }}
+              style={{ marginTop: 30 }}
             />
           ))}
         </CurationCardWrapper>
@@ -103,7 +103,7 @@ const ContentWrapper = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 25px 20px 50px 20px;
+  padding: 20px 20px 50px 20px;
 `;
 
 const CurationCardWrapper = styled.View`
@@ -112,7 +112,6 @@ const CurationCardWrapper = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 10px;
 `;
 
 export default Curation;
