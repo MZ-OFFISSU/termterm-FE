@@ -10,7 +10,7 @@ import { useSafeColor } from "@hooks/useSafeColor";
 import { NonUrl } from "@components/common/UrlText";
 import { useMember } from "@hooks/useMember";
 import * as Haptics from "expo-haptics";
-import { Vibration } from "react-native";
+import { loginSucceed } from "@utils/showToast";
 
 export type Props = StackScreenProps<RootStackParamList, "Login">;
 
@@ -44,8 +44,10 @@ const Login = ({ navigation }: Props) => {
   };
 
   const checkAutoLogin = () => {
-    if (user.isLogined && !loading)
+    if (user.isLogined && !loading) {
       navigation.reset({ routes: [{ name: "ToolBar" }] });
+      loginSucceed();
+    }
   };
 
   useEffect(() => {
