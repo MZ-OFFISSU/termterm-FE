@@ -132,7 +132,7 @@ const Notification = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       const notiInfo = await AsyncStorage.getItem("notifications");
-      if (notiInfo) setMenus(JSON.parse(notiInfo));
+      if (notiInfo) setMenus(JSON.parse(notiInfo)); // TODO 최초 접근시 에러 =
       else setMenus({ ...MENUS });
     };
     fetchNotifications();

@@ -25,8 +25,8 @@ const TermPreviewBox = ({ name, description, bookmarked, ...props }: Props) => {
       style={{
         borderBottomWidth: 1,
         borderTopWidth: 1,
-        borderBottomColor: COLOR.Neutral[5],
-        borderTopColor: COLOR.Neutral[5],
+        borderBottomColor: mode ? COLOR.Neutral[5] : COLOR.Background.input,
+        borderTopColor: mode ? COLOR.Neutral[5] : COLOR.Background.input,
         marginBottom: 5,
       }}
       {...props}

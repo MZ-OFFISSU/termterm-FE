@@ -9,12 +9,20 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useSafeColor } from "@hooks/useSafeColor";
 import { NonUrl } from "@components/common/UrlText";
 import { useMember } from "@hooks/useMember";
+import * as Haptics from "expo-haptics";
+import { Vibration } from "react-native";
 
 export type Props = StackScreenProps<RootStackParamList, "Login">;
 
 const Login = ({ navigation }: Props) => {
   const [width, setWidth] = useState(80);
   const { user, loading } = useMember();
+
+  const testHaptics = () => {
+    // Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    // Vibration.vibrate();
+  };
 
   useSafeColor();
 
@@ -72,7 +80,8 @@ const Login = ({ navigation }: Props) => {
           />
           <SocialLoginButton
             type="apple"
-            onPress={() => navigation.navigate("Support")}
+            // onPress={() => navigation.navigate("Support")}
+            onPress={testHaptics}
           />
         </ButtonBox>
         <NonUrl style={{ marginTop: 30 }}>

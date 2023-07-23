@@ -2,7 +2,7 @@ import { TextInputProps } from "react-native";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
-import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 interface Props extends TextInputProps {}
 
@@ -10,8 +10,8 @@ const SearchBox = ({ ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
   return (
-    <Container COLOR={COLOR}>
-      <Entypo name="magnifying-glass" size={24} color={COLOR.Text.muted} />
+    <Container COLOR={COLOR} mode={mode}>
+      <AntDesign name="search1" size={24} color={COLOR.Text.muted} />
       <InnerTextInput
         COLOR={COLOR}
         {...props}
@@ -23,10 +23,11 @@ const SearchBox = ({ ...props }: Props) => {
   );
 };
 
-const Container = styled.View<{ COLOR: colorTheme }>`
+const Container = styled.View<{ COLOR: colorTheme; mode: boolean }>`
   width: 100%;
   height: 44px;
-  background-color: ${(props) => props.COLOR.Neutral[5]};
+  background-color: ${(props) =>
+    props.mode ? props.COLOR.Neutral[5] : props.COLOR.Background.input};
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

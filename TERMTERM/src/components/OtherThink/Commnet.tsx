@@ -89,9 +89,9 @@ const CommentComponent = ({ comment }: Props) => {
       activeOpacity={0.8}
       style={{
         borderBottomWidth: 1,
-        borderBottomColor: COLOR.Neutral[5],
+        borderBottomColor: mode ? COLOR.Neutral[5] : COLOR.Background.input,
         borderTopWidth: 1,
-        borderTopColor: COLOR.Neutral[5],
+        borderTopColor: mode ? COLOR.Neutral[5] : COLOR.Background.input,
       }}
     >
       <Content COLOR={COLOR}>{comment.content}</Content>
@@ -133,6 +133,8 @@ const Content = styled.Text<{ COLOR: colorTheme }>`
   color: ${(props) => props.COLOR.Text.active};
   text-align: start;
   white-space: pre-line;
+
+  line-height: 20%;
 `;
 
 const Source = styled.Text<{ COLOR: colorTheme }>`
