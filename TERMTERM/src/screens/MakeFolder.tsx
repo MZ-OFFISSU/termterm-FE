@@ -59,6 +59,7 @@ const MakeFolder = ({ navigation }: Props) => {
           placeholder={"예시) 기획, 디자인, 개발, IT, 비즈니스 등"}
           onChangeText={(text) => setInfo({ ...info, name: text })}
           returnKeyType="done"
+          warning="폴더 이름은 필수로 입력해야해요."
         />
       </Wrapper>
       <Wrapper style={{ marginTop: 40 }}>
