@@ -87,7 +87,7 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
             <TouchableOpacity
               key={type}
               onPress={() => setCurType(idx)}
-              style={{ marginLeft: idx !== 0 ? 15 : 0 }}
+              style={{ marginLeft: idx !== 0 ? 15 : 5 }}
             >
               <Type
                 selected={curType === idx}
@@ -127,9 +127,7 @@ const TypeSelector = styled.View`
 
 const Type = styled.Text<{ selected: boolean }>`
   ${(props) =>
-    props.selected
-      ? TYPO_STYLE.Body[2].Bold
-      : TYPO_STYLE.Body[2].Regular};
+    props.selected ? TYPO_STYLE.Body[2].Bold : TYPO_STYLE.Body[2].Regular};
 `;
 
 export default Archive;
