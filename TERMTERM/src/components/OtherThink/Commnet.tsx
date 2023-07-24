@@ -134,7 +134,7 @@ const Content = styled.Text<{ COLOR: colorTheme }>`
   text-align: start;
   white-space: pre-line;
 
-  line-height: 20%;
+  line-height: 20.5%;
 `;
 
 const Source = styled.Text<{ COLOR: colorTheme }>`
