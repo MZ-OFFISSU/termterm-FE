@@ -7,6 +7,7 @@ import { TouchableOpacity } from "react-native";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BookmarkedCurations, BookmarkedTerms } from "@components/archive";
 import CustomModal from "@components/popup/modal";
+import AutoSizedImage from "@components/common/AutoSizedImage";
 
 export type RootProps = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -27,9 +28,15 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
   const [restedFreeFolder, setRestedFreeFolder] = useState(3);
   const [restedMaxFolder, setRestedMaxFolder] = useState(9);
 
+  const [infoModal, setInfoModal] = useState(false);
+
   const gotoMakefolder = () => {
     navigation.push("MakeFolder");
     setModal(false);
+  };
+
+  const openInfoModal = () => {
+    setInfoModal(true);
   };
 
   /**
@@ -79,6 +86,30 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
     );
   };
 
+  /**
+   * 최대 생성 가능한 폴더가 가득 찼을 때 모달
+   */
+  const InfoModal = () => {
+    // TODO 폴더 정보 채워넣기
+    const info = {
+      //현재 폴대 개수
+      cur: restedMaxFolder - restedFreeFolder,
+      //나의 폴더 생성 한도
+      myMax: 6,
+      max: 9,
+    };
+
+    return (
+      <CustomModal
+        visible={infoModal}
+        title={"폴더 관련 정보"}
+        subtitle={`현재 폴더 개수 : ${info.cur}개\n나의 폴더 생성 한도 : ${info.myMax}개\n생성 가능 폴더 개수 : 최대 ${info.max}개`}
+        btnTitle={["확인"]}
+        onNext={() => setInfoModal(false)}
+      />
+    );
+  };
+
   return (
     <>
       <Container COLOR={COLOR}>
@@ -98,6 +129,13 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
             </TouchableOpacity>
           ))}
         </TypeSelector>
+        <InfoCheckbutton onPress={openInfoModal}>
+          <AutoSizedImage
+            source={require("@assets/icon/folder-info.png")}
+            width={24}
+            height={24}
+          />
+        </InfoCheckbutton>
         <CurComponents type={TYPES[curType]} />
       </Container>
       {restedFreeFolder > 0 ? (
@@ -107,6 +145,7 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
       ) : (
         <MaxModal />
       )}
+      {infoModal && <InfoModal />}
     </>
   );
 };
@@ -128,6 +167,14 @@ const TypeSelector = styled.View`
 const Type = styled.Text<{ selected: boolean }>`
   ${(props) =>
     props.selected ? TYPO_STYLE.Body[2].Bold : TYPO_STYLE.Body[2].Regular};
+`;
+
+const InfoCheckbutton = styled.TouchableOpacity`
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 `;
 
 export default Archive;

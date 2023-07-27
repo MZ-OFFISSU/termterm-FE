@@ -93,7 +93,7 @@ const Subtitle = styled.Text<{ COLOR: colorTheme }>`
   white-space: pre-line;
   text-align: center;
   margin-top: 10px;
-  line-height: 18px;
+  line-height: 20px;
 `;
 
 const BtnWrapper = styled.View`
