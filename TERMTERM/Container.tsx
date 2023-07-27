@@ -27,9 +27,16 @@ import {
   QuizResult,
   QuizReview,
   FilterScreen,
+  EditFolder,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
-import { BackBar, BookmarkBar, CarouselBar, BookmarkSingleBar, XBar } from "@components/header";
+import {
+  BackBar,
+  BookmarkBar,
+  CarouselBar,
+  BookmarkSingleBar,
+  XBar,
+} from "@components/header";
 import { IconBar, Icon } from "@components/header";
 import { useState, useEffect, useCallback } from "react";
 import * as Font from "expo-font";
@@ -174,6 +181,21 @@ const Container = () => {
                 return (
                   <BackBar
                     title="폴더 만들기"
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="EditFolder"
+            component={EditFolder}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="폴더 수정"
                     onBack={() => props.navigation.pop()}
                   />
                 );
@@ -432,7 +454,7 @@ const Container = () => {
               headerShown: false,
             }}
           />
-            
+
           <RootStack.Screen
             name="QuizResult"
             component={QuizResult}

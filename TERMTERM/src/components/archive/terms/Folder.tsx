@@ -5,6 +5,9 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import { FolderProps } from "@interfaces/bookmark";
 import * as Haptics from "expo-haptics";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
 
 interface Props extends FolderProps {
   onOpen: (id: number) => void;
@@ -17,6 +20,7 @@ const FOLDER_ICON = [
 ];
 
 const Folder = ({ onOpen, id, name, icon }: Props) => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [COLOR, mode] = useThemeStyle();
   const { showActionSheetWithOptions } = useActionSheet();
 
@@ -34,6 +38,7 @@ const Folder = ({ onOpen, id, name, icon }: Props) => {
       (selectedIndex) => {
         switch (selectedIndex) {
           case 0:
+            navigation.push("EditFolder", { id: id });
           case 1:
           case cancelButtonIndex:
           // 닫기

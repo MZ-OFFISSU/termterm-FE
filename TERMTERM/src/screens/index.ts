@@ -23,6 +23,7 @@ import QuizIntro from "./QuizIntro";
 import QuizResult from "./QuizResult";
 import QuizReview from "./QuizReview";
 import FilterScreen from "./FilterScreen";
+import EditFolder from "./EditFolder";
 
 export {
   Home,
@@ -50,4 +51,5 @@ export {
   QuizResult,
   QuizReview,
   FilterScreen,
+  EditFolder,
 };
