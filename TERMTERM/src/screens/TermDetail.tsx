@@ -30,7 +30,11 @@ const TermDetail = ({ navigation, route }: Props) => {
     <Container COLOR={COLOR}>
       {word ? (
         <>
-          <WordCard word={word} style={{ width: screenWidth - 32 }} />
+          <WordCard
+            word={word}
+            detail={true}
+            style={{ width: screenWidth - 32 }}
+          />
           {/* <LottieAnimation /> */}
           <OtherThink word={word} />
         </>
