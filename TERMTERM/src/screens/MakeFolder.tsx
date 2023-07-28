@@ -8,10 +8,12 @@ import InputWrapper from "@components/makefolder/InputWrapper";
 import { Keyboard } from "react-native";
 import CompleteButton from "@components/makefolder/CompleteButton";
 import Toast from "react-native-toast-message";
+import { useHaptics } from "@hooks/useHaptics";
 
 export type Props = StackScreenProps<RootStackParamList, "MakeFolder">;
 
 const MakeFolder = ({ navigation }: Props) => {
+  const { haptic } = useHaptics();
   const [COLOR, mode] = useThemeStyle();
   const [info, setInfo] = useState({
     name: "",
@@ -33,6 +35,8 @@ const MakeFolder = ({ navigation }: Props) => {
     if (info.name !== "") {
       showToast();
       navigation.pop();
+    } else {
+      haptic("warning");
     }
   };
 
