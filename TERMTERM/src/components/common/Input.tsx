@@ -8,12 +8,19 @@ interface Props extends TextInputProps {
   value: string;
   max: number;
   inevitable?: boolean;
+  warning?: string;
 }
 
 /**
  * 온보딩 스크린 외의 스크린에서 사용되는 커스텀 텍스트 인풋
  */
-const CustomInput = ({ value, max, inevitable, ...props }: Props) => {
+const CustomInput = ({
+  value,
+  max,
+  inevitable,
+  warning = "필수로 입력해주세요.",
+  ...props
+}: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [borderColor, setBorderColor] = useState("");
   //한번 클릭했다가 떼었는가
@@ -48,7 +55,7 @@ const CustomInput = ({ value, max, inevitable, ...props }: Props) => {
         </Maximum>
       </InputBox>
       {inevitable && blured && value === "" ? (
-        <Warning>필수로 입력해주세요.</Warning>
+        <Warning>{warning}</Warning>
       ) : (
         <></>
       )}

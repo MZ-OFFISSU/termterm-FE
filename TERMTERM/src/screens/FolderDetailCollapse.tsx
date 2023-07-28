@@ -122,7 +122,7 @@ const FolderInfoWrapper = styled.View`
   align-items: center;
   justify-content: flex-start;
   position: absolute;
-  top: ${screenWidth - 8}px;
+  top: ${screenWidth + 15}px;
   left: 20px;
 `;
 

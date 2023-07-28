@@ -48,6 +48,7 @@ const CustomSelector = ({ ...props }: ICVDropDownPickerProps) => {
 
     <DropDownPicker
       {...props}
+      theme={mode ? "LIGHT" : "DARK"}
       placeholderStyle={{
         color: LIGHT_COLOR_STYLE.Text.disabled,
         fontWeight: "500",

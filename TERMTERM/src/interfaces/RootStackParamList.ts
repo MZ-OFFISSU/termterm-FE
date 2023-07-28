@@ -38,4 +38,5 @@ export type RootStackParamList = {
   FilterScreen: undefined;
   Kakao: undefined;
   Google: undefined;
+  EditFolder: { id: number };
 };

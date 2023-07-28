@@ -17,7 +17,7 @@ const DailyTermBox = ({ bookmarked, id, name, description }: Preview) => {
     <Container
       style={{ borderWidth: 1, borderColor: COLOR.Background.onSurface }}
     >
-      <BookmarkButtonComponent dark={false} fill={bookmarked} />
+      <BookmarkButtonComponent fill={bookmarked} />
       <Title COLOR={COLOR} mode={mode}>
         {main}
       </Title>

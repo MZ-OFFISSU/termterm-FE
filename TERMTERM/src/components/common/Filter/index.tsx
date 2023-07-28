@@ -16,7 +16,8 @@ const Filter = ({ navigateHandler }: Props) => {
   const [curColor, setColor] = useState(COLOR.Neutral[100]);
 
   const settingColor = () => {
-    if (filterArr.length === 0) setColor(COLOR.Neutral[100]);
+    if (filterArr.length === 0)
+      mode ? setColor(COLOR.Neutral[100]) : setColor(COLOR.Neutral[100]);
     else setColor(COLOR.THEME.primary[130]);
   };
 

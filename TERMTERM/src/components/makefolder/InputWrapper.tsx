@@ -8,15 +8,29 @@ interface Props extends TextInputProps {
   subtitle: string;
   max: number;
   inevitable?: boolean;
+  warning?: string;
 }
 
-const CustomInput = ({ subtitle, value, max, inevitable, ...props }: Props) => {
+const CustomInput = ({
+  subtitle,
+  value,
+  max,
+  inevitable,
+  warning,
+  ...props
+}: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
   return (
     <InputWrapper>
       <Subtitle COLOR={COLOR}>{subtitle}</Subtitle>
-      <Input value={value!} max={max} {...props} inevitable={inevitable} />
+      <Input
+        value={value!}
+        max={max}
+        {...props}
+        inevitable={inevitable}
+        warning={warning}
+      />
     </InputWrapper>
   );
 };

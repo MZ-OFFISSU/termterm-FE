@@ -33,6 +33,7 @@ const CustomTextInput = ({ value, max = true, maxLength, ...props }: Props) => {
         }
         value={value}
         COLOR={COLOR}
+        placeholderTextColor={COLOR.Text.disabled}
         maxLength={maxLength}
         {...props}
       />

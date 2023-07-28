@@ -4,12 +4,14 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, Octicons } from "@expo/vector-icons";
 import { Home, Search, Archive, My } from "./Toolbar/index";
-import { StackScreenProps } from "@react-navigation/stack";
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { HomeBar, TitleBar } from "@components/header";
 import { Icon } from "@components/header/TitleBar";
 import { useState } from "react";
 import { useSafeColor } from "@hooks/useSafeColor";
+import { hapticType, useHaptics } from "@hooks/useHaptics";
+import { useNavigation } from "@react-navigation/native";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -17,6 +19,9 @@ export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
  * 툴바(바텀바) 컴포넌트
  */
 const ToolBar = ({ ...props }: Props) => {
+  const { haptic } = useHaptics();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
   /** tabNavigator 생성 */
   const Tab = createBottomTabNavigator();
   const [COLOR, mode] = useThemeStyle();
@@ -24,6 +29,14 @@ const ToolBar = ({ ...props }: Props) => {
 
   //아카이브 스크린에서 사용할 모달 관련 state
   const [archiveModal, setArchiveModal] = useState(false);
+
+  const hapticHandler = (
+    type: hapticType,
+    destination: "Home" | "Search" | "Archive" | "My"
+  ) => {
+    navigation.navigate(destination);
+    haptic(type);
+  };
 
   return (
     <Tab.Navigator
@@ -51,19 +64,21 @@ const ToolBar = ({ ...props }: Props) => {
             );
           },
           tabBarIcon: ({ focused }) => (
-            <Octicons
-              name="home"
-              style={{
-                color: focused
-                  ? mode
-                    ? COLOR.Neutral[100]
-                    : COLOR.Text.active
-                  : mode
-                  ? COLOR.Neutral[40]
-                  : COLOR.Neutral[20],
-              }}
-              size={24}
-            />
+            <IconWrapper onPress={() => hapticHandler("light", "Home")}>
+              <Octicons
+                name="home"
+                style={{
+                  color: focused
+                    ? mode
+                      ? COLOR.Neutral[100]
+                      : COLOR.Text.active
+                    : mode
+                    ? COLOR.Neutral[40]
+                    : COLOR.Neutral[20],
+                }}
+                size={24}
+              />
+            </IconWrapper>
           ),
           tabBarLabel: ({ focused }) => (
             <Label focused={focused} COLOR={COLOR}>
@@ -82,19 +97,21 @@ const ToolBar = ({ ...props }: Props) => {
           },
           title: "검색",
           tabBarIcon: ({ focused }) => (
-            <Ionicons
-              name="search"
-              style={{
-                color: focused
-                  ? mode
-                    ? COLOR.Neutral[100]
-                    : COLOR.Text.active
-                  : mode
-                  ? COLOR.Neutral[40]
-                  : COLOR.Neutral[20],
-              }}
-              size={24}
-            />
+            <IconWrapper onPress={() => hapticHandler("light", "Search")}>
+              <Ionicons
+                name="search"
+                style={{
+                  color: focused
+                    ? mode
+                      ? COLOR.Neutral[100]
+                      : COLOR.Text.active
+                    : mode
+                    ? COLOR.Neutral[40]
+                    : COLOR.Neutral[20],
+                }}
+                size={24}
+              />
+            </IconWrapper>
           ),
           tabBarLabel: ({ focused }) => (
             <Label focused={focused} COLOR={COLOR}>
@@ -122,19 +139,21 @@ const ToolBar = ({ ...props }: Props) => {
           },
           title: "아카이브",
           tabBarIcon: ({ focused }) => (
-            <Octicons
-              name="apps"
-              style={{
-                color: focused
-                  ? mode
-                    ? COLOR.Neutral[100]
-                    : COLOR.Text.active
-                  : mode
-                  ? COLOR.Neutral[40]
-                  : COLOR.Neutral[20],
-              }}
-              size={24}
-            />
+            <IconWrapper onPress={() => hapticHandler("light", "Archive")}>
+              <Octicons
+                name="apps"
+                style={{
+                  color: focused
+                    ? mode
+                      ? COLOR.Neutral[100]
+                      : COLOR.Text.active
+                    : mode
+                    ? COLOR.Neutral[40]
+                    : COLOR.Neutral[20],
+                }}
+                size={24}
+              />
+            </IconWrapper>
           ),
           tabBarLabel: ({ focused }) => (
             <Label focused={focused} COLOR={COLOR}>
@@ -160,19 +179,21 @@ const ToolBar = ({ ...props }: Props) => {
           },
           title: "MY",
           tabBarIcon: ({ focused }) => (
-            <Octicons
-              name="person"
-              style={{
-                color: focused
-                  ? mode
-                    ? COLOR.Neutral[100]
-                    : COLOR.Text.active
-                  : mode
-                  ? COLOR.Neutral[40]
-                  : COLOR.Neutral[20],
-              }}
-              size={24}
-            />
+            <IconWrapper onPress={() => hapticHandler("light", "My")}>
+              <Octicons
+                name="person"
+                style={{
+                  color: focused
+                    ? mode
+                      ? COLOR.Neutral[100]
+                      : COLOR.Text.active
+                    : mode
+                    ? COLOR.Neutral[40]
+                    : COLOR.Neutral[20],
+                }}
+                size={24}
+              />
+            </IconWrapper>
           ),
           tabBarLabel: ({ focused }) => (
             <Label focused={focused} COLOR={COLOR}>
@@ -189,6 +210,10 @@ const Label = styled.Text<{ focused: boolean; COLOR: colorTheme }>`
   ${TYPO_STYLE.Caption[3].Medium};
   color: ${(props) =>
     props.focused ? props.COLOR.Neutral[100] : props.COLOR.Neutral[40]};
+`;
+
+const IconWrapper = styled.TouchableOpacity`
+  position: relative;
 `;
 
 export default ToolBar;

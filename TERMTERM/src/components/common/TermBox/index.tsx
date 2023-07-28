@@ -41,7 +41,7 @@ const ResultBtn = styled.TouchableOpacity<{ COLOR: colorTheme; mode: boolean }>`
   height: 70px;
   border-radius: 10px;
   border: ${(props) =>
-    props.mode ? props.COLOR.Background.inputBorderDefault : ""};
+    props.mode ? props.COLOR.Background.inputBorderDefault : "none"};
   background-color: ${(props) => props.COLOR.Background.input};
   display: flex;
   flex-direction: row;

@@ -8,6 +8,7 @@ import CustomModal from "@components/popup/modal";
 import { useState } from "react";
 import { useMember } from "@hooks/useMember";
 import { logoutSucceed } from "@utils/showToast";
+import { useHaptics } from "@hooks/useHaptics";
 
 interface MenuProps {
   title: string;
@@ -19,6 +20,7 @@ interface MenuProps {
  * 프로필 스크린에서 기본으로 보이는 메뉴 리스트
  */
 const DefaultList = () => {
+  const { haptic } = useHaptics();
   const { logout, loading } = useMember();
 
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -45,6 +47,7 @@ const DefaultList = () => {
 
   const logoutHandler = async () => {
     await logout();
+    haptic("warning");
 
     logoutSucceed();
     if (!loading) {
