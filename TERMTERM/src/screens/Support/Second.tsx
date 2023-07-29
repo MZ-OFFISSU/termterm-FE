@@ -91,8 +91,10 @@ export default Second;
 const Container = styled.View`
   width: 100%;
   position: relative;
-
-  padding: 34px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 34px 25px;
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
