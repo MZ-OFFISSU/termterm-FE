@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useEffect, useState } from "react";
-import { screenHeight, screenWidth } from "@style/dimensions";
+import { screenHeight } from "@style/dimensions";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { LIGHT_COLOR_STYLE } from "@style/designSystem";
@@ -24,30 +23,30 @@ interface WtProps {
 const Walkthrough = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [walkthough, setWalkthrough] = useState<Array<WtProps> | null>();
-  const [width, setWidth] = useState(300);
+  const [height, setHeight] = useState(413);
 
   useEffect(() => {
     setWalkthrough(walkthroughInfo);
   }, []);
 
-  /** 아이콘 너비 계산 함수 */
-  const calcWidth = () => {
-    if (screenWidth < 390) return;
-    if (screenWidth < 435) {
-      setWidth(340);
+  /** 아이콘 높이 계산 함수 */
+  const calcHeight = () => {
+    if (screenHeight < 845) return;
+    if (screenHeight < 900) {
+      setHeight(468);
       return;
     }
-    if (screenWidth < 500) {
-      setWidth(380);
+    if (screenHeight < 955) {
+      setHeight(523);
       return;
     }
-    if (screenWidth > 500) {
-      setWidth(420);
+    if (screenHeight > 1010) {
+      setHeight(578);
       return;
     }
   };
   useEffect(() => {
-    calcWidth();
+    calcHeight();
   }, []);
 
   return (
