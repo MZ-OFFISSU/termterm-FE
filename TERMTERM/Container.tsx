@@ -29,7 +29,13 @@ import {
   FilterScreen,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
-import { BackBar, BookmarkBar, CarouselBar, BookmarkSingleBar, XBar } from "@components/header";
+import {
+  BackBar,
+  BookmarkBar,
+  CarouselBar,
+  BookmarkSingleBar,
+  XBar,
+} from "@components/header";
 import { IconBar, Icon } from "@components/header";
 import { useState, useEffect, useCallback } from "react";
 import * as Font from "expo-font";
@@ -52,6 +58,7 @@ SplashScreen.preventAutoHideAsync();
  */
 const Container = () => {
   const [isReady, setIsReady] = useState(false);
+  const [quizIdx, setQuizIdx] = useState(1);
   const safeColor = useRecoilValue(safeAreaColorState);
 
   const getFonts = async () => {
@@ -121,7 +128,18 @@ const Container = () => {
           <RootStack.Screen
             name="DailyQuiz"
             component={DailyQuiz}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    // TODO : quizIdx 로직 추가
+                    title={`${quizIdx}/5`}
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
           />
           <RootStack.Screen
             name="CompleteQuiz"
@@ -432,7 +450,7 @@ const Container = () => {
               headerShown: false,
             }}
           />
-            
+
           <RootStack.Screen
             name="QuizResult"
             component={QuizResult}
@@ -455,9 +473,11 @@ const Container = () => {
               headerShown: true,
               header: (props) => {
                 return (
-                  <BackBar
+                  <BookmarkSingleBar
                     title="용어 퀴즈 리뷰"
                     onBack={() => props.navigation.pop()}
+                    onBookmark={() => null}
+                    bookmarked={false}
                   />
                 );
               },
