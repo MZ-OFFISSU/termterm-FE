@@ -108,7 +108,7 @@ const MainName = styled.Text<{
 `;
 
 const Content = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  ${TYPO_STYLE.Body[2].Regular};
+  ${TYPO_STYLE.Body[3].Regular};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
   white-space: pre-line;
