@@ -60,7 +60,7 @@ const Home = ({ navigation, route }: Props) => {
             </>
           )}
           <TitleBox style={{ marginTop: 50 }}>
-            <MenuTitle COLOR={COLOR}>데일리 용어 퀴즈</MenuTitle>
+            <MenuTitle COLOR={COLOR}>Daily 용어 퀴즈</MenuTitle>
           </TitleBox>
           <DailyQuizRouter navigation={navigation} route={route} />
           <FlexContainer>
