@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { LIGHT_COLOR_STYLE } from "@style/designSystem";
+import { colorTheme, LIGHT_COLOR_STYLE } from "@style/designSystem";
 import { First, Second, Third } from "./Support/index";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useState } from "react";
@@ -23,23 +23,24 @@ const Support = ({ navigation }: Props) => {
   };
 
   return (
-    <Wrapper>
-      <Contents>
+    <Wrapper COLOR={COLOR} mode={mode}>
+      <Contents COLOR={COLOR} mode={mode}>
         <CurrentPage onEnd={onEnd} />
       </Contents>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.ScrollView`
+const Wrapper = styled.ScrollView<{ COLOR: colorTheme; mode: boolean }>`
   display: flex;
-  background-color: ${LIGHT_COLOR_STYLE.Background.surface};
+  background-color: ${(props) => props.COLOR.Background.surface};
   position: relative;
 `;
 
-const Contents = styled.View`
+const Contents = styled.View<{ COLOR: colorTheme; mode: boolean }>`
   width: ${screenWidth}px;
   height: 100%;
+  background-color: ${(props) => props.COLOR.Background.surface};
 `;
 
 export default Support;
