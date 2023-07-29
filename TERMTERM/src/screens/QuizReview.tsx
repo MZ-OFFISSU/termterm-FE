@@ -22,7 +22,7 @@ const QuizReview = ({ navigation }: Props) => {
             answer={item.answer}
             wordAnswer={item.wordAnswer}
             userAnswer={item.userAnswer}
-            onPress={() => navigation.navigate("QuizResult")}
+            onPress={() => navigation.navigate("QuizResult", {id: 0})}
           />
         ))}
       </Container>

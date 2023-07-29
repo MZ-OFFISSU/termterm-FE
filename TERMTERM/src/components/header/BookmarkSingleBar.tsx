@@ -28,7 +28,7 @@ const BookmarkSingleBar = ({
           <AntDesign name="left" size={24} color={COLOR.Text.active} />
         </CaretBtn>
         {title ? (
-          <NavigatorTitle COLOR={COLOR} style={{ marginLeft: 130 }}>
+          <NavigatorTitle COLOR={COLOR} style={{ marginLeft: 100 }}>
             {title}
           </NavigatorTitle>
         ) : null}

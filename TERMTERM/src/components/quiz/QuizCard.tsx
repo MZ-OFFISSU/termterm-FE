@@ -1,10 +1,7 @@
 import styled from "styled-components/native";
-import {
-  colorTheme,
-  LIGHT_COLOR_STYLE,
-  TYPO_STYLE,
-} from "@style/designSystem";
+import { colorTheme, LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import { screenWidth } from "@style/dimensions";
 
 interface QuizCardProps {
   title?: string;
@@ -16,7 +13,9 @@ const QuizCard = (props: QuizCardProps) => {
 
   return (
     <CardContainer COLOR={COLOR} mode={mode}>
-      <CardText COLOR={COLOR} mode={mode}>{props.explain}</CardText>
+      <CardText COLOR={COLOR} mode={mode}>
+        {props.explain}
+      </CardText>
     </CardContainer>
   );
 };
@@ -25,23 +24,27 @@ const CardContainer = styled.View<{
   COLOR: colorTheme;
   mode: boolean;
 }>`
-  width: 358px;
-  height: 200px;
-  background-color: ${(props) => props.COLOR.THEME.secondary[10]};
-  border-radius: 20px;
+  width: ${screenWidth - 32}px;
+  height: 242px;
+  background-color: ${(props) =>
+    props.mode
+      ? props.COLOR.THEME.secondary[10]
+      : props.COLOR.Background.onSurface};
+  border-radius: 10px;
   text-align: center;
   margin: 10px auto 40px auto;
-  padding: 10px;
+  padding: 16px;
 `;
 
 const CardText = styled.Text<{
   COLOR: colorTheme;
   mode: boolean;
 }>`
-  color: ${(props) => props.COLOR.Text.darken};
-  ${TYPO_STYLE.Body[2].Regular};
+  color: ${(props) => props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
+  ${TYPO_STYLE.Body[3].Regular};
+  padding: 0 10px;
   line-height: 25px;
-  text-align: center;
+  text-align: left;
   margin: auto 0;
 `;
 

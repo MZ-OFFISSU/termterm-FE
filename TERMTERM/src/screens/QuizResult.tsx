@@ -39,9 +39,10 @@ const QuizResult = ({ navigation, route }: Props) => {
         <CustomButton
           title={"확인"}
           theme={mode}
-          type={BUTTON_TYPE.primary}
+          type={mode ? BUTTON_TYPE.primary : BUTTON_TYPE.secondary}
           state={BUTTON_STATE.active}
-          onPress={() => navigation.navigate("QuizReview")}
+          // onPress={() => navigation.navigate("CompleteQuiz")}
+          onPress={() => navigation.navigate("QuizReview", { id: 1 })}
           style={{ width: "90%", alignSelf: "center", marginTop: "7%" }}
         />
       </Container>

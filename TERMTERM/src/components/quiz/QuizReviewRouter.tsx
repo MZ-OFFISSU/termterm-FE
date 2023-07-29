@@ -9,8 +9,14 @@ import styled from "styled-components/native";
 import { CaretBtn } from "..";
 import { AntDesign } from "@expo/vector-icons";
 
-
-const QuizReviewRouter = ({ id, answer, wordAnswer, userAnswer, onPress, ...props }: quizReviewProps) => {
+const QuizReviewRouter = ({
+  id,
+  answer,
+  wordAnswer,
+  userAnswer,
+  onPress,
+  ...props
+}: quizReviewProps) => {
   const [COLOR, mode] = useThemeStyle();
   const [width, setWidth] = useState(24);
   const calcWidth = () => {
@@ -34,7 +40,12 @@ const QuizReviewRouter = ({ id, answer, wordAnswer, userAnswer, onPress, ...prop
   }, []);
 
   return (
-    <Container COLOR={COLOR} mode={mode} answer={answer}>
+    <Container
+      COLOR={COLOR}
+      mode={mode}
+      answer={answer}
+      onPress={() => onPress()}
+    >
       <AutoSizedImage
         source={
           answer
@@ -55,7 +66,7 @@ const QuizReviewRouter = ({ id, answer, wordAnswer, userAnswer, onPress, ...prop
 
 export default QuizReviewRouter;
 
-const Container = styled.View<{
+const Container = styled.TouchableOpacity<{
   COLOR: colorTheme;
   mode: boolean;
   answer: boolean;
@@ -63,9 +74,11 @@ const Container = styled.View<{
   width: 90%;
   height: 55px;
   background-color: ${(props) =>
-    props.answer
-      ? props.COLOR.THEME.positive[10]
-      : props.COLOR.THEME.negative[10]};
+    props.mode
+      ? props.answer
+        ? props.COLOR.THEME.positive[10]
+        : props.COLOR.THEME.negative[10]
+      : props.COLOR.Background.onSurface};
   display: flex;
   flex-direction: row;
   align-items: center;

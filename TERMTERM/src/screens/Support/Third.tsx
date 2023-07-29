@@ -3,9 +3,11 @@ import { View } from "react-native";
 import { useState, useEffect } from "react";
 import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
+import { useThemeStyle } from "@hooks/useThemeStyle";
 
 const Third = () => {
+  const [COLOR, mode] = useThemeStyle();
   const [width, setWidth] = useState(90);
 
   /** 아이콘 너비 계산 함수 */
@@ -42,9 +44,11 @@ const Third = () => {
           width={width}
         />
         <TitleBox>
-          <Title>문의가 정상적으로 접수되었습니다.</Title>
-          <SubTitle>
-            {`더 좋은 경험을 선사하는 termterm이\n될 수 있도록 끊임없이 노력할게요🙌🏻`}
+          <Title COLOR={COLOR} mode={mode}>
+            문의가 정상적으로 접수되었습니다.
+          </Title>
+          <SubTitle COLOR={COLOR} mode={mode}>
+            {`더 좋은 경험을 선사하는 termterm이\n될 수 있도록 끊임없이 노력할게요 🙌🏻`}
           </SubTitle>
         </TitleBox>
       </ContentWrapper>
@@ -72,14 +76,14 @@ const TitleBox = styled.View`
   margin-top: 40px;
 `;
 
-const Title = styled.Text`
+const Title = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
   ${TYPO_STYLE.Body[1].Bold};
-  color: ${LIGHT_COLOR_STYLE.Text.active};
+  color: ${(props) => props.COLOR.Text.active};
   margin-bottom: 5px;
 `;
 
-const SubTitle = styled.Text`
-  ${TYPO_STYLE.Body[3].Medium};
-  color: ${LIGHT_COLOR_STYLE.Text.darken};
-  line-height: 25px;
+const SubTitle = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
+  ${TYPO_STYLE.Body[3].Regular};
+  color: ${(props) => props.mode ?  props.COLOR.Text.darken : props.COLOR.Text.lighten};
+  line-height: 30px;
 `;

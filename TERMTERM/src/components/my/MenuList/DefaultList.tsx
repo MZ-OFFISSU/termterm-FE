@@ -31,7 +31,7 @@ const DefaultList = () => {
       { title: "테마 변경", onPress: () => navigation.push("ThemeSelect") },
     ],
     [
-      { title: "문의하기", onPress: () => null },
+      { title: "문의하기", onPress: () => navigation.push("Support") },
       { title: "앱 공유하기", onPress: () => null },
     ],
     [{ title: "버전 정보", subtitle: "v 1.0", onPress: () => null }],

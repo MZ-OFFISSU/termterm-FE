@@ -9,6 +9,7 @@ import QuizCard from "@components/quiz/QuizCard";
 import { BackBar } from "@components/header";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import useHideWord from "@hooks/useHideWord";
+import { screenWidth } from "@style/dimensions";
 
 export type Props = StackScreenProps<RootStackParamList, "DailyQuiz">;
 
@@ -20,13 +21,19 @@ const DailyQuiz = ({ navigation }: Props) => {
     id2: false,
     id3: false,
   });
+  const [borderColor, setBorderColor] = useState(
+    COLOR.Background.inputBorderDefault
+  );
 
   const { hiddenExplain } = useHideWord(dummy[idx].explain, dummy[idx].word);
+  const handleButton = () => {
+    setBorderColor(COLOR.THEME.secondary[70]);
+    navigation.navigate("QuizResult", { id: 0 });
+  };
 
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
       <Container>
-        <BackBar title={`${idx + 1}/5`} onBack={() => navigation.pop()} />
         <Title COLOR={COLOR} mode={mode}>
           어떤{" "}
           <BoldTitle COLOR={COLOR} mode={mode}>
@@ -41,7 +48,7 @@ const DailyQuiz = ({ navigation }: Props) => {
             COLOR={COLOR}
             mode={mode}
             underlayColor={COLOR.THEME.secondary[70]}
-            onPress={() => navigation.navigate("QuizResult")}
+            onPress={() => handleButton()}
           >
             <ButtonText COLOR={COLOR} mode={mode}>
               {item.word}
@@ -84,12 +91,12 @@ const QuizButton = styled.TouchableHighlight<{
   COLOR: colorTheme;
   mode: boolean;
 }>`
-  width: 358px;
+  width: ${screenWidth - 32}px;
   height: 47px;
   border-radius: 8px;
   border-width: 1px;
   border-style: solid;
-  border-color: lightgray;
+  border-color: ${(props) => props.COLOR.Background.inputBorderDefault};
   margin: 10px auto;
 `;
 
@@ -107,7 +114,7 @@ const dummy: Array<DailyQuizItemProps> = [
   {
     word: "가독성",
     explain:
-      "얼마나 쉽게 읽을 수 있는지를 나타내는 정도를 뜻하는 말이에요. 프로그래밍에서의 가독성은 소스코드를 보고 코드가 의도하는 동작이나 알고리즘을 얼마나 쉽게 이해할 수 있는지를 뜻해요.",
+      "보여지는 페이지 위에 하나의 레이어를 더 얹히고 보여주는 작은 창을 의미해요. 모달은 팝업창, 다이올로그 창과 혼용되어 사용되기도 하는데 엄밀히 따지면 모달은 보여지는 페이지 위에 하나의 레이어를 더 얹히고 보여주는 작은 창이고 팝업은 열려 있는 페이지에 또 다른 페이지(작은 창)을 띄우는 것이라 구분되지만 거의 하나처럼 이야기되는 경우가 종종 있어요.",
   },
   {
     word: "Stakeholder",

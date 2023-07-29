@@ -3,21 +3,17 @@ import { useWordReg } from "@hooks/useWordReg";
 import { WordProps } from "@interfaces/word";
 import { TEXT_STYLES, TYPO, colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { TouchableOpacityProps } from "react-native";
-import { css } from "styled-components";
 import styled from "styled-components/native";
 
 interface Props extends TouchableOpacityProps {
   word: WordProps;
   quiz?: boolean;
-  detail?: boolean;
 }
 
 /**
- * 단어 카드
- * 전체 영역에 대한 Props 상속 받고 있음.
- * 퀴즈용 테마로 하려면 quiz props true로 주세요
+ * 퀴즈 모드에서 사용할 터치가 불가능한 단어 카드
  */
-const WordCard = ({ word, quiz, detail, ...props }: Props) => {
+const UnTouchableQuizCard = ({ word, quiz, ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [sub, main] = useWordReg(word.name);
 
@@ -26,8 +22,7 @@ const WordCard = ({ word, quiz, detail, ...props }: Props) => {
       COLOR={COLOR}
       mode={mode}
       quiz={quiz}
-      detail={detail}
-      activeOpacity={0.9}
+      activeOpacity={0.6}
       {...props}
     >
       <NameWrapper>
@@ -49,24 +44,14 @@ const WordCard = ({ word, quiz, detail, ...props }: Props) => {
   );
 };
 
-const listHeight = css`
-  aspect-ratio: 1;
-  padding: 36px 22px 22px 22px;
-`;
-
-const detailHeight = css`
-  min-height: 358px;
-  padding: 36px 22px 36px 22px;
-`;
-
 const Container = styled.TouchableOpacity<{
   COLOR: colorTheme;
   mode: boolean;
   quiz?: boolean;
-  detail?: boolean;
 }>`
   min-width: 358px;
   width: 100%;
+  aspect-ratio: 1;
   border-radius: 10px;
   background-color: ${(props) =>
     props.mode
@@ -78,8 +63,7 @@ const Container = styled.TouchableOpacity<{
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-
-  ${(props) => (props.detail ? detailHeight : listHeight)};
+  padding: 36px 22px 22px 22px;
 `;
 
 const NameWrapper = styled.View`
@@ -146,4 +130,4 @@ const Source = styled.Text<{
       : props.COLOR.Neutral[10]};
 `;
 
-export default WordCard;
+export default UnTouchableQuizCard;
