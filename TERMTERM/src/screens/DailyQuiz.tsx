@@ -21,14 +21,16 @@ const DailyQuiz = ({ navigation }: Props) => {
     id2: false,
     id3: false,
   });
+  const [selectedIdx, setSelectedIdx] = useState(-1);
   const [borderColor, setBorderColor] = useState(
     COLOR.Background.inputBorderDefault
   );
 
   const { hiddenExplain } = useHideWord(dummy[idx].explain, dummy[idx].word);
-  const handleButton = () => {
-    setBorderColor(COLOR.THEME.secondary[70]);
-    navigation.navigate("QuizResult", { id: 0 });
+  const handleButton = (idx: number) => {
+    setSelectedIdx(idx);
+    setBorderColor(COLOR.THEME.secondary[120]);
+    navigation.navigate("QuizResult", { id: idx });
   };
 
   return (
@@ -47,8 +49,13 @@ const DailyQuiz = ({ navigation }: Props) => {
             key={idx}
             COLOR={COLOR}
             mode={mode}
+            borderColor={
+              idx === selectedIdx
+                ? COLOR.THEME.secondary[120]
+                : COLOR.Background.inputBorderDefault
+            }
             underlayColor={COLOR.THEME.secondary[70]}
-            onPress={() => handleButton()}
+            onPress={() => handleButton(idx)}
           >
             <ButtonText COLOR={COLOR} mode={mode}>
               {item.word}
@@ -90,13 +97,14 @@ const BoldTitle = styled.Text<{
 const QuizButton = styled.TouchableHighlight<{
   COLOR: colorTheme;
   mode: boolean;
+  borderColor: string;
 }>`
   width: ${screenWidth - 32}px;
   height: 47px;
   border-radius: 8px;
   border-width: 1px;
   border-style: solid;
-  border-color: ${(props) => props.COLOR.Background.inputBorderDefault};
+  border-color: ${(props) => props.borderColor};
   margin: 10px auto;
 `;
 

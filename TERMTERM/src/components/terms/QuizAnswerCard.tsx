@@ -2,18 +2,21 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useWordReg } from "@hooks/useWordReg";
 import { WordProps } from "@interfaces/word";
 import { TEXT_STYLES, TYPO, colorTheme, TYPO_STYLE } from "@style/designSystem";
+import { screenWidth } from "@style/dimensions";
 import { TouchableOpacityProps } from "react-native";
+import { css } from "styled-components";
 import styled from "styled-components/native";
 
 interface Props extends TouchableOpacityProps {
   word: WordProps;
   quiz?: boolean;
+  detail?: boolean;
 }
 
 /**
- * 퀴즈 모드에서 사용할 터치가 불가능한 단어 카드
+ * 퀴즈 모드에서 사용될 단어 카드
  */
-const UnTouchableQuizCard = ({ word, quiz, ...props }: Props) => {
+const QuizAnswerCard = ({ word, quiz, detail, ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [sub, main] = useWordReg(word.name);
 
@@ -22,7 +25,8 @@ const UnTouchableQuizCard = ({ word, quiz, ...props }: Props) => {
       COLOR={COLOR}
       mode={mode}
       quiz={quiz}
-      activeOpacity={0.6}
+      detail={detail}
+      activeOpacity={0.9}
       {...props}
     >
       <NameWrapper>
@@ -44,14 +48,25 @@ const UnTouchableQuizCard = ({ word, quiz, ...props }: Props) => {
   );
 };
 
+const listHeight = css`
+  aspect-ratio: 1;
+  padding: 36px 22px 22px 22px;
+`;
+
+const detailHeight = css`
+  min-height: 358px;
+  padding: 36px 22px 36px 22px;
+`;
+
 const Container = styled.TouchableOpacity<{
   COLOR: colorTheme;
   mode: boolean;
   quiz?: boolean;
+  detail?: boolean;
 }>`
-  min-width: 358px;
+  min-width: ${screenWidth - 32}px;
   width: 100%;
-  aspect-ratio: 1;
+  height: 358px;
   border-radius: 10px;
   background-color: ${(props) =>
     props.mode
@@ -63,7 +78,8 @@ const Container = styled.TouchableOpacity<{
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 36px 22px 22px 22px;
+
+  ${(props) => (props.detail ? detailHeight : listHeight)};
 `;
 
 const NameWrapper = styled.View`
@@ -106,28 +122,12 @@ const MainName = styled.Text<{
 `;
 
 const Content = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  ${TYPO_STYLE.Body[3].Regular};
+  ${TYPO_STYLE.Subheading[1].Regular};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
   white-space: pre-line;
-  //TODO : line-height 수정
-  line-height: ${TEXT_STYLES.sm.Reg?.fontSize! * 1.6}px;
-  margin-top: 19px;
+  line-height: 24px;
+  margin-top: 15px;
 `;
 
-const Source = styled.Text<{
-  COLOR: colorTheme;
-  mode: boolean;
-  quiz?: boolean;
-}>`
-  ${TYPO_STYLE.Caption[2].Medium};
-  margin-right: auto;
-  color: ${(props) =>
-    props.mode
-      ? props.quiz
-        ? props.COLOR.THEME.secondary.variant
-        : props.COLOR.THEME.primary.variant
-      : props.COLOR.Neutral[10]};
-`;
-
-export default UnTouchableQuizCard;
+export default QuizAnswerCard;

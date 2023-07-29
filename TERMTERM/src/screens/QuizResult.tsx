@@ -5,7 +5,6 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { colorTheme } from "@style/designSystem";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { WordCard } from "@components/terms";
 import { WordProps } from "@interfaces/word";
 import { dummyWord } from "@assets/dummyWord";
 import {
@@ -14,6 +13,7 @@ import {
   BUTTON_TYPE,
   AnswerReminder,
 } from "@components/index";
+import QuizAnswerCard from "@components/terms/QuizAnswerCard";
 
 export type Props = StackScreenProps<RootStackParamList, "QuizResult">;
 
@@ -30,7 +30,7 @@ const QuizResult = ({ navigation, route }: Props) => {
       <Container COLOR={COLOR} mode={mode}>
         <AnswerReminder answer={false} userAnswer={"Product Manager"} />
         <ContentWrapper>
-          <WordCard
+          <QuizAnswerCard
             word={dummyWord}
             quiz={true}
             style={{ marginTop: "-15%" }}
