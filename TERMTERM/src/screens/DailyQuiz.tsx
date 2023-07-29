@@ -6,7 +6,6 @@ import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DailyQuizItemProps } from "@interfaces/dailyquiz";
 import QuizCard from "@components/quiz/QuizCard";
-import { BackBar } from "@components/header";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import useHideWord from "@hooks/useHideWord";
 import { screenWidth } from "@style/dimensions";
