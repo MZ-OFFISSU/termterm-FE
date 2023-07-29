@@ -7,6 +7,7 @@ import { screenWidth } from "@style/dimensions";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
+import { Fontisto } from "@expo/vector-icons";
 
 export type Props = StackScreenProps<RootStackParamList, "QuizIntro">;
 
@@ -58,7 +59,13 @@ const QuizIntro = ({ navigation }: Props) => {
             onPress={() => navigation.navigate("DailyQuiz")}
           >
             <ButtonText COLOR={COLOR} mode={mode}>
-              {`퀴즈 응시하기    〉`}
+              {`퀴즈 응시하기     `}
+              <Fontisto
+                name="angle-right"
+                size={15}
+                color={COLOR.Text.lighten}
+                style={{ marginLeft: 40 }}
+              />
             </ButtonText>
           </Button>
         </ContentWrapper>
@@ -111,6 +118,7 @@ const SubTitle = styled.Text<{
   ${TYPO_STYLE.Body[1].Medium};
   color: ${(props) => props.COLOR.Text.default};
   margin-top: 20px;
+  line-height: 27px;
   text-align: center;
 `;
 
@@ -118,10 +126,11 @@ const Button = styled.TouchableOpacity<{
   COLOR: colorTheme;
   mode: boolean;
 }>`
-  width: 318px;
+  width: ${screenWidth - 32}px;
   height: 44px;
   border-radius: 30px;
-  background-color: ${(props) => props.COLOR.Neutral[100]};
+  background-color: ${(props) =>
+    props.mode ? props.COLOR.Neutral[100] : props.COLOR.Background.onSurface};
   margin-top: 80px;
 `;
 

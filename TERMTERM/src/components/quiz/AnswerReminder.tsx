@@ -72,9 +72,11 @@ const Container = styled.View<{
   width: 90%;
   height: 55px;
   background-color: ${(props) =>
-    props.answer
-      ? props.COLOR.THEME.positive[10]
-      : props.COLOR.THEME.negative[10]};
+    props.mode
+      ? props.answer
+        ? props.COLOR.THEME.positive[10]
+        : props.COLOR.THEME.negative[10]
+      : props.COLOR.Background.onSurface};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -88,7 +90,7 @@ const AnswerText = styled.Text<{
   COLOR: colorTheme;
   mode: boolean;
 }>`
-  ${TYPO_STYLE.Body[2].Medium};
+  ${TYPO_STYLE.Subheading[1].Regular};
   color: ${(props) => props.COLOR.Text.active};
   margin-left: 10px;
 `;
@@ -97,6 +99,6 @@ const BoldText = styled.Text<{
   COLOR: colorTheme;
   mode: boolean;
 }>`
-  ${TYPO_STYLE.Body[2].Bold};
+  ${TYPO_STYLE.Subheading[1].Bold};
   color: ${(props) => props.COLOR.Text.active};
 `;
