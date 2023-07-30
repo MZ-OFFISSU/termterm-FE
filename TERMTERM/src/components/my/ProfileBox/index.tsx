@@ -3,9 +3,10 @@ import { ProfileProps } from "@interfaces/profile";
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import InterestBadge from "./InterestBadge";
+import { MemberInfo } from "Member";
 
 interface Props {
-  profile: ProfileProps;
+  profile: MemberInfo;
 }
 
 /**
@@ -17,21 +18,25 @@ const ProfileBox = ({ profile }: Props) => {
   return (
     <Container>
       <ProfileImageWrapper>
-        <ProfileImage source={{ uri: profile.img }} />
+        {/* TODO : Profile 이미지 API 연결 */}
+        {/* <ProfileImage source={{ uri: profile.profileImage }} /> */}
       </ProfileImageWrapper>
       <InfoWrapper>
-        <Name COLOR={COLOR}>{profile.name} | {profile.job}</Name>
+        <Name COLOR={COLOR}>
+          {profile.name}님 | {profile.job}
+        </Name>
         <DetailWrapper>
           <Detail COLOR={COLOR}>{profile.domain}</Detail>
           <Detail COLOR={COLOR} style={{ marginLeft: 4 }}>
             |
           </Detail>
           <Detail COLOR={COLOR} style={{ marginLeft: 4 }}>
-            {profile.career}
+            {/* TODO : yearCareea 수정한 내용 반영 */}
+            {profile.yearCareer == null ? "1년 미만" : profile.yearCareer}
           </Detail>
         </DetailWrapper>
         <DetailWrapper>
-          {profile.interests.map((interest, idx) => (
+          {profile.categories.map((interest, idx) => (
             <InterestBadge
               key={interest}
               interest={interest}

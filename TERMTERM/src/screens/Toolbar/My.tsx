@@ -5,24 +5,44 @@ import ProfileBox from "@components/my/ProfileBox";
 import Button from "@components/my/Button";
 import { DefaultList } from "@components/my/MenuList";
 import { ProfileProps } from "@interfaces/profile";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IntroBox from "@components/my/IntroBox";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
+import MemberApi from "@api/MemberApi";
+import { MemberInfo } from "Member";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
 const My = ({ navigation }: Props) => {
+  const memberApi = new MemberApi();
+
   const [COLOR, mode] = useThemeStyle();
-  const [info, setInfo] = useState(dummyProfile);
+  const [info, setInfo] = useState<MemberInfo>(initProfile);
+
+  const getProfileInfo = async (): Promise<MemberInfo> => {
+    try {
+      const res = await memberApi.getInfo();
+      console.log("My : ", res);
+      setInfo(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  };
+
+  useEffect(() => {
+    getProfileInfo();
+  }, []);
 
   return (
     <Container COLOR={COLOR}>
       <InnerContainer style={{ paddingTop: 20, paddingBottom: 20 }}>
         <InnerContainer style={{ paddingLeft: 16, paddingRight: 16 }}>
-          <ProfileBox profile={info} />
-          {info.intro ? (
-            <IntroBox title="자기소개" subtitle={info.intro} />
+          <ProfileBox profile={info as MemberInfo} />
+          {info?.introduction ? (
+            <IntroBox title="자기소개" subtitle={info.introduction} />
           ) : (
             <></>
           )}
@@ -57,13 +77,17 @@ const InnerContainer = styled.View`
 
 export default My;
 
-const dummyProfile: ProfileProps = {
-  name: "왈왈이",
-  domain: "비바리퍼블리카",
-  job: "프론트엔드 개발자",
-  career: "1년 미만",
-  interests: ["개발", "디자인", "비즈니스", "IT"],
-  img: "https://i.pinimg.com/564x/42/08/6e/42086e93481fff0f923cb0ab0d3784dc.jpg",
-  intro:
-    "나는야 비바리퍼블리카가 가고 싶은 프론트엔드 개발자입니다.\n우하하하하하 백엔드 싫어~ 엠엘 싫어~",
-};
+const initProfile: MemberInfo = {
+  categories: [],
+  domain: "",
+  email: "",
+  introduction: "",
+  job: "",
+  memberId: 0,
+  name: "",
+  nickname: "",
+  // TODO : 정책에 따라 포인트 수정해두기
+  point: 5000,
+  profileImage: "",
+  yearCareer: 0,
+}
