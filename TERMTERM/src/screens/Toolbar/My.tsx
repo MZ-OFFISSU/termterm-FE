@@ -23,7 +23,6 @@ const My = ({ navigation }: Props) => {
   const getProfileInfo = async (): Promise<MemberInfo> => {
     try {
       const res = await memberApi.getInfo();
-      console.log("My : ", res);
       setInfo(res);
       return res;
     } catch (err) {
