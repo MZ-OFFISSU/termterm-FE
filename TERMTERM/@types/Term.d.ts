@@ -73,7 +73,12 @@ declare module "Term" {
 
   export type SearchResult = {
     bookmarked: "YES" | "NO";
-    id: numbeer;
+    id: number;
     name: string;
+  };
+
+  export type TermPreview = {
+    name: string;
+    termId: number;
   };
 }
