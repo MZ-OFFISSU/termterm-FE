@@ -13,11 +13,8 @@ import { BUTTON_STATE, BUTTON_TYPE } from "@components/index";
 import { useDebounce } from "@hooks/useDebounce";
 import { screenWidth } from "@style/dimensions";
 import MemberApi from "@api/MemberApi";
-import { infoState } from "@recoil/signupState";
-import { useRecoilState } from "recoil";
-import { ModifiedMemberInfo } from "Member";
-import { getTypeFromLabel } from "@utils/careerConverter";
-import { getAccessToken } from "@utils/tokenHandler";
+import { ProfileInfo, profileState } from "@recoil/signupState";
+import { useRecoilValue } from "recoil";
 
 export type Props = StackScreenProps<RootStackParamList, "EditProfile">;
 
@@ -26,10 +23,19 @@ export type Props = StackScreenProps<RootStackParamList, "EditProfile">;
  */
 const EditProfile = ({ navigation }: Props) => {
   const memberApi = new MemberApi();
-  const [info, setInfo] = useRecoilState(infoState);
 
   const [COLOR, mode] = useThemeStyle();
-  const [input, setInput] = useState<ProfileProps>(dummyProfile);
+  const currProfile = useRecoilValue(profileState);
+  const [input, setInput] = useState<ProfileProps>({
+    name: currProfile.nickname,
+    domain: currProfile.domain,
+    job: currProfile.job,
+    // TODO : career 값 변환 num to str
+    career: "",
+    interests: [],
+    img: "",
+    intro: currProfile.introduction,
+  });
   const scrollViewRef = useRef<ScrollView>(null);
   const [changed, setChanged] = useState(false);
   const [warn, setWarn] = useState(false);
@@ -40,7 +46,7 @@ const EditProfile = ({ navigation }: Props) => {
 
   const [loading] = useDebounce(
     () => {
-      if (JSON.stringify(dummyProfile) !== JSON.stringify(input))
+      if (JSON.stringify(currProfile) !== JSON.stringify(input))
         setChanged(true);
       else setChanged(false);
     },
@@ -51,7 +57,7 @@ const EditProfile = ({ navigation }: Props) => {
   const checkWarn = async (): Promise<boolean> => {
     try {
       //닉네임이 중복되지 않음 (사용가능)
-      await memberApi.nicknameDoubleCheck(input.name);
+      await memberApi.nicknameDoubleCheck(input?.name);
       setWarn(false);
       return true;
     } catch (err) {
@@ -62,30 +68,20 @@ const EditProfile = ({ navigation }: Props) => {
   };
 
   const editProfileInfo = async () => {
-    const modifiedInfo: ModifiedMemberInfo = {
-      domain: input.domain,
-      introduction: input.intro as string,
-      job: input.job,
-      nickname: input.name,
-      yearCareer: getTypeFromLabel(info.career)!,
-    };
-    setInfo({
-      name: input.name,
-      domain: input.domain,
-      job: input.job,
-      career: input.career,
-      interests: input.interests,
-    })
-    const categories: string[] = input.interests;
-    // const access = getAccessToken();
-
     try {
       // 닉네임 중복 검사
       const check = await checkWarn();
       if (!check) return;
 
-      await memberApi.putInfo(modifiedInfo);
-      await memberApi.putCategory(categories);
+      await memberApi.putInfo({
+        domain: input.domain,
+        introduction: currProfile.introduction,
+        job: input.job,
+        nickname: input.name,
+        // TODO : 연차 코드 수정
+        yearCareer: currProfile.yearCareer == null ? 1 : 0,
+      });
+      // await memberApi.putCategory(categories);
       // TODO : 프로필 사진 수정 API 추가
 
       navigation.reset({ routes: [{ name: "My" }] });
@@ -97,9 +93,12 @@ const EditProfile = ({ navigation }: Props) => {
   return (
     <Container ref={scrollViewRef} COLOR={COLOR}>
       <InnerContainer>
-        <ProfileImageSelector input={input} setInput={setInput} />
+        <ProfileImageSelector
+          input={input as ProfileProps}
+          setInput={setInput}
+        />
         <InfoSelector
-          input={input}
+          input={input as ProfileProps}
           setInput={setInput}
           scrollToBottom={scrollToBottom}
           style={{ marginTop: 35 }}
@@ -145,13 +144,10 @@ const InnerContainer = styled.View`
 
 export default EditProfile;
 
-const dummyProfile: ProfileProps = {
-  name: "왈왈이",
+const dummyProfile: ProfileInfo = {
   domain: "비바리퍼블리카",
+  introduction: "안녕하세요. 유짐인입니다",
   job: "프론트엔드 개발자",
-  career: "1년 미만",
-  interests: ["개발", "디자인", "비즈니스", "IT"],
-  img: "https://i.pinimg.com/564x/42/08/6e/42086e93481fff0f923cb0ab0d3784dc.jpg",
-  intro:
-    "나는야 비바리퍼블리카가 가고 싶은 프론트엔드 개발자입니다.\n우하하하하하 백엔드 싫어~ 엠엘 싫어~",
+  nickname: "짐프짐프",
+  yearCareer: 1,
 };
