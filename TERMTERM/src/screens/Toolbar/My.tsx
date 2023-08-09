@@ -4,13 +4,14 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import ProfileBox from "@components/my/ProfileBox";
 import Button from "@components/my/Button";
 import { DefaultList } from "@components/my/MenuList";
-import { ProfileProps } from "@interfaces/profile";
 import { useEffect, useState } from "react";
 import IntroBox from "@components/my/IntroBox";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import MemberApi from "@api/MemberApi";
 import { MemberInfo } from "Member";
+import { useRecoilState } from "recoil";
+import { profileState } from "@recoil/signupState";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -18,12 +19,20 @@ const My = ({ navigation }: Props) => {
   const memberApi = new MemberApi();
 
   const [COLOR, mode] = useThemeStyle();
-  const [info, setInfo] = useState<MemberInfo>(initProfile);
+  const [memberInfo, setMemberInfo] = useState<MemberInfo>(initProfile);
+  const [profileInfo, setProfileInfo] = useRecoilState(profileState);
 
   const getProfileInfo = async (): Promise<MemberInfo> => {
     try {
       const res = await memberApi.getInfo();
-      setInfo(res);
+      setMemberInfo(res);
+      setProfileInfo({
+        domain: res.domain,
+        introduction: res.introduction,
+        job: res.job,
+        nickname: res.nickname,
+        yearCareer: res.yearCareer,
+      });
       return res;
     } catch (err) {
       console.log(err);
@@ -39,9 +48,9 @@ const My = ({ navigation }: Props) => {
     <Container COLOR={COLOR}>
       <InnerContainer style={{ paddingTop: 20, paddingBottom: 20 }}>
         <InnerContainer style={{ paddingLeft: 16, paddingRight: 16 }}>
-          <ProfileBox profile={info as MemberInfo} />
-          {info?.introduction ? (
-            <IntroBox title="자기소개" subtitle={info.introduction} />
+          <ProfileBox profile={memberInfo as MemberInfo} />
+          {memberInfo?.introduction ? (
+            <IntroBox title="자기소개" subtitle={memberInfo.introduction} />
           ) : (
             <></>
           )}
@@ -89,4 +98,4 @@ const initProfile: MemberInfo = {
   point: 5000,
   profileImage: "",
   yearCareer: 0,
-}
+};
