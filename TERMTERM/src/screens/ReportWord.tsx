@@ -10,27 +10,30 @@ import { screenWidth } from "@style/dimensions";
 import CustomTextarea from "@components/common/CustomTextarea";
 import { Keyboard } from "react-native";
 import Toast from "react-native-toast-message";
+import CommentApi from "@api/CommentApi";
+import { Report, ReportType } from "Comment";
 
 export type Props = StackScreenProps<RootStackParamList, "ReportWord">;
-
-const Reasons = [
-  "저작권 침해, 명예훼손",
-  "개인정보 유출",
-  "광고 및 홍보성 내용",
-  "용어와 무관한 내용",
-  "사기 또는 거짓 정보",
-  "잘못된 정보 포함",
-  "혐오 발언 또는 상징",
-  "욕설, 비방, 선정성 등 미풍양속을 해치는 내용",
-  "스팸",
-  "기타",
-];
 
 /**
  * 의견 신고 스크린
  */
 const ReportWord = ({ route, navigation }: Props) => {
+  const commentApi = new CommentApi();
+
   const [COLOR, mode] = useThemeStyle();
+  const [reasonType, setReasonType] = useState([
+    {label: "저작권 침해, 명예훼손", value: "COPYRIGHT"},
+    {label: "개인정보 유출", value: "PERSONAL_INFORMATION"},
+    {label: "광고 및 홍보성 내용", value: "ADVERTISEMENT"},
+    {label: "용어와 무관한 내용", value: "IRRELEVANT_CONTENT"},
+    {label: "사기 또는 거짓 정보", value: "FRAUD"},
+    {label: "잘못된 정보 포함", value: "INCORRECT_CONTENT"},
+    {label: "혐오 발언 또는 상징", value: "DISGUST"},
+    {label: "욕설, 비방, 선정성 등 미풍양속을 해치는 내용", value: "ABUSE"},
+    {label: "스팸", value: "SPAM"},
+    {label: "기타", value: "OTHER"},
+  ])
   const [selectedReason, setSelectedReason] = useState("");
   const [etc, setEtc] = useState("");
   const [btnPosition, setBtnPosition] = useState(70);
@@ -57,8 +60,8 @@ const ReportWord = ({ route, navigation }: Props) => {
 
   // 신고가 가능한 상태인지 검사
   const testInvalid = (): boolean => {
-    if (selectedReason === "기타" && etc !== "") return true;
-    if (selectedReason === "기타" && etc === "") return false;
+    if (selectedReason === "OTHER" && etc !== "") return true;
+    if (selectedReason === "OTHER" && etc === "") return false;
     if (selectedReason !== "") return true;
     return false;
   };
@@ -66,21 +69,36 @@ const ReportWord = ({ route, navigation }: Props) => {
   const report = () => {
     if (testInvalid()) {
       showToast();
+      registerReport();
       navigation.pop();
       return;
     }
   };
 
-  const RenderRadio = (reason: string) => {
+  const RenderRadio = (reason: { label: string; value: string }) => {
     return (
       <Radio
-        title={reason}
-        checked={selectedReason === reason}
-        onPress={() => setSelectedReason(reason)}
+        title={reason.label}
+        checked={selectedReason === reason.value}
+        onPress={() => setSelectedReason(reason.value)}
         style={customRadioStyle}
-        key={reason}
+        key={reason.value}
       />
     );
+  };
+
+  const registerReport = async () => {
+    const reportInfo: Report = {
+      commentId: route.params.id,
+      content: etc,
+      type: selectedReason as ReportType,
+    };
+
+    try {
+      await commentApi.reportComment(reportInfo);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -98,8 +116,8 @@ const ReportWord = ({ route, navigation }: Props) => {
   return (
     <Container COLOR={COLOR}>
       <DynamicTitleBox />
-      {Reasons.map(RenderRadio)}
-      {selectedReason === "기타" ? (
+      {reasonType.map(RenderRadio)}
+      {selectedReason === "OTHER" ? (
         <CustomTextarea
           value={etc}
           max={300}
