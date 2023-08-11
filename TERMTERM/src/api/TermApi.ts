@@ -16,13 +16,13 @@ class TermApi {
 
   /** 오늘의 용어*/
   dailyTerm = async (): Promise<TermItem[]> => {
-    const data = await post<TermItem[]>(`/v1/term/daily`);
+    const data = await get<TermItem[]>(`/v1/term/daily`);
     return data;
   };
 
   /** 용어 상세 */
   termDetail = async (id: number): Promise<TermDetail> => {
-    const data = await post<TermDetail>(`/v1/term/detail/${id}`);
+    const data = await get<TermDetail>(`/v1/term/detail/${id}`);
     return data;
   };
 
