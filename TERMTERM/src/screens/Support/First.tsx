@@ -11,36 +11,38 @@ import {
   CustomSelector,
 } from "@components/index";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import InquiryApi from "@api/InquiryApi";
+import { InquiryContent, InquiryType } from "Inquiry";
+import { useRecoilState } from "recoil";
+import { inquiryState } from "@recoil/inquiryState";
 import CustomEmailInput from "@components/common/CustomEmailInput";
 import CustomTextarea from "@components/common/CustomTextarea";
 
 const First = ({ onEnd }: Props) => {
-  const [COLOR, mode] = useThemeStyle();
+  const inquiryApi = new InquiryApi();
+
+  const [COLOR, theme] = useThemeStyle();
   const [btnPosition, setBtnPosiition] = useState(30);
+  const [inquiryInfo, setInquiryInfo] = useRecoilState(inquiryState);
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [inquiryType, setInquiryType] = useState([
-    { label: "이용 문의", value: "이용 문의" },
-    { label: "로그인/회원가입 문의", value: "로그인/회원가입 문의" },
-    { label: "서비스 불편/오류 제보", value: "서비스 불편/오류 제보" },
-    { label: "서비스 제안", value: "서비스 제안" },
-    { label: "기타 문의", value: "기타 문의" },
+    { label: "이용 문의", value: "USE" },
+    { label: "로그인/회원가입 문의", value: "AUTH" },
+    { label: "서비스 불편/오류 제보", value: "REPORT" },
+    { label: "서비스 제안", value: "SUGGESTION" },
+    { label: "기타 문의", value: "OTHER" },
   ]);
-  const [value, setValue] = useState("");
+  const [selectedType, setSelectedType] = useState("");
   const [inquiryContent, setInquiryContent] = useState("");
   const [textLength, setTextLength] = useState(0);
-
-  const [inquiryInfo, setInquiryInfo] = useState({
-    email: "",
-    inquiryType: "",
-    inquiryContent: "",
-  });
 
   const nextStage = () => {
     if (onEnd && email !== "" && inquiryContent !== "") {
       setInquiryInfo({
+        ...inquiryInfo,
         email: email,
-        inquiryType: value,
+        inquiryType: selectedType,
         inquiryContent: inquiryContent,
       });
       onEnd();
@@ -113,6 +115,7 @@ const First = ({ onEnd }: Props) => {
           <CustomEmailInput
             value={email}
             onChangeText={(text) => setEmail(text)}
+            maxLength={50}
             placeholder="termterm@email.com"
           />
         </InputWrapper>
@@ -122,10 +125,10 @@ const First = ({ onEnd }: Props) => {
           </Subtitle>
           <CustomSelector
             open={open}
-            value={value}
+            value={selectedType}
             items={inquiryType}
             setOpen={setOpen}
-            setValue={setValue}
+            setValue={setSelectedType}
             setItems={setInquiryType}
             placeholder="문의 유형을 선택해주세요."
             listMode="MODAL"
@@ -153,7 +156,7 @@ const First = ({ onEnd }: Props) => {
           theme={mode}
           type={BUTTON_TYPE.primary}
           state={
-            email === "" || value === "" || inquiryContent === ""
+            email === "" || selectedType === "" || inquiryContent === ""
               ? BUTTON_STATE.default
               : BUTTON_STATE.active
           }

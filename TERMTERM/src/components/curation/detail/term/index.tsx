@@ -6,7 +6,7 @@ export interface Preview {
   id: number;
   name: string;
   description: string;
-  bookmarked: boolean;
+  bookmarked: string;
 }
 
 interface Props {

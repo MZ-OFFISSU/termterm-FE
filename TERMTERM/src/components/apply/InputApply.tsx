@@ -13,33 +13,56 @@ import {
 import { useState } from "react";
 import CustomTextarea from "@components/common/CustomTextarea";
 import { BUTTON_STATE, BUTTON_TYPE, CustomButton, CustomTextInput } from "..";
+import CommentApi from "@api/CommentApi";
+import { CommentInput } from "Comment";
+import { getAccessToken } from "@utils/tokenHandler";
 
 const InputApply = ({ nextStage }: ApplyProps) => {
-  const [COLOR, mode] = useThemeStyle();
-  const [info, setInfo] = useState({ desc: "", source: "" });
+  const commentApi = new CommentApi();
+  const [comment, setComment] = useState<CommentInput>({
+    content: "",
+    source: "",
+    // TODO : 임시 termId 발급 -> 수정하기
+    termId: 1,
+  });
 
-  const changeDesc = (value: string) => {
-    setInfo((prev) => {
+  const [COLOR, mode] = useThemeStyle();
+
+  const changeContent = (value: string) => {
+    setComment((prev) => {
       return {
         ...prev,
-        desc: value,
+        content: value,
       };
     });
   };
+
   const changeSource = (value: string) => {
-    setInfo((prev) => {
+    setComment((prev) => {
       return {
         ...prev,
         source: value,
       };
     });
   };
+
   const navigate = () => {
-    if (info.desc !== "") nextStage();
+    if (comment.content !== "") nextStage();
   };
 
   const descStyle = {
     backgroundColor: COLOR.Background.input,
+  };
+
+  const registerComment = async () => {
+    try {
+      await commentApi.registerComment(comment);
+      // TODO : 네비게이션 이동 코드 추가
+      navigate();
+    } catch (err) {
+      console.log(err);
+      // TODO : 네비게이션 이동 코드 추가
+    }
   };
 
   return (
@@ -55,9 +78,9 @@ const InputApply = ({ nextStage }: ApplyProps) => {
         <ContentBox style={{ marginTop: 32 }}>
           <ContentTitle COLOR={COLOR}>용어 설명</ContentTitle>
           <CustomTextarea
-            value={info.desc}
+            value={comment.content}
             max={250}
-            onChangeText={changeDesc}
+            onChangeText={changeContent}
             placeholder="용어에 대한 나만의 생각을 편안하게 남겨주세요."
             style={descStyle}
           />
@@ -65,7 +88,7 @@ const InputApply = ({ nextStage }: ApplyProps) => {
         <ContentBox style={{ marginTop: 32 }}>
           <ContentTitle COLOR={COLOR}>출처</ContentTitle>
           <CustomTextInput
-            value={info.source}
+            value={comment.source}
             placeholder="홈페이지 url 등"
             max={false}
             onChangeText={changeSource}
@@ -80,8 +103,10 @@ const InputApply = ({ nextStage }: ApplyProps) => {
         title="신청하기"
         theme={mode}
         type={BUTTON_TYPE.primary}
-        state={info.desc !== "" ? BUTTON_STATE.active : BUTTON_STATE.default}
-        onPress={navigate}
+        state={
+          comment.content !== "" ? BUTTON_STATE.active : BUTTON_STATE.default
+        }
+        onPress={registerComment}
         style={{ width: "100%", marginTop: 48 }}
       />
     </Wrapper>

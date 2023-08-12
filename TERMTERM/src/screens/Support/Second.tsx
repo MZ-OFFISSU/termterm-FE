@@ -7,6 +7,8 @@ import { Props } from "@interfaces/support";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { CheckBoxContent, CheckBoxWrapper } from "@components/apply/style";
 import { CheckBoxIcon } from "@components/apply/StandardApply";
+import { useRecoilState } from "recoil";
+import { inquiryState } from "@recoil/inquiryState";
 
 const Second = ({ onEnd }: Props) => {
   const [COLOR, mode] = useThemeStyle();

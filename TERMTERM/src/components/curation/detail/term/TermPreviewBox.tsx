@@ -10,7 +10,7 @@ import { useWordReg } from "@hooks/useWordReg";
 interface Props extends TouchableOpacityProps {
   name: string;
   description: string;
-  bookmarked: boolean;
+  bookmarked: string;
 }
 
 /**
@@ -34,7 +34,7 @@ const TermPreviewBox = ({ name, description, bookmarked, ...props }: Props) => {
       <UpperBox>
         <Job COLOR={COLOR}>{main}</Job>
         <PreviewBookmark>
-          {bookmarked ? (
+          {bookmarked === "YES" ? (
             <Ionicons
               name="ios-bookmark"
               size={22}

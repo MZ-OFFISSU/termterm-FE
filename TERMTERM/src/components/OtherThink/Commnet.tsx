@@ -9,9 +9,11 @@ import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
+import CommentApi from "@api/CommentApi";
 
 interface LikeProps {
   liked: boolean;
+  onPress: () => Promise<void>;
 }
 
 interface Props {
@@ -26,7 +28,7 @@ const THUMBUP_ICON = [
 ];
 
 /** 좋아요 버튼 컴포넌트 */
-const LikeButton = ({ liked }: LikeProps) => {
+const LikeButton = ({ liked, onPress }: LikeProps) => {
   const [COLOR, mode] = useThemeStyle();
   const [buttonImage, setButtonImage] = useState(0);
 
@@ -40,12 +42,17 @@ const LikeButton = ({ liked }: LikeProps) => {
     }
   };
 
+  const handleLikeButtonClick = () => {
+    onPress();
+    settingImage();
+  }
+
   useEffect(() => {
     settingImage();
   }, [liked, mode]);
 
   return (
-    <LikeButtonWrapper>
+    <LikeButtonWrapper onPress={handleLikeButtonClick}>
       <CustomImage source={THUMBUP_ICON[buttonImage]} />
     </LikeButtonWrapper>
   );
@@ -53,7 +60,12 @@ const LikeButton = ({ liked }: LikeProps) => {
 
 /** 실제 코멘트 컴포넌트 */
 const CommentComponent = ({ comment }: Props) => {
+  const commentApi = new CommentApi();
+
   const [COLOR, mode] = useThemeStyle();
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(comment.likeCnt);
+
   const { showActionSheetWithOptions } = useActionSheet();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
@@ -82,6 +94,24 @@ const CommentComponent = ({ comment }: Props) => {
     );
   };
 
+  const handleCommentLikeClick = async () => {
+    // TODO : 디버깅 필요...
+    try {
+      if (liked) {
+        await commentApi.dislikeComment(comment.id);
+        setLikeCount((prevCount) => prevCount - 1);
+        console.log("dislike button clicked : ", comment.id, comment.likeCnt);
+      } else {
+        await commentApi.likeComment(comment.id);
+        setLikeCount((prevCount) => prevCount + 1);
+        console.log("like button clicked : ", comment.id, comment.likeCnt);
+      }
+    } catch (err) {
+      console.log("like & dislike button clicked error : ", comment.id, comment.likeCnt);
+      console.log(err);
+    }
+  };
+
   return (
     <Wrapper
       onLongPress={openActionSheet}
@@ -108,7 +138,7 @@ const CommentComponent = ({ comment }: Props) => {
           <Date COLOR={COLOR}>{dateConverter(comment.createdDate)}</Date>
         </DefaultInfoWrapper>
         <ThumbUpWrapper>
-          <LikeButton liked={false} />
+          <LikeButton onPress={handleCommentLikeClick} liked={liked} />
           {/* TODO _ 좋아요 눌렀는지 불리언 값 필요함*/}
           <Likes COLOR={COLOR}>{comment.likeCnt}</Likes>
         </ThumbUpWrapper>

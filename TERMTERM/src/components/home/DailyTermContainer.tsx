@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import DailyTermBox from "./DailyTermBox";
 import { Preview } from "@components/curation/detail/term";
+import { TermItem } from "Term";
+import TermApi from "@api/TermApi";
 
 const dummyData: Array<Preview> = [
   {
@@ -38,7 +40,19 @@ const dummyData: Array<Preview> = [
  * 오늘의 용어 콘테이너
  */
 const DailyTermContainer = () => {
+  const termApi = new TermApi();
   const [terms, setTerms] = useState(dummyData);
+
+  const getTodayTerms = async () => {
+    const terms: TermItem[] = [];
+
+    try {
+      const terms = await termApi.dailyTerm();
+
+    } catch(err) {
+      console.log(err);
+    }
+  }
 
   return (
     <Container>
