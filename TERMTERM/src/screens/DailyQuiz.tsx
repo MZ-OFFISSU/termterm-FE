@@ -1,15 +1,14 @@
 import styled from "styled-components/native";
 import { useState, useEffect } from "react";
-import AutoSizedImage from "@components/common/AutoSizedImage";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import {
-  LIGHT_COLOR_STYLE,
-} from "@style/designSystem";
+import { LIGHT_COLOR_STYLE } from "@style/designSystem";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DailyQuizItemProps } from "@interfaces/dailyquiz";
 import QuizCard from "@components/quiz/QuizCard";
 import { BackBar } from "@components/header";
+import QuizApi from "@api/QuizApi";
+import { QuizDetail } from "Quiz";
 
 export type Props = StackScreenProps<RootStackParamList, "DailyQuiz">;
 
@@ -32,12 +31,28 @@ const dummy: Array<DailyQuizItemProps> = [
 ];
 
 const DailyQuiz = ({ navigation }: Props) => {
+  const quizApi = new QuizApi();
+
   const [idx, setIdx] = useState(0);
   const [isSelect, setSelect] = useState<unknown>({
     id1: false,
     id2: false,
     id3: false,
   });
+  const [quizData, setQuizData] = useState<QuizDetail[]>([]);
+
+  const setDailQuizItem = async () => {
+    try {
+      setQuizData(await quizApi.getDailyQuiz());
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    // TODO : 내부 DB 채워지면 다시 연결!
+    // setDailQuizItem();
+  }, []);
 
   return (
     <SafeAreaView style={{ backgroundColor: "white" }}>
