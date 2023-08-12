@@ -41,7 +41,8 @@ const Support = ({ navigation }: Props) => {
     try {
       await inquiryApi.postInquiry(basicInquiry);
       // TODO : 네비게이션 경로 로직에 따라 변경
-      navigation.reset({ routes: [{ name: "CompleteInquiry" }] });
+      console.log(basicInquiry);
+      navigation.reset({ routes: [{ name: "Third" }] });
     } catch (err) {
       console.log(err);
       // TODO : 네비게이션 경로 로직에 따라 변경
