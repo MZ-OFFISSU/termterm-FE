@@ -48,7 +48,7 @@ import { safeAreaColorState } from "@recoil/safeAreaColor";
 import Filter from "@components/common/Filter";
 import KakaoLogin from "@screens/Webview/KakaoLogin";
 import GoogleLogin from "@screens/Webview/GoogleLogin";
-import CompleteInquiry from "@screens/CompleteInquiry";
+import Third from "@screens/Support/Third";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -495,6 +495,21 @@ const Container = () => {
                     onBack={() => props.navigation.pop()}
                     onBookmark={() => null}
                     bookmarked={false}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="Third"
+            component={Third}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="문의하기"
+                    onBack={() => props.navigation.pop()}
                   />
                 );
               },
