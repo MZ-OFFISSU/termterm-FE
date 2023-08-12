@@ -21,7 +21,7 @@ import CustomTextarea from "@components/common/CustomTextarea";
 const First = ({ onEnd }: Props) => {
   const inquiryApi = new InquiryApi();
 
-  const [COLOR, theme] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
   const [btnPosition, setBtnPosiition] = useState(30);
   const [inquiryInfo, setInquiryInfo] = useRecoilState(inquiryState);
   const [open, setOpen] = useState(false);
