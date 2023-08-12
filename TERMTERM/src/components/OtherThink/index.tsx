@@ -25,10 +25,13 @@ interface Props {
 
 /** 커스텀 핸들 컴포넌트 (바텀시트 내부)*/
 const CustomHandle = ({ contents }: HandleProps) => {
-  const [COLOR] = useThemeStyle();
+  const [COLOR, mode] = useThemeStyle();
 
   return (
-    <CustomHandleWrapper COLOR={COLOR} style={styles.handle}>
+    <CustomHandleWrapper
+      COLOR={COLOR}
+      style={mode ? styles.handle : styles.handleDark}
+    >
       <HandleHorizon />
       <Title COLOR={COLOR}>{contents}</Title>
     </CustomHandleWrapper>
@@ -101,6 +104,16 @@ const CustomHandleWrapper = styled.View<{ COLOR: colorTheme }>`
 const styles = StyleSheet.create({
   handle: {
     shadowColor: "#00000024",
+    shadowOffset: {
+      width: 0,
+      height: -15,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 10,
+    elevation: 4, // Android에서 그림자 표시를 위해 필요합니다.
+  },
+  handleDark: {
+    shadowColor: "#a1a1a118",
     shadowOffset: {
       width: 0,
       height: -15,

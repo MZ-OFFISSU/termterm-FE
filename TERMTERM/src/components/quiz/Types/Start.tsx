@@ -19,7 +19,11 @@ const Start = ({ navigate }: ChildrenProps) => {
       </LeftBox>
       <TouchableOpacity onPress={() => navigate()}>
         <AutoSizedImage
-          source={require("@assets/arrow-button.png")}
+          source={
+            mode
+              ? require("@assets/arrow-button.png")
+              : require("@assets/arrow-button-dark.png")
+          }
           width={40}
         />
       </TouchableOpacity>

@@ -19,8 +19,11 @@ import TermDetail from "./TermDetail";
 import ReportWord from "./ReportWord";
 import MyWordApply from "./MyWordApply";
 import TermsDetail from "./TermsDetail";
+import QuizIntro from "./QuizIntro";
+import QuizResult from "./QuizResult";
+import QuizReview from "./QuizReview";
 import FilterScreen from "./FilterScreen";
-import CompleteInquiry from "./CompleteInquiry";
+import EditFolder from "./EditFolder";
 
 export {
   Home,
@@ -44,6 +47,9 @@ export {
   ReportWord,
   MyWordApply,
   TermsDetail,
+  QuizIntro,
+  QuizResult,
+  QuizReview,
   FilterScreen,
-  CompleteInquiry,
+  EditFolder,
 };

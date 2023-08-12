@@ -47,7 +47,7 @@ const InnerBox = styled.View`
 const BtnText = styled.Text<{ COLOR: colorTheme }>`
   color: ${(props) => props.COLOR.Text.lighten};
   ${TYPO_STYLE.Body[2].SemiBold};
-  margin-right: 6px;
+  margin-right: 8px;
 `;
 
 export default Button;

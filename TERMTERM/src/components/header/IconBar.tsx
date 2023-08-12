@@ -45,7 +45,7 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
     ) : (
       <AutoSizedImage
         source={require("@assets/icon/fold-dark.png")}
-        height={25}
+        height={18}
       />
     );
   }, []);

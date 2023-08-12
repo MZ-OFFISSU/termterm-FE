@@ -8,39 +8,49 @@ import InputWrapper from "@components/makefolder/InputWrapper";
 import { Keyboard } from "react-native";
 import CompleteButton from "@components/makefolder/CompleteButton";
 import Toast from "react-native-toast-message";
-import { useHaptics } from "@hooks/useHaptics";
 
-export type Props = StackScreenProps<RootStackParamList, "MakeFolder">;
+export type Props = StackScreenProps<RootStackParamList, "EditFolder">;
 
-const MakeFolder = ({ navigation }: Props) => {
-  const { haptic } = useHaptics();
+const EditFolder = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [info, setInfo] = useState({
+    prevName: "",
+    prevDesc: "",
     name: "",
     desc: "",
   });
   const [btnPosition, setBtnPosiition] = useState(30);
 
-  //토스트메시지 보여주는 함수
+  //TODO 여기서 폴더 기본 정보 받아오기
+  const settingPrevInfo = () => {
+    const folderId = route.params.id;
+    const prevInfo = {
+      prevName: "폴더정보",
+      prevDesc: "여기서 통신으로 기존 폴더 정보 받아오세요",
+      name: "폴더정보",
+      desc: "여기서 통신으로 기존 폴더 정보 받아오세요",
+    };
+
+    setInfo(prevInfo);
+  };
+
   const showToast = () => {
     Toast.show({
       type: mode ? "light" : "dark",
-      text1: "폴더 생성이 완료 되었어요!",
+      text1: "폴더 수정이 완료 되었어요!",
     });
   };
 
-  //임시로 만들어놓은 완료버튼 핸들러
-  //통신 및 다양한 수정이 필요함...
   const onComplete = () => {
-    if (info.name !== "") {
+    if (info.name !== info.prevName || info.desc !== info.prevDesc) {
       showToast();
       navigation.pop();
-    } else {
-      haptic("warning");
     }
   };
 
   useEffect(() => {
+    settingPrevInfo();
+
     const showSubscription = Keyboard.addListener("keyboardWillShow", (e) => {
       setBtnPosiition(10 + e.endCoordinates.height);
     });
@@ -78,9 +88,9 @@ const MakeFolder = ({ navigation }: Props) => {
         />
       </Wrapper>
       <CompleteButton
-        ready={info.name !== ""}
+        ready={info.name !== info.prevName || info.desc !== info.prevDesc}
         position={btnPosition}
-        onPress={() => onComplete()}
+        onPress={onComplete}
       />
     </Container>
   );
@@ -103,4 +113,4 @@ const Wrapper = styled.View`
   padding: 0px 16px;
 `;
 
-export default MakeFolder;
+export default EditFolder;

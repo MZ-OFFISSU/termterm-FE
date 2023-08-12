@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/termtermsplash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#121212"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

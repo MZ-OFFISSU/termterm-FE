@@ -8,6 +8,7 @@ interface Props {
   visible: boolean;
   title: string;
   subtitle?: string;
+  list?: string[];
   btnTitle: Array<string>;
   onClose?: () => void;
   onNext: () => void;
@@ -21,11 +22,14 @@ const CustomModal = ({
   visible,
   title,
   subtitle,
+  list,
   btnTitle,
   onClose,
   onNext,
 }: Props) => {
   const [COLOR, mode] = useThemeStyle();
+  const folderList = list ? list.join(" ,") : "";
+
   return (
     <Modal
       isVisible={visible}
@@ -35,6 +39,7 @@ const CustomModal = ({
       <Container COLOR={COLOR} mode={mode}>
         <Title COLOR={COLOR}>{title}</Title>
         {subtitle ? <Subtitle COLOR={COLOR}>{subtitle}</Subtitle> : <></>}
+        {list && <FolderList COLOR={COLOR}>{folderList}</FolderList>}
         {btnTitle.length === 2 && onClose ? (
           <BtnWrapper>
             <Button
@@ -93,7 +98,7 @@ const Subtitle = styled.Text<{ COLOR: colorTheme }>`
   white-space: pre-line;
   text-align: center;
   margin-top: 10px;
-  line-height: 18px;
+  line-height: 20px;
 `;
 
 const BtnWrapper = styled.View`
@@ -126,6 +131,11 @@ const OneButton = styled.TouchableOpacity`
 const ButtonTitle = styled.Text`
   ${TYPO_STYLE.Subheading[1].Medium};
   color: white;
+`;
+
+const FolderList = styled.Text<{ COLOR: colorTheme }>`
+  ${TYPO_STYLE.Subheading[1].Bold};
+  color: ${(props) => props.COLOR.Text.default};
 `;
 
 export default CustomModal;

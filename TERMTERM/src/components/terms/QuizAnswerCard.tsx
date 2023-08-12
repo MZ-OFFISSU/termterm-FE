@@ -2,6 +2,7 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useWordReg } from "@hooks/useWordReg";
 import { WordProps } from "@interfaces/word";
 import { TEXT_STYLES, TYPO, colorTheme, TYPO_STYLE } from "@style/designSystem";
+import { screenWidth } from "@style/dimensions";
 import { TouchableOpacityProps } from "react-native";
 import { css } from "styled-components";
 import styled from "styled-components/native";
@@ -13,11 +14,9 @@ interface Props extends TouchableOpacityProps {
 }
 
 /**
- * 단어 카드
- * 전체 영역에 대한 Props 상속 받고 있음.
- * 퀴즈용 테마로 하려면 quiz props true로 주세요
+ * 퀴즈 모드에서 사용될 단어 카드
  */
-const WordCard = ({ word, quiz, detail, ...props }: Props) => {
+const QuizAnswerCard = ({ word, quiz, detail, ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [sub, main] = useWordReg(word.name);
 
@@ -65,8 +64,9 @@ const Container = styled.TouchableOpacity<{
   quiz?: boolean;
   detail?: boolean;
 }>`
-  min-width: 358px;
+  min-width: ${screenWidth - 32}px;
   width: 100%;
+  height: 358px;
   border-radius: 10px;
   background-color: ${(props) =>
     props.mode
@@ -122,28 +122,12 @@ const MainName = styled.Text<{
 `;
 
 const Content = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
-  ${TYPO_STYLE.Body[3].Regular};
+  ${TYPO_STYLE.Subheading[1].Regular};
   color: ${(props) =>
     props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
   white-space: pre-line;
-  //TODO : line-height 수정
-  line-height: ${TEXT_STYLES.sm.Reg?.fontSize! * 1.6}px;
-  margin-top: 19px;
+  line-height: 24px;
+  margin-top: 15px;
 `;
 
-const Source = styled.Text<{
-  COLOR: colorTheme;
-  mode: boolean;
-  quiz?: boolean;
-}>`
-  ${TYPO_STYLE.Caption[2].Medium};
-  margin-right: auto;
-  color: ${(props) =>
-    props.mode
-      ? props.quiz
-        ? props.COLOR.THEME.secondary.variant
-        : props.COLOR.THEME.primary.variant
-      : props.COLOR.Neutral[10]};
-`;
-
-export default WordCard;
+export default QuizAnswerCard;

@@ -114,6 +114,7 @@ const Button = styled.TouchableOpacity<{ COLOR: colorTheme; mode: boolean }>`
 const ButtonContent = styled.Text`
   ${TYPO_STYLE.Body[2].SemiBold};
   color: ${LIGHT_COLOR_STYLE.Text.lighten};
+  margin-right: 8px;
 `;
 
 export default HistoryWrapper;

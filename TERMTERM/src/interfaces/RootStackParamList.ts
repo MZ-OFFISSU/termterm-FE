@@ -32,8 +32,11 @@ export type RootStackParamList = {
   AllTerms: undefined;
   ReportWord: { id: number };
   MyWordApply: { id: number };
+  QuizIntro: undefined;
+  QuizResult: { id: number };
+  QuizReview: { id: number };
   FilterScreen: undefined;
   Kakao: undefined;
   Google: undefined;
-  CompleteInquiry: undefined;
+  EditFolder: { id: number };
 };

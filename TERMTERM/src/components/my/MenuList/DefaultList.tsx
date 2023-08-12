@@ -8,6 +8,7 @@ import CustomModal from "@components/popup/modal";
 import { useState } from "react";
 import { useMember } from "@hooks/useMember";
 import { logoutSucceed } from "@utils/showToast";
+import { useHaptics } from "@hooks/useHaptics";
 
 interface MenuProps {
   title: string;
@@ -19,6 +20,7 @@ interface MenuProps {
  * 프로필 스크린에서 기본으로 보이는 메뉴 리스트
  */
 const DefaultList = () => {
+  const { haptic } = useHaptics();
   const { logout, loading } = useMember();
 
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -29,7 +31,7 @@ const DefaultList = () => {
       { title: "테마 변경", onPress: () => navigation.push("ThemeSelect") },
     ],
     [
-      { title: "문의하기", onPress: () => null },
+      { title: "문의하기", onPress: () => navigation.push("Support") },
       { title: "앱 공유하기", onPress: () => null },
     ],
     [{ title: "버전 정보", subtitle: "v 1.0", onPress: () => null }],
@@ -45,6 +47,7 @@ const DefaultList = () => {
 
   const logoutHandler = async () => {
     await logout();
+    haptic("warning");
 
     logoutSucceed();
     if (!loading) {

@@ -23,10 +23,20 @@ import {
   ReportWord,
   MyWordApply,
   TermsDetail,
+  QuizIntro,
+  QuizResult,
+  QuizReview,
   FilterScreen,
+  EditFolder,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
-import { BackBar, BookmarkBar, CarouselBar, XBar } from "@components/header";
+import {
+  BackBar,
+  BookmarkBar,
+  CarouselBar,
+  BookmarkSingleBar,
+  XBar,
+} from "@components/header";
 import { IconBar, Icon } from "@components/header";
 import { useState, useEffect, useCallback } from "react";
 import * as Font from "expo-font";
@@ -50,6 +60,7 @@ SplashScreen.preventAutoHideAsync();
  */
 const Container = () => {
   const [isReady, setIsReady] = useState(false);
+  const [quizIdx, setQuizIdx] = useState(1);
   const safeColor = useRecoilValue(safeAreaColorState);
 
   const getFonts = async () => {
@@ -119,7 +130,18 @@ const Container = () => {
           <RootStack.Screen
             name="DailyQuiz"
             component={DailyQuiz}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    // TODO : quizIdx 로직 추가
+                    title={`${quizIdx}/5`}
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
           />
           <RootStack.Screen
             name="CompleteQuiz"
@@ -172,6 +194,21 @@ const Container = () => {
                 return (
                   <BackBar
                     title="폴더 만들기"
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="EditFolder"
+            component={EditFolder}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="폴더 수정"
                     onBack={() => props.navigation.pop()}
                   />
                 );
@@ -405,6 +442,18 @@ const Container = () => {
             }}
           />
           <RootStack.Screen
+            name="QuizIntro"
+            component={QuizIntro}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar title="" onBack={() => props.navigation.pop()} />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
             name="Kakao"
             component={KakaoLogin}
             options={{
@@ -418,17 +467,34 @@ const Container = () => {
               headerShown: false,
             }}
           />
+
           <RootStack.Screen
-            name="CompleteInquiry"
-            component={CompleteInquiry}
+            name="QuizResult"
+            component={QuizResult}
             options={{
               headerShown: true,
               header: (props) => {
                 return (
                   <BackBar
-                    title="문의하기"
-                    // TODO : 로직에 따라 네비게이션 변경
-                    onBack={() => props.navigation.push("Login")}
+                    title="정답 확인"
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="QuizReview"
+            component={QuizReview}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BookmarkSingleBar
+                    title="용어 퀴즈 리뷰"
+                    onBack={() => props.navigation.pop()}
+                    onBookmark={() => null}
+                    bookmarked={false}
                   />
                 );
               },

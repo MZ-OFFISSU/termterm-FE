@@ -33,19 +33,18 @@ export const BookmarkWrapper = styled.TouchableOpacity`
 `;
 
 interface Props {
-  dark: boolean;
   fill: boolean;
 }
 
 /**
  * 용어 부분의 그레이 백그라운드 버튼
  */
-export const BookmarkButtonComponent = ({ fill, dark }: Props) => {
+export const BookmarkButtonComponent = ({ fill }: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
   return (
     <BookmarkWrapper
-      style={{ backgroundColor: dark ? "#2c2c2c7a" : "#e2e2e279" }}
+      style={{ backgroundColor: mode ? "#e2e2e279" : "#2c2c2c7a" }}
     >
       {fill ? (
         <Ionicons
@@ -54,7 +53,11 @@ export const BookmarkButtonComponent = ({ fill, dark }: Props) => {
           color={COLOR.THEME.secondary[130]}
         />
       ) : (
-        <Ionicons name="ios-bookmark-outline" size={22} color="white" />
+        <Ionicons
+          name="ios-bookmark-outline"
+          size={22}
+          color={mode ? "white" : " #DEE0E2"}
+        />
       )}
     </BookmarkWrapper>
   );

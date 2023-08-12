@@ -45,7 +45,7 @@ const Home = ({ navigation, route }: Props) => {
               <TitleContainer
                 username={name}
                 title={"님, 오늘도 파이팅👏"}
-                subtitle={"아카이빙한 용어를 확인해보세요!"}
+                subtitle={"아카이빙한 용어를 확인해 보세요!"}
               />
               <WordCarousel words={curation} dots={true} />
             </>
@@ -60,7 +60,7 @@ const Home = ({ navigation, route }: Props) => {
             </>
           )}
           <TitleBox style={{ marginTop: 50 }}>
-            <MenuTitle COLOR={COLOR}>데일리 용어 퀴즈</MenuTitle>
+            <MenuTitle COLOR={COLOR}>Daily 용어 퀴즈</MenuTitle>
           </TitleBox>
           <DailyQuizRouter navigation={navigation} route={route} />
           <FlexContainer>
