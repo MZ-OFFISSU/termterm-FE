@@ -6,6 +6,7 @@ import { MemberInfo } from "Member";
 import { getAccessToken } from "@utils/tokenHandler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getTypeFromLabel } from "@utils/careerConverter";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 export type ProfileEditModalType =
   | "SUCCESS"
@@ -21,9 +22,21 @@ export const useProfile = () => {
   const memberApi = new MemberApi();
   const [profileInfo, setProfileInfo] = useRecoilState(profileState);
   const [warn, setWarn] = useState(false);
-  const [modal, setModal] = useState<ProfileEditModalType>("NONE");
   const [loading, setLoading] = useState(false);
 
+  const successToast = () => {
+    Toast.show({
+      type: "light",
+      text1: "프로필 정보 수정이 완료 되었어요!",
+    });
+  };
+
+  const failedToast = () => {
+    Toast.show({
+      type: "dark",
+      text1: "프로필 정보 수정에 실패했어요.",
+    });
+  };
   /** 프로필 정보 받아오기 / 최신화 */
   const getProfileInfo = async () => {
     try {
@@ -60,7 +73,7 @@ export const useProfile = () => {
           domain: input.domain,
           introduction: input.introduction,
           job: input.job,
-          nickname: input.name,
+          nickname: input.nickname,
           yearCareer: getTypeFromLabel(career)!,
         };
         await memberApi.putInfo(config);
@@ -103,7 +116,6 @@ export const useProfile = () => {
           "Content-Type": "image/jpeg",
         },
       });
-      console.log(response);
       return response;
     } catch (err) {
       console.log(err);
@@ -115,7 +127,6 @@ export const useProfile = () => {
   const editProfileImage = async (input: MemberInfo): Promise<boolean> => {
     try {
       const updateS3url = await memberApi.getPresignedUrl();
-      console.log(updateS3url);
       const blob = await fetchBlob(input.profileImage);
       await uploadToS3(updateS3url, blob);
       await memberApi.syncPresignedUrl();
@@ -137,7 +148,11 @@ export const useProfile = () => {
     }
   };
 
-  const saveInfo = async (input: MemberInfo, career: string) => {
+  const saveInfo = async (
+    input: MemberInfo,
+    career: string,
+    callback: () => void
+  ) => {
     setLoading(true);
 
     const basicComplete = await editBasicProfile(input, career);
@@ -146,9 +161,11 @@ export const useProfile = () => {
 
     setLoading(false);
 
-    if (basicComplete && categoriesComplete && imageComplete)
-      setModal("SUCCESS");
-    else setModal("ERROR");
+    if (basicComplete && categoriesComplete && imageComplete) {
+      successToast();
+      await getProfileInfo();
+      callback();
+    } else failedToast();
   };
 
   useEffect(() => {
@@ -164,6 +181,6 @@ export const useProfile = () => {
     removeMember,
     profileInfo,
     warn,
-    modal,
+    loading,
   };
 };

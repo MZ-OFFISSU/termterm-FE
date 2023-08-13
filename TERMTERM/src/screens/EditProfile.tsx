@@ -13,6 +13,7 @@ import { useDebounce } from "@hooks/useDebounce";
 import { screenWidth } from "@style/dimensions";
 import { useProfile } from "@hooks/useProfile";
 import { MemberInfo } from "Member";
+import { getLabelFromType } from "@utils/careerConverter";
 
 export type Props = StackScreenProps<RootStackParamList, "EditProfile">;
 
@@ -21,11 +22,11 @@ export type Props = StackScreenProps<RootStackParamList, "EditProfile">;
  */
 const EditProfile = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const { profileInfo, editBasicProfile, editCategories, editProfileImage } =
-    useProfile();
+  const { profileInfo, saveInfo } = useProfile();
   const [input, setInput] = useState<MemberInfo>(profileInfo);
   const scrollViewRef = useRef<ScrollView>(null);
   const [changed, setChanged] = useState(false);
+  const [career, setCareer] = useState(getLabelFromType(input.yearCareer));
 
   const scrollToBottom = () => {
     scrollViewRef.current?.scrollToEnd({ animated: true });
@@ -41,6 +42,10 @@ const EditProfile = ({ navigation }: Props) => {
     500
   );
 
+  const handleBack = () => {
+    navigation.pop();
+  };
+
   return (
     <Container ref={scrollViewRef} COLOR={COLOR}>
       <InnerContainer>
@@ -49,6 +54,8 @@ const EditProfile = ({ navigation }: Props) => {
           input={input}
           setInput={setInput}
           scrollToBottom={scrollToBottom}
+          career={career!}
+          setCareer={setCareer}
           style={{ marginTop: 35 }}
         />
         <CustomButton
@@ -62,7 +69,7 @@ const EditProfile = ({ navigation }: Props) => {
               ? BUTTON_STATE.active
               : BUTTON_STATE.default
           }
-          onPress={async () => await editProfileImage(input)}
+          onPress={async () => await saveInfo(input, career!, handleBack)}
           style={{
             width: screenWidth - 32,
             alignSelf: "center",

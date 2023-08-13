@@ -9,15 +9,35 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { MemberInfo } from "Member";
 import { useProfile } from "@hooks/useProfile";
+import { useCallback, useState } from "react";
+import { RefreshControl } from "react-native";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
 const My = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const { profileInfo } = useProfile();
+  const { getProfileInfo, profileInfo } = useProfile();
+  const [refresh, setRefresh] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefresh(true);
+    try {
+      await getProfileInfo();
+      setRefresh(false);
+    } catch (err) {
+      setTimeout(() => {
+        setRefresh(false);
+      }, 2000);
+    }
+  }, []);
 
   return (
-    <Container COLOR={COLOR}>
+    <Container
+      COLOR={COLOR}
+      refreshControl={
+        <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
+      }
+    >
       <InnerContainer style={{ paddingTop: 20, paddingBottom: 20 }}>
         <InnerContainer style={{ paddingLeft: 16, paddingRight: 16 }}>
           <ProfileBox profile={profileInfo as MemberInfo} />

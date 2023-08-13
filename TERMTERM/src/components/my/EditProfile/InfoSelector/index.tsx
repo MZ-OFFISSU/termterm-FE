@@ -9,18 +9,26 @@ import { JOB_TYPE } from "@screens/Onboarding/Third";
 import { JobCard } from "@components/index";
 import { screenWidth } from "@style/dimensions";
 import { MemberInfo } from "Member";
-import { getLabelFromType } from "@utils/careerConverter";
 
 interface Props extends ViewProps {
   input: MemberInfo;
   setInput: Dispatch<SetStateAction<MemberInfo>>;
   scrollToBottom: () => void;
+  career: string;
+  setCareer: Dispatch<SetStateAction<string | undefined>>;
 }
 
 /**
  * 닉네임 / 도메인 / 직업 / 연차 / 자기소개 입력 콘테이너
  */
-const InfoSelector = ({ input, setInput, scrollToBottom, ...props }: Props) => {
+const InfoSelector = ({
+  input,
+  setInput,
+  scrollToBottom,
+  career,
+  setCareer,
+  ...props
+}: Props) => {
   // 연차 세팅 관련 상태들
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([
@@ -33,7 +41,6 @@ const InfoSelector = ({ input, setInput, scrollToBottom, ...props }: Props) => {
     { label: "5년 이상", value: "5년 이상" },
     { label: "시니어", value: "시니어" },
   ]);
-  const [career, setCareer] = useState(getLabelFromType(input.yearCareer));
 
   const onChangeInput = (name: string, value: string) => {
     switch (name) {
