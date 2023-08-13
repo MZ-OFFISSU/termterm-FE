@@ -29,7 +29,9 @@ const QuizReview = ({ navigation }: Props) => {
     }
   };
 
-  useEffect(() => console.log(getQuizReviewList()), []);
+  useEffect(() => {
+    getQuizReviewList();
+  }, []);
 
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
