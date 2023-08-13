@@ -2,17 +2,18 @@ import styled from "styled-components/native";
 import Wrapper from "./Wrapper";
 import { Input } from "@components/index";
 import { Dispatch, SetStateAction, useState } from "react";
-import { ProfileProps } from "@interfaces/profile";
 import { ViewProps } from "react-native";
 import { CustomSelector } from "@components/index";
 import CustomTextarea from "@components/common/CustomTextarea";
 import { JOB_TYPE } from "@screens/Onboarding/Third";
 import { JobCard } from "@components/index";
 import { screenWidth } from "@style/dimensions";
+import { MemberInfo } from "Member";
+import { getLabelFromType } from "@utils/careerConverter";
 
 interface Props extends ViewProps {
-  input: ProfileProps;
-  setInput: Dispatch<SetStateAction<ProfileProps>>;
+  input: MemberInfo;
+  setInput: Dispatch<SetStateAction<MemberInfo>>;
   scrollToBottom: () => void;
 }
 
@@ -32,12 +33,12 @@ const InfoSelector = ({ input, setInput, scrollToBottom, ...props }: Props) => {
     { label: "5년 이상", value: "5년 이상" },
     { label: "시니어", value: "시니어" },
   ]);
-  const [career, setCareer] = useState(input.career);
+  const [career, setCareer] = useState(getLabelFromType(input.yearCareer));
 
   const onChangeInput = (name: string, value: string) => {
     switch (name) {
       case "name":
-        setInput({ ...input, name: value });
+        setInput({ ...input, nickname: value });
         break;
       case "domain":
         setInput({ ...input, domain: value });
@@ -46,16 +47,18 @@ const InfoSelector = ({ input, setInput, scrollToBottom, ...props }: Props) => {
         setInput({ ...input, job: value });
         break;
       case "intro":
-        setInput({ ...input, intro: value });
+        setInput({ ...input, introduction: value });
         break;
       case "interests":
-        if (input.interests.includes(value))
+        if (input.categories.includes(value))
           setInput({
             ...input,
-            interests: input.interests.filter((interest) => interest !== value),
+            categories: input.categories.filter(
+              (interest) => interest !== value
+            ),
           });
-        else if (input.interests.length < 4)
-          setInput({ ...input, interests: [...input.interests, value] });
+        else if (input.categories.length < 4)
+          setInput({ ...input, categories: [...input.categories, value] });
         break;
       default:
         break;
@@ -66,7 +69,7 @@ const InfoSelector = ({ input, setInput, scrollToBottom, ...props }: Props) => {
     <Container {...props}>
       <Wrapper title="닉네임">
         <Input
-          value={input.name}
+          value={input.nickname}
           max={20}
           inevitable={true}
           onChangeText={(text) => onChangeInput("name", text)}
@@ -91,7 +94,7 @@ const InfoSelector = ({ input, setInput, scrollToBottom, ...props }: Props) => {
       <Wrapper title="연차" style={{ marginTop: 35 }}>
         <CustomSelector
           open={open}
-          value={career}
+          value={career!}
           items={items}
           setOpen={setOpen}
           setValue={setCareer}
@@ -106,7 +109,7 @@ const InfoSelector = ({ input, setInput, scrollToBottom, ...props }: Props) => {
       </Wrapper>
       <Wrapper title="자기소개" style={{ marginTop: 40 }}>
         <CustomTextarea
-          value={input.intro}
+          value={input.introduction}
           max={100}
           onChangeText={(text) => onChangeInput("intro", text)}
         />
@@ -120,8 +123,8 @@ const InfoSelector = ({ input, setInput, scrollToBottom, ...props }: Props) => {
           {JOB_TYPE.map((job) => (
             <JobCard
               key={job.title}
-              isFocused={input.interests.includes(job.title)}
-              onPress={() => onChangeInput("interests", job.title)}
+              isFocused={input.categories.includes(job.type)}
+              onPress={() => onChangeInput("interests", job.type)}
               {...job}
             />
           ))}

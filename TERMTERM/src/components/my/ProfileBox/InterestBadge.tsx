@@ -3,14 +3,14 @@ import { ViewProps } from "react-native";
 import styled from "styled-components/native";
 import { useState, useEffect } from "react";
 
-enum Interst {
-  PM = "기획",
-  Design = "디자인",
-  IT = "IT",
-  Marketing = "마켓팅",
-  Business = "비즈니스",
-  Develop = "개발",
-}
+const Interst: { [key: string]: string } = {
+  PM: "기획",
+  DESIGN: "디자인",
+  IT: "IT",
+  MARKETING: "마켓팅",
+  BUSINESS: "비즈니스",
+  DEVELOPMENT: "개발",
+};
 
 interface Props extends ViewProps {
   interest: string;
@@ -25,22 +25,22 @@ const InterestBadge = ({ interest, ...props }: Props) => {
 
   useEffect(() => {
     switch (interest) {
-      case Interst.PM:
+      case "PM":
         setBg("#F99B49");
         break;
-      case Interst.Develop:
+      case "DEVELOPMENT":
         setBg("#AB83FF");
         break;
-      case Interst.Marketing:
+      case "MARKETING":
         setBg("#76CEFF");
         break;
-      case Interst.Design:
+      case "DESIGN":
         setBg("#F58585");
         break;
-      case Interst.Business:
+      case "BUSINESS":
         setBg("#FF8DCA");
         break;
-      case Interst.IT:
+      case "IT":
         setBg("#FFCA43");
         break;
     }
@@ -48,7 +48,7 @@ const InterestBadge = ({ interest, ...props }: Props) => {
 
   return (
     <Badge bg={bg} {...props}>
-      <BadgeContent>{interest}</BadgeContent>
+      <BadgeContent>{Interst[interest]}</BadgeContent>
     </Badge>
   );
 };

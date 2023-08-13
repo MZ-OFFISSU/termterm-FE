@@ -4,11 +4,11 @@ import styled from "styled-components/native";
 import { FontAwesome } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { Dispatch, SetStateAction } from "react";
-import { ProfileProps } from "@interfaces/profile";
+import { MemberInfo } from "Member";
 
 interface Props extends ViewProps {
-  input: ProfileProps;
-  setInput: Dispatch<SetStateAction<ProfileProps>>;
+  input: MemberInfo;
+  setInput: Dispatch<SetStateAction<MemberInfo>>;
 }
 
 const ProfileImageSelector = ({ input, setInput, ...props }: Props) => {
@@ -33,13 +33,13 @@ const ProfileImageSelector = ({ input, setInput, ...props }: Props) => {
       return null; // 이미지 업로드 취소한 경우
     }
     // 이미지 업로드 결과 및 이미지 경로 업데이트
-    setInput({ ...input, img: result.assets[0].uri });
+    setInput({ ...input, profileImage: result.assets[0].uri });
   };
 
   return (
     <Container onPress={uploadImage} {...props}>
       <ImageContainer>
-        <ProfileImage source={{ uri: input.img }} />
+        <ProfileImage source={{ uri: input.profileImage }} />
       </ImageContainer>
       <CameraWrapper>
         <FontAwesome
