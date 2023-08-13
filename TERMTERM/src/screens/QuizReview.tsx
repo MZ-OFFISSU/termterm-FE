@@ -1,10 +1,8 @@
 import QuizApi from "@api/QuizApi";
 import QuizReviewRouter from "@components/quiz/QuizReviewRouter";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { quizReviewProps } from "@interfaces/quizReview";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { StackScreenProps } from "@react-navigation/stack";
-import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { QuizReviewDetail } from "Quiz";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
