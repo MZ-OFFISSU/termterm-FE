@@ -13,7 +13,7 @@ declare module "Quiz" {
     termId: number;
   };
 
-  export type QuizReview = {
+  export type QuizReviewDetail = {
     bookmarked: "NO" | "YES";
     isAnswerRight: boolean;
     termDescription: string;
