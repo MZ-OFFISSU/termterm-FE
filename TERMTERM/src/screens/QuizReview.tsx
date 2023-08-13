@@ -14,18 +14,32 @@ const QuizReview = ({ navigation }: Props) => {
   const quizApi = new QuizApi();
   const [COLOR, mode] = useThemeStyle();
   const [quizReviewList, setQuizReviewList] = useState<QuizReviewDetail[]>([]);
-  const [isAnswer, setIsAnswer] = useState<boolean[]>([]);
 
   const getQuizReviewList = async () => {
     try {
-      // TODO : Quiz 부분 검토 완료 시 확인
-      setQuizReviewList(await quizApi.getFinalQuizReview());
-      const answerArray: boolean[] = quizReviewList.map(
-        (item) => item.isAnswerRight
-      );
-      setIsAnswer(answerArray);
+      const res = await quizApi.getFinalQuizReview();
+      const termNameArr = res.map((item) => {
+        return getMainTermName(item.termName);
+      });
+
+      const updatedReviewList = res.map((item, index) => {
+        return {
+          ...item,
+          termName: termNameArr[index],
+        };
+      });
+      setQuizReviewList(updatedReviewList);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const getMainTermName = (word: string): string => {
+    const match = word.split(" :: ");
+    if (match.length > 1) {
+      return match[1];
+    } else {
+      return word;
     }
   };
 
@@ -36,7 +50,7 @@ const QuizReview = ({ navigation }: Props) => {
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
       <Container>
-        {dummy.map((item, idx) => (
+        {quizReviewList.map((item, idx) => (
           <QuizReviewRouter
             key={idx}
             id={item.termId}
@@ -58,52 +72,3 @@ const Container = styled.ScrollView`
   height: 100%;
   margin-top: 10px;
 `;
-
-/** TODO : 비어있는 퀴즈 리뷰 데이터 대체 임시 데이터 */
-const dummy: Array<QuizReviewDetail> = [
-  {
-    bookmarked: "NO",
-    isAnswerRight: true,
-    termDescription: "이 용어는 프로덕트 매니저입니다.",
-    termId: 1,
-    termName: "Product Manager",
-    termSource: "https://www.naver.com",
-    wrongChoices: ["Product Manager"],
-  },
-  {
-    bookmarked: "YES",
-    isAnswerRight: false,
-    termDescription: "이 용어는 모달입니다.",
-    termId: 2,
-    termName: "Modal",
-    termSource: "https://www.google.com",
-    wrongChoices: ["Slide Menu"],
-  },
-  {
-    bookmarked: "YES",
-    isAnswerRight: true,
-    termDescription: "이 용어는 스크럼입니다.",
-    termId: 3,
-    termName: "Scrum",
-    termSource: "https://www.daum.com",
-    wrongChoices: ["Scrum"],
-  },
-  {
-    bookmarked: "NO",
-    isAnswerRight: true,
-    termDescription: "이 용어는 깃허브입니다.",
-    termId: 4,
-    termName: "Github",
-    termSource: "https://www.meta.com",
-    wrongChoices: ["Moda"],
-  },
-  {
-    bookmarked: "YES",
-    isAnswerRight: false,
-    termDescription: "이 용어는 딤드입니다.",
-    termId: 5,
-    termName: "Dimmed",
-    termSource: "https://www.instagram.com",
-    wrongChoices: ["Dimmed"],
-  },
-];
