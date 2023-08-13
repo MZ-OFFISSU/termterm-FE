@@ -9,7 +9,6 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useSafeColor } from "@hooks/useSafeColor";
 import { NonUrl } from "@components/common/UrlText";
 import { useMember } from "@hooks/useMember";
-import * as Haptics from "expo-haptics";
 import { loginSucceed } from "@utils/showToast";
 import { useHaptics } from "@hooks/useHaptics";
 
@@ -19,12 +18,6 @@ const Login = ({ navigation }: Props) => {
   const { haptic } = useHaptics();
   const [width, setWidth] = useState(80);
   const { user, loading } = useMember();
-
-  const testHaptics = () => {
-    // Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    // Vibration.vibrate();
-  };
 
   useSafeColor();
 
@@ -86,7 +79,6 @@ const Login = ({ navigation }: Props) => {
           <SocialLoginButton
             type="apple"
             // onPress={() => navigation.navigate("Support")}
-            onPress={testHaptics}
           />
         </ButtonBox>
         <NonUrl style={{ marginTop: 30 }}>

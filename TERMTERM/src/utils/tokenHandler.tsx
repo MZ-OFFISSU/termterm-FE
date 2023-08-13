@@ -30,7 +30,7 @@ export const setRefreshToken = async (token: string): Promise<boolean> => {
   }
 };
 
-/** 액세스토큰 가져오기 함수 */
+/** 리프레시토큰 가져오기 함수 */
 export const getRefreshToken = async (): Promise<string | null> => {
   const refresh = await AsyncStorage.getItem("refresh");
   return refresh;
@@ -41,7 +41,7 @@ export const updateRefreshToken = async () => {
   const access = await getAccessToken();
   const refresh = await getRefreshToken();
 
-  const data = await axios({
+  const data: any = await axios({
     method: "post",
     url: `${BASE_URL}/v1/auth/token/refresh`,
     data: {
@@ -50,6 +50,8 @@ export const updateRefreshToken = async () => {
     },
   });
 
-  setAccessToken(data.data.access_token);
-  setRefreshToken(data.data.refresh_token);
+  if (data.access_token && data.refresh_token) {
+    setAccessToken(data.data.access_token);
+    setRefreshToken(data.data.refresh_token);
+  }
 };

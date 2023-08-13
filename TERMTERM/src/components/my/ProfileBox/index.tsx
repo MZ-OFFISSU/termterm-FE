@@ -4,6 +4,7 @@ import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import InterestBadge from "./InterestBadge";
 import { MemberInfo } from "Member";
+import { getLabelFromType } from "@utils/careerConverter";
 
 interface Props {
   profile: MemberInfo;
@@ -18,12 +19,13 @@ const ProfileBox = ({ profile }: Props) => {
   return (
     <Container>
       <ProfileImageWrapper>
-        {/* TODO : Profile 이미지 API 연결 */}
-        {/* <ProfileImage source={{ uri: profile.profileImage }} /> */}
+        {profile.profileImage !== "" && (
+          <ProfileImage source={{ uri: profile.profileImage }} />
+        )}
       </ProfileImageWrapper>
       <InfoWrapper>
         <Name COLOR={COLOR}>
-          {profile.name}님 | {profile.job}
+          {profile.nickname}님 | {profile.job}
         </Name>
         <DetailWrapper>
           <Detail COLOR={COLOR}>{profile.domain}</Detail>
@@ -32,7 +34,9 @@ const ProfileBox = ({ profile }: Props) => {
           </Detail>
           <Detail COLOR={COLOR} style={{ marginLeft: 4 }}>
             {/* TODO : yearCareea 수정한 내용 반영 */}
-            {profile.yearCareer == null ? "1년 미만" : profile.yearCareer}
+            {profile.yearCareer == null
+              ? "1년 미만"
+              : getLabelFromType(profile.yearCareer)}
           </Detail>
         </DetailWrapper>
         <DetailWrapper>
