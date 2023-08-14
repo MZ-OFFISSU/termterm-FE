@@ -8,6 +8,7 @@ import { truncateString } from "@utils/wordCutter";
 import { useWordReg } from "@hooks/useWordReg";
 
 interface Props extends TouchableOpacityProps {
+  id: number;
   name: string;
   description: string;
   bookmarked: string;
@@ -16,7 +17,13 @@ interface Props extends TouchableOpacityProps {
 /**
  * 용어 미리보기 박스
  */
-const TermPreviewBox = ({ name, description, bookmarked, ...props }: Props) => {
+const TermPreviewBox = ({
+  id,
+  name,
+  description,
+  bookmarked,
+  ...props
+}: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [sub, main] = useWordReg(name);
 
@@ -49,7 +56,12 @@ const TermPreviewBox = ({ name, description, bookmarked, ...props }: Props) => {
           )}
         </PreviewBookmark>
       </UpperBox>
-      <Description COLOR={COLOR}>{truncateString(description, 60)}</Description>
+      <Description COLOR={COLOR}>
+        {/* TODO : Description 확인하기 */}
+        {description !== null
+          ? truncateString(description, 60)
+          : "용어 설명이 없어요."}
+      </Description>
     </Container>
   );
 };

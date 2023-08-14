@@ -9,8 +9,9 @@ import TermPreviewBox from "@components/curation/detail/term/TermPreviewBox";
 import { truncateString } from "@utils/wordCutter";
 import { useWordReg } from "@hooks/useWordReg";
 import TermApi from "@api/TermApi";
-import { TermItem } from "Term";
+import { TermConfig, TermItem } from "Term";
 import { getAccessToken } from "@utils/tokenHandler";
+import { useTerm } from "@hooks/useTerm";
 
 export type Props = StackScreenProps<RootStackParamList, "AllTerms">;
 
@@ -19,27 +20,23 @@ export type Props = StackScreenProps<RootStackParamList, "AllTerms">;
  */
 const AllTerms = ({ navigation }: Props) => {
   const termApi = new TermApi();
-  const [dailyTerm, setDailyTerm] = useState<TermItem[]>([]);
+  const { totalTermList, getAllTermList } = useTerm();
   const [COLOR, mode] = useThemeStyle();
-  // TODO : dailyTerm으로 변경해두기 (현재 dailyTerm 응답 값 저장된 것이 없음)
-  const [terms, setTerms] = useState<Array<TermItem>>(dummyData);
-
-  const getTermList = async () => {
-    try {
-      setDailyTerm(await termApi.dailyTerm());
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const [termConfig, setTermConfig] = useState<TermConfig>({
+    category: "pm",
+    page: 3,
+    size: 5,
+    sort: "YES",
+  });
 
   useEffect(() => {
-    getTermList();
+    getAllTermList(termConfig);
   }, []);
 
   return (
     <Container COLOR={COLOR}>
       <InnerContainer>
-        {terms.map((term) => (
+        {totalTermList.map((term) => (
           <TermPreviewBox {...term} key={term.id} />
         ))}
       </InnerContainer>
