@@ -4,59 +4,50 @@ import DailyTermBox from "./DailyTermBox";
 import { Preview } from "@components/curation/detail/term";
 import { TermItem } from "Term";
 import TermApi from "@api/TermApi";
-
-const dummyData: Array<Preview> = [
-  {
-    bookmarked: false,
-    id: 0,
-    name: "Scrum :: 스크럼",
-    description:
-      "애자일 소프트웨어 개발 방법론 종류 중의 하나로 반복적이고 점진적인 개발방식을 취해요. 스크럼의 성공 공식은 다음과 같은 3가지(매 스프린트마다 어쩌구 저쩌구입니다람쥐렁이빨대나무인도)",
-  },
-  {
-    bookmarked: true,
-    id: 1,
-    name: "Scrum :: 스크럼",
-    description:
-      "애자일 소프트웨어 개발 방법론 종류 중의 하나로 반복적이고 점진적인 개발방식을 취해요. 스크럼의 성공 공식은 다음과 같은 3가지(매 스프린트마다 어쩌구 저쩌구입니다람쥐렁이빨대나무인도)",
-  },
-  {
-    bookmarked: false,
-    id: 2,
-    name: "Scrum :: 스크럼",
-    description:
-      "애자일 소프트웨어 개발 방법론 종류 중의 하나로 반복적이고 점진적인 개발방식을 취해요. 스크럼의 성공 공식은 다음과 같은 3가지(매 스프린트마다 어쩌구 저쩌구입니다람쥐렁이빨대나무인도)",
-  },
-  {
-    bookmarked: true,
-    id: 3,
-    name: "Scrum :: 스크럼",
-    description:
-      "애자일 소프트웨어 개발 방법론 종류 중의 하나로 반복적이고 점진적인 개발방식을 취해요. 스크럼의 성공 공식은 다음과 같은 3가지(매 스프린트마다 어쩌구 저쩌구입니다람쥐렁이빨대나무인도)",
-  },
-];
+import { useTerm } from "@hooks/useTerm";
 
 /**
  * 오늘의 용어 콘테이너
  */
 const DailyTermContainer = () => {
   const termApi = new TermApi();
-  const [terms, setTerms] = useState(dummyData);
+  const {dailyTermList, getDailyTerm} = useTerm();
 
-  const getTodayTerms = async () => {
-    const terms: TermItem[] = [];
+  const dummy: TermItem[] = [
+    {
+      bookmarked: "NO",
+      description: "이것은 유지민입니다.",
+      id: 1,
+      name: "유지민",
+    },
+    {
+      bookmarked: "YES",
+      description: "이것은 유짐인입니다.",
+      id: 2,
+      name: "유짐인",
+    },
+    {
+      bookmarked: "YES",
+      description: "이것은 짐인유입니다.",
+      id: 3,
+      name: "짐인유",
+    },
+    {
+      bookmarked: "NO",
+      description: "이것은 지민지민유짐인입니다.",
+      id: 4,
+      name: "지민지민유짐인",
+    },
+  ]
 
-    try {
-      const terms = await termApi.dailyTerm();
-
-    } catch(err) {
-      console.log(err);
-    }
-  }
+  useEffect(() => {
+    getDailyTerm();
+  }, []);
 
   return (
     <Container>
-      {terms.map((term) => (
+      {/* TODO : 렌더링 데이터 바꾸기 */}
+      {dummy.map((term) => (
         <DailyTermBox {...term} key={term.id} />
       ))}
     </Container>

@@ -29,6 +29,8 @@ export const useTerm = () => {
     try {
       const res = await termApi.dailyTerm();
       setDailyTermList(res);
+      console.log("daily terms : ", dailyTermList);
+      console.log("res : ", res);
       return true;
     } catch (err) {
       console.log(err);
