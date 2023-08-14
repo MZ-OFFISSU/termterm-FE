@@ -63,8 +63,10 @@ class FolderApi {
   /** 폴더에 용어 삭제 (아카이빙 해제) */
   removeTermInFolder = async (
     cancelArchiveInfo: CancelArchive
-  ): Promise<string> => {
-    const data = await remove<string>(`/v1/folder/term`, cancelArchiveInfo);
+  ): Promise<void> => {
+    const data = await remove<void>(`/v1/folder/term`, {
+      data: cancelArchiveInfo,
+    });
     return data;
   };
 
