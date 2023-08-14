@@ -8,10 +8,11 @@ import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { HomeBar, TitleBar } from "@components/header";
 import { Icon } from "@components/header/TitleBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSafeColor } from "@hooks/useSafeColor";
 import { hapticType, useHaptics } from "@hooks/useHaptics";
 import { useNavigation } from "@react-navigation/native";
+import { useProfile } from "@hooks/useProfile";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -21,6 +22,7 @@ export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 const ToolBar = ({ ...props }: Props) => {
   const { haptic } = useHaptics();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { authCheckProfile, onboardingToast } = useProfile();
 
   /** tabNavigator 생성 */
   const Tab = createBottomTabNavigator();
@@ -37,6 +39,21 @@ const ToolBar = ({ ...props }: Props) => {
     navigation.navigate(destination);
     haptic(type);
   };
+
+  useEffect(() => {
+    /** 온보딩 미완료 회원 온보딩 스크린으로 */
+    const reset = () => {
+      onboardingToast();
+      navigation.reset({ routes: [{ name: "Onboarding" }] });
+    };
+
+    const onboardingTest = async () => {
+      await authCheckProfile(reset);
+      console.log("테스트 끝");
+    };
+
+    onboardingTest();
+  }, []);
 
   return (
     <Tab.Navigator

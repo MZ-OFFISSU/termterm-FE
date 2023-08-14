@@ -34,7 +34,7 @@ const KakaoLogin = ({ navigation }: HomeScreenProps) => {
       navigation.reset({ routes: [{ name: "ToolBar" }] });
     } else {
       needRegister();
-      navigation.replace("Onboarding");
+      navigation.reset({ routes: [{ name: "Onboarding" }] });
     }
   };
 

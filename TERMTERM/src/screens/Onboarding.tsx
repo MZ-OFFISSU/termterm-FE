@@ -74,9 +74,7 @@ const Onboarding = ({ navigation }: Props) => {
             justifyContent: "space-between",
           }}
         >
-          <CaretBtn onPress={() => navigation.pop()}>
-            <AntDesign name="left" size={20} color={COLOR.Text.active} />
-          </CaretBtn>
+          <CaretBtn></CaretBtn>
           <NavigatorTitle COLOR={COLOR}>회원가입</NavigatorTitle>
           <NavigatorPager style={{ color: COLOR.Text.active }} COLOR={COLOR}>
             {stage + 1} / 3
