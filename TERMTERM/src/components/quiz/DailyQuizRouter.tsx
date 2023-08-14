@@ -15,11 +15,11 @@ const STAGES = [Start, Clear, Fail];
  */
 enum QuizState {
   /** 시작하지 않은 상테 */
-  start = "start",
+  NOT_STARTED = "NOT_STARTED",
   /** 모두 정답인 상태 */
-  clear = "clear",
+  COMPLETED = "COMPLETED",
   /** 오답이 있는 상태 */
-  fail = "fail",
+  IN_PROGRESS = "IN_PROGRESS",
 }
 
 export type ScreenProps = StackScreenProps<RootStackParamList, "ToolBar">;
@@ -27,7 +27,7 @@ export type ScreenProps = StackScreenProps<RootStackParamList, "ToolBar">;
 const DailyQuizRouter = ({ navigation }: ScreenProps) => {
   const [COLOR, mode] = useThemeStyle();
   const [stage, setStage] = useState(0);
-  const [quizState, setQuizState] = useState<string>(QuizState.start);
+  const [quizState, setQuizState] = useState<string>(QuizState.COMPLETED);
   const [retakeTime, setRetakeTime] = useState("");
 
   const CurStage = STAGES[stage];
