@@ -76,3 +76,5 @@ class FolderApi {
     return data;
   };
 }
+
+export default FolderApi;
