@@ -48,7 +48,7 @@ const Walkthrough = ({ navigation }: Props) => {
 
   const goToHome = () => {
     navigation.reset({
-      routes: [{ name: "Login", params: { nonAuto: true } }],
+      routes: [{ name: "Login", params: { nonAuto: false } }],
     });
   };
 

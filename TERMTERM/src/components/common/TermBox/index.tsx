@@ -3,6 +3,7 @@ import { TouchableOpacityProps } from "react-native";
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { Ionicons } from "@expo/vector-icons";
+import { divideTerm } from "@utils/termCutter";
 
 interface Props extends TouchableOpacityProps {
   title: string;
@@ -17,7 +18,7 @@ const TermBox = ({ title, marked, ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   return (
     <ResultBtn COLOR={COLOR} mode={mode} {...props}>
-      <ResultTitle COLOR={COLOR}>{title}</ResultTitle>
+      <ResultTitle COLOR={COLOR}>{divideTerm(title)[0]}</ResultTitle>
       {marked ? (
         <Ionicons
           name="ios-bookmark"
