@@ -6,6 +6,10 @@ import { PreviewBookmark } from "@components/common/Bookmark";
 import { Ionicons } from "@expo/vector-icons";
 import { truncateString } from "@utils/wordCutter";
 import { useWordReg } from "@hooks/useWordReg";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
+import { useTerm } from "@hooks/useTerm";
 
 interface Props extends TouchableOpacityProps {
   id: number;
@@ -26,6 +30,7 @@ const TermPreviewBox = ({
 }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [sub, main] = useWordReg(name);
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return (
     <Container
@@ -37,6 +42,7 @@ const TermPreviewBox = ({
         marginBottom: 5,
       }}
       {...props}
+      onPress={() => navigation.navigate("TermDetail", { id: id })}
     >
       <UpperBox>
         <Job COLOR={COLOR}>{main}</Job>

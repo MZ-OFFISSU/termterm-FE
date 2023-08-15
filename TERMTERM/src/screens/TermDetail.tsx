@@ -10,6 +10,7 @@ import { dummyWord } from "@assets/dummyWord";
 import { screenWidth } from "@style/dimensions";
 import OtherThink from "@components/OtherThink";
 import LottieAnimation from "@components/OtherThink/LottieAnimation";
+import { useTerm } from "@hooks/useTerm";
 
 export type Props = StackScreenProps<RootStackParamList, "TermDetail">;
 
@@ -18,25 +19,23 @@ export type Props = StackScreenProps<RootStackParamList, "TermDetail">;
  */
 const TermDetail = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const [word, setWord] = useState<WordProps>();
+  const { getTermDetail, termDetail } = useTerm();
 
   useEffect(() => {
-    //TODO : 아이디로 해당 용어 정보 받아오는 함수 추가
-
-    setWord(dummyWord);
+    getTermDetail(route.params.id);
   }, [route]);
 
   return (
     <Container COLOR={COLOR}>
-      {word ? (
+      {termDetail ? (
         <>
           <WordCard
-            word={word}
+            word={termDetail}
             detail={true}
             style={{ width: screenWidth - 32 }}
           />
           {/* <LottieAnimation /> */}
-          <OtherThink word={word} />
+          <OtherThink word={termDetail} />
         </>
       ) : (
         <></>

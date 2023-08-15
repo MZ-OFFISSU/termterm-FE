@@ -16,7 +16,6 @@ export const useTerm = () => {
   const bookmarkingTerm = async (termId: number): Promise<boolean> => {
     try {
       const res = await termApi.bookmarkTerm(termId);
-      console.log("bookmarking term : ", res);
       return true;
     } catch (err) {
       console.log(err);
@@ -29,8 +28,6 @@ export const useTerm = () => {
     try {
       const res = await termApi.dailyTerm();
       setDailyTermList(res);
-      console.log("daily terms : ", dailyTermList);
-      console.log("res : ", res);
       return true;
     } catch (err) {
       console.log(err);
@@ -43,7 +40,6 @@ export const useTerm = () => {
     try {
       const res = await termApi.termDetail(termId);
       setTermDetail(res);
-      console.log("term details : ", res, "termDetail : ", termDetail);
       return true;
     } catch (err) {
       console.log(err);
@@ -56,6 +52,7 @@ export const useTerm = () => {
     try {
       const res = await termApi.allTermList(config);
       setTotalTermList(res.content);
+      console.log(res.content);
       setTotalTermRes(res);
       return true;
     } catch (err) {

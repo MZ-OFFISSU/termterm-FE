@@ -54,34 +54,3 @@ const InnerContainer = styled.View`
 `;
 
 export default AllTerms;
-
-const dummyData: Array<TermItem> = [
-  {
-    bookmarked: "NO",
-    id: 0,
-    name: "Scrum :: 스크럼",
-    description:
-      "애자일 소프트웨어 개발 방법론 종류 중의 하나로 반복적이고 점진적인 개발방식을 취해요. 스크럼의 성공 공식은 다음과 같은 3가지(매 스프린트마다 어쩌구 저쩌구입니다람쥐렁이빨대나무인도)",
-  },
-  {
-    bookmarked: "YES",
-    id: 1,
-    name: "Scrum :: 스크럼",
-    description:
-      "애자일 소프트웨어 개발 방법론 종류 중의 하나로 반복적이고 점진적인 개발방식을 취해요. 스크럼의 성공 공식은 다음과 같은 3가지(매 스프린트마다 어쩌구 저쩌구입니다람쥐렁이빨대나무인도)",
-  },
-  {
-    bookmarked: "YES",
-    id: 2,
-    name: "Scrum :: 스크럼",
-    description:
-      "애자일 소프트웨어 개발 방법론 종류 중의 하나로 반복적이고 점진적인 개발방식을 취해요. 스크럼의 성공 공식은 다음과 같은 3가지(매 스프린트마다 어쩌구 저쩌구입니다람쥐렁이빨대나무인도)",
-  },
-  {
-    bookmarked: "NO",
-    id: 3,
-    name: "Scrum :: 스크럼",
-    description:
-      "애자일 소프트웨어 개발 방법론 종류 중의 하나로 반복적이고 점진적인 개발방식을 취해요. 스크럼의 성공 공식은 다음과 같은 3가지(매 스프린트마다 어쩌구 저쩌구입니다람쥐렁이빨대나무인도)",
-  },
-];
