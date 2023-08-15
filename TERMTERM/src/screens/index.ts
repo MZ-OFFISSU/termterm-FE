@@ -15,7 +15,7 @@ import ThemeSelect from "./ThemeSelect";
 import DeleteAccount from "./DeleteAccount";
 import Walkthrough from "./Walkthrough";
 import Support from "./Support";
-import TermDetail from "./TermDetail";
+import SingleTermDetail from "./SingleTermDetail";
 import ReportWord from "./ReportWord";
 import MyWordApply from "./MyWordApply";
 import TermsDetail from "./TermsDetail";
@@ -42,7 +42,7 @@ export {
   ThemeSelect,
   DeleteAccount,
   Walkthrough,
-  TermDetail,
+  SingleTermDetail,
   Support,
   ReportWord,
   MyWordApply,

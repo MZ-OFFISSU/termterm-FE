@@ -19,7 +19,7 @@ import {
   DeleteAccount,
   Walkthrough,
   Support,
-  TermDetail,
+  SingleTermDetail,
   ReportWord,
   MyWordApply,
   TermsDetail,
@@ -48,7 +48,6 @@ import { safeAreaColorState } from "@recoil/safeAreaColor";
 import Filter from "@components/common/Filter";
 import KakaoLogin from "@screens/Webview/KakaoLogin";
 import GoogleLogin from "@screens/Webview/GoogleLogin";
-import CompleteInquiry from "@screens/CompleteInquiry";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -367,8 +366,8 @@ const Container = () => {
             }}
           />
           <RootStack.Screen
-            name="TermDetail"
-            component={TermDetail}
+            name="SingleTermDetail"
+            component={SingleTermDetail}
             options={{
               headerShown: true,
               header: (props) => {

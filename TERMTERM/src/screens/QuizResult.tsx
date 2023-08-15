@@ -5,7 +5,6 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { colorTheme } from "@style/designSystem";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { WordProps } from "@interfaces/word";
 import { dummyWord } from "@assets/dummyWord";
 import {
   CustomButton,
@@ -14,12 +13,13 @@ import {
   AnswerReminder,
 } from "@components/index";
 import QuizAnswerCard from "@components/terms/QuizAnswerCard";
+import { TermDetail } from "Term";
 
 export type Props = StackScreenProps<RootStackParamList, "QuizResult">;
 
 const QuizResult = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const [answer, setAnswer] = useState<WordProps>();
+  const [answer, setAnswer] = useState<TermDetail>();
 
   useEffect(() => {
     //TODO : 정답 받아오는 로직 추가

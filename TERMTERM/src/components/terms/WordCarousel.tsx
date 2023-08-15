@@ -7,15 +7,15 @@ import Animated, {
 } from "react-native-reanimated";
 import Carousel from "react-native-reanimated-carousel";
 import { screenWidth } from "@style/dimensions";
-import { WordProps } from "@interfaces/word";
 import WordCard from "./WordCard";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { TermDetail } from "Term";
 
 interface Props extends ViewProps {
-  words: Array<WordProps>;
+  words: Array<TermDetail>;
   dots?: boolean;
   snap?: (idx: number) => void;
   touchable?: boolean;

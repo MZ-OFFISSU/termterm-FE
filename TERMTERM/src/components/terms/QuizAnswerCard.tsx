@@ -1,14 +1,14 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useWordReg } from "@hooks/useWordReg";
-import { WordProps } from "@interfaces/word";
 import { TEXT_STYLES, TYPO, colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
 import { TouchableOpacityProps } from "react-native";
 import { css } from "styled-components";
 import styled from "styled-components/native";
+import { TermDetail } from "Term";
 
 interface Props extends TouchableOpacityProps {
-  word: WordProps;
+  word: TermDetail;
   quiz?: boolean;
   detail?: boolean;
 }

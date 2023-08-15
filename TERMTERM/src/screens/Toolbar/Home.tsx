@@ -8,12 +8,12 @@ import { CurationItem } from "@components/curation";
 import { CurationItemProps } from "@interfaces/curation";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
-import { WordProps } from "@interfaces/word";
 import { dummyWords } from "@assets/dummyWord";
 import { WordCarousel } from "@components/terms/";
 import DailyTermContainer from "@components/home/DailyTermContainer";
 import { Octicons } from "@expo/vector-icons";
 import { useHome } from "@hooks/useHome";
+import { TermDetail } from "Term";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -26,7 +26,7 @@ interface TextType {
  * 필요시 수정가능합니다.
  */
 const Home = ({ navigation, route }: Props) => {
-  const [curation, setCuration] = useState<Array<WordProps> | null>();
+  const [curation, setCuration] = useState<Array<TermDetail> | null>();
   const [COLOR, mode] = useThemeStyle();
   const { homeMainTitle, homeSubTitle } = useHome();
 

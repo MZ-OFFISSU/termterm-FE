@@ -5,20 +5,20 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { WordCard } from "@components/terms/";
 import { useEffect, useState } from "react";
-import { WordProps } from "@interfaces/word";
 import { dummyWord } from "@assets/dummyWord";
 import { screenWidth } from "@style/dimensions";
 import OtherThink from "@components/OtherThink";
 import LottieAnimation from "@components/OtherThink/LottieAnimation";
+import { TermDetail } from "Term";
 
-export type Props = StackScreenProps<RootStackParamList, "TermDetail">;
+export type Props = StackScreenProps<RootStackParamList, "SingleTermDetail">;
 
 /**
  * 단일 용어 설명 페이지
  */
-const TermDetail = ({ navigation, route }: Props) => {
+const SingleTermDetail = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const [word, setWord] = useState<WordProps>();
+  const [word, setWord] = useState<TermDetail>();
 
   useEffect(() => {
     //TODO : 아이디로 해당 용어 정보 받아오는 함수 추가
@@ -56,4 +56,4 @@ const Container = styled.View<{ COLOR: colorTheme }>`
   padding: 20px 0px 100px 0px;
 `;
 
-export default TermDetail;
+export default SingleTermDetail;
