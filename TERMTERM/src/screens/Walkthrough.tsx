@@ -45,6 +45,13 @@ const Walkthrough = ({ navigation }: Props) => {
       return;
     }
   };
+
+  const goToHome = () => {
+    navigation.reset({
+      routes: [{ name: "Login", params: { nonAuto: true } }],
+    });
+  };
+
   useEffect(() => {
     calcHeight();
   }, []);
@@ -59,7 +66,7 @@ const Walkthrough = ({ navigation }: Props) => {
           type={BUTTON_TYPE.primary}
           state={BUTTON_STATE.active}
           // TODO : Home으로 이동하도록 navigation 수정
-          onPress={() => navigation.push("Login")}
+          onPress={goToHome}
           style={{ width: "90%" }}
         />
         <CustomButton

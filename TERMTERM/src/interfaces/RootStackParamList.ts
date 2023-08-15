@@ -5,7 +5,7 @@
  * e.g. Profile: {name: string};
  */
 export type RootStackParamList = {
-  Login: undefined;
+  Login: { nonAuto?: boolean };
   ToolBar: undefined;
   Onboarding: undefined;
   Curation: undefined;

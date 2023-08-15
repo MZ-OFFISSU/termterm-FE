@@ -60,7 +60,9 @@ const Onboarding = ({ navigation }: Props) => {
     } catch (err) {
       console.log(err);
       registerFailed();
-      navigation.reset({ routes: [{ name: "Login" }] });
+      navigation.reset({
+        routes: [{ name: "Login", params: { nonAuto: true } }],
+      });
     }
   };
 
