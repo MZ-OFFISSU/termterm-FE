@@ -34,11 +34,14 @@ const EditProfile = ({ navigation }: Props) => {
 
   const [loading] = useDebounce(
     () => {
-      if (JSON.stringify(profileInfo) !== JSON.stringify(input))
+      if (
+        JSON.stringify(profileInfo) !== JSON.stringify(input) ||
+        career !== getLabelFromType(profileInfo.yearCareer)
+      )
         setChanged(true);
       else setChanged(false);
     },
-    JSON.stringify(input),
+    JSON.stringify(input) + `${career}`,
     500
   );
 
