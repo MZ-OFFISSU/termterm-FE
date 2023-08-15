@@ -99,18 +99,22 @@ const CommentComponent = ({ comment }: Props) => {
     try {
       if (liked) {
         await commentApi.dislikeComment(comment.id);
+        setLiked(true);
         setLikeCount((prevCount) => prevCount - 1);
-        console.log("dislike button clicked : ", comment.id, comment.likeCnt);
+        console.log("dislike button clicked : ", comment.id, comment.likeCnt, liked);
       } else {
         await commentApi.likeComment(comment.id);
+        setLiked(false);
         setLikeCount((prevCount) => prevCount + 1);
-        console.log("like button clicked : ", comment.id, comment.likeCnt);
+        console.log("like button clicked : ", comment.id, comment.likeCnt, liked);
       }
     } catch (err) {
-      console.log("like & dislike button clicked error : ", comment.id, comment.likeCnt);
+      console.log("like & dislike button clicked error : ", comment.id, comment.likeCnt, liked);
       console.log(err);
     }
   };
+
+  useEffect(() => console.log("liked click"), [liked, likeCount]);
 
   return (
     <Wrapper

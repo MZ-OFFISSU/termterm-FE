@@ -3,6 +3,7 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CommentInput, Report } from "Comment";
+import { useState } from "react";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { useThemeStyle } from "./useThemeStyle";
 
@@ -11,6 +12,7 @@ export const useComment = () => {
   const commentApi = new CommentApi();
   const [COLOR, mode] = useThemeStyle();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const [liked, setLiked] = useState(false);
 
   /** 용어 설명 신청 - 성공 토스트 메시지 */
   const successCommentToast = () => {
@@ -65,7 +67,6 @@ export const useComment = () => {
   ): Promise<boolean> => {
     try {
       const res = await commentApi.registerComment(input);
-      console.log("res - success : ", res, input);
       navigation.navigate("TermsDetail", { id: id });
       successCommentToast();
       return true;
@@ -80,7 +81,6 @@ export const useComment = () => {
   const registerReport = async (input: Report): Promise<boolean> => {
     try {
       await commentApi.reportComment(input);
-      console.log("용어 신고 : ", input)
       navigation.navigate("TermsDetail", { id: input.commentId });
       successReportToast();
       return true;
@@ -89,6 +89,16 @@ export const useComment = () => {
       return false;
     }
   };
+
+  /** 용어 설명 좋아요 누르기 & 좋아요 취소하기 */
+  const handleLikeButton = async (): Promise<boolean> => {
+    try {
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  }
 
   return {
     registerComment,
