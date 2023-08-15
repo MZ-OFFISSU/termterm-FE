@@ -49,7 +49,6 @@ const ToolBar = ({ ...props }: Props) => {
 
     const onboardingTest = async () => {
       await authCheckProfile(reset);
-      console.log("테스트 끝");
     };
 
     onboardingTest();

@@ -55,6 +55,7 @@ export const useProfile = () => {
     try {
       const res = await memberApi.getInfo();
       setProfileInfo(res);
+      console.log(res);
       return res;
     } catch (err) {
       console.log(err);
