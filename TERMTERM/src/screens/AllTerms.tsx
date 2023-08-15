@@ -4,14 +4,11 @@ import styled from "styled-components/native";
 import { colorTheme } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useEffect, useState } from "react";
-import { Preview } from "@components/curation/detail/term";
 import TermPreviewBox from "@components/curation/detail/term/TermPreviewBox";
-import { truncateString } from "@utils/wordCutter";
-import { useWordReg } from "@hooks/useWordReg";
 import TermApi from "@api/TermApi";
 import { TermConfig, TermItem } from "Term";
-import { getAccessToken } from "@utils/tokenHandler";
 import { useTerm } from "@hooks/useTerm";
+import { getAccessToken } from "@utils/tokenHandler";
 
 export type Props = StackScreenProps<RootStackParamList, "AllTerms">;
 
@@ -25,8 +22,7 @@ const AllTerms = ({ navigation }: Props) => {
   const [termConfig, setTermConfig] = useState<TermConfig>({
     category: "pm",
     page: 3,
-    size: 5,
-    sort: "YES",
+    size: 10,
   });
 
   useEffect(() => {
