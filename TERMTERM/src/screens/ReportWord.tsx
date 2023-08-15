@@ -12,6 +12,7 @@ import { Keyboard } from "react-native";
 import Toast from "react-native-toast-message";
 import CommentApi from "@api/CommentApi";
 import { Report, ReportType } from "Comment";
+import { useComment } from "@hooks/useComment";
 
 export type Props = StackScreenProps<RootStackParamList, "ReportWord">;
 
@@ -19,21 +20,9 @@ export type Props = StackScreenProps<RootStackParamList, "ReportWord">;
  * 의견 신고 스크린
  */
 const ReportWord = ({ route, navigation }: Props) => {
-  const commentApi = new CommentApi();
-
+  const { registerReport, reportCategories } = useComment();
   const [COLOR, mode] = useThemeStyle();
-  const [reasonType, setReasonType] = useState([
-    {label: "저작권 침해, 명예훼손", value: "COPYRIGHT"},
-    {label: "개인정보 유출", value: "PERSONAL_INFORMATION"},
-    {label: "광고 및 홍보성 내용", value: "ADVERTISEMENT"},
-    {label: "용어와 무관한 내용", value: "IRRELEVANT_CONTENT"},
-    {label: "사기 또는 거짓 정보", value: "FRAUD"},
-    {label: "잘못된 정보 포함", value: "INCORRECT_CONTENT"},
-    {label: "혐오 발언 또는 상징", value: "DISGUST"},
-    {label: "욕설, 비방, 선정성 등 미풍양속을 해치는 내용", value: "ABUSE"},
-    {label: "스팸", value: "SPAM"},
-    {label: "기타", value: "OTHER"},
-  ])
+  const [reasonType, setReasonType] = useState(reportCategories);
   const [selectedReason, setSelectedReason] = useState("");
   const [etc, setEtc] = useState("");
   const [btnPosition, setBtnPosition] = useState(70);
@@ -67,10 +56,14 @@ const ReportWord = ({ route, navigation }: Props) => {
   };
 
   const report = () => {
+    const reportInfo: Report = {
+      commentId: route.params.id,
+      content: etc,
+      type: selectedReason as ReportType,
+    };
     if (testInvalid()) {
       showToast();
-      registerReport();
-      navigation.pop();
+      registerReport(reportInfo);
       return;
     }
   };
@@ -85,20 +78,6 @@ const ReportWord = ({ route, navigation }: Props) => {
         key={reason.value}
       />
     );
-  };
-
-  const registerReport = async () => {
-    const reportInfo: Report = {
-      commentId: route.params.id,
-      content: etc,
-      type: selectedReason as ReportType,
-    };
-
-    try {
-      await commentApi.reportComment(reportInfo);
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   useEffect(() => {
@@ -140,7 +119,7 @@ const ReportWord = ({ route, navigation }: Props) => {
             : BUTTON_STATE.default
         }
         type={BUTTON_TYPE.primary}
-        onPress={report}
+        onPress={() => report()}
         style={{
           width: screenWidth - 32,
           alignSelf: "center",
