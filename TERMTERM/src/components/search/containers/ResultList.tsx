@@ -4,10 +4,10 @@ import {
   ContentsHeader,
   ResultWrapper,
 } from "@components/search";
-import { SearchResultProps } from "@interfaces/search";
+import { SearchResult } from "Term";
 
 interface Props extends ViewProps {
-  results: Array<SearchResultProps>;
+  results: Array<SearchResult>;
 }
 
 /**

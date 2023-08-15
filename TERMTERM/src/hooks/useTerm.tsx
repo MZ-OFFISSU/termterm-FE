@@ -17,5 +17,13 @@ export const useTerm = () => {
     }
   };
 
-  return { results, searchTerm };
+  const bookmarkTerm = async (id: number) => {
+    try {
+      await termApi.bookmarkTerm(id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return { results, searchTerm, bookmarkTerm };
 };
