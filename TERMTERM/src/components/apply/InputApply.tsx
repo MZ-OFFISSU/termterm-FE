@@ -13,12 +13,11 @@ import {
 import { useState } from "react";
 import CustomTextarea from "@components/common/CustomTextarea";
 import { BUTTON_STATE, BUTTON_TYPE, CustomButton, CustomTextInput } from "..";
-import CommentApi from "@api/CommentApi";
 import { CommentInput } from "Comment";
-import { getAccessToken } from "@utils/tokenHandler";
+import { useComment } from "@hooks/useComment";
 
 const InputApply = ({ nextStage }: ApplyProps) => {
-  const commentApi = new CommentApi();
+  const { registerComment } = useComment();
   const [comment, setComment] = useState<CommentInput>({
     content: "",
     source: "",
@@ -46,23 +45,8 @@ const InputApply = ({ nextStage }: ApplyProps) => {
     });
   };
 
-  const navigate = () => {
-    if (comment.content !== "") nextStage();
-  };
-
   const descStyle = {
     backgroundColor: COLOR.Background.input,
-  };
-
-  const registerComment = async () => {
-    try {
-      await commentApi.registerComment(comment);
-      // TODO : 네비게이션 이동 코드 추가
-      navigate();
-    } catch (err) {
-      console.log(err);
-      // TODO : 네비게이션 이동 코드 추가
-    }
   };
 
   return (
@@ -106,7 +90,7 @@ const InputApply = ({ nextStage }: ApplyProps) => {
         state={
           comment.content !== "" ? BUTTON_STATE.active : BUTTON_STATE.default
         }
-        onPress={registerComment}
+        onPress={() => registerComment(comment, comment.termId)}
         style={{ width: "100%", marginTop: 48 }}
       />
     </Wrapper>
