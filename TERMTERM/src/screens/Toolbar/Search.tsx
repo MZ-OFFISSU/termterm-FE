@@ -23,9 +23,14 @@ const Search = ({ navigation }: Props) => {
 
   const [COLOR, mode] = useThemeStyle();
 
-  const handleSearch = async () => {
+  const handleSearch = async (keyword: string) => {
     await searchTerm(keyword);
     if (keyword !== "") setRecords([...records, keyword]);
+  };
+
+  const handleRecommendKeyword = async (recommend: string) => {
+    setKeyword(recommend);
+    await handleSearch(recommend);
   };
 
   const Nothing = () => {
@@ -52,14 +57,14 @@ const Search = ({ navigation }: Props) => {
     <Container COLOR={COLOR}>
       <CotentsArea>
         <SearchBox
-          onSubmitEditing={handleSearch}
+          onSubmitEditing={() => handleSearch(keyword)}
           value={keyword}
           onChangeText={(text) => setKeyword(text)}
         />
         <Nothing />
         <ResultList results={results} />
         <RecentSearched />
-        <RecommendKeyword />
+        <RecommendKeyword handleRecommendKeyword={handleRecommendKeyword} />
         <RecommendList navigation={navigation} />
       </CotentsArea>
     </Container>

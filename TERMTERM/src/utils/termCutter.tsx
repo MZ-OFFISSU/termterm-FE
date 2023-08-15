@@ -3,5 +3,6 @@ export const divideTerm = (fullName: string) => {
   if (match && match.length > 2) {
     return [match[1].trim(), match[2].trim()];
   }
-  return [];
+
+  return [fullName];
 };

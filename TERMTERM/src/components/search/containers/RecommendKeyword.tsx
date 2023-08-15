@@ -4,14 +4,16 @@ import {
   ContentsHeader,
   RecommendWrapper,
 } from "@components/search";
-import { useSearch } from "@hooks/useSearch";
 
-const RecommendKeyword = ({ ...props }: ViewProps) => {
-  const [records, setRecords] = useSearch();
+interface Props extends ViewProps {
+  handleRecommendKeyword: (recommend: string) => void;
+}
+
+const RecommendKeyword = ({ handleRecommendKeyword, ...props }: Props) => {
   return (
     <ContentsWrapper {...props}>
       <ContentsHeader title="추천 검색어" />
-      <RecommendWrapper />
+      <RecommendWrapper handleRecommendKeyword={handleRecommendKeyword} />
     </ContentsWrapper>
   );
 };
