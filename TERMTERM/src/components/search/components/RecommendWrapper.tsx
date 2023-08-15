@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import Recommend from "./Recommend";
-import { useSearch } from "@hooks/useSearch";
+import { useHaptics } from "@hooks/useHaptics";
 
 const RecommendList = [
   "비즈니스",
@@ -13,8 +13,17 @@ const RecommendList = [
   "디자이너",
 ];
 
-const RecommendWrapper = () => {
-  const [records, setRecords] = useSearch();
+interface Props {
+  handleRecommendKeyword: (recommend: string) => void;
+}
+
+const RecommendWrapper = ({ handleRecommendKeyword }: Props) => {
+  const { haptic } = useHaptics();
+
+  const recommend = (rec: string) => {
+    handleRecommendKeyword(rec);
+    haptic("light");
+  };
 
   return (
     <Container>
@@ -22,7 +31,7 @@ const RecommendWrapper = () => {
         <Recommend
           title={rec}
           key={`${rec}_${idx}`}
-          onPress={() => setRecords([...records, rec])}
+          onPress={() => recommend(rec)}
         />
       ))}
     </Container>

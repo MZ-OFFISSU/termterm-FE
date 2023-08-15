@@ -36,6 +36,13 @@ export const useProfile = () => {
     });
   };
 
+  const doubleNicknameToast = () => {
+    Toast.show({
+      type: "dark",
+      text1: "이미 사용 중인 닉네임이에요.",
+    });
+  };
+
   const removeToast = () => {
     Toast.show({
       type: "dark",
@@ -162,12 +169,33 @@ export const useProfile = () => {
     }
   };
 
+  /** 닉네임이 변경되었는가? 변경되었다면 검사
+   * 검사 후 변경 가능한 상태라면 true, 아니라면 false
+   */
+  const checkingNickname = async (input: MemberInfo): Promise<boolean> => {
+    if (profileInfo.nickname === input.nickname) return true;
+
+    try {
+      await memberApi.nicknameDoubleCheck(input.nickname);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  };
+
   const saveInfo = async (
     input: MemberInfo,
     career: string,
     callback: () => void
   ) => {
     setLoading(true);
+
+    const checkNickname = await checkingNickname(input);
+    if (!checkNickname) {
+      doubleNicknameToast();
+      return;
+    }
 
     const basicComplete = await editBasicProfile(input, career);
     const categoriesComplete = await editCategories(input);

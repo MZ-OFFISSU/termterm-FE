@@ -14,7 +14,7 @@ import { useHaptics } from "@hooks/useHaptics";
 
 export type Props = StackScreenProps<RootStackParamList, "Login">;
 
-const Login = ({ navigation }: Props) => {
+const Login = ({ navigation, route }: Props) => {
   const { haptic } = useHaptics();
   const [width, setWidth] = useState(80);
   const { user, loading } = useMember();
@@ -39,7 +39,7 @@ const Login = ({ navigation }: Props) => {
   };
 
   const checkAutoLogin = () => {
-    if (user.isLogined && !loading) {
+    if (!route.params.nonAuto && user.isLogined && !loading) {
       haptic("success");
       navigation.reset({ routes: [{ name: "ToolBar" }] });
       loginSucceed();
