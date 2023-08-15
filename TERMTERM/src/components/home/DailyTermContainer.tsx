@@ -13,41 +13,13 @@ const DailyTermContainer = () => {
   const termApi = new TermApi();
   const {dailyTermList, getDailyTerm} = useTerm();
 
-  const dummy: TermItem[] = [
-    {
-      bookmarked: "NO",
-      description: "이것은 유지민입니다.",
-      id: 1,
-      name: "유지민",
-    },
-    {
-      bookmarked: "YES",
-      description: "이것은 유짐인입니다.",
-      id: 2,
-      name: "유짐인",
-    },
-    {
-      bookmarked: "YES",
-      description: "이것은 짐인유입니다.",
-      id: 3,
-      name: "짐인유",
-    },
-    {
-      bookmarked: "NO",
-      description: "이것은 지민지민유짐인입니다.",
-      id: 4,
-      name: "지민지민유짐인",
-    },
-  ]
-
   useEffect(() => {
     getDailyTerm();
   }, []);
 
   return (
     <Container>
-      {/* TODO : 렌더링 데이터 바꾸기 */}
-      {dummy.map((term) => (
+      {dailyTermList.map((term) => (
         <DailyTermBox {...term} key={term.id} />
       ))}
     </Container>
