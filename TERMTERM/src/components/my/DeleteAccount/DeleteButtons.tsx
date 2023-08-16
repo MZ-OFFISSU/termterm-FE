@@ -7,6 +7,7 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useState } from "react";
 import CustomModal from "@components/popup/modal";
 import { useHaptics } from "@hooks/useHaptics";
+import { useProfile } from "@hooks/useProfile";
 
 /**
  * 탈퇴하기 스크린의 버튼들
@@ -16,14 +17,20 @@ const DeleteButtons = () => {
   const [COLOR, mode] = useThemeStyle();
   const [isModal, setIsModal] = useState(false);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { removeMember, removeToast } = useProfile();
 
-  const removeAccount = () => {
-    //TODO 계정 삭제 로직 추가
-    setIsModal(false);
-    haptic("warning");
-    navigation.reset({
-      routes: [{ name: "Login" }],
-    });
+  const removeAccount = async () => {
+    try {
+      await removeMember();
+      setIsModal(false);
+      haptic("warning");
+      removeToast();
+      navigation.reset({
+        routes: [{ name: "Login", params: { nonAuto: true } }],
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

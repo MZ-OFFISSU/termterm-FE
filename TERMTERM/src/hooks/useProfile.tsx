@@ -1,10 +1,8 @@
 import MemberApi from "@api/MemberApi";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { profileState } from "@recoil/signupState";
+import { initProfile, profileState } from "@recoil/signupState";
 import { MemberInfo } from "Member";
-import { getAccessToken } from "@utils/tokenHandler";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getTypeFromLabel } from "@utils/careerConverter";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 
@@ -37,14 +35,37 @@ export const useProfile = () => {
       text1: "프로필 정보 수정에 실패했어요.",
     });
   };
+
+  const doubleNicknameToast = () => {
+    Toast.show({
+      type: "dark",
+      text1: "이미 사용 중인 닉네임이에요.",
+    });
+  };
+
+  const removeToast = () => {
+    Toast.show({
+      type: "dark",
+      text1: "회원 탈퇴가 완료 되었어요.\n언제든 또 찾아와주세요! :)",
+    });
+  };
+
+  const onboardingToast = () => {
+    Toast.show({
+      type: "light",
+      text1: "온보딩 완료 후 이용이 가능해요!",
+    });
+  };
+
   /** 프로필 정보 받아오기 / 최신화 */
-  const getProfileInfo = async () => {
+  const getProfileInfo = async (): Promise<MemberInfo> => {
     try {
       const res = await memberApi.getInfo();
       setProfileInfo(res);
+      return res;
     } catch (err) {
       console.log(err);
-      throw err;
+      return initProfile;
     }
   };
 
@@ -148,12 +169,33 @@ export const useProfile = () => {
     }
   };
 
+  /** 닉네임이 변경되었는가? 변경되었다면 검사
+   * 검사 후 변경 가능한 상태라면 true, 아니라면 false
+   */
+  const checkingNickname = async (input: MemberInfo): Promise<boolean> => {
+    if (profileInfo.nickname === input.nickname) return true;
+
+    try {
+      await memberApi.nicknameDoubleCheck(input.nickname);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  };
+
   const saveInfo = async (
     input: MemberInfo,
     career: string,
     callback: () => void
   ) => {
     setLoading(true);
+
+    const checkNickname = await checkingNickname(input);
+    if (!checkNickname) {
+      doubleNicknameToast();
+      return;
+    }
 
     const basicComplete = await editBasicProfile(input, career);
     const categoriesComplete = await editCategories(input);
@@ -166,6 +208,17 @@ export const useProfile = () => {
       await getProfileInfo();
       callback();
     } else failedToast();
+  };
+
+  const authCheckProfile = async (callback: () => void) => {
+    try {
+      const res = await getProfileInfo();
+      if (!res.domain || res.domain === "") {
+        callback();
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -182,5 +235,8 @@ export const useProfile = () => {
     profileInfo,
     warn,
     loading,
+    removeToast,
+    authCheckProfile,
+    onboardingToast,
   };
 };

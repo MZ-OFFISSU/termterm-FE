@@ -7,19 +7,18 @@ import { SafeAreaView } from "react-native";
 import { CurationItem } from "@components/curation";
 import { CurationItemProps } from "@interfaces/curation";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { colorTheme, TEXT_STYLES, TYPO_STYLE } from "@style/designSystem";
-import { Fontisto } from "@expo/vector-icons";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { WordProps } from "@interfaces/word";
 import { dummyWords } from "@assets/dummyWord";
 import { WordCarousel } from "@components/terms/";
 import DailyTermContainer from "@components/home/DailyTermContainer";
 import { Octicons } from "@expo/vector-icons";
+import { useHome } from "@hooks/useHome";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
 interface TextType {
-  username: string;
-  title?: string;
+  maintitle: string;
   subtitle?: string;
 }
 
@@ -29,7 +28,7 @@ interface TextType {
 const Home = ({ navigation, route }: Props) => {
   const [curation, setCuration] = useState<Array<WordProps> | null>();
   const [COLOR, mode] = useThemeStyle();
-  const [name, setName] = useState("루시사랑해");
+  const { homeMainTitle, homeSubTitle } = useHome();
 
   useEffect(() => {
     //TODO: 큐레이션 용어 받아오는 로직. 없으면 null
@@ -43,18 +42,16 @@ const Home = ({ navigation, route }: Props) => {
           {curation ? (
             <>
               <TitleContainer
-                username={name}
-                title={"님, 오늘도 파이팅👏"}
-                subtitle={"아카이빙한 용어를 확인해 보세요!"}
+                maintitle={homeMainTitle}
+                subtitle={homeSubTitle}
               />
               <WordCarousel words={curation} dots={true} />
             </>
           ) : (
             <>
               <TitleContainer
-                username={name}
-                title={"님, 오늘도 파이팅"}
-                subtitle={"지금 용어를 아카이빙 해보세요!"}
+                maintitle={homeMainTitle}
+                subtitle={homeSubTitle}
               />
               <EmptyWordCard style={{ marginTop: 20 }} />
             </>
@@ -123,8 +120,7 @@ const TitleContainer = (props: TextType) => {
   return (
     <TitleBox>
       <Title COLOR={COLOR}>
-        {props.username}
-        {props.title}
+        {props.maintitle}
       </Title>
       <SubTitle COLOR={COLOR} mode={mode}>
         {props.subtitle}

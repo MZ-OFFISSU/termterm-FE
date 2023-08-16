@@ -40,7 +40,7 @@ const My = ({ navigation }: Props) => {
     >
       <InnerContainer style={{ paddingTop: 20, paddingBottom: 20 }}>
         <InnerContainer style={{ paddingLeft: 16, paddingRight: 16 }}>
-          <ProfileBox profile={profileInfo as MemberInfo} />
+          <ProfileBox profile={profileInfo} />
           {profileInfo?.introduction && (
             <IntroBox title="자기소개" subtitle={profileInfo.introduction} />
           )}

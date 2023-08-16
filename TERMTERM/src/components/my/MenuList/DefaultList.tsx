@@ -53,7 +53,7 @@ const DefaultList = () => {
     if (!loading) {
       setIsModal(false);
       navigation.reset({
-        routes: [{ name: "Login" }],
+        routes: [{ name: "Login", params: { nonAuto: true } }],
       });
     }
   };

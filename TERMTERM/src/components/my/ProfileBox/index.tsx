@@ -16,11 +16,15 @@ interface Props {
 const ProfileBox = ({ profile }: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
+  console.log(profile.profileImage);
+
   return (
     <Container>
       <ProfileImageWrapper>
         {profile.profileImage !== "" && (
-          <ProfileImage source={{ uri: profile.profileImage }} />
+          <ProfileImage
+            source={{ uri: profile.profileImage + "?cache=" + Math.random() }}
+          />
         )}
       </ProfileImageWrapper>
       <InfoWrapper>

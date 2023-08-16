@@ -1,12 +1,13 @@
 import TermApi from "@api/TermApi";
 import { useEffect, useState } from "react";
-import { TermConfig, TermDetail, TermItem, TermResponse } from "Term";
+import { TermConfig, TermDetail, TermItem, TermResponse, SearchResult } from "Term";
 
 /**
  * Term 관리 훅
  */
 export const useTerm = () => {
   const termApi = new TermApi();
+  const [results, setResults] = useState<SearchResult[]>([]);
   const [dailyTermList, setDailyTermList] = useState<TermItem[]>([]);
   const [termDetail, setTermDetail] = useState<TermDetail>();
   const [totalTermRes, setTotalTermRes] = useState<TermResponse>();
@@ -60,6 +61,25 @@ export const useTerm = () => {
       return false;
     }
   };
+    
+  /** 용어 검색하기 */
+  const searchTerm = async (keyword: string) => {
+    try {
+      const termList = await termApi.searchTerm(keyword);
+      setResults(termList);
+    } catch (err) {
+      console.log(err);
+      setResults([]);
+    }
+  };
+
+  const bookmarkTerm = async (id: number) => {
+    try {
+      await termApi.bookmarkTerm(id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return {
     bookmarkingTerm,
@@ -71,5 +91,7 @@ export const useTerm = () => {
     totalTermList,
     getTermDetail,
     getAllTermList,
+    results, 
+    searchTerm, 
+    bookmarkTerm
   };
-};

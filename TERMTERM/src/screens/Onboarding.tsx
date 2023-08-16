@@ -35,11 +35,13 @@ const Onboarding = ({ navigation }: Props) => {
   const CurrentPage = STAGES[stage];
   useSafeColor();
 
-  const onEnd = () => {
-    stage < STAGES.length - 1 ? setStage((prev) => prev + 1) : registerInfo();
+  const onEnd = (jobs?: string[]) => {
+    stage < STAGES.length - 1
+      ? setStage((prev) => prev + 1)
+      : registerInfo(jobs);
   };
 
-  const registerInfo = async () => {
+  const registerInfo = async (jobs?: string[]) => {
     const basicInfo: ModifiedMemberInfo = {
       domain: info.domain,
       introduction: "",
@@ -47,18 +49,20 @@ const Onboarding = ({ navigation }: Props) => {
       nickname: info.name,
       yearCareer: getTypeFromLabel(info.career)!,
     };
-    const categories: string[] = info.interests;
 
     try {
       await memberApi.putInfo(basicInfo);
-      await memberApi.putCategory(categories);
+      console.log(jobs);
+      await memberApi.putCategory(jobs!);
 
       registerSucceed();
       navigation.reset({ routes: [{ name: "ToolBar" }] });
     } catch (err) {
       console.log(err);
       registerFailed();
-      navigation.reset({ routes: [{ name: "Login" }] });
+      navigation.reset({
+        routes: [{ name: "Login", params: { nonAuto: true } }],
+      });
     }
   };
 
@@ -74,9 +78,7 @@ const Onboarding = ({ navigation }: Props) => {
             justifyContent: "space-between",
           }}
         >
-          <CaretBtn onPress={() => navigation.pop()}>
-            <AntDesign name="left" size={20} color={COLOR.Text.active} />
-          </CaretBtn>
+          <CaretBtn></CaretBtn>
           <NavigatorTitle COLOR={COLOR}>회원가입</NavigatorTitle>
           <NavigatorPager style={{ color: COLOR.Text.active }} COLOR={COLOR}>
             {stage + 1} / 3
