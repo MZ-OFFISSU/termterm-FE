@@ -1,6 +1,12 @@
 import TermApi from "@api/TermApi";
 import { useEffect, useState } from "react";
-import { TermConfig, TermDetail, TermItem, TermResponse, SearchResult } from "Term";
+import {
+  TermConfig,
+  TermDetail,
+  TermItem,
+  TermResponse,
+  SearchResult,
+} from "Term";
 
 /**
  * Term 관리 훅
@@ -61,7 +67,7 @@ export const useTerm = () => {
       return false;
     }
   };
-    
+
   /** 용어 검색하기 */
   const searchTerm = async (keyword: string) => {
     try {
@@ -91,7 +97,8 @@ export const useTerm = () => {
     totalTermList,
     getTermDetail,
     getAllTermList,
-    results, 
-    searchTerm, 
-    bookmarkTerm
+    results,
+    searchTerm,
+    bookmarkTerm,
   };
+};
