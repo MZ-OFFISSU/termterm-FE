@@ -3,8 +3,12 @@ import { RecoilRoot } from "recoil";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "@components/popup/toast";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import { LogBox } from "react-native";
 
 export default function App() {
+  LogBox.ignoreLogs([
+    "Sending `onAnimatedValueUpdate` with no listeners registered.",
+  ]);
   return (
     <ActionSheetProvider>
       <RecoilRoot>

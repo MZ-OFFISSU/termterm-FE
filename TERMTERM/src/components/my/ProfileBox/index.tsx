@@ -16,8 +16,6 @@ interface Props {
 const ProfileBox = ({ profile }: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
-  console.log(profile.profileImage);
-
   return (
     <Container>
       <ProfileImageWrapper>
