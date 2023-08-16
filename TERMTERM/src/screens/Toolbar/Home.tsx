@@ -14,6 +14,7 @@ import { WordCarousel } from "@components/terms/";
 import DailyTermContainer from "@components/home/DailyTermContainer";
 import { Octicons } from "@expo/vector-icons";
 import { useHome } from "@hooks/useHome";
+import Tutorial from "@components/popup/tutorials";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -110,6 +111,7 @@ const Home = ({ navigation, route }: Props) => {
             ))}
           </CurationCardWrapper>
         </InnerContainer>
+        <Tutorial />
       </Container>
     </SafeAreaView>
   );
@@ -119,9 +121,7 @@ const TitleContainer = (props: TextType) => {
   const [COLOR, mode] = useThemeStyle();
   return (
     <TitleBox>
-      <Title COLOR={COLOR}>
-        {props.maintitle}
-      </Title>
+      <Title COLOR={COLOR}>{props.maintitle}</Title>
       <SubTitle COLOR={COLOR} mode={mode}>
         {props.subtitle}
       </SubTitle>
