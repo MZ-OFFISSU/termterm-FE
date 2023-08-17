@@ -22,7 +22,7 @@ const CoachBackground = ({ type }: Props) => {
     },
     comment: {
       holeCenter: { x: screenWidth / 2, y: screenHeight },
-      radius: 100,
+      radius: 200,
     },
   };
 

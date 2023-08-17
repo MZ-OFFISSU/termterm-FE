@@ -5,6 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { CoachType } from "@hooks/useCoach";
 import CoachBackground from "./CoachBackground";
+import { screenHeight } from "@style/dimensions";
 
 interface Props {
   type: CoachType;
@@ -36,7 +37,7 @@ const Coachmark = ({
       <CloseButtpn onPress={() => hideCoach(type, checked)}>
         <AntDesign name="close" size={24} color={COLOR.Neutral[30]} />
       </CloseButtpn>
-      <HideCheckbox onPress={handleCheck}>
+      <HideCheckbox onPress={handleCheck} up={type === "comment"}>
         <MaterialCommunityIcons
           name={checked ? "checkbox-marked" : `checkbox-blank-outline`}
           size={20}
@@ -48,14 +49,14 @@ const Coachmark = ({
   );
 };
 
-const HideCheckbox = styled.TouchableOpacity`
+const HideCheckbox = styled.TouchableOpacity<{ up: boolean }>`
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: 70px;
+  bottom: ${(props) => (props.up ? `${screenHeight - 100}px` : "70px")};
 `;
 
 const HideText = styled.Text`
