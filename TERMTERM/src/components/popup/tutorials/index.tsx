@@ -7,6 +7,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import TutorialCarousel from "./Carousel";
+import { useRecoilState } from "recoil";
+import { tutorialState } from "@recoil/tutorialState";
 
 /**
  * 모달창 컴포넌트
@@ -14,7 +16,7 @@ import TutorialCarousel from "./Carousel";
  */
 const Tutorial = () => {
   const [COLOR, mode] = useThemeStyle();
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useRecoilState(tutorialState);
   const [checked, setChecked] = useState(false);
 
   const getVisible = async () => {

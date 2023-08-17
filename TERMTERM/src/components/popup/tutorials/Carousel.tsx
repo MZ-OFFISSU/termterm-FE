@@ -91,9 +91,9 @@ const TutorialCarousel = () => {
               backgroundColor={COLOR.THEME.primary[130]}
               animValue={progressValue}
               index={index}
-              key={index}
               isRotate={false}
               length={items.length}
+              key={_.content}
             />
           );
         })}

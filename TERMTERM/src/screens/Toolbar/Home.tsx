@@ -15,6 +15,10 @@ import DailyTermContainer from "@components/home/DailyTermContainer";
 import { Octicons } from "@expo/vector-icons";
 import { useHome } from "@hooks/useHome";
 import Tutorial from "@components/popup/tutorials";
+import { useCoach } from "@hooks/useCoach";
+import { useRecoilValue } from "recoil";
+import { tutorialState } from "@recoil/tutorialState";
+import Coachmark from "@components/popup/coach";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -27,14 +31,20 @@ interface TextType {
  * 필요시 수정가능합니다.
  */
 const Home = ({ navigation, route }: Props) => {
+  const isTutorialOpen = useRecoilValue(tutorialState);
   const [curation, setCuration] = useState<Array<WordProps> | null>();
   const [COLOR, mode] = useThemeStyle();
   const { homeMainTitle, homeSubTitle } = useHome();
+  const { isOpen, openCoach, hideCoach, checked, handleCheck } = useCoach();
 
   useEffect(() => {
     //TODO: 큐레이션 용어 받아오는 로직. 없으면 null
     setCuration(dummyWords);
   }, []);
+
+  useEffect(() => {
+    openCoach("slide");
+  }, [isTutorialOpen]);
 
   return (
     <SafeAreaView>
@@ -111,7 +121,17 @@ const Home = ({ navigation, route }: Props) => {
             ))}
           </CurationCardWrapper>
         </InnerContainer>
-        <Tutorial />
+        {isTutorialOpen ? (
+          <Tutorial />
+        ) : (
+          <Coachmark
+            type="slide"
+            isOpen={isOpen}
+            checked={checked}
+            handleCheck={handleCheck}
+            hideCoach={hideCoach}
+          />
+        )}
       </Container>
     </SafeAreaView>
   );

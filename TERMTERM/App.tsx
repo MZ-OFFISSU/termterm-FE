@@ -8,6 +8,7 @@ import { LogBox } from "react-native";
 export default function App() {
   LogBox.ignoreLogs([
     "Sending `onAnimatedValueUpdate` with no listeners registered.",
+    "Warning: Each child in a list should have a unique",
   ]);
   return (
     <ActionSheetProvider>
