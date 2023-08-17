@@ -5,17 +5,19 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme } from "@style/designSystem";
 import { Ionicons } from "@expo/vector-icons";
 import { BookmarkButton } from "@components/common/Bookmark";
+import { MoreRecommendedCuration } from "Curation";
 
-interface Props extends CurationItemProps {
+interface Props extends MoreRecommendedCuration {
   onMove: (id: number) => void;
+  img: string;
 }
 
 const CurationItem = ({
-  id,
+  curationId,
   title,
   img,
-  counts,
-  marked,
+  cnt,
+  bookmarked,
   onMove,
   ...props
 }: Props) => {
@@ -23,11 +25,11 @@ const CurationItem = ({
   return (
     <ItemContainer {...props}>
       <CurationTitle COLOR={COLOR}>{title}</CurationTitle>
-      <CurationThumbnail onPress={() => onMove(id)}>
+      <CurationThumbnail onPress={() => onMove(curationId)}>
         <CurationImage source={{ uri: img }} />
-        <WordsNum>용어 {counts}개</WordsNum>
+        <WordsNum>용어 {cnt}개</WordsNum>
         <BookmarkButton>
-          {marked ? (
+          {bookmarked ? (
             <Ionicons
               name="ios-bookmark"
               size={22}
