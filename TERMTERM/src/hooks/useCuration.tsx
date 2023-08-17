@@ -1,5 +1,10 @@
 import CurationApi from "@api/CurationApi";
-import { Category, CurationDetail, CurationPreview } from "Curation";
+import {
+  Category,
+  CurationDetail,
+  CurationPreview,
+  MoreRecommendedCuration,
+} from "Curation";
 import { useState } from "react";
 
 /**
@@ -13,7 +18,7 @@ export const useCuration = () => {
   const [curationDetailInfo, setCurationDetailInfo] =
     useState<CurationDetail>();
   const [categoryCurationList, setCategoryCurationList] = useState<
-    CurationPreview[]
+    MoreRecommendedCuration[]
   >([]);
 
   /** 아카이브한 큐레이션 목록 가져오기 */
@@ -59,9 +64,13 @@ export const useCuration = () => {
     try {
       const res = await curationApi.getCurationListByCategory(category);
       setCategoryCurationList(res);
+      console.log(category);
+      console.log(categoryCurationList);
       return true;
     } catch (err) {
       console.log(err);
+      console.log(category);
+      console.log(categoryCurationList);
       return false;
     }
   };

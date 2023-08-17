@@ -14,7 +14,7 @@ declare module "Curation" {
     name: string;
   };
 
-  type MoreRecommendedCuration = {
+  export type MoreRecommendedCuration = {
     bookmarked: string;
     cnt: number;
     curationId: number;

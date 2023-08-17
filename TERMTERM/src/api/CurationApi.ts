@@ -3,6 +3,7 @@ import {
   CreateCuration,
   CurationDetail,
   CurationPreview,
+  MoreRecommendedCuration,
 } from "Curation";
 import { get, post, put } from "./AxiosCreate";
 
@@ -28,8 +29,8 @@ class CurationApi {
   /** 카테고리별 큐레이션 리스트 */
   getCurationListByCategory = async (
     category: Category
-  ): Promise<CurationPreview[]> => {
-    const data = await get<CurationPreview[]>(`/v1/curation/list`, {
+  ): Promise<MoreRecommendedCuration[]> => {
+    const data = await get<MoreRecommendedCuration[]>(`/v1/curation/list`, {
       params: {
         category: category,
       },
