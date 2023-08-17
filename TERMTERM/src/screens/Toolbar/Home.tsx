@@ -14,6 +14,7 @@ import { WordCarousel } from "@components/terms/";
 import DailyTermContainer from "@components/home/DailyTermContainer";
 import { Octicons } from "@expo/vector-icons";
 import { useHome } from "@hooks/useHome";
+import { useCuration } from "@hooks/useCuration";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -26,6 +27,7 @@ interface TextType {
  * 필요시 수정가능합니다.
  */
 const Home = ({ navigation, route }: Props) => {
+  const { getEachCategoryCurationList, categoryCurationList} = useCuration();
   const [curation, setCuration] = useState<Array<WordProps> | null>();
   const [COLOR, mode] = useThemeStyle();
   const { homeMainTitle, homeSubTitle } = useHome();
@@ -33,6 +35,7 @@ const Home = ({ navigation, route }: Props) => {
   useEffect(() => {
     //TODO: 큐레이션 용어 받아오는 로직. 없으면 null
     setCuration(dummyWords);
+    getEachCategoryCurationList("pm");
   }, []);
 
   return (
@@ -98,13 +101,14 @@ const Home = ({ navigation, route }: Props) => {
             </CurationTitleBox>
           </FlexContainer>
           <CurationCardWrapper>
-            {dummy.map((item, idx) => (
+            {categoryCurationList.map((item, idx) => (
               <CurationItem
                 {...item}
                 onMove={() =>
-                  navigation.push("CurationDetail", { id: item.id })
+                  navigation.push("CurationDetail", { id: item.curationId })
                 }
-                key={item.img}
+                //TODO : 이미지 URL 같이 보내기 (API 변경 이후)
+                img={"https://file2.nocutnews.co.kr/newsroom/image/2022/10/15/202210150951152389_0.jpg"}
                 style={{ marginTop: 30 }}
               />
             ))}
