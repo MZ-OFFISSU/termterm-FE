@@ -13,6 +13,7 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useCoach } from "@hooks/useCoach";
 import Coachmark from "@components/popup/coach";
+import { TermDetail } from "Term";
 
 interface HandleProps {
   contents: string;
@@ -22,7 +23,7 @@ interface FooterProps {
   id: number;
 }
 interface Props {
-  word: WordProps;
+  word: TermDetail;
 }
 
 /** 커스텀 핸들 컴포넌트 (바텀시트 내부)*/
