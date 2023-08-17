@@ -13,8 +13,16 @@ interface Props {
 const CoachBackground = ({ type }: Props) => {
   const holes: any = {
     folder: {
-      holeCenter: { x: screenWidth - 80, y: 35 },
+      holeCenter: { x: screenWidth - 70, y: 35 },
       radius: 50,
+    },
+    collapse: {
+      holeCenter: { x: screenWidth - 70, y: 35 },
+      radius: 50,
+    },
+    comment: {
+      holeCenter: { x: screenWidth / 2, y: screenHeight },
+      radius: 100,
     },
   };
 
@@ -23,7 +31,8 @@ const CoachBackground = ({ type }: Props) => {
       case "slide":
         return <Slide />;
       case "folder":
-        return <Fold />;
+      case "collapse":
+        return <Fold collapse={type === "folder" ? true : false} />;
       case "comment":
         return <Comment />;
       default:

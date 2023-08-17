@@ -4,7 +4,6 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { CoachType } from "@hooks/useCoach";
-import Fold from "./Fold";
 import CoachBackground from "./CoachBackground";
 
 interface Props {
@@ -26,8 +25,6 @@ const Coachmark = ({
   hideCoach,
 }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-
-  console.log(type);
 
   return (
     <Modal

@@ -8,7 +8,9 @@ import TermDetailGlance from "@components/folder/glance";
 import { useModal } from "@hooks/useModal";
 import HeaderModal from "@components/common/HeaderModal";
 import Empty from "@components/folder/empty";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Coachmark from "@components/popup/coach";
+import { useCoach } from "@hooks/useCoach";
 
 export type Props = StackScreenProps<RootStackParamList, "FolderDetailGlance">;
 
@@ -21,6 +23,11 @@ const FolderDetailGlance = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [contents, setContents] = useState(dummyData);
   const [modal, setModal] = useModal();
+  const coachConfigs = useCoach();
+
+  useEffect(() => {
+    coachConfigs.openCoach("folder");
+  }, []);
 
   return (
     <ModalBackground onPress={() => setModal(false)}>
@@ -40,6 +47,7 @@ const FolderDetailGlance = ({ navigation, route }: Props) => {
             {modal ? <HeaderModal id={FOLDER_ID} /> : <></>}
           </>
         )}
+        <Coachmark type="collapse" {...coachConfigs} />
       </Container>
     </ModalBackground>
   );

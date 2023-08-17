@@ -3,7 +3,7 @@ import { tutorialState } from "@recoil/tutorialState";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 
-export type CoachType = "folder" | "slide" | "comment";
+export type CoachType = "folder" | "slide" | "comment" | "collapse";
 
 export const useCoach = () => {
   const isTutorialOpen = useRecoilValue(tutorialState);
