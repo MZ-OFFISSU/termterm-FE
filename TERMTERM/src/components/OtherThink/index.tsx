@@ -2,7 +2,7 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { WordProps } from "@interfaces/word";
 import { TYPO_STYLE, colorTheme } from "@style/designSystem";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import Container from "./Container";
@@ -11,6 +11,8 @@ import { useWordReg } from "@hooks/useWordReg";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { useCoach } from "@hooks/useCoach";
+import Coachmark from "@components/popup/coach";
 import { TermDetail } from "Term";
 
 interface HandleProps {
@@ -65,6 +67,7 @@ const OtherThink = ({ word }: Props) => {
   const [sub, main] = useWordReg(word.name);
   const contents = ["용어에 대한 다른 생각", main];
   const [curIdx, setCurIdx] = useState(0);
+  const coachConfigs = useCoach();
 
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -77,6 +80,10 @@ const OtherThink = ({ word }: Props) => {
     setCurIdx(index);
   }, []);
 
+  useEffect(() => {
+    coachConfigs.openCoach("comment");
+  }, []);
+
   return (
     <BottomSheet
       ref={bottomSheetRef}
@@ -87,6 +94,7 @@ const OtherThink = ({ word }: Props) => {
       footerComponent={() => <CustomFooter id={word.id} />}
     >
       <Container comments={word.comments} />
+      {curIdx === 1 && <Coachmark type="comment" {...coachConfigs} />}
     </BottomSheet>
   );
 };
