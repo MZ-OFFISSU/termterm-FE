@@ -7,7 +7,7 @@ declare module "Curation" {
     title: string;
   };
 
-  type TermSimple = {
+  export type TermSimple = {
     bookmarked: "NO" | "YES";
     description: string;
     id: number;
@@ -19,6 +19,7 @@ declare module "Curation" {
     cnt: number;
     curationId: number;
     description: string;
+    thumbnail: string;
     title: string;
   };
 

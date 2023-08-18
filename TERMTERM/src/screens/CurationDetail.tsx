@@ -13,15 +13,18 @@ import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import CustomModal from "@components/popup/modal";
 import { colorTheme } from "@style/designSystem";
+import { useCuration } from "@hooks/useCuration";
+import { MoreRecommendedCuration, TermSimple } from "Curation";
 
 export type Props = StackScreenProps<RootStackParamList, "CurationDetail">;
 
 const CurationDetail = ({ navigation, route }: Props) => {
   //아이디로 통신해서 정보 가져올 것
+  const { getCurationDetailInfo, curationDetailInfo } = useCuration();
   const CURATION_ID = route.params.id;
   const [COLOR, mode] = useThemeStyle();
-  const [terms, setTerms] = useState(dummyData.terms);
-  const [pay, setPay] = useState(dummyData.pay);
+  const [terms, setTerms] = useState(dummyData.termSimples);
+  const [pay, setPay] = useState(curationDetailInfo?.paid);
   const [modal, setModal] = useState(false);
 
   //토스트메시지 보여주는 함수
@@ -44,8 +47,9 @@ const CurationDetail = ({ navigation, route }: Props) => {
   //결제 여부에 따라서 온오프가 변경됨.
   //추후 백엔드와 논의가 필요함
   useEffect(() => {
-    if (pay) setTerms(dummyData.terms);
-    else setTerms(dummyData.terms.slice(0, 5));
+    getCurationDetailInfo(CURATION_ID);
+    if (pay) setTerms(dummyData.termSimples);
+    else setTerms(dummyData.termSimples.slice(0, 5));
   }, [pay]);
 
   //추천 큐레이션 미리보기에서 -> 해당 큐레이션으로 이동하는 함수
@@ -60,9 +64,9 @@ const CurationDetail = ({ navigation, route }: Props) => {
           thumbnail={dummyData.thumbnail}
           title={dummyData.title}
           subtitle={dummyData.subtitle}
-          termCnt={dummyData.terms.length}
+          termCnt={dummyData.termSimples.length}
         />
-        <TermPreview items={terms} pay={pay} onPay={() => setModal(true)} />
+        <TermPreview items={terms as TermSimple[]} pay={curationDetailInfo?.paid as boolean} onPay={() => setModal(true)} />
         <RecommendCuration items={dummyCuration} onNavigate={onNavigate} />
         <RelatedTags tags={dummyData.tags} />
       </Container>
@@ -117,65 +121,65 @@ const dummyData = {
     "https://i.pinimg.com/564x/dc/2e/4c/dc2e4c113d3cf5c25870895ea2aeab08.jpg",
   title: "기획자에게 필요한 용어 모음집",
   subtitle: "기획자가 꼭 알아야하고 필요한 용어만을 선별했어요!",
-  terms: [
+  termSimples: [
     {
+      bookmarked: "NO",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
       id: 0,
       name: "기획자",
-      description:
-        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-      bookmarked: false,
     },
     {
+      bookmarked: "NO",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
       id: 1,
       name: "기획자",
-      description:
-        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-      bookmarked: true,
     },
     {
+      bookmarked: "NO",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
       id: 2,
       name: "기획자",
-      description:
-        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-      bookmarked: false,
     },
     {
+      bookmarked: "NO",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
       id: 3,
       name: "기획자",
-      description:
-        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-      bookmarked: true,
     },
     {
+      bookmarked: "NO",
+      description:
+        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
       id: 4,
       name: "기획자",
-      description:
-        "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-      bookmarked: false,
     },
     {
-      id: 5,
-      name: "기획자",
+      bookmarked: "NO",
       description:
         "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-      bookmarked: true,
+      id: 5,
+      name: "기획자",
     },
     {
       id: 6,
       name: "기획자",
       description:
         "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-      bookmarked: false,
+      bookmarked: "NO",
     },
     {
-      id: 7,
-      name: "기획자",
+      bookmarked: "NO",
       description:
         "지나간 모든 것들이 그렇듯이 아름다웠던 거였겠지 어제의 나 역시 얼마나 많은 시간이 지나야 알 수 있을까? 난 아직도 그래 아직도 여기",
-      bookmarked: true,
+      id: 7,
+      name: "기획자",
     },
   ],
-  pay: false,
+  paid: true,
   cuations: dummyCuration,
   tags: ["기획자", "IT", "트렌드"],
 };
