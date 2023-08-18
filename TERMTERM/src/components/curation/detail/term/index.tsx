@@ -1,4 +1,6 @@
+import { MoreRecommendedCuration, TermSimple } from "Curation";
 import styled from "styled-components/native";
+import { TermDetail } from "Term";
 import Button from "./Button";
 import TermPreviewBox from "./TermPreviewBox";
 
@@ -10,7 +12,7 @@ export interface Preview {
 }
 
 interface Props {
-  items: Array<Preview>;
+  items: Array<TermSimple>;
   pay: boolean;
   onPay: () => void;
 }

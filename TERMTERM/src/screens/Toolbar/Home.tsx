@@ -107,8 +107,7 @@ const Home = ({ navigation, route }: Props) => {
                 onMove={() =>
                   navigation.push("CurationDetail", { id: item.curationId })
                 }
-                //TODO : 이미지 URL 같이 보내기 (API 변경 이후)
-                img={"https://file2.nocutnews.co.kr/newsroom/image/2022/10/15/202210150951152389_0.jpg"}
+                img={item.thumbnail}
                 style={{ marginTop: 30 }}
               />
             ))}

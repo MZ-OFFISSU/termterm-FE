@@ -5,7 +5,7 @@ import {
   CurationPreview,
   MoreRecommendedCuration,
 } from "Curation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * 큐레이션 관리 훅
@@ -50,9 +50,12 @@ export const useCuration = () => {
     try {
       const res = await curationApi.getCurationDetail(id);
       setCurationDetailInfo(res);
+      console.log("curation detail list - res : ",res.moreRecommendedCurations);
+      console.log("curationDetailInfo : ", curationDetailInfo)
       return true;
     } catch (err) {
       console.log(err);
+      console.log("curationDetailInfo : ", curationDetailInfo)
       return false;
     }
   };
