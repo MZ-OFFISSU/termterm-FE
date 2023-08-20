@@ -1,9 +1,10 @@
 import { CurationItemProps } from "@interfaces/curation";
 import { ContentsWrapper, ContentsHeader } from "@components/search";
 import CurationItem from "@components/curation/CurationItem";
+import { MoreRecommendedCuration } from "Curation";
 
 interface Props {
-  items: Array<CurationItemProps>;
+  items: Array<MoreRecommendedCuration>;
   onNavigate: (id: number) => void;
 }
 
@@ -21,7 +22,7 @@ const RecommendCuration = ({ items, onNavigate }: Props) => {
         <CurationItem
           {...item}
           onMove={onNavigate}
-          key={item.id}
+          key={item.curationId}
           style={idx !== 0 ? { marginTop: 30 } : {}}
         />
       ))}

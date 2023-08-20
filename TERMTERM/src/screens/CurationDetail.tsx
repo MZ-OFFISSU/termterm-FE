@@ -48,7 +48,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
     getCurationDetailInfo(CURATION_ID);
     // console.log("first curation detail info : ", curationDetailInfo)
     setTerms(curationDetailInfo?.termSimples);
-  }, [curationDetailInfo]);
+  }, []);
   //결제 여부에 따라서 온오프가 변경됨.
   //추후 백엔드와 논의가 필요함
   useEffect(() => {
@@ -71,12 +71,19 @@ const CurationDetail = ({ navigation, route }: Props) => {
           termCnt={curationDetailInfo?.cnt as number}
         />
         <TermPreview
-        // TODO : items에 서버 응답값 넘기기
+          // TODO : items에 서버 응답값 넘기기
           items={dummyData.termSimples as TermSimple[]}
           pay={curationDetailInfo?.paid as boolean}
           onPay={() => setModal(true)}
         />
-        <RecommendCuration items={dummyCuration} onNavigate={onNavigate} />
+        <RecommendCuration
+          items={
+            curationDetailInfo !== undefined
+              ? (curationDetailInfo?.moreRecommendedCurations as MoreRecommendedCuration[])
+              : dummyCuration
+          }
+          onNavigate={onNavigate}
+        />
         <RelatedTags tags={dummyData.tags} />
       </Container>
       <CustomModal
