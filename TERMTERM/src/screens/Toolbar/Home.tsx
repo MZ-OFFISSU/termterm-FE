@@ -27,14 +27,24 @@ interface TextType {
  * 필요시 수정가능합니다.
  */
 const Home = ({ navigation, route }: Props) => {
-  const { getEachCategoryCurationList, categoryCurationList} = useCuration();
+  const {
+    getEachCategoryCurationList,
+    categoryCurationList,
+    getCurationDetailInfo,
+    curationDetailInfo,
+  } = useCuration();
   const [curation, setCuration] = useState<Array<WordProps> | null>();
   const [COLOR, mode] = useThemeStyle();
   const { homeMainTitle, homeSubTitle } = useHome();
 
   useEffect(() => {
-    //TODO: 큐레이션 용어 받아오는 로직. 없으면 null
+    // TODO : 임시 CurationID값 해결
+    getCurationDetailInfo(8);
+  }, [curationDetailInfo]);
+
+  useEffect(() => {
     setCuration(dummyWords);
+    // TODO : 큐레이션 카테고리 배열로 선택해 넘기도록
     getEachCategoryCurationList("pm");
   }, []);
 
@@ -122,9 +132,7 @@ const TitleContainer = (props: TextType) => {
   const [COLOR, mode] = useThemeStyle();
   return (
     <TitleBox>
-      <Title COLOR={COLOR}>
-        {props.maintitle}
-      </Title>
+      <Title COLOR={COLOR}>{props.maintitle}</Title>
       <SubTitle COLOR={COLOR} mode={mode}>
         {props.subtitle}
       </SubTitle>

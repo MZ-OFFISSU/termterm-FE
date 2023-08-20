@@ -23,7 +23,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
   const { getCurationDetailInfo, curationDetailInfo } = useCuration();
   const CURATION_ID = route.params.id;
   const [COLOR, mode] = useThemeStyle();
-  const [terms, setTerms] = useState(dummyData.termSimples);
+  const [terms, setTerms] = useState<TermSimple[]>();
   const [pay, setPay] = useState(curationDetailInfo?.paid);
   const [modal, setModal] = useState(false);
 
@@ -44,12 +44,16 @@ const CurationDetail = ({ navigation, route }: Props) => {
     setPay(true);
   };
 
+  useEffect(() => {
+    getCurationDetailInfo(CURATION_ID);
+    // console.log("first curation detail info : ", curationDetailInfo)
+    setTerms(curationDetailInfo?.termSimples);
+  }, [curationDetailInfo]);
   //결제 여부에 따라서 온오프가 변경됨.
   //추후 백엔드와 논의가 필요함
   useEffect(() => {
-    getCurationDetailInfo(CURATION_ID);
-    if (pay) setTerms(dummyData.termSimples);
-    else setTerms(dummyData.termSimples.slice(0, 5));
+    if (pay) setTerms(curationDetailInfo?.termSimples);
+    else setTerms(curationDetailInfo?.termSimples.slice(0, 5));
   }, [pay]);
 
   //추천 큐레이션 미리보기에서 -> 해당 큐레이션으로 이동하는 함수
@@ -61,12 +65,17 @@ const CurationDetail = ({ navigation, route }: Props) => {
     <>
       <Container COLOR={COLOR}>
         <TitleBox
-          thumbnail={dummyData.thumbnail}
-          title={dummyData.title}
-          subtitle={dummyData.subtitle}
-          termCnt={dummyData.termSimples.length}
+          thumbnail={curationDetailInfo?.thumbnail as string}
+          title={curationDetailInfo?.title as string}
+          subtitle={curationDetailInfo?.description as string}
+          termCnt={curationDetailInfo?.cnt as number}
         />
-        <TermPreview items={terms as TermSimple[]} pay={curationDetailInfo?.paid as boolean} onPay={() => setModal(true)} />
+        <TermPreview
+        // TODO : items에 서버 응답값 넘기기
+          items={dummyData.termSimples as TermSimple[]}
+          pay={curationDetailInfo?.paid as boolean}
+          onPay={() => setModal(true)}
+        />
         <RecommendCuration items={dummyCuration} onNavigate={onNavigate} />
         <RelatedTags tags={dummyData.tags} />
       </Container>
