@@ -16,17 +16,16 @@ export type Props = StackScreenProps<RootStackParamList, "AllTerms">;
  * 용어 전체페이지
  */
 const AllTerms = ({ navigation }: Props) => {
-  const termApi = new TermApi();
   const { totalTermList, getAllTermList } = useTerm();
   const [COLOR, mode] = useThemeStyle();
+  // TODO : 임시 설정 값 돌려놓기
   const [termConfig, setTermConfig] = useState<TermConfig>({
-    category: "pm",
-    page: 3,
-    size: 10,
+    categories: ["pm", "development"],
   });
 
   useEffect(() => {
     getAllTermList(termConfig);
+    // console.log("totalTermList - in AllTerms : ", totalTermList);
   }, []);
 
   return (

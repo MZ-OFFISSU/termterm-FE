@@ -4,6 +4,8 @@ import { CurationItem } from "@components/curation";
 import { CurationItemProps } from "@interfaces/curation";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { useCuration } from "@hooks/useCuration";
+import { useEffect } from "react";
 
 interface Props extends ViewProps {
   navigation: StackNavigationProp<RootStackParamList, "ToolBar", undefined>;
@@ -55,14 +57,21 @@ const dummy: Array<CurationItemProps> = [
 ];
 
 const RecommendList = ({ navigation, ...props }: Props) => {
+  const { getEachCategoryCurationList, categoryCurationList } = useCuration();
+
+  useEffect(() => {
+    // TODO : 임시 카테고리 변경
+    getEachCategoryCurationList("development");
+  }, []);
+
   return (
     <ContentsWrapper {...props}>
       <ContentsHeader title="추천 모음집" />
-      {dummy.map((item, idx) => (
+      {categoryCurationList.map((item, idx) => (
         <CurationItem
           {...item}
           onMove={() => navigation.push("CurationDetail", { id: item.id })}
-          key={item.img}
+          key={item.thumbnail}
           style={idx !== 0 ? { marginTop: 30 } : {}}
         />
       ))}
