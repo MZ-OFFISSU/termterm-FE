@@ -50,22 +50,19 @@ export const useCuration = () => {
     try {
       const res = await curationApi.getCurationDetail(id);
       setCurationDetailInfo(res);
-      console.log("curation detail list - res : ",res.moreRecommendedCurations);
-      console.log("curationDetailInfo : ", curationDetailInfo)
       return true;
     } catch (err) {
       console.log(err);
-      console.log("curationDetailInfo : ", curationDetailInfo)
       return false;
     }
   };
 
   /** 카테고리별 큐레이션 리스트 가져오기(카테고리 없을 경우 추천 큐레이션) */
   const getEachCategoryCurationList = async (
-    category: Category
+    category?: Category
   ): Promise<boolean> => {
     try {
-      const res = await curationApi.getCurationListByCategory(category);
+      const res = await curationApi.getCurationListByCategory(category!);
       setCategoryCurationList(res);
       console.log(category);
       console.log(categoryCurationList);
@@ -86,5 +83,6 @@ export const useCuration = () => {
     curationDetailInfo,
     getEachCategoryCurationList,
     categoryCurationList,
+    setCategoryCurationList,
   };
 };

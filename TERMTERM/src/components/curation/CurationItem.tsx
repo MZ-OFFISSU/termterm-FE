@@ -15,7 +15,7 @@ interface Props extends MoreRecommendedCuration {
 const CurationItem = ({
   curationId,
   title,
-  img,
+  thumbnail,
   cnt,
   bookmarked,
   onMove,
@@ -26,7 +26,7 @@ const CurationItem = ({
     <ItemContainer {...props}>
       <CurationTitle COLOR={COLOR}>{title}</CurationTitle>
       <CurationThumbnail onPress={() => onMove(curationId)}>
-        <CurationImage source={{ uri: img }} />
+        <CurationImage source={{ uri: thumbnail }} />
         <WordsNum>용어 {cnt}개</WordsNum>
         <BookmarkButton>
           {bookmarked ? (
