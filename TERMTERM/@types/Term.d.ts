@@ -29,19 +29,8 @@ declare module "Term" {
   };
 
   export type TermConfig = {
-    /**X면 추천용어 리스트 */
-    category:
-      | "X"
-      | "pm"
-      | "marketing"
-      | "development"
-      | "design"
-      | "business"
-      | "IT";
-    /** 몇 페이지인지? */
-    page: number;
-    /** 한 페이지당 몇개씩 불러올지 */
-    size: number;
+    /** 카테고리 배열 */
+    category: string[];
   };
 
   type Pageable = {

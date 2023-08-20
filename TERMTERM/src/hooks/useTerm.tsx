@@ -59,7 +59,6 @@ export const useTerm = () => {
     try {
       const res = await termApi.allTermList(config);
       setTotalTermList(res.content);
-      console.log(res.content);
       setTotalTermRes(res);
       return true;
     } catch (err) {

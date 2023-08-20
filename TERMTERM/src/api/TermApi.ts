@@ -28,9 +28,7 @@ class TermApi {
 
   /** 전체용어 리스트 */
   allTermList = async (config: TermConfig): Promise<TermResponse> => {
-    const data = await get<TermResponse>(`/v1/term/list`, {
-      params: config,
-    });
+    const data = await post<TermResponse>(`/v1/term/list`, config);
     return data;
   };
 
