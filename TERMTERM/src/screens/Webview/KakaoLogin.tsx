@@ -49,7 +49,9 @@ const KakaoLogin = ({ navigation }: HomeScreenProps) => {
     } catch (err) {
       console.log(err);
       loginFailed();
-      navigation.reset({ routes: [{ name: "Login" }] });
+      navigation.reset({
+        routes: [{ name: "Login", params: { nonAuto: true } }],
+      });
     }
   };
 

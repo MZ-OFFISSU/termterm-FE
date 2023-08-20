@@ -1,13 +1,14 @@
 import TermBox from "@components/common/TermBox";
 import styled from "styled-components/native";
 import { ViewProps } from "react-native";
-import { SearchResultProps } from "@interfaces/search";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { SearchResult } from "Term";
+import { booleanConverter } from "@utils/booleanConverter";
 
 interface Props extends ViewProps {
-  results: Array<SearchResultProps>;
+  results: Array<SearchResult>;
 }
 
 /**
@@ -20,8 +21,9 @@ const ResultWrapper = ({ results, ...props }: Props) => {
     <Container>
       {results.map((result) => (
         <TermBox
+          id={result.id}
           title={result.name}
-          marked={false}
+          marked={booleanConverter(result.bookmarked)}
           key={`${result.id}`}
           onPress={() => navigation.navigate("TermDetail", { id: result.id })}
         ></TermBox>

@@ -11,6 +11,8 @@ import { useHeader } from "@hooks/useHeader";
 import { dummyWords } from "@assets/dummyWord";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { screenWidth } from "@style/dimensions";
+import { useCoach } from "@hooks/useCoach";
+import Coachmark from "@components/popup/coach";
 
 export type Props = StackScreenProps<
   RootStackParamList,
@@ -50,6 +52,7 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
   const [words, setWords] = useState<Array<WordProps>>();
   const [curIdx, setCurIdx] = useState(0);
   const [folderInfo, setFolderInfo] = useState<FolderProps>(defaultProps);
+  const coachConfigs = useCoach();
 
   const { setHeaderState, settingIdx } = useHeader();
 
@@ -85,6 +88,10 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
     settingProps();
   }, [route]);
 
+  useEffect(() => {
+    coachConfigs.openCoach("folder");
+  }, []);
+
   return (
     <Container COLOR={COLOR}>
       {words ? (
@@ -101,6 +108,7 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
       ) : (
         <></>
       )}
+      <Coachmark type="folder" {...coachConfigs} />
     </Container>
   );
 };

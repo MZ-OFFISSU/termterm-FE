@@ -15,6 +15,11 @@ import DailyTermContainer from "@components/home/DailyTermContainer";
 import { Octicons } from "@expo/vector-icons";
 import { useHome } from "@hooks/useHome";
 import { useCuration } from "@hooks/useCuration";
+import Tutorial from "@components/popup/tutorials";
+import { useCoach } from "@hooks/useCoach";
+import { useRecoilValue } from "recoil";
+import { tutorialState } from "@recoil/tutorialState";
+import Coachmark from "@components/popup/coach";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -33,9 +38,11 @@ const Home = ({ navigation, route }: Props) => {
     getCurationDetailInfo,
     curationDetailInfo,
   } = useCuration();
+  const isTutorialOpen = useRecoilValue(tutorialState);
   const [curation, setCuration] = useState<Array<WordProps> | null>();
   const [COLOR, mode] = useThemeStyle();
   const { homeMainTitle, homeSubTitle } = useHome();
+  const { isOpen, openCoach, hideCoach, checked, handleCheck } = useCoach();
 
   useEffect(() => {
     // TODO : 임시 CurationID값 해결
@@ -47,6 +54,10 @@ const Home = ({ navigation, route }: Props) => {
     // TODO : 큐레이션 카테고리 배열로 선택해 넘기도록
     getEachCategoryCurationList("pm");
   }, []);
+
+  useEffect(() => {
+    openCoach("slide");
+  }, [isTutorialOpen]);
 
   return (
     <SafeAreaView>
@@ -123,6 +134,17 @@ const Home = ({ navigation, route }: Props) => {
             ))}
           </CurationCardWrapper>
         </InnerContainer>
+        {isTutorialOpen ? (
+          <Tutorial />
+        ) : (
+          <Coachmark
+            type="slide"
+            isOpen={isOpen}
+            checked={checked}
+            handleCheck={handleCheck}
+            hideCoach={hideCoach}
+          />
+        )}
       </Container>
     </SafeAreaView>
   );

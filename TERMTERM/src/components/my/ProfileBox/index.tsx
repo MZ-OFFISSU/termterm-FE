@@ -20,7 +20,9 @@ const ProfileBox = ({ profile }: Props) => {
     <Container>
       <ProfileImageWrapper>
         {profile.profileImage !== "" && (
-          <ProfileImage source={{ uri: profile.profileImage }} />
+          <ProfileImage
+            source={{ uri: profile.profileImage + "?cache=" + Math.random() }}
+          />
         )}
       </ProfileImageWrapper>
       <InfoWrapper>

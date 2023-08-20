@@ -1,61 +1,70 @@
 import styled from "styled-components/native";
-import { SearchBox } from "@components/search";
+import { NotResult, SearchBox } from "@components/search";
 import {
   RecentSearched,
   RecommendKeyword,
   RecommendList,
   ResultList,
 } from "@components/search/containers";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSearch } from "@hooks/useSearch";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { colorTheme } from "@style/designSystem";
-import { SearchResultProps } from "@interfaces/search";
+import { useTerm } from "@hooks/useTerm";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
 const Search = ({ navigation }: Props) => {
   const [keyword, setKeyword] = useState("");
   const [records, setRecords] = useSearch();
-  const [results, setResults] = useState<Array<SearchResultProps>>([]);
+  const { results, searchTerm } = useTerm();
+
   const [COLOR, mode] = useThemeStyle();
 
-  useEffect(() => {
-    //TODO : 통신으로 검색 결과 받아와야 함
-    const dummyResults: Array<SearchResultProps> = [
-      {
-        id: 0,
-        name: "기획",
-      },
-      {
-        id: 1,
-        name: "기획자",
-      },
-      {
-        id: 2,
-        name: "기획주",
-      },
-      {
-        id: 3,
-        name: "기획중",
-      },
-    ];
-    setResults(dummyResults);
-  }, []);
+  const handleSearch = async (keyword: string) => {
+    await searchTerm(keyword);
+    if (keyword !== "") setRecords([...records, keyword]);
+  };
+
+  const handleRecommendKeyword = async (recommend: string) => {
+    setKeyword(recommend);
+    await handleSearch(recommend);
+  };
+
+  const Nothing = () => {
+    if (results.length === 0 && records.length === 0)
+      return (
+        <NotResult
+          title="최근 검색어가 없어요."
+          subtitle="다양한 키워드로 검색해보세요."
+        />
+      );
+
+    if (results.length === 0)
+      return (
+        <NotResult
+          title="검색 결과가 없어요."
+          subtitle="다양한 키워드로 검색해보세요."
+        />
+      );
+
+    return <></>;
+  };
 
   return (
     <Container COLOR={COLOR}>
       <CotentsArea>
         <SearchBox
-          onSubmitEditing={() => setRecords([...records, keyword])}
+          onSubmitEditing={() => handleSearch(keyword)}
           value={keyword}
           onChangeText={(text) => setKeyword(text)}
         />
+        <Nothing />
         <ResultList results={results} />
         <RecentSearched />
-        <RecommendKeyword />
+        <RecommendKeyword handleRecommendKeyword={handleRecommendKeyword} />
         <RecommendList navigation={navigation} />
       </CotentsArea>
     </Container>

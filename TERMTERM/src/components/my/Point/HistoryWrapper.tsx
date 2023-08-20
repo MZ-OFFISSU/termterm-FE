@@ -7,6 +7,7 @@ import styled from "styled-components/native";
 import HistoryBox from "./HistoryBox";
 import { screenWidth } from "@style/dimensions";
 import { Entypo } from "@expo/vector-icons";
+import { usePoint } from "@hooks/usePoint";
 
 /**
  * 포인트 사용내역의 wrapper 컴포넌트
@@ -16,6 +17,8 @@ const HistoryWrapper = ({ ...props }: ViewProps) => {
   const [histories, setHistories] = useState<Array<PointHistory>>();
   const [visible, setVisible] = useState<number>(0);
   const [max, setMax] = useState(false);
+
+  const { history } = usePoint();
 
   /**
    * 시간 순으로 정렬

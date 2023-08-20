@@ -35,8 +35,8 @@ class TermApi {
   };
 
   /** 용어 검색 */
-  searchTerm = async (token: string): Promise<SearchResult> => {
-    const data = await get<SearchResult>(`/v1/term/search/${token}`);
+  searchTerm = async (token: string): Promise<SearchResult[]> => {
+    const data = await get<SearchResult[]>(`/v1/term/search/${token}`);
     return data;
   };
 }

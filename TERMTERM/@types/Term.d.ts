@@ -42,7 +42,6 @@ declare module "Term" {
     page: number;
     /** 한 페이지당 몇개씩 불러올지 */
     size: number;
-    sort: string;
   };
 
   type Pageable = {

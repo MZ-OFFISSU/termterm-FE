@@ -26,7 +26,7 @@ const DeleteButtons = () => {
       haptic("warning");
       removeToast();
       navigation.reset({
-        routes: [{ name: "Login" }],
+        routes: [{ name: "Login", params: { nonAuto: true } }],
       });
     } catch (err) {
       console.log(err);
