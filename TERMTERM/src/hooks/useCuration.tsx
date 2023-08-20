@@ -50,6 +50,7 @@ export const useCuration = () => {
     try {
       const res = await curationApi.getCurationDetail(id);
       setCurationDetailInfo(res);
+      // console.log("curation Detail Info - at hook: ", id, curationDetailInfo);
       return true;
     } catch (err) {
       console.log(err);
@@ -65,7 +66,6 @@ export const useCuration = () => {
       const res = await curationApi.getCurationListByCategory(category!);
       setCategoryCurationList([]);
       setCategoryCurationList(res);
-      console.log("success : ", category, res)
       return true;
     } catch (err) {
       console.log(err);

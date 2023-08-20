@@ -32,6 +32,7 @@ declare module "Curation" {
     tags: string[];
     termSimples: TermSimple[];
     title: string;
+    thumbnail: string;
   };
 
   export type Category =
