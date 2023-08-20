@@ -5,6 +5,7 @@ import { CoachType } from "@hooks/useCoach";
 import Fold from "./Fold";
 import Slide from "./Slide";
 import Comment from "./Comment";
+import { useCallback } from "react";
 
 interface Props {
   type: CoachType;
@@ -26,7 +27,7 @@ const CoachBackground = ({ type }: Props) => {
     },
   };
 
-  const Children = () => {
+  const Children = useCallback(() => {
     switch (type) {
       case "slide":
         return <Slide />;
@@ -38,7 +39,7 @@ const CoachBackground = ({ type }: Props) => {
       default:
         return <></>;
     }
-  };
+  }, [type]);
 
   return (
     <Background>
