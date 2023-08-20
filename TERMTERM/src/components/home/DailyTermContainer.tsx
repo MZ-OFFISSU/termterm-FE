@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import DailyTermBox from "./DailyTermBox";
-import { Preview } from "@components/curation/detail/term";
-import { TermItem } from "Term";
 import TermApi from "@api/TermApi";
 import { useTerm } from "@hooks/useTerm";
 
@@ -10,7 +8,6 @@ import { useTerm } from "@hooks/useTerm";
  * 오늘의 용어 콘테이너
  */
 const DailyTermContainer = () => {
-  const termApi = new TermApi();
   const {dailyTermList, getDailyTerm} = useTerm();
 
   useEffect(() => {
