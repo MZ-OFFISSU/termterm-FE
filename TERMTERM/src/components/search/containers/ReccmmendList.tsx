@@ -69,8 +69,11 @@ const RecommendList = ({ navigation, ...props }: Props) => {
       <ContentsHeader title="추천 모음집" />
       {categoryCurationList.map((item, idx) => (
         <CurationItem
-          {...item}
-          onMove={() => navigation.push("CurationDetail", { id: item.id })}
+          item={item}
+          img={item.thumbnail}
+          onMove={() =>
+            navigation.push("CurationDetail", { id: item.curationId })
+          }
           key={item.thumbnail}
           style={idx !== 0 ? { marginTop: 30 } : {}}
         />

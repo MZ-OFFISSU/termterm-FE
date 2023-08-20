@@ -1,26 +1,20 @@
-import { CurationItemProps } from "@interfaces/curation";
 import styled from "styled-components/native";
-import { TEXT_STYLES, TYPO_STYLE } from "@style/designSystem";
+import { TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme } from "@style/designSystem";
 import { Ionicons } from "@expo/vector-icons";
 import { BookmarkButton } from "@components/common/Bookmark";
 import { MoreRecommendedCuration } from "Curation";
+import { ViewProps } from "react-native";
 
-interface Props extends MoreRecommendedCuration {
+interface Props extends ViewProps {
+  item: MoreRecommendedCuration;
   onMove: (id: number) => void;
   img: string;
 }
 
-const CurationItem = ({
-  curationId,
-  title,
-  thumbnail,
-  cnt,
-  bookmarked,
-  onMove,
-  ...props
-}: Props) => {
+const CurationItem = ({ item, onMove, ...props }: Props) => {
+  const { curationId, title, thumbnail, cnt, bookmarked } = item;
   const [COLOR, mode] = useThemeStyle();
   return (
     <ItemContainer {...props}>

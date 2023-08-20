@@ -124,7 +124,7 @@ const Home = ({ navigation, route }: Props) => {
           <CurationCardWrapper>
             {categoryCurationList.map((item, idx) => (
               <CurationItem
-                {...item}
+                item={item}
                 onMove={() =>
                   navigation.push("CurationDetail", { id: item.curationId })
                 }
