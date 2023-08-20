@@ -41,7 +41,7 @@ declare module "Folder" {
     name: string;
   };
 
-  export type FolderList = {
+  export type UserFolderList = {
     folderId: number;
     title: string;
   };
