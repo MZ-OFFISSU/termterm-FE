@@ -9,6 +9,7 @@ export default function App() {
   LogBox.ignoreLogs([
     "Sending `onAnimatedValueUpdate` with no listeners registered.",
     "Warning: Each child in a list should have a unique",
+    "Warning: Encountered two children with the same key",
   ]);
   return (
     <ActionSheetProvider>

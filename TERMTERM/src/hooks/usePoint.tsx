@@ -1,4 +1,5 @@
 import PointApi from "@api/PointApi";
+import { getAccessToken } from "@utils/tokenHandler";
 import { PointHistoryContent } from "Point";
 import { useEffect, useState } from "react";
 
@@ -22,6 +23,7 @@ export const usePoint = () => {
   const getHistoryByPage = async () => {
     try {
       const data = await pointApi.getPointHistory(curPage);
+      if (!data) return;
       setHistory((prev) => [...prev, ...data.content]);
       if (data.empty || data.numberOfElements < 5) setIsEnd(true);
       else setCurPage((prev) => prev + 1);

@@ -1,11 +1,11 @@
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { PointHistory } from "@interfaces/point";
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
+import { PointHistoryContent } from "Point";
 import { ViewProps } from "react-native";
 import styled from "styled-components/native";
 
 interface Props extends ViewProps {
-  history: PointHistory;
+  history: PointHistoryContent;
 }
 
 const HistoryBox = ({ history, ...props }: Props) => {
@@ -13,12 +13,12 @@ const HistoryBox = ({ history, ...props }: Props) => {
   return (
     <Container {...props}>
       <DateText COLOR={COLOR}>{history.date}</DateText>
-      {history.details.map((content, idx) => (
+      {history.dailyHistories.map((content, idx) => (
         <ContentLine key={`${idx}`}>
-          <ContentText COLOR={COLOR}>{content.desc}</ContentText>
+          <ContentText COLOR={COLOR}>{content.detail}</ContentText>
           <ContentText COLOR={COLOR}>
             <ContentText COLOR={COLOR} style={{ fontWeight: `700` }}>
-              {content.amount > 0 ? `+${content.amount}` : content.amount}
+              {Number(content.point) > 0 ? `+${content.point}` : content.point}
             </ContentText>{" "}
             포인트
           </ContentText>

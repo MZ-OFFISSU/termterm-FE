@@ -8,13 +8,14 @@ import HistoryBox from "./HistoryBox";
 import { screenWidth } from "@style/dimensions";
 import { Entypo } from "@expo/vector-icons";
 import { usePoint } from "@hooks/usePoint";
+import { PointHistoryContent } from "Point";
 
 /**
  * 포인트 사용내역의 wrapper 컴포넌트
  */
 const HistoryWrapper = ({ ...props }: ViewProps) => {
   const [COLOR, mode] = useThemeStyle();
-  const [histories, setHistories] = useState<Array<PointHistory>>();
+  const [histories, setHistories] = useState<Array<PointHistoryContent>>();
   const [visible, setVisible] = useState<number>(0);
   const [max, setMax] = useState(false);
 
@@ -23,7 +24,7 @@ const HistoryWrapper = ({ ...props }: ViewProps) => {
   /**
    * 시간 순으로 정렬
    */
-  const sortDated = (data: Array<PointHistory>) => {
+  const sortDated = (data: Array<PointHistoryContent>) => {
     const sortedHistories = data.sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     );
@@ -41,10 +42,13 @@ const HistoryWrapper = ({ ...props }: ViewProps) => {
   };
 
   useEffect(() => {
-    sortDated(dummyHistories);
-    dummyHistories.length > 5
-      ? setVisible(5)
-      : setVisible(dummyHistories.length);
+    if (!history) setHistories([]);
+    else {
+      sortDated(history);
+      dummyHistories.length > 5
+        ? setVisible(5)
+        : setVisible(dummyHistories.length);
+    }
   }, []);
 
   return (
@@ -60,13 +64,15 @@ const HistoryWrapper = ({ ...props }: ViewProps) => {
       ) : (
         <></>
       )}
-      {max ? (
-        <></>
-      ) : (
+      {max && history ? (
         <Button COLOR={COLOR} mode={mode} onPress={() => onVisible()}>
           <ButtonContent>더보기</ButtonContent>
           <Entypo name="chevron-down" size={24} color="white" />
         </Button>
+      ) : (
+        <EmptyBox>
+          <EmptyText COLOR={COLOR}>아직 포인트 사용내역이 없어요</EmptyText>
+        </EmptyBox>
       )}
     </Container>
   );
@@ -118,6 +124,19 @@ const ButtonContent = styled.Text`
   ${TYPO_STYLE.Body[2].SemiBold};
   color: ${LIGHT_COLOR_STYLE.Text.lighten};
   margin-right: 8px;
+`;
+
+const EmptyBox = styled.View`
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const EmptyText = styled.Text<{ COLOR: colorTheme }>`
+  ${TYPO_STYLE.Subheading[1].Medium};
+  color: ${(props) => props.COLOR.Text.default};
+  text-align: center;
 `;
 
 export default HistoryWrapper;
