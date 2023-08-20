@@ -63,14 +63,12 @@ export const useCuration = () => {
   ): Promise<boolean> => {
     try {
       const res = await curationApi.getCurationListByCategory(category!);
+      setCategoryCurationList([]);
       setCategoryCurationList(res);
-      console.log(category);
-      console.log(categoryCurationList);
+      console.log("success : ", category, res)
       return true;
     } catch (err) {
       console.log(err);
-      console.log(category);
-      console.log(categoryCurationList);
       return false;
     }
   };
