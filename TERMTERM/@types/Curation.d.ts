@@ -7,18 +7,19 @@ declare module "Curation" {
     title: string;
   };
 
-  type TermSimple = {
+  export type TermSimple = {
     bookmarked: "NO" | "YES";
     description: string;
     id: number;
     name: string;
   };
 
-  type MoreRecommendedCuration = {
+  export type MoreRecommendedCuration = {
     bookmarked: string;
     cnt: number;
     curationId: number;
     description: string;
+    thumbnail: string;
     title: string;
   };
 
@@ -31,6 +32,7 @@ declare module "Curation" {
     tags: string[];
     termSimples: TermSimple[];
     title: string;
+    thumbnail: string;
   };
 
   export type Category =

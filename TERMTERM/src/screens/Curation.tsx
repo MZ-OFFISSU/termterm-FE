@@ -2,10 +2,11 @@ import styled from "styled-components/native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { CurationItem, CurationSelector } from "@components/curation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CurationItemProps } from "@interfaces/curation";
 import { colorTheme } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import { useCuration } from "@hooks/useCuration";
 
 export type Props = StackScreenProps<RootStackParamList, "Curation">;
 
@@ -67,6 +68,15 @@ const dummy: Array<CurationItemProps> = [
 const Curation = ({ navigation }: Props) => {
   const [idx, setIdx] = useState(0);
   const [COLOR, mode] = useThemeStyle();
+  const {
+    getEachCategoryCurationList,
+    categoryCurationList,
+    setCategoryCurationList,
+  } = useCuration();
+
+  useEffect(() => {
+    getEachCategoryCurationList();
+  }, [idx]);
 
   return (
     <Container COLOR={COLOR}>
@@ -77,11 +87,11 @@ const Curation = ({ navigation }: Props) => {
           setIdx={(idx: number) => setIdx(idx)}
         />
         <CurationCardWrapper>
-          {dummy.map((item, idx) => (
+          {categoryCurationList.map((item, idx) => (
             <CurationItem
               {...item}
-              onMove={() => navigation.push("CurationDetail", { id: item.id })}
-              key={item.img}
+              onMove={() => navigation.push("CurationDetail", { id: item.curationId })}
+              key={item.thumbnail}
               style={{ marginTop: 30 }}
             />
           ))}

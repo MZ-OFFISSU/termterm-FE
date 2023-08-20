@@ -14,6 +14,7 @@ import { WordCarousel } from "@components/terms/";
 import DailyTermContainer from "@components/home/DailyTermContainer";
 import { Octicons } from "@expo/vector-icons";
 import { useHome } from "@hooks/useHome";
+import { useCuration } from "@hooks/useCuration";
 import Tutorial from "@components/popup/tutorials";
 import { useCoach } from "@hooks/useCoach";
 import { useRecoilValue } from "recoil";
@@ -31,6 +32,12 @@ interface TextType {
  * 필요시 수정가능합니다.
  */
 const Home = ({ navigation, route }: Props) => {
+  const {
+    getEachCategoryCurationList,
+    categoryCurationList,
+    getCurationDetailInfo,
+    curationDetailInfo,
+  } = useCuration();
   const isTutorialOpen = useRecoilValue(tutorialState);
   const [curation, setCuration] = useState<Array<WordProps> | null>();
   const [COLOR, mode] = useThemeStyle();
@@ -38,8 +45,14 @@ const Home = ({ navigation, route }: Props) => {
   const { isOpen, openCoach, hideCoach, checked, handleCheck } = useCoach();
 
   useEffect(() => {
-    //TODO: 큐레이션 용어 받아오는 로직. 없으면 null
+    // TODO : 임시 CurationID값 해결
+    getCurationDetailInfo(8);
+  }, [curationDetailInfo]);
+
+  useEffect(() => {
     setCuration(dummyWords);
+    // TODO : 큐레이션 카테고리 배열로 선택해 넘기도록
+    getEachCategoryCurationList("pm");
   }, []);
 
   useEffect(() => {
@@ -109,13 +122,13 @@ const Home = ({ navigation, route }: Props) => {
             </CurationTitleBox>
           </FlexContainer>
           <CurationCardWrapper>
-            {dummy.map((item, idx) => (
+            {categoryCurationList.map((item, idx) => (
               <CurationItem
                 {...item}
                 onMove={() =>
-                  navigation.push("CurationDetail", { id: item.id })
+                  navigation.push("CurationDetail", { id: item.curationId })
                 }
-                key={item.img}
+                img={item.thumbnail}
                 style={{ marginTop: 30 }}
               />
             ))}
