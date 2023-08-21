@@ -1,21 +1,16 @@
+import { FolderProps } from "@interfaces/bookmark";
 import styled from "styled-components/native";
 import Folder from "./Folder";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { UserFolderList } from "Folder";
 
-interface FolderProps extends UserFolderList {
-  icon: number,
-}
 interface Props {
-  folders: Array<UserFolderList>;
+  folders: Array<FolderProps>;
 }
 
-// TODO : props 변경
 const FolderList = ({ folders }: Props) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-
   return (
     <Container>
       {folders.map((folder) => (
@@ -23,7 +18,7 @@ const FolderList = ({ folders }: Props) => {
           onOpen={(id: number) =>
             navigation.push("FolderDetailCollapse", { id: id })
           }
-          key={folder.folderId}
+          key={folder.id}
           {...folder}
         />
       ))}

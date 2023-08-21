@@ -9,13 +9,10 @@ import { Keyboard } from "react-native";
 import CompleteButton from "@components/makefolder/CompleteButton";
 import Toast from "react-native-toast-message";
 import { useHaptics } from "@hooks/useHaptics";
-import { useFolder } from "@hooks/useFolder";
-import { getAccessToken } from "@utils/tokenHandler";
 
 export type Props = StackScreenProps<RootStackParamList, "MakeFolder">;
 
 const MakeFolder = ({ navigation }: Props) => {
-  const { createFolder } = useFolder();
   const { haptic } = useHaptics();
   const [COLOR, mode] = useThemeStyle();
   const [info, setInfo] = useState({
@@ -24,12 +21,19 @@ const MakeFolder = ({ navigation }: Props) => {
   });
   const [btnPosition, setBtnPosiition] = useState(30);
 
+  //토스트메시지 보여주는 함수
+  const showToast = () => {
+    Toast.show({
+      type: mode ? "light" : "dark",
+      text1: "폴더 생성이 완료 되었어요!",
+    });
+  };
+
   //임시로 만들어놓은 완료버튼 핸들러
   //통신 및 다양한 수정이 필요함...
   const onComplete = () => {
     if (info.name !== "") {
-      const res = createFolder({ description: info.desc, title: info.name });
-      console.log("res : ", res);
+      showToast();
       navigation.pop();
     } else {
       haptic("warning");
