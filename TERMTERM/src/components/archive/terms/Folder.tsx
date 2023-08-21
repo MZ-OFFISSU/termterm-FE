@@ -8,9 +8,8 @@ import { useActionSheet } from "@expo/react-native-action-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { UserFolderList } from "Folder";
 
-interface Props extends UserFolderList {
+interface Props extends FolderProps {
   onOpen: (id: number) => void;
 }
 
@@ -20,7 +19,7 @@ const FOLDER_ICON = [
   require("@assets/folders/gray.png"),
 ];
 
-const Folder = ({ onOpen, folderId, title }: Props) => {
+const Folder = ({ onOpen, id, name, icon }: Props) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [COLOR, mode] = useThemeStyle();
   const { showActionSheetWithOptions } = useActionSheet();
@@ -39,7 +38,7 @@ const Folder = ({ onOpen, folderId, title }: Props) => {
       (selectedIndex) => {
         switch (selectedIndex) {
           case 0:
-            navigation.push("EditFolder", { id: folderId });
+            navigation.push("EditFolder", { id: id });
           case 1:
           case cancelButtonIndex:
           // 닫기
@@ -49,10 +48,9 @@ const Folder = ({ onOpen, folderId, title }: Props) => {
   };
 
   return (
-    <FolderWrapper onPress={() => onOpen(folderId)} onLongPress={openActionSheet}>
-      {/* TODO : Icon 색상 기준 따라 반영 */}
-      <AutoSizedImage source={FOLDER_ICON[1]} width={90} />
-      <FolderInfo COLOR={COLOR}>{title}</FolderInfo>
+    <FolderWrapper onPress={() => onOpen(id)} onLongPress={openActionSheet}>
+      <AutoSizedImage source={FOLDER_ICON[icon]} width={90} />
+      <FolderInfo COLOR={COLOR}>{name}</FolderInfo>
     </FolderWrapper>
   );
 };

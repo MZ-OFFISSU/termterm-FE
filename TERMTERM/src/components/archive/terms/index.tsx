@@ -1,31 +1,21 @@
 import GotoBookmark from "../default";
-import { useEffect, useState } from "react";
+import { FolderProps } from "@interfaces/bookmark";
+import { useState } from "react";
 import FolderList from "./FolderList";
 import styled from "styled-components/native";
-import { useFolder } from "@hooks/useFolder";
-import { UserFolderList } from "Folder";
 
 interface Props {
   type: string;
 }
 
 const BookmarkedTerms = ({ type }: Props) => {
-  const { getUsersFolderList, myFolderList } = useFolder();
-  const [folders, setFolders] = useState<Array<UserFolderList>>(dummyData);
-
-  useEffect(() => {
-    getUsersFolderList();
-    // TODO : 폴더 리스트 불러오기 관련 버그 잡기
-    // setFolders(myFolderList as UserFolderList[]);
-    console.log("my folder list : ", myFolderList, "folder list : ", folders, myFolderList?.length)
-  }, []);
-
+  const [folders, setFolders] = useState<Array<FolderProps>>(dummyData);
   return (
     <Container>
-      {folders?.length === 0 ? (
+      {folders.length === 0 ? (
         <GotoBookmark type={type} />
-        ) : (
-          <FolderList folders={folders} />
+      ) : (
+        <FolderList folders={folders} />
       )}
     </Container>
   );
@@ -42,27 +32,7 @@ const Container = styled.View`
 export default BookmarkedTerms;
 
 //더미데이터
-const dummyData: Array<UserFolderList> = [
-  {
-    folderId: 0,
-    title: "기획",
-  },
-  {
-    folderId: 1,
-    title: "프론트엔드 개발",
-  },
-  {
-    folderId: 2,
-    title: "백엔드 개발",
-  },
-  {
-    folderId: 3,
-    title: "디자인",
-  },
-
-]
-
-const oldDummyData = [
+const dummyData: Array<FolderProps> = [
   {
     id: 0,
     name: "기획",

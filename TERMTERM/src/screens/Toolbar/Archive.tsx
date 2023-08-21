@@ -4,11 +4,10 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { TouchableOpacity } from "react-native";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { BookmarkedCurations, BookmarkedTerms } from "@components/archive";
 import CustomModal from "@components/popup/modal";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { useFolder } from "@hooks/useFolder";
 
 export type RootProps = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -24,7 +23,6 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [curType, setCurType] = useState(0);
   const CurComponents = TYPES_WRAPPER[curType];
-  const { getFolderInfoModal, folderInfoModal } = useFolder();
 
   //폴더 생성 관련 상태
   const [restedFreeFolder, setRestedFreeFolder] = useState(3);
@@ -94,16 +92,12 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
   const InfoModal = () => {
     // TODO 폴더 정보 채워넣기
     const info = {
-      //현재 폴더 개수
-      cur: folderInfoModal?.currentFolderCount,
+      //현재 폴대 개수
+      cur: restedMaxFolder - restedFreeFolder,
       //나의 폴더 생성 한도
-      myMax: folderInfoModal?.myFolderCreationLimit,
-      max: folderInfoModal?.systemFolderCreationLimit,
+      myMax: 6,
+      max: 9,
     };
-
-    useEffect(() => {
-      getFolderInfoModal();
-    }, []);
 
     return (
       <CustomModal
