@@ -1,13 +1,23 @@
-import { TermComment, TermPreview } from "Term";
-
 declare module "Folder" {
   export type FolderDetail = {
     bookmarked: string;
     categories: string[];
-    comments: TermComment[];
+    comments: FolderTermComment[];
     description: string;
     id: number;
     name: string;
+    source: string;
+  };
+
+  export type FolderTermComment = {
+    authorJob: string;
+    authorName: string;
+    authorProfileImageUrl: string;
+    content: string;
+    createdDate: string;
+    id: number;
+    likeCnt: number;
+    liked: "NO" | "YES";
     source: string;
   };
 
@@ -16,8 +26,13 @@ declare module "Folder" {
     description: string;
     folderId: number;
     saveLimit: number;
-    terms: TermPreview[];
+    terms: FolderTermPreview[];
     title: string;
+  };
+
+  export type FolderTermPreview = {
+    name: string;
+    termId: number;
   };
 
   export type EditFolder = {

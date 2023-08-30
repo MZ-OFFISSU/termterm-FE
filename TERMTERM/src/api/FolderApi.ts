@@ -19,8 +19,8 @@ class FolderApi {
   };
 
   /** 폴더 상세 페이지_하나씩 보기 */
-  getEachFolderDetail = async (id: number): Promise<FolderDetail> => {
-    const data = await get<FolderDetail>(`/v1/folder/detail/each/${id}`);
+  getEachFolderDetail = async (id: number): Promise<FolderDetail[]> => {
+    const data = await get<FolderDetail[]>(`/v1/folder/detail/each/${id}`);
     return data;
   };
 
@@ -37,8 +37,8 @@ class FolderApi {
   };
 
   /** 내 폴더 리스트 */
-  getMyFolderList = async (): Promise<FolderList> => {
-    const data = await get<FolderList>(`/v1/folder/list`);
+  getMyFolderList = async (): Promise<FolderList[]> => {
+    const data = await get<FolderList[]>(`/v1/folder/list`);
     return data;
   };
 
@@ -63,14 +63,18 @@ class FolderApi {
   /** 폴더에 용어 삭제 (아카이빙 해제) */
   removeTermInFolder = async (
     cancelArchiveInfo: CancelArchive
-  ): Promise<string> => {
-    const data = await remove<string>(`/v1/folder/term`, cancelArchiveInfo);
+  ): Promise<void> => {
+    const data = await remove<void>(`/v1/folder/term`, {
+      data: cancelArchiveInfo,
+    });
     return data;
   };
 
   /** 홈 화면 - 아카이빙 한 단어들 중 10개를 랜덤으로 뽑아 리턴 */
-  getRandomArchiveTerms = async (): Promise<RandomTerms> => {
-    const data = await get<RandomTerms>(`/v1/folder/term/random-10`);
+  getRandomArchiveTerms = async (): Promise<RandomTerms[]> => {
+    const data = await get<RandomTerms[]>(`/v1/folder/term/random-10`);
     return data;
   };
 }
+
+export default FolderApi;
