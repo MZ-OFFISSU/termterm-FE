@@ -16,9 +16,11 @@ interface Props {
 const FolderList = ({ folders }: Props) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
+  console.log(folders);
+
   return (
     <Container>
-      {folders.map((folder) => (
+      {folders?.map((folder) => (
         <Folder
           onOpen={(id: number) =>
             navigation.push("FolderDetailCollapse", { id: id })

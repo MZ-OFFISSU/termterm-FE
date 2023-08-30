@@ -9,7 +9,7 @@ import {
   FolderPreview,
   RandomTerms,
 } from "Folder";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { useThemeStyle } from "./useThemeStyle";
 /**
@@ -159,6 +159,7 @@ export const useFolder = () => {
       return false;
     }
   };
+
   return {
     successToast,
     failedToast,
