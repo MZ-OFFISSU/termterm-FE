@@ -2,7 +2,7 @@ import {
   FolderDetail,
   FolderPreview,
   EditFolder,
-  FolderList,
+  UserFolderList,
   CreateFolder,
   FolderInfo,
   FolderModal,
@@ -37,8 +37,8 @@ class FolderApi {
   };
 
   /** 내 폴더 리스트 */
-  getMyFolderList = async (): Promise<FolderList[]> => {
-    const data = await get<FolderList[]>(`/v1/folder/list`);
+  getMyFolderList = async (): Promise<UserFolderList[]> => {
+    const data = await get<UserFolderList[]>(`/v1/folder/list`);
     return data;
   };
 
