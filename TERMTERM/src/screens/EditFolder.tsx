@@ -8,6 +8,7 @@ import InputWrapper from "@components/makefolder/InputWrapper";
 import { Keyboard } from "react-native";
 import CompleteButton from "@components/makefolder/CompleteButton";
 import Toast from "react-native-toast-message";
+import { useFolder } from "@hooks/useFolder";
 
 export type Props = StackScreenProps<RootStackParamList, "EditFolder">;
 
@@ -20,18 +21,21 @@ const EditFolder = ({ navigation, route }: Props) => {
     desc: "",
   });
   const [btnPosition, setBtnPosiition] = useState(30);
+  const { getUsersFolderList, myFolderList, editFolderInfo } = useFolder();
 
   //TODO 여기서 폴더 기본 정보 받아오기
   const settingPrevInfo = () => {
     const folderId = route.params.id;
-    const prevInfo = {
-      prevName: "폴더정보",
-      prevDesc: "여기서 통신으로 기존 폴더 정보 받아오세요",
-      name: "폴더정보",
-      desc: "여기서 통신으로 기존 폴더 정보 받아오세요",
-    };
-
-    setInfo(prevInfo);
+    const folderInfo = myFolderList && myFolderList[folderId];
+    if (folderInfo) {
+      const prevInfo = {
+        prevName: folderInfo.title,
+        prevDesc: folderInfo.description,
+        name: folderInfo.title,
+        desc: folderInfo.description,
+      };
+      setInfo(prevInfo);
+    }
   };
 
   const showToast = () => {
@@ -43,10 +47,29 @@ const EditFolder = ({ navigation, route }: Props) => {
 
   const onComplete = () => {
     if (info.name !== info.prevName || info.desc !== info.prevDesc) {
+      editFolderInfo({
+        description: info.desc,
+        folderId: route.params.id,
+        name: info.name,
+      });
       showToast();
       navigation.pop();
     }
   };
+
+  useEffect(() => {
+    getUsersFolderList();
+    // console.log(
+    //   "이전 이름 : ",
+    //   info.prevName,
+    //   "이전 설명 : ",
+    //   info.prevDesc,
+    //   "바뀐 이름 : ",
+    //   info.name,
+    //   "바뀐 설명 : ",
+    //   info.desc
+    // );
+  }, []);
 
   useEffect(() => {
     settingPrevInfo();
@@ -58,9 +81,11 @@ const EditFolder = ({ navigation, route }: Props) => {
       setBtnPosiition(30);
     });
 
-    showSubscription;
-    hideSubscription;
-  }, []);
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, [myFolderList]);
 
   return (
     <Container COLOR={COLOR}>
@@ -71,7 +96,7 @@ const EditFolder = ({ navigation, route }: Props) => {
           max={10}
           inevitable={true}
           placeholder={"예시) 기획, 디자인, 개발, IT, 비즈니스 등"}
-          onChangeText={(text) => setInfo({ ...info, name: text })}
+          onChangeText={(text) => setInfo((prev) => ({ ...prev, name: text }))}
           returnKeyType="done"
           warning="폴더 이름은 필수로 입력해야해요."
         />
