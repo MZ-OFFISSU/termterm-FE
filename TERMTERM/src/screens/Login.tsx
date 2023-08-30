@@ -88,6 +88,7 @@ const Login = ({ navigation, route }: Props) => {
           AppleAuthentication.AppleAuthenticationScope.EMAIL,
         ],
       });
+      console.log(credential);
       const data = await authApi.postAppleTokenToServer(
         credential.authorizationCode!,
         credential.identityToken!
@@ -131,7 +132,6 @@ const Login = ({ navigation, route }: Props) => {
           />
           <SocialLoginButton
             type="google"
-            // onPress={() => navigation.navigate("ToolBar")}
             onPress={() => navigation.navigate("Google")}
           />
           <SocialLoginButton

@@ -27,7 +27,7 @@ class AuthApi {
     const data = await axios({
       method: "post",
       url: `${BASE_URL}/v1/apple-callback`,
-      headers: {
+      params: {
         code: code,
         id_token: token,
       },
