@@ -20,11 +20,12 @@ const GoogleLogin = ({ navigation }: HomeScreenProps) => {
   const logInProgress = (data: any) => {
     const startIdx = data.indexOf("code=") + 5;
     const endIdx = data.indexOf("&", startIdx);
-    if (startIdx < 5) return null; // "code=" not found in the URL
+    if (startIdx < 5) return null;
     if (endIdx === -1) {
-      getToken(data.substring(startIdx));
+      getToken(decodeURIComponent(data.substring(startIdx)));
     }
-    getToken(data.substring(startIdx, endIdx));
+    console.log(decodeURIComponent(data.substring(startIdx, endIdx)));
+    getToken(decodeURIComponent(data.substring(startIdx, endIdx)));
   };
 
   const checkInfo = (memberInfo: MemberInfo) => {
