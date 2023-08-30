@@ -4,7 +4,7 @@ import {
   CreateFolder,
   EditFolder,
   FolderDetail,
-  FolderList,
+  UserFolderList,
   FolderModal,
   FolderPreview,
   RandomTerms,
@@ -22,7 +22,7 @@ export const useFolder = () => {
     useState<FolderDetail[]>();
   const [termPreviewInFolder, setTermPreviewInFolder] =
     useState<FolderPreview>();
-  const [myFolderList, setMyFolderList] = useState<FolderList[]>();
+  const [myFolderList, setMyFolderList] = useState<UserFolderList[]>();
   const [folderInfoModal, setFolderInfoModal] = useState<FolderModal>();
   const [archived10Terms, setArchived10Terms] = useState<RandomTerms[]>();
 
