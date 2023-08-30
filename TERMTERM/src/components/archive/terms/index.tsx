@@ -50,18 +50,22 @@ const dummyData: Array<UserFolderList> = [
   {
     folderId: 0,
     title: "기획",
+    description: "기획과 관련된 폴더입니다.",
   },
   {
     folderId: 1,
     title: "프론트엔드 개발",
+    description: "프론트엔드 개발과 관련된 폴더입니다.",
   },
   {
     folderId: 2,
     title: "백엔드 개발",
+    description: "백엔드 개발과 관련된 폴더입니다.",
   },
   {
     folderId: 3,
     title: "디자인",
+    description: "디자인과 관련된 폴더입니다.",
   },
 ];
 
