@@ -16,7 +16,9 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "usesAppleSignIn": true,
+      "bundleIdentifier": "io.sociallogin.termterm"
     },
     "android": {
       "adaptiveIcon": {

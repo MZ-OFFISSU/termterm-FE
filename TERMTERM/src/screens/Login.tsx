@@ -9,15 +9,39 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useSafeColor } from "@hooks/useSafeColor";
 import { NonUrl } from "@components/common/UrlText";
 import { useMember } from "@hooks/useMember";
-import { loginSucceed } from "@utils/showToast";
+import { loginFailed, loginSucceed, needRegister } from "@utils/showToast";
 import { useHaptics } from "@hooks/useHaptics";
+import * as AppleAuthentication from "expo-apple-authentication";
+import AuthApi from "@api/AuthApi";
+import { MemberInfo } from "Member";
+import { setAccessToken, setRefreshToken } from "@utils/tokenHandler";
+import MemberApi from "@api/MemberApi";
 
 export type Props = StackScreenProps<RootStackParamList, "Login">;
+
+type AppleAuthResponse = {
+  authorizationCode: string;
+  email: string;
+  fullName: {
+    familyName: string;
+    givenName: string;
+    middleName: string | null;
+    namePrefix: string | null;
+    nameSuffix: string | null;
+    nickname: string | null;
+  };
+  identityToken: string;
+  realUserStatus: number;
+  state: null;
+  user: string;
+};
 
 const Login = ({ navigation, route }: Props) => {
   const { haptic } = useHaptics();
   const [width, setWidth] = useState(80);
   const { user, loading } = useMember();
+  const authApi = new AuthApi();
+  const memberApi = new MemberApi();
 
   useSafeColor();
 
@@ -43,6 +67,41 @@ const Login = ({ navigation, route }: Props) => {
       haptic("success");
       navigation.reset({ routes: [{ name: "ToolBar" }] });
       loginSucceed();
+    }
+  };
+
+  const checkInfo = (memberInfo: MemberInfo) => {
+    if (memberInfo.domain) {
+      loginSucceed();
+      navigation.reset({ routes: [{ name: "ToolBar" }] });
+    } else {
+      needRegister();
+      navigation.reset({ routes: [{ name: "Onboarding" }] });
+    }
+  };
+
+  const appleOauth = async () => {
+    try {
+      const credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+      console.log(credential);
+      const data = await authApi.postAppleTokenToServer(
+        credential.authorizationCode!,
+        credential.identityToken!
+      );
+      console.log(data);
+      // await setAccessToken(data.access_token);
+      // await setRefreshToken(data.refresh_token);
+
+      // const memberInfo = await memberApi.getInfo();
+      // checkInfo(memberInfo);
+    } catch (e) {
+      console.log(e);
+      loginFailed();
     }
   };
 
@@ -73,12 +132,12 @@ const Login = ({ navigation, route }: Props) => {
           />
           <SocialLoginButton
             type="google"
-            // onPress={() => navigation.navigate("ToolBar")}
             onPress={() => navigation.navigate("Google")}
           />
           <SocialLoginButton
             type="apple"
             // onPress={() => navigation.navigate("Support")}
+            onPress={appleOauth}
           />
         </ButtonBox>
         <NonUrl style={{ marginTop: 30 }}>

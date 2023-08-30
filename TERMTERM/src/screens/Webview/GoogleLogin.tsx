@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { WebView } from "react-native-webview";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { KAKAO_CLIENT_ID, KAKAO_REDIRECT_URI } from "@api/secret";
+import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from "@api/secret";
 import AuthApi from "@api/AuthApi";
 import { setAccessToken, setRefreshToken } from "@utils/tokenHandler";
 import MemberApi from "@api/MemberApi";
@@ -13,20 +13,19 @@ export type HomeScreenProps = StackScreenProps<RootStackParamList, "Google">;
 
 const runFirst = `window.ReactNativeWebView.postMessage("this is message from web");`;
 
-//TODO 서버 도메인 등록후 연동 예정
 const GoogleLogin = ({ navigation }: HomeScreenProps) => {
   const authApi = new AuthApi();
   const memberApi = new MemberApi();
 
   const logInProgress = (data: any) => {
-    const exp = "code=";
-
-    const condition = data.indexOf(exp);
-
-    if (condition != -1) {
-      const request_code = data.substring(condition + exp.length);
-      getToken(request_code);
+    const startIdx = data.indexOf("code=") + 5;
+    const endIdx = data.indexOf("&", startIdx);
+    if (startIdx < 5) return null;
+    if (endIdx === -1) {
+      getToken(decodeURIComponent(data.substring(startIdx)));
     }
+    console.log(decodeURIComponent(data.substring(startIdx, endIdx)));
+    getToken(decodeURIComponent(data.substring(startIdx, endIdx)));
   };
 
   const checkInfo = (memberInfo: MemberInfo) => {
@@ -63,13 +62,14 @@ const GoogleLogin = ({ navigation }: HomeScreenProps) => {
         scalesPageToFit={false}
         style={{ marginTop: 30 }}
         source={{
-          uri: `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`,
+          uri: `https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?scope=profile%20email%20openid&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=https%3A%2F%2Fapi.iterview.com%2Fv1%2Fsocial-auth&client_id=413663542158-o4k411e714pjhibpb2nbmpa54o6vucuf.apps.googleusercontent.com&service=lso&o2v=2&flowName=GeneralOAuthFlow`,
         }}
         injectedJavaScript={runFirst}
         javaScriptEnabled={true}
         onMessage={(event) => {
           logInProgress(event.nativeEvent.url);
         }}
+        userAgent="Chrome/56.0.0.0 Mobile"
       />
     </View>
   );

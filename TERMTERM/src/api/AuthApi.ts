@@ -18,6 +18,23 @@ class AuthApi {
 
     return data.data.data;
   };
+
+  /** 애플 로그인 */
+  postAppleTokenToServer = async (
+    code: string,
+    token: string
+  ): Promise<AuthResponse> => {
+    const data = await axios({
+      method: "post",
+      url: `${BASE_URL}/v1/apple-callback`,
+      params: {
+        code: code,
+        id_token: token,
+      },
+    });
+
+    return data.data.data;
+  };
 }
 
 export default AuthApi;
