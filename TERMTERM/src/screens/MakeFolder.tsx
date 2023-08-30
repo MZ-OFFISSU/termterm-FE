@@ -7,10 +7,8 @@ import { useState, useEffect } from "react";
 import InputWrapper from "@components/makefolder/InputWrapper";
 import { Keyboard } from "react-native";
 import CompleteButton from "@components/makefolder/CompleteButton";
-import Toast from "react-native-toast-message";
 import { useHaptics } from "@hooks/useHaptics";
 import { useFolder } from "@hooks/useFolder";
-import { getAccessToken } from "@utils/tokenHandler";
 
 export type Props = StackScreenProps<RootStackParamList, "MakeFolder">;
 
