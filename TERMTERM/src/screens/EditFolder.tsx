@@ -59,16 +59,6 @@ const EditFolder = ({ navigation, route }: Props) => {
 
   useEffect(() => {
     getUsersFolderList();
-    // console.log(
-    //   "이전 이름 : ",
-    //   info.prevName,
-    //   "이전 설명 : ",
-    //   info.prevDesc,
-    //   "바뀐 이름 : ",
-    //   info.name,
-    //   "바뀐 설명 : ",
-    //   info.desc
-    // );
   }, []);
 
   useEffect(() => {
