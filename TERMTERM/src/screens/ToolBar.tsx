@@ -144,6 +144,7 @@ const ToolBar = ({ ...props }: Props) => {
         )}
         options={{
           headerShown: true,
+          unmountOnBlur: true, // 언마운트 되었을 때 리로드
           header: (props) => {
             return (
               <TitleBar

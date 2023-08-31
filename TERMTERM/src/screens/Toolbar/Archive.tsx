@@ -4,10 +4,11 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { TouchableOpacity } from "react-native";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { BookmarkedCurations, BookmarkedTerms } from "@components/archive";
 import CustomModal from "@components/popup/modal";
 import AutoSizedImage from "@components/common/AutoSizedImage";
+import { useFolder } from "@hooks/useFolder";
 
 export type RootProps = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -15,30 +16,25 @@ interface Props extends RootProps {
   modal: boolean;
   setModal: Dispatch<SetStateAction<boolean>>;
 }
-
 const TYPES = ["용어", "큐레이션"];
 const TYPES_WRAPPER = [BookmarkedTerms, BookmarkedCurations] as const;
-
 const Archive = ({ modal, setModal, navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [curType, setCurType] = useState(0);
   const CurComponents = TYPES_WRAPPER[curType];
+  const { getFolderInfoModal, folderInfoModal } = useFolder();
 
   //폴더 생성 관련 상태
   const [restedFreeFolder, setRestedFreeFolder] = useState(3);
   const [restedMaxFolder, setRestedMaxFolder] = useState(9);
-
   const [infoModal, setInfoModal] = useState(false);
-
   const gotoMakefolder = () => {
     navigation.push("MakeFolder");
     setModal(false);
   };
-
   const openInfoModal = () => {
     setInfoModal(true);
   };
-
   /**
    * 폴더 개수가 3개 미만일 때 모달
    */
@@ -53,7 +49,6 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
       />
     );
   };
-
   /**
    * 폴더 개수가 3개 이상일 때 모달
    */
@@ -69,7 +64,6 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
       />
     );
   };
-
   /**
    * 최대 생성 가능한 폴더가 가득 찼을 때 모달
    */
@@ -85,19 +79,22 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
       />
     );
   };
-
   /**
    * 최대 생성 가능한 폴더가 가득 찼을 때 모달
    */
   const InfoModal = () => {
     // TODO 폴더 정보 채워넣기
     const info = {
-      //현재 폴대 개수
-      cur: restedMaxFolder - restedFreeFolder,
+      //현재 폴더 개수
+      cur: folderInfoModal?.currentFolderCount,
       //나의 폴더 생성 한도
-      myMax: 6,
-      max: 9,
+      myMax: folderInfoModal?.myFolderCreationLimit,
+      max: folderInfoModal?.systemFolderCreationLimit,
     };
+
+    useEffect(() => {
+      getFolderInfoModal();
+    }, []);
 
     return (
       <CustomModal
@@ -109,7 +106,6 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
       />
     );
   };
-
   return (
     <>
       <Container COLOR={COLOR}>
@@ -149,26 +145,22 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
     </>
   );
 };
-
 const Container = styled.ScrollView<{ COLOR: colorTheme }>`
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.COLOR.Background.surface};
   padding: 20px 16px;
 `;
-
 const TypeSelector = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
 `;
-
 const Type = styled.Text<{ selected: boolean }>`
   ${(props) =>
     props.selected ? TYPO_STYLE.Body[2].Bold : TYPO_STYLE.Body[2].Regular};
 `;
-
 const InfoCheckbutton = styled.TouchableOpacity`
   width: 24px;
   height: 24px;
@@ -176,5 +168,4 @@ const InfoCheckbutton = styled.TouchableOpacity`
   top: 0px;
   right: 0px;
 `;
-
 export default Archive;
