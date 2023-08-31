@@ -7,6 +7,8 @@ import { divideTerm } from "@utils/termCutter";
 import { useState } from "react";
 import { useTerm } from "@hooks/useTerm";
 import { useHaptics } from "@hooks/useHaptics";
+import { useArchive } from "@hooks/useArchive";
+import CustomModal from "@components/popup/modal";
 
 interface Props extends TouchableOpacityProps {
   id: number;
@@ -20,25 +22,19 @@ interface Props extends TouchableOpacityProps {
  */
 const TermBox = ({ id, title, marked, ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const [tempMarked, setTempMarked] = useState(marked);
-  const { bookmarkTerm } = useTerm();
+  const { archiveTerm, isModalOpen, goToFolderMake, closeModal } = useArchive();
   const { haptic } = useHaptics();
 
-  const handleBookmark = async () => {
-    try {
-      await bookmarkTerm(id);
-      haptic("light");
-      setTempMarked((prev) => !prev);
-    } catch (err) {
-      console.log(err);
-    }
+  const handleBookmark = () => {
+    haptic("light");
+    archiveTerm(id);
   };
 
   return (
     <ResultBtn COLOR={COLOR} mode={mode} {...props}>
       <ResultTitle COLOR={COLOR}>{divideTerm(title)[0]}</ResultTitle>
       <BookmarkButton mode={mode} onPress={handleBookmark}>
-        {tempMarked ? (
+        {marked ? (
           <Ionicons
             name="ios-bookmark"
             size={22}
@@ -52,6 +48,18 @@ const TermBox = ({ id, title, marked, ...props }: Props) => {
           />
         )}
       </BookmarkButton>
+      <CustomModal
+        visible={isModalOpen}
+        title={"용어 아카이빙 폴더가 없어요"}
+        subtitle={
+          "폴더를 만들어 용어를 아카이빙한 후\n용어 아카이브를 활용해 보세요"
+        }
+        btnTitle={["나중에 만들게요", "폴더 만들기"]}
+        onNext={goToFolderMake}
+        onClose={() => {
+          closeModal();
+        }}
+      />
     </ResultBtn>
   );
 };

@@ -25,7 +25,9 @@ const ResultWrapper = ({ results, ...props }: Props) => {
           title={result.name}
           marked={booleanConverter(result.bookmarked)}
           key={`${result.id}`}
-          onPress={() => navigation.navigate("TermDetail", { id: result.id })}
+          onPress={() =>
+            navigation.navigate("TermDetail", { id: `${result.id}` })
+          }
         ></TermBox>
       ))}
     </Container>

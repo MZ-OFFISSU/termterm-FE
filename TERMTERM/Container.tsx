@@ -28,6 +28,7 @@ import {
   QuizReview,
   FilterScreen,
   EditFolder,
+  SelectFolder,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import {
@@ -495,6 +496,21 @@ const Container = () => {
                     onBack={() => props.navigation.pop()}
                     onBookmark={() => null}
                     bookmarked={false}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="SelectFolder"
+            component={SelectFolder}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="아카이빙"
+                    onBack={() => props.navigation.pop()}
                   />
                 );
               },

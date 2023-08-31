@@ -106,6 +106,7 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
       />
     );
   };
+
   return (
     <>
       <Container COLOR={COLOR}>

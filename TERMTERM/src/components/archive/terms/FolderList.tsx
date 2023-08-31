@@ -39,4 +39,5 @@ const Container = styled.View`
   justify-content: flex-start;
   padding: 20px 0px;
 `;
+
 export default FolderList;
