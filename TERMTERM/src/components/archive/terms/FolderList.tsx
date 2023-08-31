@@ -16,8 +16,6 @@ interface Props {
 const FolderList = ({ folders }: Props) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-  console.log(folders);
-
   return (
     <Container>
       {folders?.map((folder) => (
