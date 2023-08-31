@@ -55,8 +55,11 @@ class FolderApi {
   };
 
   /** 폴더에 용어 저장 (아카이빙) */
-  registerTermInFolder = async (folderIds: number[]): Promise<string> => {
-    const data = await post<string>(`/v1/folder/term`, folderIds);
+  registerTermInFolder = async (
+    folderIds: number[],
+    termId: number
+  ): Promise<string> => {
+    const data = await post<string>(`/v1/folder/term`, { folderIds, termId });
     return data;
   };
 

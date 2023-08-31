@@ -3,11 +3,13 @@ import { useArchive } from "@hooks/useArchive";
 import { useFolder } from "@hooks/useFolder";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { TYPO_STYLE, colorTheme } from "@style/designSystem";
-import { useEffect } from "react";
+import { UserFolderList } from "Folder";
 import styled from "styled-components/native";
 
 interface Props {
-  handleCanNext: (check: boolean) => void;
+  myFolderList: UserFolderList[];
+  selectedFolders: number[];
+  handleSelectFolder: (folderId: number) => void;
 }
 
 const FOLDER_ICON = [
@@ -16,8 +18,11 @@ const FOLDER_ICON = [
   require("@assets/folders/gray.png"),
 ];
 
-const FolderList = ({ handleCanNext }: Props) => {
-  const { myFolderList, selectedFolders, handleSelectFolder } = useArchive();
+const FolderList = ({
+  myFolderList,
+  selectedFolders,
+  handleSelectFolder,
+}: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
   const curFolderImg = (fId: number) => {
@@ -25,11 +30,6 @@ const FolderList = ({ handleCanNext }: Props) => {
     if (mode) return FOLDER_ICON[0];
     return FOLDER_ICON[2];
   };
-
-  useEffect(() => {
-    if (selectedFolders.length === 0) handleCanNext(false);
-    else handleCanNext(true);
-  }, [selectedFolders]);
 
   return (
     <Container>

@@ -1,18 +1,19 @@
 import FolderList from "@components/FolderList";
 import { BUTTON_STATE, BUTTON_TYPE, CustomButton } from "@components/index";
+import { useArchive } from "@hooks/useArchive";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { StackScreenProps } from "@react-navigation/stack";
 import { TYPO_STYLE, colorTheme } from "@style/designSystem";
 import { screenHeight } from "@style/dimensions";
-import { useState } from "react";
 import styled from "styled-components/native";
 
-const SelectFolder = () => {
-  const [COLOR, mode] = useThemeStyle();
-  const [isCanNext, setIsCanNext] = useState(false);
+export type Props = StackScreenProps<RootStackParamList, "SelectFolder">;
 
-  const handleCanNext = (check: boolean) => {
-    setIsCanNext(check);
-  };
+const SelectFolder = ({ navigation, route }: Props) => {
+  const [COLOR, mode] = useThemeStyle();
+  const { selectedFolders, handleSelectFolder, myFolderList, handleArchive } =
+    useArchive();
 
   return (
     <Container COLOR={COLOR}>
@@ -27,13 +28,22 @@ const SelectFolder = () => {
               단어 하나를 여러 개의 폴더에 아카이빙 할 수 있어요!
             </Subtitle>
           </TitleContainer>
-          <FolderList handleCanNext={handleCanNext} />
+          <FolderList
+            myFolderList={myFolderList!}
+            selectedFolders={selectedFolders}
+            handleSelectFolder={handleSelectFolder}
+          />
         </Topper>
         <CustomButton
           title="확인"
+          onPress={() => handleArchive(route.params.termId)}
           theme={mode}
           type={BUTTON_TYPE.primary}
-          state={isCanNext ? BUTTON_STATE.active : BUTTON_STATE.default}
+          state={
+            selectedFolders.length > 0
+              ? BUTTON_STATE.active
+              : BUTTON_STATE.default
+          }
           style={{ width: "100%", marginTop: 32 }}
         />
       </Inner>
