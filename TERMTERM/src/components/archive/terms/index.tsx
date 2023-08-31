@@ -12,8 +12,6 @@ interface Props {
 const BookmarkedTerms = ({ type }: Props) => {
   const { getUsersFolderList, myFolderList } = useFolder();
 
-  console.log(myFolderList);
-
   useEffect(() => {
     getUsersFolderList();
   }, []);

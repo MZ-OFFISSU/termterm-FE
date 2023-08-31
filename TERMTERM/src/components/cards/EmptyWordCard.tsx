@@ -6,8 +6,12 @@ import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { Fontisto } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 
 const EmptyWordCard = ({ ...props }: TouchableOpacityProps) => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [COLOR, mode] = useThemeStyle();
   const [width, setWidth] = useState(83);
   /** 북마크 여부 상태 */
@@ -46,7 +50,7 @@ const EmptyWordCard = ({ ...props }: TouchableOpacityProps) => {
           COLOR={COLOR}
         >{`아카이빙을 하면 용어를 더욱\n쉽게 다시 볼 수 있어요`}</SubTitle>
       </TitleBox>
-      <WordButton COLOR={COLOR}>
+      <WordButton COLOR={COLOR} onPress={() => navigation.navigate("Search")}>
         <ButtonText COLOR={COLOR}>아카이빙 하러 가기</ButtonText>
         <Fontisto
           name="angle-right"

@@ -31,6 +31,7 @@ const FolderList = ({ folders }: Props) => {
   );
 };
 const Container = styled.View`
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
