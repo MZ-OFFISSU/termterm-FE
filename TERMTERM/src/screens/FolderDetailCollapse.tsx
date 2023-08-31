@@ -108,7 +108,7 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
       ) : (
         <></>
       )}
-      <Coachmark type="folder" {...coachConfigs} />
+      {/* <Coachmark type="folder" {...coachConfigs} /> */}
     </Container>
   );
 };

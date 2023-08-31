@@ -12,13 +12,15 @@ interface Props {
 const BookmarkedTerms = ({ type }: Props) => {
   const { getUsersFolderList, myFolderList } = useFolder();
 
+  console.log(myFolderList);
+
   useEffect(() => {
     getUsersFolderList();
   }, []);
 
   return (
     <Container>
-      {myFolderList?.length === 0 ? (
+      {myFolderList?.length === 0 || !myFolderList ? (
         <GotoBookmark type={type} />
       ) : (
         <FolderList folders={myFolderList as UserFolderList[]} />

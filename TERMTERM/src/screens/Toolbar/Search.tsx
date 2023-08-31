@@ -34,7 +34,7 @@ const Search = ({ navigation }: Props) => {
   };
 
   const Nothing = () => {
-    if (results.length === 0 && records.length === 0)
+    if (!results || (results.length === 0 && records.length === 0))
       return (
         <NotResult
           title="최근 검색어가 없어요."
