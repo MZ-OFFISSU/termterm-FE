@@ -6,13 +6,14 @@ import {
   RecommendList,
   ResultList,
 } from "@components/search/containers";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useSearch } from "@hooks/useSearch";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { colorTheme } from "@style/designSystem";
 import { useTerm } from "@hooks/useTerm";
+import { RefreshControl } from "react-native";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -20,6 +21,7 @@ const Search = ({ navigation }: Props) => {
   const [keyword, setKeyword] = useState("");
   const [records, setRecords] = useSearch();
   const { results, searchTerm } = useTerm();
+  const [refresh, setRefresh] = useState(false);
 
   const [COLOR, mode] = useThemeStyle();
 
@@ -53,8 +55,28 @@ const Search = ({ navigation }: Props) => {
     return <></>;
   };
 
+  const onRefresh = useCallback(async (keyword: string) => {
+    setRefresh(true);
+    try {
+      await handleSearch(keyword);
+      setRefresh(false);
+    } catch (err) {
+      setTimeout(() => {
+        setRefresh(false);
+      }, 2000);
+    }
+  }, []);
+
   return (
-    <Container COLOR={COLOR}>
+    <Container
+      COLOR={COLOR}
+      refreshControl={
+        <RefreshControl
+          refreshing={refresh}
+          onRefresh={() => onRefresh(keyword)}
+        />
+      }
+    >
       <CotentsArea>
         <SearchBox
           onSubmitEditing={() => handleSearch(keyword)}

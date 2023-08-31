@@ -25,11 +25,6 @@ interface FolderProps {
   desc: string;
 }
 
-const defaultProps: FolderProps = {
-  name: "",
-  desc: "",
-};
-
 const FolderInfo = ({ name, desc }: FolderProps) => {
   const [COLOR, mode] = useThemeStyle();
 
@@ -54,14 +49,14 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
   const coachConfigs = useCoach();
   const { termsEach, getTermsEachInFolder, folderInfo } = useArchive();
 
-  const { setHeaderState, settingIdx } = useHeader();
+  const { setHeaderState, settingIdx, headerState } = useHeader();
 
   const settingHeader = (words: Array<WordProps>) => {
     const defaultHeaderState = {
       id: route.params.id,
       maxNum: words.length,
       curNum: curIdx + 1,
-      bookmarked: words[curIdx].bookmarked ? true : false,
+      bookmarked: true,
     };
     setHeaderState(defaultHeaderState);
   };
@@ -76,7 +71,7 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
   }, [route]);
 
   useEffect(() => {
-    if (termsEach.length > 0) {
+    if (termsEach.length > 0 && headerState.maxNum === 0) {
       const items = termsEach.map((item) => {
         return {
           termId: item.id,

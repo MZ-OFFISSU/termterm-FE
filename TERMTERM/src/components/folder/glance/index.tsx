@@ -16,6 +16,7 @@ const TermDetailGlance = ({ terms, ...props }: Props) => {
           title={term.name}
           marked={true}
           key={term.termId}
+          bookmarkDisabled
         ></TermBox>
       ))}
     </Container>

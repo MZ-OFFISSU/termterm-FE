@@ -14,13 +14,20 @@ interface Props extends TouchableOpacityProps {
   id: number;
   title: string;
   marked: boolean;
+  bookmarkDisabled?: boolean;
 }
 
 /**
  * 검색 결과 -> 용어
  * 북마크 폴더 안 -> 용어
  */
-const TermBox = ({ id, title, marked, ...props }: Props) => {
+const TermBox = ({
+  id,
+  title,
+  marked,
+  bookmarkDisabled = false,
+  ...props
+}: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const { archiveTerm, isModalOpen, goToFolderMake, closeModal } = useArchive();
   const { haptic } = useHaptics();
@@ -33,7 +40,11 @@ const TermBox = ({ id, title, marked, ...props }: Props) => {
   return (
     <ResultBtn COLOR={COLOR} mode={mode} {...props}>
       <ResultTitle COLOR={COLOR}>{divideTerm(title)[0]}</ResultTitle>
-      <BookmarkButton mode={mode} onPress={handleBookmark}>
+      <BookmarkButton
+        mode={mode}
+        onPress={handleBookmark}
+        disabled={bookmarkDisabled}
+      >
         {marked ? (
           <Ionicons
             name="ios-bookmark"

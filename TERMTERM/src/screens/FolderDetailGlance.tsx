@@ -27,7 +27,6 @@ const FolderDetailGlance = ({ navigation, route }: Props) => {
   const { folderInfo, getTermsSuminFolder, termsSum } = useArchive();
 
   useEffect(() => {
-    console.log(route.params.id);
     getTermsSuminFolder(route.params.id);
     coachConfigs.openCoach("folder");
   }, []);
