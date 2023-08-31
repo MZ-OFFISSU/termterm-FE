@@ -1,20 +1,21 @@
 import TermBox from "@components/common/TermBox";
 import styled from "styled-components/native";
 import { ViewProps } from "react-native";
-import { Term } from "@interfaces/term";
+import { FolderPreview } from "Folder";
 
 interface Props extends ViewProps {
-  terms: Array<Term>;
+  terms: FolderPreview;
 }
 
 const TermDetailGlance = ({ terms, ...props }: Props) => {
   return (
     <Container {...props}>
-      {terms.map((term, idx) => (
+      {terms.terms.map((term) => (
         <TermBox
+          id={term.termId}
           title={term.name}
-          marked={term.bookmarked}
-          key={term.id}
+          marked={true}
+          key={term.termId}
         ></TermBox>
       ))}
     </Container>

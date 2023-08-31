@@ -25,8 +25,8 @@ class FolderApi {
   };
 
   /** 폴더 상세 페이지_모아서 보기 */
-  getSumFolderDetail = async (id: number): Promise<FolderPreview[]> => {
-    const data = await get<FolderPreview[]>(`/v1/folder/detail/sum/${id}`);
+  getSumFolderDetail = async (id: number): Promise<FolderPreview> => {
+    const data = await get<FolderPreview>(`/v1/folder/detail/sum/${id}`);
     return data;
   };
 

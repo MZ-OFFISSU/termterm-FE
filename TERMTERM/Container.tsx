@@ -228,7 +228,8 @@ const Container = () => {
                     icon={Icon.collapse}
                     onPress={() =>
                       props.navigation.navigate("FolderDetailCollapse", {
-                        id: 0,
+                        //@ts-ignore
+                        id: props.route.params!.id,
                       })
                     }
                   />
@@ -247,7 +248,10 @@ const Container = () => {
                     onBack={() => props.navigation.pop()}
                     icon={Icon.fold}
                     onPress={() =>
-                      props.navigation.navigate("FolderDetailGlance", { id: 0 })
+                      props.navigation.navigate("FolderDetailGlance", {
+                        //@ts-ignore
+                        id: props.route.params!.id,
+                      })
                     }
                     bookmarkBar={true}
                   />

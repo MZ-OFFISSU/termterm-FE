@@ -24,7 +24,7 @@ export const useArchive = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [selectedFolders, setSelectedFolders] = useState<number[]>([]);
-  const [termsSum, setTermsSum] = useState<FolderPreview[]>([]);
+  const [termsSum, setTermsSum] = useState<FolderPreview>();
   const [termsEach, setTermsEach] = useState<FolderDetail[]>([]);
 
   const getArchiveListInHome = async () => {
