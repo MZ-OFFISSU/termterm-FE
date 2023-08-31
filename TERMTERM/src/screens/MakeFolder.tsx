@@ -13,7 +13,7 @@ import { useFolder } from "@hooks/useFolder";
 export type Props = StackScreenProps<RootStackParamList, "MakeFolder">;
 
 const MakeFolder = ({ navigation }: Props) => {
-  const { createFolder } = useFolder();
+  const { createFolder, getUsersFolderList } = useFolder();
   const { haptic } = useHaptics();
   const [COLOR, mode] = useThemeStyle();
   const [info, setInfo] = useState({
@@ -28,6 +28,7 @@ const MakeFolder = ({ navigation }: Props) => {
     if (info.name !== "") {
       const res = createFolder({ description: info.desc, title: info.name });
       console.log("res : ", res);
+      getUsersFolderList();
       navigation.pop();
     } else {
       haptic("warning");

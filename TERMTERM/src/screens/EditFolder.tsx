@@ -24,9 +24,10 @@ const EditFolder = ({ navigation, route }: Props) => {
   const { getUsersFolderList, myFolderList, editFolderInfo } = useFolder();
 
   //TODO 여기서 폴더 기본 정보 받아오기
-  const settingPrevInfo = () => {
+  const settingPrevInfo = async () => {
     const folderId = route.params.id;
     const folderInfo = myFolderList && myFolderList[folderId];
+
     if (folderInfo) {
       const prevInfo = {
         prevName: folderInfo.title,
