@@ -8,6 +8,9 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useHaptics } from "./useHaptics";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { useThemeStyle } from "./useThemeStyle";
+import { FolderDetail, FolderPreview } from "Folder";
+import { useRecoilState } from "recoil";
+import { folderInfoState } from "@recoil/folderInfoState";
 
 export const useArchive = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -15,11 +18,14 @@ export const useArchive = () => {
   const { myFolderList, getUsersFolderList } = useFolder();
   const { haptic } = useHaptics();
   const [COLOR, mode] = useThemeStyle();
+  const [folderInfo, setFolderInfo] = useRecoilState(folderInfoState);
 
   const [archivedWords, setArchivedWords] = useState<Array<WordProps> | null>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [selectedFolders, setSelectedFolders] = useState<number[]>([]);
+  const [termsSum, setTermsSum] = useState<FolderPreview[]>([]);
+  const [termsEach, setTermsEach] = useState<FolderDetail[]>([]);
 
   const getArchiveListInHome = async () => {
     try {
@@ -69,6 +75,32 @@ export const useArchive = () => {
     }
   };
 
+  const getTermsSuminFolder = async (folderId: number) => {
+    try {
+      const res = await folderApi.getSumFolderDetail(folderId);
+      setTermsSum(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /** 캐러셀 */
+  const getTermsEachInFolder = async (folderId: number) => {
+    try {
+      const res = await folderApi.getEachFolderDetail(folderId);
+      setTermsEach(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const saveFolderInfo = (name: string, desc: string) => {
+    setFolderInfo({
+      name,
+      desc,
+    });
+  };
+
   useEffect(() => {
     getUsersFolderList();
   }, []);
@@ -84,5 +116,11 @@ export const useArchive = () => {
     myFolderList,
     selectedFolders,
     handleArchive,
+    getTermsEachInFolder,
+    getTermsSuminFolder,
+    termsSum,
+    termsEach,
+    saveFolderInfo,
+    folderInfo,
   };
 };

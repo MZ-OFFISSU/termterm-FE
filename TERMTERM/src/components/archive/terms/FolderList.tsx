@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { UserFolderList } from "Folder";
+import { useArchive } from "@hooks/useArchive";
 
 interface FolderProps extends UserFolderList {
   icon: number;
@@ -15,14 +16,16 @@ interface Props {
 // TODO : props 변경
 const FolderList = ({ folders }: Props) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { saveFolderInfo } = useArchive();
 
   return (
     <Container>
       {folders?.map((folder) => (
         <Folder
-          onOpen={(id: number) =>
-            navigation.push("FolderDetailCollapse", { id: id })
-          }
+          onOpen={(id: number) => {
+            navigation.push("FolderDetailCollapse", { id: id });
+            saveFolderInfo(folder.title, folder.description);
+          }}
           key={folder.folderId}
           {...folder}
         />

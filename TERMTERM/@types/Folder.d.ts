@@ -1,6 +1,6 @@
 declare module "Folder" {
   export type FolderDetail = {
-    bookmarked: string;
+    bookmarked: "YES" | null;
     categories: string[];
     comments: FolderTermComment[];
     description: string;
