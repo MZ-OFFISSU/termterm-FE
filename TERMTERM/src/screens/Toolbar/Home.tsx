@@ -20,6 +20,7 @@ import { useCoach } from "@hooks/useCoach";
 import { useRecoilValue } from "recoil";
 import { tutorialState } from "@recoil/tutorialState";
 import Coachmark from "@components/popup/coach";
+import { useArchive } from "@hooks/useArchive";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -38,8 +39,10 @@ const Home = ({ navigation, route }: Props) => {
     getCurationDetailInfo,
     curationDetailInfo,
   } = useCuration();
+
+  const { archivedWords, getArchiveListInHome } = useArchive();
+
   const isTutorialOpen = useRecoilValue(tutorialState);
-  const [curation, setCuration] = useState<Array<WordProps> | null>();
   const [COLOR, mode] = useThemeStyle();
   const { homeMainTitle, homeSubTitle } = useHome();
   const { isOpen, openCoach, hideCoach, checked, handleCheck } = useCoach();
@@ -50,7 +53,7 @@ const Home = ({ navigation, route }: Props) => {
   }, [curationDetailInfo]);
 
   useEffect(() => {
-    setCuration(dummyWords);
+    getArchiveListInHome();
     // TODO : 큐레이션 카테고리 배열로 선택해 넘기도록
     getEachCategoryCurationList("pm");
   }, []);
@@ -63,22 +66,11 @@ const Home = ({ navigation, route }: Props) => {
     <SafeAreaView>
       <Container COLOR={COLOR}>
         <InnerContainer>
-          {curation ? (
-            <>
-              <TitleContainer
-                maintitle={homeMainTitle}
-                subtitle={homeSubTitle}
-              />
-              <WordCarousel words={curation} dots={true} />
-            </>
+          <TitleContainer maintitle={homeMainTitle} subtitle={homeSubTitle} />
+          {archivedWords ? (
+            <WordCarousel words={archivedWords} dots={true} />
           ) : (
-            <>
-              <TitleContainer
-                maintitle={homeMainTitle}
-                subtitle={homeSubTitle}
-              />
-              <EmptyWordCard style={{ marginTop: 20 }} />
-            </>
+            <EmptyWordCard style={{ marginTop: 20 }} />
           )}
           <TitleBox style={{ marginTop: 50 }}>
             <MenuTitle COLOR={COLOR}>Daily 용어 퀴즈</MenuTitle>

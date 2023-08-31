@@ -103,7 +103,7 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
             touchable={false}
           />
           <FolderInfo {...folderInfo} />
-          <OtherThink word={words[curIdx]} />
+          <OtherThink word={words[curIdx] as any} />
         </>
       ) : (
         <></>

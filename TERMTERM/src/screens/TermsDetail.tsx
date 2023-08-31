@@ -7,7 +7,6 @@ import { WordCarousel } from "@components/terms/";
 import { useEffect, useState } from "react";
 import { WordProps } from "@interfaces/word";
 import OtherThink from "@components/OtherThink";
-import LottieAnimation from "@components/OtherThink/LottieAnimation";
 import { useHeader } from "@hooks/useHeader";
 import { dummyWords } from "@assets/dummyWord";
 
@@ -55,7 +54,7 @@ const TermsDetail = ({ navigation, route }: Props) => {
             touchable={false}
           />
           {/* <LottieAnimation /> */}
-          <OtherThink word={words[curIdx]} />
+          <OtherThink word={words[curIdx] as any} />
         </>
       ) : (
         <></>

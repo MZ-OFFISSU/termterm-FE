@@ -56,6 +56,6 @@ declare module "Folder" {
     description: string;
     name: string;
     source: string;
-    termId: string;
+    termId: any;
   };
 }
