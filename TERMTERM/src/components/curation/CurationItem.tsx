@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { BookmarkButton } from "@components/common/Bookmark";
 import { MoreRecommendedCuration } from "Curation";
 import { ViewProps } from "react-native";
-import { useEffect } from "react";
+import { useCuration } from "@hooks/useCuration";
 
 interface Props extends ViewProps {
   item: MoreRecommendedCuration;
@@ -18,13 +18,15 @@ const CurationItem = ({ item, onMove, ...props }: Props) => {
   const { curationId, title, thumbnail, cnt, bookmarked } = item ?? {};
   const [COLOR, mode] = useThemeStyle();
 
+  const { bookmarkCuration } = useCuration();
+
   return (
     <ItemContainer {...props}>
       <CurationTitle COLOR={COLOR}>{title}</CurationTitle>
       <CurationThumbnail onPress={() => onMove(curationId)}>
         <CurationImage source={{ uri: thumbnail }} />
         <WordsNum>용어 {cnt}개</WordsNum>
-        <BookmarkButton>
+        <BookmarkButton onPress={() => bookmarkCuration(curationId)}>
           {bookmarked ? (
             <Ionicons
               name="ios-bookmark"

@@ -20,6 +20,8 @@ import { tutorialState } from "@recoil/tutorialState";
 import Coachmark from "@components/popup/coach";
 import { useArchive } from "@hooks/useArchive";
 import { useTerm } from "@hooks/useTerm";
+import { useMember } from "@hooks/useMember";
+import { Category } from "Curation";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -33,6 +35,7 @@ interface TextType {
  */
 const Home = ({ navigation, route }: Props) => {
   const { getEachCategoryCurationList, categoryCurationList } = useCuration();
+  const { user } = useMember();
 
   const { archivedWords, getArchiveListInHome } = useArchive();
   const { getDailyTerm } = useTerm();
@@ -48,7 +51,9 @@ const Home = ({ navigation, route }: Props) => {
     try {
       getArchiveListInHome();
       getDailyTerm();
-      getEachCategoryCurationList("pm");
+      getEachCategoryCurationList(
+        user.info?.categories[0].toLowerCase() as Category
+      );
       setRefresh(false);
     } catch (err) {
       setTimeout(() => {
@@ -59,8 +64,9 @@ const Home = ({ navigation, route }: Props) => {
 
   useEffect(() => {
     getArchiveListInHome();
-    // TODO : 큐레이션 카테고리 배열로 선택해 넘기도록
-    getEachCategoryCurationList("pm");
+    getEachCategoryCurationList(
+      user.info?.categories[0].toLowerCase() as Category
+    );
   }, []);
 
   useEffect(() => {

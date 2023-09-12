@@ -1,4 +1,5 @@
 import CurationApi from "@api/CurationApi";
+import { curationDetailState, curationListState } from "@recoil/curationState";
 import {
   Category,
   CurationDetail,
@@ -6,6 +7,7 @@ import {
   MoreRecommendedCuration,
 } from "Curation";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
 /**
  * 큐레이션 관리 훅
@@ -16,10 +18,9 @@ export const useCuration = () => {
     CurationPreview[]
   >([]);
   const [curationDetailInfo, setCurationDetailInfo] =
-    useState<CurationDetail>();
-  const [categoryCurationList, setCategoryCurationList] = useState<
-    MoreRecommendedCuration[]
-  >([]);
+    useRecoilState(curationDetailState);
+  const [categoryCurationList, setCategoryCurationList] =
+    useRecoilState(curationListState);
 
   /** 아카이브한 큐레이션 목록 가져오기 */
   const getArchivecurationList = async (): Promise<boolean> => {
@@ -49,8 +50,8 @@ export const useCuration = () => {
   const getCurationDetailInfo = async (id: number): Promise<boolean> => {
     try {
       const res = await curationApi.getCurationDetail(id);
+      console.log(res);
       setCurationDetailInfo(res);
-      // console.log("curation Detail Info - at hook: ", id, curationDetailInfo);
       return true;
     } catch (err) {
       console.log(err);

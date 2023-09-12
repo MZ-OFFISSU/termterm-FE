@@ -15,6 +15,9 @@ import { colorTheme } from "@style/designSystem";
 import { useTerm } from "@hooks/useTerm";
 import { RefreshControl } from "react-native";
 import { useFolder } from "@hooks/useFolder";
+import { useCuration } from "@hooks/useCuration";
+import { useMember } from "@hooks/useMember";
+import { Category } from "Curation";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -24,6 +27,8 @@ const Search = ({ navigation }: Props) => {
   const { results, searchTerm } = useTerm();
   const [refresh, setRefresh] = useState(false);
   const { getUsersFolderList } = useFolder();
+  const { getEachCategoryCurationList } = useCuration();
+  const { user } = useMember();
 
   const [COLOR, mode] = useThemeStyle();
 
@@ -62,6 +67,9 @@ const Search = ({ navigation }: Props) => {
     try {
       await handleSearch(keyword);
       getUsersFolderList();
+      getEachCategoryCurationList(
+        user.info?.categories[0].toLowerCase() as Category
+      );
       setRefresh(false);
     } catch (err) {
       setTimeout(() => {
