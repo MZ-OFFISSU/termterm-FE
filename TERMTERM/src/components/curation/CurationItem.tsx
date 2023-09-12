@@ -7,6 +7,9 @@ import { BookmarkButton } from "@components/common/Bookmark";
 import { MoreRecommendedCuration } from "Curation";
 import { ViewProps } from "react-native";
 import { useCuration } from "@hooks/useCuration";
+import { useState } from "react";
+import { booleanConverter } from "@utils/booleanConverter";
+import { useHaptics } from "@hooks/useHaptics";
 
 interface Props extends ViewProps {
   item: MoreRecommendedCuration;
@@ -17,8 +20,27 @@ interface Props extends ViewProps {
 const CurationItem = ({ item, onMove, ...props }: Props) => {
   const { curationId, title, thumbnail, cnt, bookmarked } = item ?? {};
   const [COLOR, mode] = useThemeStyle();
+  const [isBookmarked, setIsBookmarked] = useState(
+    booleanConverter(bookmarked)
+  );
+  const { haptic } = useHaptics();
 
-  const { bookmarkCuration } = useCuration();
+  const { bookmarkCuration, deleteCurationBookmark } = useCuration();
+
+  const handleCuration = async () => {
+    try {
+      haptic("light");
+      if (isBookmarked) {
+        await deleteCurationBookmark(curationId);
+        setIsBookmarked(false);
+      } else {
+        await bookmarkCuration(curationId);
+        setIsBookmarked(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <ItemContainer {...props}>
@@ -26,8 +48,8 @@ const CurationItem = ({ item, onMove, ...props }: Props) => {
       <CurationThumbnail onPress={() => onMove(curationId)}>
         <CurationImage source={{ uri: thumbnail }} />
         <WordsNum>용어 {cnt}개</WordsNum>
-        <BookmarkButton onPress={() => bookmarkCuration(curationId)}>
-          {bookmarked ? (
+        <BookmarkButton onPress={handleCuration}>
+          {isBookmarked ? (
             <Ionicons
               name="ios-bookmark"
               size={22}

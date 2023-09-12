@@ -37,8 +37,18 @@ export const useCuration = () => {
   /** 큐레이션 북마크하기 */
   const bookmarkCuration = async (id: number): Promise<boolean> => {
     try {
-      const res = await curationApi.curationBookmark(id);
-      console.log("특정 큐레이션 북마크 성공 - ID : ", id);
+      await curationApi.curationBookmark(id);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  };
+
+  /** 큐레이션 북마크취소 */
+  const deleteCurationBookmark = async (id: number): Promise<boolean> => {
+    try {
+      await curationApi.cancelBookmarkCuration(id);
       return true;
     } catch (err) {
       console.log(err);
@@ -83,5 +93,6 @@ export const useCuration = () => {
     getEachCategoryCurationList,
     categoryCurationList,
     setCategoryCurationList,
+    deleteCurationBookmark,
   };
 };
