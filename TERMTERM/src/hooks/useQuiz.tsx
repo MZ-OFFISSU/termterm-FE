@@ -1,5 +1,5 @@
 import QuizApi from "@api/QuizApi";
-import { QuizDetail, QuizReviewDetail, QuizStatus } from "Quiz";
+import { QuizDetail, QuizReviewDetail, QuizResult, QuizSubmit } from "Quiz";
 import { useEffect, useState } from "react";
 
 /**
@@ -40,9 +40,9 @@ export const useQuiz = () => {
   };
 
   /** 데일리/복습 퀴즈 결과 제출 */
-  const registerQuizResultInfo = async (): Promise<boolean> => {
+  const registerQuizResultInfo = async (resultData: QuizSubmit): Promise<boolean> => {
     try {
-      await quizApi.registerQuizResult();
+      await quizApi.registerQuizResult(resultData);
       return true;
     } catch (err) {
       console.log(err);
