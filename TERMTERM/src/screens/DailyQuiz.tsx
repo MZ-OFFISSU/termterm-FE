@@ -11,13 +11,13 @@ import { screenWidth } from "@style/dimensions";
 import { useQuiz } from "@hooks/useQuiz";
 import { useRecoilState } from "recoil";
 import { quizState } from "@recoil/quizState";
+import { QuizSubmit } from "Quiz";
 
 export type Props = StackScreenProps<RootStackParamList, "DailyQuiz">;
 
 const DailyQuiz = ({ navigation }: Props) => {
-  const { dailyQuizItem } = useQuiz();
+  const { dailyQuizItem, registerQuizResultInfo } = useQuiz();
   const [COLOR, mode] = useThemeStyle();
-  const [idx, setIdx] = useState(0);
   const [selectedIdx, setSelectedIdx] = useState(-1);
   const [borderColor, setBorderColor] = useState(
     COLOR.Background.inputBorderDefault
@@ -31,12 +31,23 @@ const DailyQuiz = ({ navigation }: Props) => {
     setSelectedIdx(idx);
     setBorderColor(COLOR.THEME.secondary[120]);
     setCurr((prev) => ({ ...prev, currIdx: prev.currIdx + 1 }));
+    const memberQuizSelect: QuizSubmit = {
+      quizType: "DAILY",
+      results: [
+        ...(curr.currIdx <= 5
+          ? [
+              {
+                memberSelectedTermId: idx,
+                problemTermId: currentQuiz?.termId || 0,
+              },
+            ]
+          : []),
+      ],
+    };
 
-    if (curr.currIdx === 5) {
-      navigation.navigate("CompleteQuiz");
-    } else {
-      navigation.navigate("QuizResult", { id: idx });
-    }
+    console.log(memberQuizSelect);
+    registerQuizResultInfo(memberQuizSelect);
+    navigation.navigate("QuizResult", { id: idx });
   };
 
   return (
