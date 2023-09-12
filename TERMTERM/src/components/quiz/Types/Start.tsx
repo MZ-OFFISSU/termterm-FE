@@ -8,6 +8,8 @@ import Clear from "./Clear";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { useRecoilValue } from "recoil";
+import { quizState } from "@recoil/quizState";
 
 /**
  * async storage에 저장되는 퀴즈 현재 상태
@@ -27,14 +29,18 @@ enum QuizState {
 const Start = ({ navigate }: ChildrenProps) => {
   const quizApi = new QuizApi();
   const [COLOR, mode] = useThemeStyle();
-  const [quizState, setQuizState] = useState<string>(QuizState.NOT_STARTED);
+  const [quizStatus, setQuizStatus] = useState<string>(QuizState.NOT_STARTED);
   const [countdown, setCountdown] = useState(20);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const curr = useRecoilValue(quizState);
+  const { currIdx } = curr
 
   const remindQuizStatus = async () => {
     try {
       const res = await quizApi.getDailyQuizStatus();
-      setQuizState(res.status);
+      // TODO : 값 바꿔두기
+      // setQuizState(res.status);
+      setQuizStatus(QuizState.NOT_STARTED)
     } catch (err) {
       console.log(err);
     }
@@ -43,7 +49,7 @@ const Start = ({ navigate }: ChildrenProps) => {
   useEffect(() => {
     remindQuizStatus();
     let interval: NodeJS.Timer;
-    if (quizState === QuizState.IN_PROGRESS) {
+    if (quizStatus === QuizState.IN_PROGRESS) {
       interval = setInterval(() => {
         setCountdown((prevCountdown) => prevCountdown - 1);
       }, 1000);
@@ -52,11 +58,11 @@ const Start = ({ navigate }: ChildrenProps) => {
     return () => {
       clearInterval(interval);
     };
-  }, [quizState]);
+  }, [quizStatus]);
 
   return (
     <>
-      {quizState === QuizState.NOT_STARTED && (
+      {quizStatus === QuizState.NOT_STARTED && currIdx <= 5 && (
         <>
           <AutoSizedImage source={require("@assets/test.png")} width={24} />
           <Title COLOR={COLOR} style={{ marginLeft: 5 }}>
@@ -71,7 +77,7 @@ const Start = ({ navigate }: ChildrenProps) => {
         </>
       )}
 
-      {quizState === QuizState.IN_PROGRESS && (
+      {quizStatus === QuizState.IN_PROGRESS && (
         <>
           {countdown > 0 ? (
             <>
@@ -102,7 +108,7 @@ const Start = ({ navigate }: ChildrenProps) => {
         </>
       )}
 
-      {quizState === QuizState.COMPLETED && (
+      {quizStatus === QuizState.COMPLETED && (
         <Clear navigate={() => navigation.push("ReviewQuizIntro")} />
       )}
     </>
