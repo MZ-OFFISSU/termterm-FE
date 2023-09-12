@@ -118,6 +118,7 @@ const InfoSelector = ({
         <CustomTextarea
           value={input.introduction}
           max={100}
+          placeholder="자신을 잘 소개할 수 있는 문구를 적어주세요."
           onChangeText={(text) => onChangeInput("intro", text)}
         />
       </Wrapper>
