@@ -185,6 +185,7 @@ const Container = () => {
                     onBookmark={() => null}
                     onShare={() => null}
                     bookmarked={false}
+                    isCuration={true}
                   />
                 );
               },

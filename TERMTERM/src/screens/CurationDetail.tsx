@@ -14,8 +14,9 @@ import Toast from "react-native-toast-message";
 import CustomModal from "@components/popup/modal";
 import { colorTheme } from "@style/designSystem";
 import { useCuration } from "@hooks/useCuration";
-import { MoreRecommendedCuration, TermSimple } from "Curation";
+import { TermSimple } from "Curation";
 import { RefreshControl } from "react-native";
+import { useBookmarkHeader } from "@hooks/useBookmarkHeader";
 
 export type Props = StackScreenProps<RootStackParamList, "CurationDetail">;
 
@@ -27,6 +28,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
   const [terms, setTerms] = useState<TermSimple[]>();
   const [pay, setPay] = useState(curationDetailInfo?.paid);
   const [modal, setModal] = useState(false);
+  const { settingCurationId } = useBookmarkHeader();
 
   //토스트메시지 보여주는 함수
   const showToast = () => {
@@ -46,6 +48,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
   };
 
   useEffect(() => {
+    settingCurationId(CURATION_ID);
     getCurationDetailInfo(CURATION_ID);
     // console.log("first curation detail info : ", curationDetailInfo)
     setTerms(curationDetailInfo?.termSimples);
