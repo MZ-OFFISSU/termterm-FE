@@ -26,7 +26,6 @@ const AllTerms = ({ navigation }: Props) => {
 
   useEffect(() => {
     getAllTermList(termConfig);
-    // console.log("totalTermList - in AllTerms : ", totalTermList);
   }, []);
 
   return (

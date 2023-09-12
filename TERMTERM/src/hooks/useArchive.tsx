@@ -1,6 +1,6 @@
 import FolderApi from "@api/FolderApi";
 import { WordProps } from "@interfaces/word";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFolder } from "./useFolder";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -105,6 +105,10 @@ export const useArchive = () => {
       desc,
     });
   };
+
+  useEffect(() => {
+    getUsersFolderList();
+  }, []);
 
   return {
     archivedWords,

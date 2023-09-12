@@ -10,6 +10,9 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { useTerm } from "@hooks/useTerm";
+import { booleanConverter } from "@utils/booleanConverter";
+import { useArchive } from "@hooks/useArchive";
+import CustomModal from "@components/popup/modal";
 
 interface Props extends TouchableOpacityProps {
   id: number;
@@ -31,6 +34,7 @@ const TermPreviewBox = ({
   const [COLOR, mode] = useThemeStyle();
   const [sub, main] = useWordReg(name);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { archiveTerm, isModalOpen, goToFolderMake, closeModal } = useArchive();
 
   return (
     <Container
@@ -42,12 +46,12 @@ const TermPreviewBox = ({
         marginBottom: 5,
       }}
       {...props}
-      onPress={() => navigation.navigate("TermDetail", { id: id })}
+      onPress={() => navigation.navigate("TermDetail", { id: `${id}` })}
     >
       <UpperBox>
         <Job COLOR={COLOR}>{main}</Job>
-        <PreviewBookmark>
-          {bookmarked === "YES" ? (
+        <PreviewBookmark onPress={() => archiveTerm(id)}>
+          {booleanConverter(bookmarked) ? (
             <Ionicons
               name="ios-bookmark"
               size={22}
@@ -67,6 +71,18 @@ const TermPreviewBox = ({
           ? truncateString(description, 60)
           : "용어 설명이 없어요."}
       </Description>
+      <CustomModal
+        visible={isModalOpen}
+        title={"용어 아카이빙 폴더가 없어요"}
+        subtitle={
+          "폴더를 만들어 용어를 아카이빙한 후\n용어 아카이브를 활용해 보세요"
+        }
+        btnTitle={["나중에 만들게요", "폴더 만들기"]}
+        onNext={goToFolderMake}
+        onClose={() => {
+          closeModal();
+        }}
+      />
     </Container>
   );
 };

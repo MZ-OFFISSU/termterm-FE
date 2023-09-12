@@ -33,12 +33,7 @@ interface TextType {
  * 필요시 수정가능합니다.
  */
 const Home = ({ navigation, route }: Props) => {
-  const {
-    getEachCategoryCurationList,
-    categoryCurationList,
-    getCurationDetailInfo,
-    curationDetailInfo,
-  } = useCuration();
+  const { getEachCategoryCurationList, categoryCurationList } = useCuration();
 
   const { archivedWords, getArchiveListInHome } = useArchive();
 
@@ -46,11 +41,6 @@ const Home = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const { homeMainTitle, homeSubTitle } = useHome();
   const { isOpen, openCoach, hideCoach, checked, handleCheck } = useCoach();
-
-  useEffect(() => {
-    // TODO : 임시 CurationID값 해결
-    getCurationDetailInfo(8);
-  }, [curationDetailInfo]);
 
   useEffect(() => {
     getArchiveListInHome();
