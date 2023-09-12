@@ -8,6 +8,7 @@ import {
   FolderModal,
   CancelArchive,
   RandomTerms,
+  IncludeWord,
 } from "Folder";
 import { get, post, put, remove } from "./AxiosCreate";
 
@@ -74,6 +75,17 @@ class FolderApi {
   /** 홈 화면 - 아카이빙 한 단어들 중 10개를 랜덤으로 뽑아 리턴 */
   getRandomArchiveTerms = async (): Promise<RandomTerms[]> => {
     const data = await get<RandomTerms[]>(`/v1/folder/term/random-10`);
+    return data;
+  };
+
+  /** 홈 화면 - 아카이빙 한 단어들 중 10개를 랜덤으로 뽑아 리턴 */
+  isIncludeWordInFolder = async (
+    folderId: number,
+    termId: number
+  ): Promise<IncludeWord> => {
+    const data = await get<IncludeWord>(
+      `/v1/folder/${folderId}/including/${termId}`
+    );
     return data;
   };
 }

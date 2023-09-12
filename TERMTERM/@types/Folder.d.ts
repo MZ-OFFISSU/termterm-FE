@@ -74,4 +74,8 @@ declare module "Folder" {
     source: string;
     termId: any;
   };
+
+  export type IncludeWord = {
+    isExist: boolean;
+  };
 }
