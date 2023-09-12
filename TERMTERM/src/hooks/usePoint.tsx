@@ -1,5 +1,4 @@
 import PointApi from "@api/PointApi";
-import { getAccessToken } from "@utils/tokenHandler";
 import { PointHistoryContent } from "Point";
 import { useEffect, useState } from "react";
 
