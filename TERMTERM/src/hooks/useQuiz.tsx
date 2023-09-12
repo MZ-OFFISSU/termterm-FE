@@ -77,6 +77,7 @@ export const useQuiz = () => {
 
   useEffect(() => {
     getDailyQuizInfo();
+    getReviewQuizInfo();
     getFinalQuizReviewInfo();
   }, []);
 
