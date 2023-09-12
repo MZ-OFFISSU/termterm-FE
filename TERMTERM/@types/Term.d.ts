@@ -30,7 +30,7 @@ declare module "Term" {
 
   export type TermConfig = {
     /** 카테고리 배열 */
-    category: string[];
+    categories: string[];
   };
 
   type Pageable = {

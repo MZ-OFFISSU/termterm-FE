@@ -1,13 +1,15 @@
 import { BookmarkButtonComponent } from "@components/common/Bookmark";
 import { Preview } from "@components/curation/detail/term";
+import CustomModal from "@components/popup/modal";
+import { useArchive } from "@hooks/useArchive";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useWordReg } from "@hooks/useWordReg";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { TEXT_STYLES, colorTheme, TYPO_STYLE } from "@style/designSystem";
+import { booleanConverter } from "@utils/booleanConverter";
 import { truncateString } from "@utils/wordCutter";
-import { useState } from "react";
 import styled from "styled-components/native";
 
 /**
@@ -16,19 +18,34 @@ import styled from "styled-components/native";
 const DailyTermBox = ({ bookmarked, id, name, description }: Preview) => {
   const [COLOR, mode] = useThemeStyle();
   const [sub, main] = useWordReg(name);
-  const [bookmarkState, setBookmarkState] = useState(bookmarked);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { archiveTerm, isModalOpen, goToFolderMake, closeModal } = useArchive();
 
   return (
     <Container
       style={{ borderWidth: 1, borderColor: COLOR.Background.onSurface }}
-      onPress={() => navigation.push("TermDetail", { id: id })}
+      onPress={() => navigation.push("TermDetail", { id: `${id}` })}
     >
-      <BookmarkButtonComponent fill={bookmarked === "YES" ? true : false} />
+      <BookmarkButtonComponent
+        fill={booleanConverter(bookmarked)}
+        onPress={() => archiveTerm(id)}
+      />
       <Title COLOR={COLOR} mode={mode}>
         {main}
       </Title>
       <Content COLOR={COLOR}>{truncateString(description, 75)}</Content>
+      <CustomModal
+        visible={isModalOpen}
+        title={"용어 아카이빙 폴더가 없어요"}
+        subtitle={
+          "폴더를 만들어 용어를 아카이빙한 후\n용어 아카이브를 활용해 보세요"
+        }
+        btnTitle={["나중에 만들게요", "폴더 만들기"]}
+        onNext={goToFolderMake}
+        onClose={() => {
+          closeModal();
+        }}
+      />
     </Container>
   );
 };

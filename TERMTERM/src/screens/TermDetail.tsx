@@ -4,13 +4,13 @@ import { colorTheme } from "@style/designSystem";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { WordCard } from "@components/terms/";
-import { useEffect, useState } from "react";
-import { WordProps } from "@interfaces/word";
-import { dummyWord } from "@assets/dummyWord";
+import { useEffect } from "react";
 import { screenWidth } from "@style/dimensions";
 import OtherThink from "@components/OtherThink";
-import LottieAnimation from "@components/OtherThink/LottieAnimation";
 import { useTerm } from "@hooks/useTerm";
+import { useBookmarkHeader } from "@hooks/useBookmarkHeader";
+import { booleanConverter } from "@utils/booleanConverter";
+import CustomModal from "@components/popup/modal";
 
 export type Props = StackScreenProps<RootStackParamList, "TermDetail">;
 
@@ -20,10 +20,18 @@ export type Props = StackScreenProps<RootStackParamList, "TermDetail">;
 const TermDetail = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const { getTermDetail, termDetail } = useTerm();
+  const { setDefaultBookmarkState, isModalOpen, closeModal, setTermId } =
+    useBookmarkHeader();
 
   useEffect(() => {
+    setTermId(Number(route.params.id));
     getTermDetail(Number(route.params.id));
   }, [route]);
+
+  useEffect(() => {
+    if (termDetail)
+      setDefaultBookmarkState(booleanConverter(termDetail.bookmarked));
+  }, [termDetail]);
 
   return (
     <Container COLOR={COLOR}>
@@ -34,12 +42,18 @@ const TermDetail = ({ navigation, route }: Props) => {
             detail={true}
             style={{ width: screenWidth - 32 }}
           />
-          {/* <LottieAnimation /> */}
           <OtherThink word={termDetail} />
         </>
       ) : (
         <></>
       )}
+      <CustomModal
+        visible={isModalOpen}
+        title={"아카이빙 해제는 아카이브 내에서만 가능해요!"}
+        subtitle={"해당 용어를 아카이빙 한 폴더를 확인해주세요"}
+        btnTitle={["확인"]}
+        onNext={closeModal}
+      />
     </Container>
   );
 };

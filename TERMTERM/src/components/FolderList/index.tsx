@@ -1,15 +1,16 @@
+import FolderApi from "@api/FolderApi";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { useArchive } from "@hooks/useArchive";
-import { useFolder } from "@hooks/useFolder";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { TYPO_STYLE, colorTheme } from "@style/designSystem";
 import { UserFolderList } from "Folder";
+import { useEffect, useState } from "react";
 import styled from "styled-components/native";
 
 interface Props {
   myFolderList: UserFolderList[];
   selectedFolders: number[];
   handleSelectFolder: (folderId: number) => void;
+  termId: number;
 }
 
 const FOLDER_ICON = [
@@ -22,8 +23,11 @@ const FolderList = ({
   myFolderList,
   selectedFolders,
   handleSelectFolder,
+  termId,
 }: Props) => {
+  const folderApi = new FolderApi();
   const [COLOR, mode] = useThemeStyle();
+  const [disabledFolders, setDisabledFolders] = useState<number[]>([]);
 
   const curFolderImg = (fId: number) => {
     if (selectedFolders.includes(fId)) return FOLDER_ICON[1];
@@ -31,10 +35,39 @@ const FolderList = ({
     return FOLDER_ICON[2];
   };
 
+  const isInWord = async (folderId: number) => {
+    try {
+      const res = await folderApi.isIncludeWordInFolder(folderId, termId);
+      return res.isExist;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    const checkFolders = async () => {
+      const disableds: number[] = [];
+
+      for (let folder of myFolderList) {
+        if (await isInWord(folder.folderId)) {
+          disableds.push(folder.folderId);
+        }
+      }
+
+      setDisabledFolders(disableds);
+    };
+
+    checkFolders();
+  }, [myFolderList, termId]);
+
   return (
     <Container>
       {myFolderList?.map((folder) => (
-        <FolderWrapper onPress={() => handleSelectFolder(folder.folderId)}>
+        <FolderWrapper
+          disabled={disabledFolders.includes(folder.folderId)}
+          onPress={() => handleSelectFolder(folder.folderId)}
+        >
           <AutoSizedImage source={curFolderImg(folder.folderId)} width={90} />
           <FolderInfo COLOR={COLOR}>{folder.title}</FolderInfo>
         </FolderWrapper>
@@ -59,6 +92,7 @@ const FolderWrapper = styled.TouchableOpacity`
   flex-direction: column;
   align-items: center;
   margin: 7px;
+  opacity: ${(props) => (props.disabled ? 0.2 : 1)};
 `;
 
 const FolderInfo = styled.Text<{ COLOR: colorTheme }>`

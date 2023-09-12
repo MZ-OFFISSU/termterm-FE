@@ -3,12 +3,12 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import styled from "styled-components/native";
 import { colorTheme } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import TermPreviewBox from "@components/curation/detail/term/TermPreviewBox";
-import TermApi from "@api/TermApi";
 import { TermConfig, TermItem } from "Term";
 import { useTerm } from "@hooks/useTerm";
-import { getAccessToken } from "@utils/tokenHandler";
+import { FlatList, RefreshControl, StyleSheet } from "react-native";
+import { useFilter } from "@hooks/useFilter";
 
 export type Props = StackScreenProps<RootStackParamList, "AllTerms">;
 
@@ -16,31 +16,65 @@ export type Props = StackScreenProps<RootStackParamList, "AllTerms">;
  * 용어 전체페이지
  */
 const AllTerms = ({ navigation }: Props) => {
-  const { totalTermList, getAllTermList } = useTerm();
+  const { totalTermList, getAllTermList, page, initializePage } = useTerm();
   const [COLOR, mode] = useThemeStyle();
-  // TODO : 임시 설정 값 돌려놓기
-  const [termConfig, setTermConfig] = useState<TermConfig>({
-    // TODO : 카테고리 배열 디버깅
-    categories: ["pm", "development"],
+  const { filterArr, converter } = useFilter();
+
+  const [refresh, setRefresh] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefresh(true);
+    const termConfig = filterArr.map((item) => converter(item));
+    try {
+      initializePage();
+      getAllTermList({ categories: termConfig }, 0);
+      setRefresh(false);
+    } catch (err) {
+      setTimeout(() => {
+        setRefresh(false);
+      }, 2000);
+    }
+  }, []);
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      width: "100%",
+      backgroundColor: COLOR.Background.surface,
+    },
   });
 
   useEffect(() => {
-    getAllTermList(termConfig);
-    // console.log("totalTermList - in AllTerms : ", totalTermList);
+    const termConfig = filterArr.map((item) => converter(item));
+    getAllTermList({ categories: termConfig }, page);
   }, []);
 
+  useEffect(() => {
+    const termConfig = filterArr.map((item) => converter(item));
+    initializePage();
+    getAllTermList({ categories: termConfig }, 0);
+  }, [filterArr]);
+
   return (
-    <Container COLOR={COLOR}>
-      <InnerContainer>
-        {totalTermList.map((term) => (
-          <TermPreviewBox {...term} key={term.id} />
-        ))}
-      </InnerContainer>
-    </Container>
+    <FlatList
+      style={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={refresh} onRefresh={() => onRefresh()} />
+      }
+      data={totalTermList}
+      renderItem={({ item }: { item: TermItem }) => (
+        <TermPreviewBox {...item} />
+      )}
+      onEndReached={() => {
+        const termConfig = filterArr.map((item) => converter(item));
+        getAllTermList({ categories: termConfig }, page);
+      }}
+      onEndReachedThreshold={0.5}
+    />
   );
 };
 
-const Container = styled.ScrollView<{ COLOR: colorTheme }>`
+const Container = styled.FlatList<{ COLOR: colorTheme }>`
   width: 100%;
   background-color: ${(props) => props.COLOR.Background.surface};
 `;

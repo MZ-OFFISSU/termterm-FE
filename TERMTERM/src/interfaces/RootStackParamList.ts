@@ -43,4 +43,5 @@ export type RootStackParamList = {
   ReviewQuizIntro: undefined;
   ReviewQuiz: undefined;
   ReviewQuizResult: { id: number };
+  SelectFolder: { termId: number };
 };

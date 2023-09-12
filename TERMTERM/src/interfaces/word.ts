@@ -6,7 +6,7 @@ interface WordProps {
   name: string;
   description: string;
   source: string;
-  categories?: Array<Category>;
+  categories?: Array<string>;
   comments?: Array<Comment>;
   bookmarked?: "YES" | null;
 }
