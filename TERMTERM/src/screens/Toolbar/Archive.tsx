@@ -72,7 +72,7 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
         onNext={() => gotoMakefolder()}
       />
     );
-  }, [folderInfoModal]);
+  }, [folderInfoModal, modal]);
 
   /**
    * 폴더 개수가 3개 이상일 때 모달
@@ -88,7 +88,7 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
         onClose={() => setModal(false)}
       />
     );
-  }, [folderInfoModal]);
+  }, [folderInfoModal, modal]);
 
   /**
    * 최대 생성 가능한 폴더가 가득 찼을 때 모달
@@ -104,7 +104,7 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
         onClose={() => setModal(false)}
       />
     );
-  }, [folderInfoModal]);
+  }, [folderInfoModal, modal]);
 
   useEffect(() => {
     getFolderInfoModal();
@@ -154,13 +154,15 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
       ) : (
         <MaxModal />
       )}
-      <CustomModal
-        visible={infoModal}
-        title={"폴더 관련 정보"}
-        subtitle={`현재 폴더 개수 : ${folderInfoModal?.currentFolderCount}개\n나의 폴더 생성 한도 : ${folderInfoModal?.myFolderCreationLimit}개\n생성 가능 폴더 개수 : 최대 ${folderInfoModal?.systemFolderCreationLimit}개`}
-        btnTitle={["확인"]}
-        onNext={() => setInfoModal(false)}
-      />
+      {infoModal && (
+        <CustomModal
+          visible={infoModal}
+          title={"폴더 관련 정보"}
+          subtitle={`현재 폴더 개수 : ${folderInfoModal?.currentFolderCount}개\n나의 폴더 생성 한도 : ${folderInfoModal?.myFolderCreationLimit}개\n생성 가능 폴더 개수 : 최대 ${folderInfoModal?.systemFolderCreationLimit}개`}
+          btnTitle={["확인"]}
+          onNext={() => setInfoModal(false)}
+        />
+      )}
     </>
   );
 };
