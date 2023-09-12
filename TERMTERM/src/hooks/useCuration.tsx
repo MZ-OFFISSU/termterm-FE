@@ -1,5 +1,9 @@
 import CurationApi from "@api/CurationApi";
-import { curationDetailState, curationListState } from "@recoil/curationState";
+import {
+  archivedCurationListState,
+  curationDetailState,
+  curationListState,
+} from "@recoil/curationState";
 import {
   Category,
   CurationDetail,
@@ -14,9 +18,9 @@ import { useRecoilState } from "recoil";
  */
 export const useCuration = () => {
   const curationApi = new CurationApi();
-  const [arcihivedCurationList, setArchivedCurationList] = useState<
-    CurationPreview[]
-  >([]);
+  const [arcihivedCurationList, setArchivedCurationList] = useRecoilState(
+    archivedCurationListState
+  );
   const [curationDetailInfo, setCurationDetailInfo] =
     useRecoilState(curationDetailState);
   const [categoryCurationList, setCategoryCurationList] =
@@ -27,7 +31,6 @@ export const useCuration = () => {
     try {
       const res = await curationApi.getArchivedCuration();
       setArchivedCurationList(res);
-      console.log("success : ", res);
       return true;
     } catch (err) {
       return false;

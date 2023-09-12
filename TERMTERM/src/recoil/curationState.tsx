@@ -1,4 +1,8 @@
-import { CurationDetail, MoreRecommendedCuration } from "Curation";
+import {
+  CurationDetail,
+  CurationPreview,
+  MoreRecommendedCuration,
+} from "Curation";
 import { atom } from "recoil";
 
 const emptyCurationDetail: CurationDetail = {
@@ -22,5 +26,11 @@ export const curationDetailState = atom<CurationDetail>({
 /** 큐레이션 리스트 상태 */
 export const curationListState = atom<MoreRecommendedCuration[]>({
   key: "curationListState",
+  default: [],
+});
+
+/** 아카이브한 큐레이션 상태 */
+export const archivedCurationListState = atom<CurationPreview[]>({
+  key: "archivedCurationList",
   default: [],
 });
