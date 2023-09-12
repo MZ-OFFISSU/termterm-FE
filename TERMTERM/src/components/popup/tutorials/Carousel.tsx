@@ -19,6 +19,7 @@ const TutorialCarousel = () => {
     vertical: false,
     width: screenWidth,
     height: 355,
+    lineHeight: 24,
   } as const;
 
   const snap = (idx: number) => {
