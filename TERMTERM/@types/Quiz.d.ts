@@ -38,5 +38,7 @@ declare module "Quiz" {
     results: QuizResult[];
   };
 
-  export type QuizStatus = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+  export type QuizStatus = {
+    status: "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+  };
 }
