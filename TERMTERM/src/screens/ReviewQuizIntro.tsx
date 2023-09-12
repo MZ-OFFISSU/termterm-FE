@@ -55,7 +55,7 @@ const ReviewQuizIntro = ({ navigation }: Props) => {
           <Button
             COLOR={COLOR}
             mode={mode}
-            onPress={() => navigation.navigate("DailyQuiz")}
+            onPress={() => navigation.navigate("ReviewQuiz")}
           >
             <ButtonText COLOR={COLOR} mode={mode}>
               {`퀴즈 응시하기     `}
