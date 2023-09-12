@@ -4,7 +4,7 @@ import { TYPO_STYLE, colorTheme } from "@style/designSystem";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { WordCarousel } from "@components/terms/";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { WordProps } from "@interfaces/word";
 import OtherThink from "@components/OtherThink";
 import { useHeader } from "@hooks/useHeader";
@@ -48,15 +48,32 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
   const [curIdx, setCurIdx] = useState(0);
   const coachConfigs = useCoach();
   const { termsEach, getTermsEachInFolder, folderInfo } = useArchive();
+  const {
+    setHeaderState,
+    settingIdx,
+    settingBookmarkArray,
+    settingTermsArray,
+  } = useHeader();
 
-  const { setHeaderState, settingIdx, headerState } = useHeader();
+  const items = useMemo(() => {
+    if (termsEach.length > 0) {
+      return termsEach.map((item) => {
+        return {
+          termId: item.id,
+          ...item,
+        };
+      });
+    }
+    return [];
+  }, [termsEach]);
 
   const settingHeader = (words: Array<WordProps>) => {
     const defaultHeaderState = {
-      id: route.params.id,
+      id: words[curIdx].termId,
       maxNum: words.length,
-      curNum: curIdx + 1,
+      curNum: curIdx,
       bookmarked: true,
+      folderId: route.params.id,
     };
     setHeaderState(defaultHeaderState);
   };
@@ -71,16 +88,12 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
   }, [route]);
 
   useEffect(() => {
-    if (termsEach.length > 0 && headerState.maxNum === 0) {
-      const items = termsEach.map((item) => {
-        return {
-          termId: item.id,
-          ...item,
-        };
-      });
+    if (items.length > 0) {
+      settingBookmarkArray(items.length);
       settingHeader(items);
+      settingTermsArray(items.map((item) => item.id));
     }
-  }, [termsEach]);
+  }, [items]);
 
   useEffect(() => {
     coachConfigs.openCoach("folder");
@@ -88,7 +101,7 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
 
   return (
     <Container COLOR={COLOR}>
-      {termsEach.length > 0 ? (
+      {termsEach.length > 0 && (
         <>
           <WordCarousel
             words={termsEach.map((item) => {
@@ -104,8 +117,6 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
           <FolderInfo {...folderInfo} />
           <OtherThink word={termsEach[curIdx] as any} />
         </>
-      ) : (
-        <></>
       )}
       <Coachmark type="folder" {...coachConfigs} />
     </Container>

@@ -32,6 +32,7 @@ const SelectFolder = ({ navigation, route }: Props) => {
             myFolderList={myFolderList!}
             selectedFolders={selectedFolders}
             handleSelectFolder={handleSelectFolder}
+            termId={route.params.termId}
           />
         </Topper>
         <CustomButton

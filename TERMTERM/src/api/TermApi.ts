@@ -6,6 +6,7 @@ import {
   TermResponse,
 } from "Term";
 import { get, post, put } from "./AxiosCreate";
+import { AxiosRequestConfig } from "axios";
 
 class TermApi {
   /** 용어 북마크 (임시)*/
@@ -27,8 +28,11 @@ class TermApi {
   };
 
   /** 전체용어 리스트 */
-  allTermList = async (config: TermConfig): Promise<TermResponse> => {
-    const data = await post<TermResponse>(`/v1/term/list`, config);
+  allTermList = async (
+    categories: TermConfig,
+    config?: AxiosRequestConfig
+  ): Promise<TermResponse> => {
+    const data = await post<TermResponse>(`/v1/term/list`, categories, config);
     return data;
   };
 

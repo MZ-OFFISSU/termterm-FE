@@ -1,6 +1,6 @@
 import FolderApi from "@api/FolderApi";
 import { WordProps } from "@interfaces/word";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFolder } from "./useFolder";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -37,8 +37,13 @@ export const useArchive = () => {
   };
 
   const archiveTerm = (termId: number) => {
-    if (!myFolderList || myFolderList!.length === 0) setIsModalOpen(true);
-    else navigation.push("SelectFolder", { termId });
+    if (!myFolderList || myFolderList!.length === 0) {
+      setIsModalOpen(true);
+      return false; // 폴더가 없음
+    } else {
+      navigation.push("SelectFolder", { termId });
+      return true; // 폴더가 있음
+    }
   };
 
   const closeModal = () => {
@@ -70,6 +75,18 @@ export const useArchive = () => {
       });
 
       navigation.pop();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDeleteArchive = async (folderId: number, termId: number) => {
+    try {
+      await folderApi.removeTermInFolder({ folderId, termId });
+      Toast.show({
+        type: mode ? "light" : "dark",
+        text1: "선택한 폴더에서\n용어 아카이빙이 해제되었어요!",
+      });
     } catch (err) {
       console.log(err);
     }
@@ -122,5 +139,6 @@ export const useArchive = () => {
     termsEach,
     saveFolderInfo,
     folderInfo,
+    handleDeleteArchive,
   };
 };

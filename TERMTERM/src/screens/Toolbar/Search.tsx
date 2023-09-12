@@ -14,6 +14,7 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { colorTheme } from "@style/designSystem";
 import { useTerm } from "@hooks/useTerm";
 import { RefreshControl } from "react-native";
+import { useFolder } from "@hooks/useFolder";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -22,6 +23,7 @@ const Search = ({ navigation }: Props) => {
   const [records, setRecords] = useSearch();
   const { results, searchTerm } = useTerm();
   const [refresh, setRefresh] = useState(false);
+  const { getUsersFolderList } = useFolder();
 
   const [COLOR, mode] = useThemeStyle();
 
@@ -59,6 +61,7 @@ const Search = ({ navigation }: Props) => {
     setRefresh(true);
     try {
       await handleSearch(keyword);
+      getUsersFolderList();
       setRefresh(false);
     } catch (err) {
       setTimeout(() => {

@@ -1,15 +1,13 @@
 import styled from "styled-components/native";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { EmptyWordCard, DailyQuizRouter } from "@components/index";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { SafeAreaView } from "react-native";
+import { RefreshControl, SafeAreaView } from "react-native";
 import { CurationItem } from "@components/curation";
 import { CurationItemProps } from "@interfaces/curation";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
-import { WordProps } from "@interfaces/word";
-import { dummyWords } from "@assets/dummyWord";
 import { WordCarousel } from "@components/terms/";
 import DailyTermContainer from "@components/home/DailyTermContainer";
 import { Octicons } from "@expo/vector-icons";
@@ -21,6 +19,7 @@ import { useRecoilValue } from "recoil";
 import { tutorialState } from "@recoil/tutorialState";
 import Coachmark from "@components/popup/coach";
 import { useArchive } from "@hooks/useArchive";
+import { useTerm } from "@hooks/useTerm";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -33,24 +32,30 @@ interface TextType {
  * 필요시 수정가능합니다.
  */
 const Home = ({ navigation, route }: Props) => {
-  const {
-    getEachCategoryCurationList,
-    categoryCurationList,
-    getCurationDetailInfo,
-    curationDetailInfo,
-  } = useCuration();
+  const { getEachCategoryCurationList, categoryCurationList } = useCuration();
 
   const { archivedWords, getArchiveListInHome } = useArchive();
+  const { getDailyTerm } = useTerm();
 
   const isTutorialOpen = useRecoilValue(tutorialState);
   const [COLOR, mode] = useThemeStyle();
   const { homeMainTitle, homeSubTitle } = useHome();
   const { isOpen, openCoach, hideCoach, checked, handleCheck } = useCoach();
+  const [refresh, setRefresh] = useState(false);
 
-  useEffect(() => {
-    // TODO : 임시 CurationID값 해결
-    getCurationDetailInfo(8);
-  }, [curationDetailInfo]);
+  const onRefresh = useCallback(async () => {
+    setRefresh(true);
+    try {
+      getArchiveListInHome();
+      getDailyTerm();
+      getEachCategoryCurationList("pm");
+      setRefresh(false);
+    } catch (err) {
+      setTimeout(() => {
+        setRefresh(false);
+      }, 2000);
+    }
+  }, []);
 
   useEffect(() => {
     getArchiveListInHome();
@@ -64,7 +69,12 @@ const Home = ({ navigation, route }: Props) => {
 
   return (
     <SafeAreaView>
-      <Container COLOR={COLOR}>
+      <Container
+        COLOR={COLOR}
+        refreshControl={
+          <RefreshControl refreshing={refresh} onRefresh={() => onRefresh()} />
+        }
+      >
         <InnerContainer>
           <TitleContainer maintitle={homeMainTitle} subtitle={homeSubTitle} />
           {archivedWords ? (

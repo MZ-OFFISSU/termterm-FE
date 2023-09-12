@@ -1,9 +1,10 @@
 import HeaderWrapper from "./HeaderWrapper";
 import { NavigatorTitle, CaretBtn } from "../common/NavigatorTitle";
 import styled from "styled-components/native";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import BackArrowIcon from "@assets/icon/BackArrowIcon";
+import { useBookmarkHeader } from "@hooks/useBookmarkHeader";
 
 interface Props {
   onBack: () => void;
@@ -16,14 +17,10 @@ interface Props {
 /**
  * 북마크 아이콘이 있는 헤더
  */
-const BookmarkBar = ({
-  onBack,
-  onBookmark,
-  onShare,
-  title,
-  bookmarked,
-}: Props) => {
+const BookmarkBar = ({ onBack, onBookmark, onShare, title }: Props) => {
   const [COLOR, mode] = useThemeStyle();
+  const { bookmarked, handleBookmarkState } = useBookmarkHeader();
+
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <ElementWrapper style={{ marginLeft: 20 }}>
@@ -37,7 +34,7 @@ const BookmarkBar = ({
         ) : null}
       </ElementWrapper>
       <ElementWrapper style={{ marginRight: 20 }}>
-        <CaretBtn onPress={() => onBookmark()} style={{ marginRight: 20 }}>
+        <CaretBtn onPress={handleBookmarkState} style={{ marginRight: 20 }}>
           {bookmarked ? (
             <Ionicons
               name="md-bookmark"

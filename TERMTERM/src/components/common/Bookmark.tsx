@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
+import { TouchableOpacityProps } from "react-native";
 
 export const BookmarkButton = styled.TouchableOpacity`
   position: absolute;
@@ -32,19 +33,20 @@ export const BookmarkWrapper = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-interface Props {
+interface Props extends TouchableOpacityProps {
   fill: boolean;
 }
 
 /**
  * 용어 부분의 그레이 백그라운드 버튼
  */
-export const BookmarkButtonComponent = ({ fill }: Props) => {
+export const BookmarkButtonComponent = ({ fill, ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
 
   return (
     <BookmarkWrapper
       style={{ backgroundColor: mode ? "#e2e2e279" : "#2c2c2c7a" }}
+      {...props}
     >
       {fill ? (
         <Ionicons
