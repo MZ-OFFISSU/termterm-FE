@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { BookmarkButton } from "@components/common/Bookmark";
 import { MoreRecommendedCuration } from "Curation";
 import { ViewProps } from "react-native";
+import { useEffect } from "react";
 
 interface Props extends ViewProps {
   item: MoreRecommendedCuration;
@@ -14,8 +15,9 @@ interface Props extends ViewProps {
 }
 
 const CurationItem = ({ item, onMove, ...props }: Props) => {
-  const { curationId, title, thumbnail, cnt, bookmarked } = item;
+  const { curationId, title, thumbnail, cnt, bookmarked } = item ?? {};
   const [COLOR, mode] = useThemeStyle();
+
   return (
     <ItemContainer {...props}>
       <CurationTitle COLOR={COLOR}>{title}</CurationTitle>
