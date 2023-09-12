@@ -30,7 +30,8 @@ const Start = ({ navigate }: ChildrenProps) => {
   const quizApi = new QuizApi();
   const [COLOR, mode] = useThemeStyle();
   const [quizStatus, setQuizStatus] = useState<string>(QuizState.NOT_STARTED);
-  const [countdown, setCountdown] = useState(20);
+  // TODO : 180초로 추후 재설정
+  const [countdown, setCountdown] = useState(3);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const curr = useRecoilValue(quizState);
   const { currIdx } = curr
@@ -40,7 +41,7 @@ const Start = ({ navigate }: ChildrenProps) => {
       const res = await quizApi.getDailyQuizStatus();
       // TODO : 값 바꿔두기
       // setQuizState(res.status);
-      setQuizStatus(QuizState.NOT_STARTED)
+      setQuizStatus(QuizState.COMPLETED)
     } catch (err) {
       console.log(err);
     }
@@ -109,7 +110,7 @@ const Start = ({ navigate }: ChildrenProps) => {
       )}
 
       {quizStatus === QuizState.COMPLETED && (
-        <Clear navigate={() => navigation.push("ReviewQuizIntro")} />
+        <Clear navigate={() => navigation.push("QuizReview")} />
       )}
     </>
   );
