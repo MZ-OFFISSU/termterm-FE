@@ -29,6 +29,7 @@ import {
   FilterScreen,
   EditFolder,
   SelectFolder,
+  ReviewQuizIntro,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import {
@@ -529,6 +530,18 @@ const Container = () => {
                     title="아카이빙"
                     onBack={() => props.navigation.pop()}
                   />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="ReviewQuizIntro"
+            component={ReviewQuizIntro}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar title="" onBack={() => props.navigation.pop()} />
                 );
               },
             }}
