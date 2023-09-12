@@ -14,17 +14,22 @@ import {
   AnswerReminder,
 } from "@components/index";
 import QuizAnswerCard from "@components/terms/QuizAnswerCard";
+import { quizState } from "@recoil/quizState";
+import { useRecoilValue } from "recoil";
 
 export type Props = StackScreenProps<RootStackParamList, "QuizResult">;
 
 const QuizResult = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [answer, setAnswer] = useState<WordProps>();
+  const curr = useRecoilValue(quizState);
+  const { currIdx } = curr;
 
   useEffect(() => {
     //TODO : 정답 받아오는 로직 추가
     setAnswer(dummyWord);
   });
+
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
       <Container COLOR={COLOR} mode={mode}>
@@ -41,8 +46,11 @@ const QuizResult = ({ navigation, route }: Props) => {
           theme={mode}
           type={mode ? BUTTON_TYPE.primary : BUTTON_TYPE.secondary}
           state={BUTTON_STATE.active}
-          // onPress={() => navigation.navigate("CompleteQuiz")}
-          onPress={() => navigation.navigate("DailyQuiz")}
+          onPress={() =>
+            currIdx === 5
+              ? navigation.navigate("CompleteQuiz")
+              : navigation.navigate("DailyQuiz")
+          }
           style={{ width: "90%", alignSelf: "center", marginTop: "7%" }}
         />
       </Container>
