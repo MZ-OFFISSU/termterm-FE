@@ -1,6 +1,5 @@
-import { MoreRecommendedCuration, TermSimple } from "Curation";
+import { TermSimple } from "Curation";
 import styled from "styled-components/native";
-import { TermDetail } from "Term";
 import Button from "./Button";
 import TermPreviewBox from "./TermPreviewBox";
 

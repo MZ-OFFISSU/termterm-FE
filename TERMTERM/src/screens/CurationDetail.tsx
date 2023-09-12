@@ -70,20 +70,19 @@ const CurationDetail = ({ navigation, route }: Props) => {
           subtitle={curationDetailInfo?.description as string}
           termCnt={curationDetailInfo?.cnt as number}
         />
-        <TermPreview
-          // TODO : items에 서버 응답값 넘기기
-          items={dummyData.termSimples as TermSimple[]}
-          pay={curationDetailInfo?.paid as boolean}
-          onPay={() => setModal(true)}
-        />
-        <RecommendCuration
-          items={
-            curationDetailInfo !== undefined
-              ? (curationDetailInfo?.moreRecommendedCurations as MoreRecommendedCuration[])
-              : dummyCuration
-          }
-          onNavigate={onNavigate}
-        />
+        {curationDetailInfo && (
+          <>
+            <TermPreview
+              items={curationDetailInfo.termSimples}
+              pay={curationDetailInfo.paid}
+              onPay={() => setModal(true)}
+            />
+            <RecommendCuration
+              items={curationDetailInfo.moreRecommendedCurations}
+              onNavigate={onNavigate}
+            />
+          </>
+        )}
         <RelatedTags tags={dummyData.tags} />
       </Container>
       <CustomModal

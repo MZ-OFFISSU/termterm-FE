@@ -1,4 +1,3 @@
-import { CurationItemProps } from "@interfaces/curation";
 import { ContentsWrapper, ContentsHeader } from "@components/search";
 import CurationItem from "@components/curation/CurationItem";
 import { MoreRecommendedCuration } from "Curation";
@@ -20,7 +19,8 @@ const RecommendCuration = ({ items, onNavigate }: Props) => {
       <ContentsHeader title={"함께 보면 더 좋은 용어 모음집"} />
       {items.map((item, idx) => (
         <CurationItem
-          {...item}
+          item={item}
+          img={item.thumbnail}
           onMove={onNavigate}
           key={item.curationId}
           style={idx !== 0 ? { marginTop: 30 } : {}}
