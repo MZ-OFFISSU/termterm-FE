@@ -12,6 +12,9 @@ import CustomButton, {
   BUTTON_TYPE,
 } from "@components/buttons/CustomButton";
 import WalkthroughCarousel from "@components/terms/WalkthroughCarousel";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRecoilState } from "recoil";
+import { walkthroughState } from "@recoil/walkthroughState";
 
 export type Props = StackScreenProps<RootStackParamList, "Walkthrough">;
 interface WtProps {
@@ -24,6 +27,8 @@ const Walkthrough = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [walkthough, setWalkthrough] = useState<Array<WtProps> | null>();
   const [height, setHeight] = useState(413);
+  const [checked, setChecked] = useState(false);
+  const [visible, setVisible] = useRecoilState(walkthroughState);
 
   useEffect(() => {
     setWalkthrough(walkthroughInfo);
@@ -52,8 +57,24 @@ const Walkthrough = ({ navigation }: Props) => {
     });
   };
 
+  const getVisible = async () => {
+    const data = await AsyncStorage.getItem("walkthrough");
+    if (!data) setVisible(true);
+  };
+
+  const handleHideButton = async () => {
+    if (checked) {
+      await AsyncStorage.setItem("walkthrough", "hide");
+    } else {
+      await AsyncStorage.removeItem("walkthrough");
+    }
+    setVisible(false);
+    goToHome();
+  };
+
   useEffect(() => {
     calcHeight();
+    getVisible();
   }, []);
 
   return (
@@ -65,7 +86,6 @@ const Walkthrough = ({ navigation }: Props) => {
           theme={mode}
           type={BUTTON_TYPE.primary}
           state={BUTTON_STATE.active}
-          // TODO : Home으로 이동하도록 navigation 수정
           onPress={goToHome}
           style={{ width: "90%" }}
         />
@@ -74,7 +94,7 @@ const Walkthrough = ({ navigation }: Props) => {
           theme={mode}
           type={BUTTON_TYPE.primary}
           state={BUTTON_STATE.default}
-          // TODO : 다시 보지 않기 로직 추가
+          onPress={handleHideButton}
           style={{ width: "90%", marginTop: "3%" }}
         />
       </ButtonWrapper>
