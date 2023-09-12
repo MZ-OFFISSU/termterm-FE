@@ -1,6 +1,6 @@
 import FolderApi from "@api/FolderApi";
 import { WordProps } from "@interfaces/word";
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { useFolder } from "./useFolder";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -36,9 +36,14 @@ export const useArchive = () => {
     }
   };
 
-  const archiveTerm = async (termId: number) => {
-    if (!myFolderList || myFolderList!.length === 0) setIsModalOpen(true);
-    else navigation.push("SelectFolder", { termId });
+  const archiveTerm = (termId: number) => {
+    if (!myFolderList || myFolderList!.length === 0) {
+      setIsModalOpen(true);
+      return false; // 폴더가 없음
+    } else {
+      navigation.push("SelectFolder", { termId });
+      return true; // 폴더가 있음
+    }
   };
 
   const closeModal = () => {
