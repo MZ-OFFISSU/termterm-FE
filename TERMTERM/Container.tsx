@@ -30,6 +30,8 @@ import {
   EditFolder,
   SelectFolder,
   ReviewQuizIntro,
+  ReviewQuiz,
+  ReviewQuizResult,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import {
@@ -64,7 +66,8 @@ SplashScreen.preventAutoHideAsync();
 const Container = () => {
   const [isReady, setIsReady] = useState(false);
   const safeColor = useRecoilValue(safeAreaColorState);
-  const { totalIdx, currIdx } = useRecoilValue(quizState);
+  const { totalIdx, currIdx, currReviewIdx, totalReviewIdx } =
+    useRecoilValue(quizState);
 
   const getFonts = async () => {
     await Font.loadAsync({
@@ -544,6 +547,38 @@ const Container = () => {
               header: (props) => {
                 return (
                   <BackBar title="" onBack={() => props.navigation.pop()} />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="ReviewQuiz"
+            component={ReviewQuiz}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title={`리뷰${currReviewIdx + 1}/${totalReviewIdx}`}
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="ReviewQuizResult"
+            component={ReviewQuizResult}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BookmarkSingleBar
+                    title="정답 확인"
+                    onBack={() => props.navigation.pop()}
+                    onBookmark={() => null}
+                    bookmarked={false}
+                  />
                 );
               },
             }}

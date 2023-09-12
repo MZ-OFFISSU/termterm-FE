@@ -34,11 +34,13 @@ export type RootStackParamList = {
   MyWordApply: { id: number };
   QuizIntro: undefined;
   QuizResult: { id: number };
-  QuizReview: { id: number };
+  QuizReview: undefined;
   FilterScreen: undefined;
   Kakao: undefined;
   Google: undefined;
   EditFolder: { id: number };
   Third: undefined;
   ReviewQuizIntro: undefined;
+  ReviewQuiz: undefined;
+  ReviewQuizResult: { id: number };
 };
