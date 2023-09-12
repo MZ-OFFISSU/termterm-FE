@@ -38,7 +38,7 @@ const MyWordApply = ({ navigation, route }: Props) => {
 
   return (
     <Container COLOR={COLOR}>
-      <CurComponent nextStage={nextStage} />
+      <CurComponent nextStage={nextStage} termId={route.params.id} />
     </Container>
   );
 };
