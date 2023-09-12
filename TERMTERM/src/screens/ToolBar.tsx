@@ -13,6 +13,7 @@ import { useSafeColor } from "@hooks/useSafeColor";
 import { hapticType, useHaptics } from "@hooks/useHaptics";
 import { useNavigation } from "@react-navigation/native";
 import { useProfile } from "@hooks/useProfile";
+import { usePoint } from "@hooks/usePoint";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -23,6 +24,7 @@ const ToolBar = ({ ...props }: Props) => {
   const { haptic } = useHaptics();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { authCheckProfile, onboardingToast } = useProfile();
+  const {curPoint} = usePoint();
 
   /** tabNavigator 생성 */
   const Tab = createBottomTabNavigator();
@@ -189,7 +191,7 @@ const ToolBar = ({ ...props }: Props) => {
               <TitleBar
                 title="My"
                 icon={0}
-                point={10000}
+                point={curPoint}
                 onPress={() => props.navigation.navigate("MyPoint")}
               />
             );
