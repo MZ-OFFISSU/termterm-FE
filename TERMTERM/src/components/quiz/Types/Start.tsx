@@ -55,6 +55,7 @@ const Start = ({ navigate }: ChildrenProps) => {
         setCountdown((prevCountdown) => prevCountdown - 1);
       }, 1000);
     }
+    console.log("test")
 
     return () => {
       clearInterval(interval);
