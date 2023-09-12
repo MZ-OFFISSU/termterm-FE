@@ -1,8 +1,11 @@
+import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { RouteProp } from "@react-navigation/native";
 import { LIGHT_COLOR_STYLE, TYPO_STYLE, colorTheme } from "@style/designSystem";
 import styled from "styled-components/native";
 
 export interface ApplyProps {
   nextStage: () => void;
+  termId: number;
 }
 
 export const Wrapper = styled.View`

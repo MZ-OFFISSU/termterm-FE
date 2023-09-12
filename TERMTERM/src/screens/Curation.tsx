@@ -92,6 +92,8 @@ const Curation = ({ navigation }: Props) => {
               {...item}
               onMove={() => navigation.push("CurationDetail", { id: item.curationId })}
               key={item.thumbnail}
+              img={item.thumbnail}
+              item={item}
               style={{ marginTop: 30 }}
             />
           ))}
