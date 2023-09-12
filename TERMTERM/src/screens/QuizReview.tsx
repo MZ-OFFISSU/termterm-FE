@@ -29,6 +29,7 @@ const QuizReview = ({ navigation }: Props) => {
         };
       });
       setQuizReviewList(updatedReviewList);
+      console.log(updatedReviewList);
     } catch (err) {
       console.log(err);
     }

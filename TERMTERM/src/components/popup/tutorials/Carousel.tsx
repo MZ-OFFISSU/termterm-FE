@@ -50,7 +50,7 @@ const TutorialCarousel = () => {
         ? require("@assets/tutorials/carousel/light-4.png")
         : require("@assets/tutorials/carousel/light-4.png"),
       subContent:
-        "큐레이션의 용어를 더 보고 싶거나\n폴더를 3개 이상만들 때\n포인트를 사용할 수 있어요!",
+        "큐레이션의 용어를 더 보고 싶거나\n폴더를 3개 이상 만들 때\n포인트를 사용할 수 있어요!",
     },
   ];
 

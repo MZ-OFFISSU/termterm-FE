@@ -58,7 +58,7 @@ const QuizReviewRouter = ({
         {wordAnswer}
       </AnswerText>
       <CaretBtn onPress={() => onPress()}>
-        <AntDesign name="right" size={20} color={COLOR.Neutral[90]} />
+        <AntDesign name="right" size={18} color={COLOR.Neutral[90]} />
       </CaretBtn>
     </Container>
   );

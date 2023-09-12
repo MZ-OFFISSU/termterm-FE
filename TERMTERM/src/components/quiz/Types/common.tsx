@@ -13,7 +13,7 @@ export const LeftBox = styled.View`
 `;
 
 export const Title = styled.Text<{ COLOR: colorTheme }>`
-  ${TYPO_STYLE.Body[2].Medium};
+  ${TYPO_STYLE.Subheading[1].Medium};
   color: ${(props) => props.COLOR.Text.active};
   text-align: center;
 `;

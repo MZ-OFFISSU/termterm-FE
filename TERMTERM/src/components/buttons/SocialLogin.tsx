@@ -24,17 +24,17 @@ const SocialLoginButton = ({ type, ...props }: Props) => {
       {type === "kakao" ? (
         <InnerView>
           <AutoSizedImage source={require("@assets/kakao.png")} height={20} />
-          <SocialText>카카오톡으로 시작하기</SocialText>
+          <SocialText>카카오톡으로 계속하기</SocialText>
         </InnerView>
       ) : type === "google" ? (
         <InnerView>
           <AutoSizedImage source={require("@assets/google.png")} height={20} />
-          <SocialText>Google로 시작하기</SocialText>
+          <SocialText>Google로 계속하기</SocialText>
         </InnerView>
       ) : type === "apple" ? (
         <InnerView>
           <AutoSizedImage source={require("@assets/apple.png")} height={20} />
-          <SocialText>Apple로 시작하기</SocialText>
+          <SocialText>Apple로 계속하기</SocialText>
         </InnerView>
       ) : (
         <></>
