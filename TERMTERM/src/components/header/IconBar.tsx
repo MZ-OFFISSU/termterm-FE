@@ -15,6 +15,10 @@ import { Feather } from "@expo/vector-icons";
 import * as Sharing from "expo-sharing";
 import * as Haptics from "expo-haptics";
 import BackArrowIcon from "@assets/icon/BackArrowIcon";
+import { useHeader } from "@hooks/useHeader";
+import FolderApi from "@api/FolderApi";
+import { useHaptics } from "@hooks/useHaptics";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 export enum Icon {
   fold,
@@ -32,11 +36,37 @@ interface Props {
  * 아이콘과 함수를 유동적으로 삽입할 수 있는 헤더
  */
 const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
-  const [COLOR, mode] = useThemeStyle();
-  const headerState = useRecoilValue(iconHeaderState);
+  const folderApi = new FolderApi();
 
-  const onBookmark = (id: number) => {
-    null;
+  const [COLOR, mode] = useThemeStyle();
+  const {
+    headerState,
+    bookmarkArray,
+    termIdArray,
+    settingBookmarkArrayByIndex,
+  } = useHeader();
+  const { haptic } = useHaptics();
+
+  const onBookmark = async (folderId: number, termId: number) => {
+    const isBookmarked = bookmarkArray[headerState.curNum];
+    haptic("light");
+    if (isBookmarked) {
+      //북마크가 되어있다면?
+      await folderApi.removeTermInFolder({ folderId, termId });
+      settingBookmarkArrayByIndex(headerState.curNum, false);
+      Toast.show({
+        type: mode ? "light" : "dark",
+        text1: "선택한 폴더에서\n용어 아카이빙이 해제되었어요!",
+      });
+    } else {
+      //북마크가 취소되어있다면?
+      await folderApi.registerTermInFolder([folderId], termId);
+      settingBookmarkArrayByIndex(headerState.curNum, true);
+      Toast.show({
+        type: mode ? "light" : "dark",
+        text1: "선택한 폴더에서\n용어가 다시 아카이빙 되었어요!",
+      });
+    }
   };
 
   const Fold = useCallback(() => {
@@ -67,10 +97,12 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
   const Bookmark = () => {
     return (
       <CaretBtn
-        onPress={() => onBookmark(headerState.id)}
+        onPress={() =>
+          onBookmark(headerState.folderId, termIdArray[headerState.curNum])
+        }
         style={{ marginRight: 15 }}
       >
-        {headerState.bookmarked ? (
+        {bookmarkArray[headerState.curNum] ? (
           <Ionicons
             name="md-bookmark"
             size={24}
@@ -91,7 +123,6 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
     if (!(await Sharing.isAvailableAsync())) {
       return;
     }
-
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
     Sharing.shareAsync(url);
   };
@@ -104,14 +135,14 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
       {bookmarkBar ? (
         <TitleWrapper>
           <NavigatorTitle COLOR={COLOR}>
-            {`${headerState.curNum}/${headerState.maxNum}`}
+            {`${headerState.curNum + 1}/${headerState.maxNum}`}
           </NavigatorTitle>
         </TitleWrapper>
       ) : (
         <></>
       )}
       <ElementWrapper style={{ marginRight: 20 }}>
-        {bookmarkBar === undefined ? <></> : <Bookmark />}
+        {bookmarkBar !== undefined && <Bookmark />}
         <CaretBtn onPress={() => onPress()} style={{ marginRight: 13 }}>
           {icon === Icon.fold ? <Fold /> : <Collapse />}
         </CaretBtn>

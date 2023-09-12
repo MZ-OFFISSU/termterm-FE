@@ -80,6 +80,18 @@ export const useArchive = () => {
     }
   };
 
+  const handleDeleteArchive = async (folderId: number, termId: number) => {
+    try {
+      await folderApi.removeTermInFolder({ folderId, termId });
+      Toast.show({
+        type: mode ? "light" : "dark",
+        text1: "선택한 폴더에서\n용어 아카이빙이 해제되었어요!",
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const getTermsSuminFolder = async (folderId: number) => {
     try {
       const res = await folderApi.getSumFolderDetail(folderId);
@@ -127,5 +139,6 @@ export const useArchive = () => {
     termsEach,
     saveFolderInfo,
     folderInfo,
+    handleDeleteArchive,
   };
 };

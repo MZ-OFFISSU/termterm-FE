@@ -1,8 +1,14 @@
 import { useRecoilState } from "recoil";
-import { iconHeaderState } from "@recoil/iconHeaderState";
+import {
+  bookmarkArrayState,
+  iconHeaderState,
+  termIdArrayState,
+} from "@recoil/iconHeaderState";
 
 export function useHeader() {
   const [headerState, setHeaderState] = useRecoilState(iconHeaderState);
+  const [bookmarkArray, setBookmarkArray] = useRecoilState(bookmarkArrayState);
+  const [termIdArray, setTermIdArray] = useRecoilState(termIdArrayState);
 
   /**
    * 전체 인덱스를 수정하는 함수
@@ -40,11 +46,31 @@ export function useHeader() {
     });
   };
 
+  const settingBookmarkArray = (length: number) => {
+    setBookmarkArray(new Array(length).fill(true));
+  };
+
+  const settingBookmarkArrayByIndex = (index: number, custom: boolean) => {
+    const newBookmarkArray = bookmarkArray.map((bookmark, idx) =>
+      idx === index ? custom : bookmark
+    );
+    setBookmarkArray(newBookmarkArray);
+  };
+
+  const settingTermsArray = (ids: number[]) => {
+    setTermIdArray(ids);
+  };
+
   return {
     headerState,
     settingIdx,
     settingMax,
     bookmarkHandler,
     setHeaderState,
+    settingBookmarkArray,
+    bookmarkArray,
+    settingTermsArray,
+    termIdArray,
+    settingBookmarkArrayByIndex,
   };
 }
