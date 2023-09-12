@@ -9,6 +9,7 @@ import { BackBar } from "@components/header";
 import { colorTheme, LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { Fontisto } from "@expo/vector-icons";
+import { useQuiz } from "@hooks/useQuiz";
 
 export type Props = StackScreenProps<RootStackParamList, "CompleteQuiz">;
 
@@ -16,6 +17,7 @@ const CompleteQuiz = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [width, setWidth] = useState(112);
   const [score, setScore] = useState(200);
+  const { quizStatus } = useQuiz();
 
   /** 아이콘 너비 계산 함수 */
   const calcWidth = () => {
