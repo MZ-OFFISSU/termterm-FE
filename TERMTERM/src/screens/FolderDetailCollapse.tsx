@@ -13,6 +13,7 @@ import AutoSizedImage from "@components/common/AutoSizedImage";
 import { screenWidth } from "@style/dimensions";
 import { useCoach } from "@hooks/useCoach";
 import Coachmark from "@components/popup/coach";
+import { useArchive } from "@hooks/useArchive";
 
 export type Props = StackScreenProps<
   RootStackParamList,
@@ -23,11 +24,6 @@ interface FolderProps {
   name: string;
   desc: string;
 }
-
-const defaultProps: FolderProps = {
-  name: "",
-  desc: "",
-};
 
 const FolderInfo = ({ name, desc }: FolderProps) => {
   const [COLOR, mode] = useThemeStyle();
@@ -49,30 +45,20 @@ const FolderInfo = ({ name, desc }: FolderProps) => {
  */
 const FolderDetailCollapse = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const [words, setWords] = useState<Array<WordProps>>();
   const [curIdx, setCurIdx] = useState(0);
-  const [folderInfo, setFolderInfo] = useState<FolderProps>(defaultProps);
   const coachConfigs = useCoach();
+  const { termsEach, getTermsEachInFolder, folderInfo } = useArchive();
 
-  const { setHeaderState, settingIdx } = useHeader();
+  const { setHeaderState, settingIdx, headerState } = useHeader();
 
   const settingHeader = (words: Array<WordProps>) => {
     const defaultHeaderState = {
       id: route.params.id,
       maxNum: words.length,
       curNum: curIdx + 1,
-      bookmarked: words[curIdx].bookmarked ? true : false,
+      bookmarked: true,
     };
     setHeaderState(defaultHeaderState);
-  };
-
-  const settingProps = () => {
-    const dummyInfo: FolderProps = {
-      name: "기획",
-      desc: "기획 관련 용어들의 모음",
-    };
-
-    setFolderInfo(dummyInfo);
   };
 
   const snap = (idx: number) => {
@@ -81,12 +67,20 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
   };
 
   useEffect(() => {
-    //TODO : 큐레이션 속 용어 아이디로 용어 상세 받아오기
-    //TODO : 폴더 정보 받아오기
-    setWords(dummyWords);
-    settingHeader(dummyWords);
-    settingProps();
+    getTermsEachInFolder(route.params.id);
   }, [route]);
+
+  useEffect(() => {
+    if (termsEach.length > 0 && headerState.maxNum === 0) {
+      const items = termsEach.map((item) => {
+        return {
+          termId: item.id,
+          ...item,
+        };
+      });
+      settingHeader(items);
+    }
+  }, [termsEach]);
 
   useEffect(() => {
     coachConfigs.openCoach("folder");
@@ -94,16 +88,21 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
 
   return (
     <Container COLOR={COLOR}>
-      {words ? (
+      {termsEach.length > 0 ? (
         <>
           <WordCarousel
-            words={words}
+            words={termsEach.map((item) => {
+              return {
+                termId: item.id,
+                ...item,
+              };
+            })}
             dots={false}
             snap={snap}
             touchable={false}
           />
           <FolderInfo {...folderInfo} />
-          <OtherThink word={words[curIdx]} />
+          <OtherThink word={termsEach[curIdx] as any} />
         </>
       ) : (
         <></>

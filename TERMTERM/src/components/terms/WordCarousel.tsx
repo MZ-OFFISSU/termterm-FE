@@ -48,7 +48,7 @@ const WordCarousel = ({
   };
 
   const moveToDetail = (index: number) => {
-    if (touchable) navigateToTermDetail(words[index].id);
+    if (touchable) navigateToTermDetail(words[index].termId);
   };
 
   return (
@@ -77,7 +77,10 @@ const WordCarousel = ({
         }}
         data={words}
         renderItem={({ index }) => (
-          <WordCard word={words[index]} onPress={() => moveToDetail(index)} />
+          <WordCard
+            word={words[index] as any}
+            onPress={() => moveToDetail(index)}
+          />
         )}
       />
       {dots && (

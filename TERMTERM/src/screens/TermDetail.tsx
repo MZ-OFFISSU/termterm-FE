@@ -22,7 +22,7 @@ const TermDetail = ({ navigation, route }: Props) => {
   const { getTermDetail, termDetail } = useTerm();
 
   useEffect(() => {
-    getTermDetail(route.params.id);
+    getTermDetail(Number(route.params.id));
   }, [route]);
 
   return (

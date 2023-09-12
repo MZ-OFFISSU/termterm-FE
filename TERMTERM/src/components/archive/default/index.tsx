@@ -21,7 +21,7 @@ const GotoBookmark = ({ type }: Props) => {
   return (
     <Container>
       <AutoSizedImage
-        width={115}
+        height={100}
         source={require("@assets/bookmark-character.png")}
       />
       <Title COLOR={COLOR}>{`아직 아카이빙을\n하지 않으셨군요!`}</Title>
@@ -54,7 +54,7 @@ const Container = styled.View`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 70px;
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`

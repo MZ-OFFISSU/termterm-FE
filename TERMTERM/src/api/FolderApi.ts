@@ -55,20 +55,21 @@ class FolderApi {
   };
 
   /** 폴더에 용어 저장 (아카이빙) */
-  registerTermInFolder = async (folderIds: number[]): Promise<string> => {
-    const data = await post<string>(`/v1/folder/term`, folderIds);
+  registerTermInFolder = async (
+    folderIds: number[],
+    termId: number
+  ): Promise<string> => {
+    const data = await post<string>(`/v1/folder/term`, { folderIds, termId });
     return data;
   };
 
   /** 폴더에 용어 삭제 (아카이빙 해제) */
-  removeTermInFolder = async (
-    cancelArchiveInfo: CancelArchive
-  ): Promise<void> => {
-    const data = await remove<void>(`/v1/folder/term`, {
-      data: cancelArchiveInfo,
-    });
-    return data;
-  };
+  // removeTermInFolder = async (
+  //   cancelArchiveInfo: CancelArchive
+  // ): Promise<string> => {
+  //   const data = await remove<string>(`/v1/folder/term`, cancelArchiveInfo);
+  //   return data;
+  // };
 
   /** 홈 화면 - 아카이빙 한 단어들 중 10개를 랜덤으로 뽑아 리턴 */
   getRandomArchiveTerms = async (): Promise<RandomTerms[]> => {

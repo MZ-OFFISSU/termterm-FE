@@ -7,7 +7,6 @@ import { DefaultList } from "@components/my/MenuList";
 import IntroBox from "@components/my/IntroBox";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { MemberInfo } from "Member";
 import { useProfile } from "@hooks/useProfile";
 import { useCallback, useState } from "react";
 import { RefreshControl } from "react-native";

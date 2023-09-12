@@ -18,7 +18,7 @@ const BookmarkedTerms = ({ type }: Props) => {
 
   return (
     <Container>
-      {myFolderList?.length === 0 ? (
+      {myFolderList?.length === 0 || !myFolderList ? (
         <GotoBookmark type={type} />
       ) : (
         <FolderList folders={myFolderList as UserFolderList[]} />

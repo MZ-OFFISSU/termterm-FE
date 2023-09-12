@@ -2,13 +2,13 @@
  * 단어 관련된 모든 Props
  */
 interface WordProps {
-  id: number;
+  termId: number;
   name: string;
   description: string;
   source: string;
-  categories: Array<Category>;
-  comments: Array<Comment>;
-  bookmarked: "YES" | null;
+  categories?: Array<Category>;
+  comments?: Array<Comment>;
+  bookmarked?: "YES" | null;
 }
 
 interface Category {

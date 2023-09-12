@@ -28,6 +28,7 @@ import {
   QuizReview,
   FilterScreen,
   EditFolder,
+  SelectFolder,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import {
@@ -227,7 +228,8 @@ const Container = () => {
                     icon={Icon.collapse}
                     onPress={() =>
                       props.navigation.navigate("FolderDetailCollapse", {
-                        id: 0,
+                        //@ts-ignore
+                        id: props.route.params!.id,
                       })
                     }
                   />
@@ -246,7 +248,10 @@ const Container = () => {
                     onBack={() => props.navigation.pop()}
                     icon={Icon.fold}
                     onPress={() =>
-                      props.navigation.navigate("FolderDetailGlance", { id: 0 })
+                      props.navigation.navigate("FolderDetailGlance", {
+                        //@ts-ignore
+                        id: props.route.params!.id,
+                      })
                     }
                     bookmarkBar={true}
                   />
@@ -507,6 +512,21 @@ const Container = () => {
                 return (
                   <BackBar
                     title="문의하기"
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="SelectFolder"
+            component={SelectFolder}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title="아카이빙"
                     onBack={() => props.navigation.pop()}
                   />
                 );
