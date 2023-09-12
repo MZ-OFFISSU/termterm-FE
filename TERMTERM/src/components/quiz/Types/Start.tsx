@@ -62,7 +62,7 @@ const Start = ({ navigate }: ChildrenProps) => {
           <Title COLOR={COLOR} style={{ marginLeft: 5 }}>
             Daily 용어 퀴즈를 시작해 볼까요?
           </Title>
-          <TouchableOpacity onPress={() => navigate()}>
+          <TouchableOpacity onPress={() => navigation.push("QuizIntro")}>
             <AutoSizedImage
               source={require("@assets/arrow-button.png")}
               width={40}
@@ -91,7 +91,7 @@ const Start = ({ navigate }: ChildrenProps) => {
               <Title COLOR={COLOR} style={{ marginLeft: 5 }}>
                 용어 복습 퀴즈를 통해 다시 학습해요!
               </Title>
-              <TouchableOpacity onPress={() => navigate()}>
+              <TouchableOpacity onPress={() => navigation.push("ReviewQuizIntro")}>
                 <AutoSizedImage
                   source={require("@assets/arrow-button.png")}
                   width={40}
@@ -103,7 +103,7 @@ const Start = ({ navigate }: ChildrenProps) => {
       )}
 
       {quizState === QuizState.COMPLETED && (
-        <Clear navigate={() => navigation.push("QuizIntro")} />
+        <Clear navigate={() => navigation.push("ReviewQuizIntro")} />
       )}
     </>
   );

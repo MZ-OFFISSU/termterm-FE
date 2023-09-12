@@ -12,7 +12,6 @@ import {
 } from "@components/index";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import InquiryApi from "@api/InquiryApi";
-import { InquiryContent, InquiryType } from "Inquiry";
 import { useRecoilState } from "recoil";
 import { inquiryState } from "@recoil/inquiryState";
 import CustomEmailInput from "@components/common/CustomEmailInput";
@@ -22,7 +21,6 @@ const First = ({ onEnd }: Props) => {
   const inquiryApi = new InquiryApi();
 
   const [COLOR, mode] = useThemeStyle();
-  const [btnPosition, setBtnPosiition] = useState(30);
   const [inquiryInfo, setInquiryInfo] = useRecoilState(inquiryState);
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");

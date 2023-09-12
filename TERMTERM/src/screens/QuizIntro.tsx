@@ -48,10 +48,9 @@ const QuizIntro = ({ navigation }: Props) => {
             <Title COLOR={COLOR} mode={mode}>
               Daily 용어 퀴즈
             </Title>
-            <SubTitle
-              COLOR={COLOR}
-              mode={mode}
-            >{`Daily 용어 퀴즈로 용어를 학습하고\n포인트까지 얻어보세요!`}</SubTitle>
+            <SubTitle COLOR={COLOR} mode={mode}>
+              {`Daily 용어 퀴즈로 용어를 학습하고\n포인트까지 얻어보세요!`}
+            </SubTitle>
           </TitleBox>
           <Button
             COLOR={COLOR}
