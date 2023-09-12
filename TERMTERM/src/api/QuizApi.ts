@@ -16,8 +16,8 @@ class QuizApi {
   };
 
   /** 데일리/복습 퀴즈 결과 제출 */
-  registerQuizResult = async (): Promise<QuizSubmit> => {
-    const data = await post<QuizSubmit>(`/v1/quiz/result`);
+  registerQuizResult = async (input: QuizSubmit): Promise<QuizSubmit> => {
+    const data = await post<QuizSubmit>(`/v1/quiz/result`, input);
     return data;
   };
 

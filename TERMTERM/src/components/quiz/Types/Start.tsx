@@ -8,6 +8,8 @@ import Clear from "./Clear";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { useRecoilValue } from "recoil";
+import { quizState } from "@recoil/quizState";
 
 /**
  * async storage에 저장되는 퀴즈 현재 상태
@@ -27,14 +29,19 @@ enum QuizState {
 const Start = ({ navigate }: ChildrenProps) => {
   const quizApi = new QuizApi();
   const [COLOR, mode] = useThemeStyle();
-  const [quizState, setQuizState] = useState<string>(QuizState.NOT_STARTED);
-  const [countdown, setCountdown] = useState(20);
+  const [quizStatus, setQuizStatus] = useState<string>(QuizState.NOT_STARTED);
+  // TODO : 180초로 추후 재설정
+  const [countdown, setCountdown] = useState(3);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const curr = useRecoilValue(quizState);
+  const { currIdx } = curr
 
   const remindQuizStatus = async () => {
     try {
       const res = await quizApi.getDailyQuizStatus();
-      setQuizState(res.status);
+      // TODO : 값 바꿔두기
+      // setQuizState(res.status);
+      setQuizStatus(QuizState.COMPLETED)
     } catch (err) {
       console.log(err);
     }
@@ -43,7 +50,7 @@ const Start = ({ navigate }: ChildrenProps) => {
   useEffect(() => {
     remindQuizStatus();
     let interval: NodeJS.Timer;
-    if (quizState === QuizState.IN_PROGRESS) {
+    if (quizStatus === QuizState.IN_PROGRESS) {
       interval = setInterval(() => {
         setCountdown((prevCountdown) => prevCountdown - 1);
       }, 1000);
@@ -52,17 +59,17 @@ const Start = ({ navigate }: ChildrenProps) => {
     return () => {
       clearInterval(interval);
     };
-  }, [quizState]);
+  }, [quizStatus]);
 
   return (
     <>
-      {quizState === QuizState.NOT_STARTED && (
+      {quizStatus === QuizState.NOT_STARTED && currIdx <= 5 && (
         <>
           <AutoSizedImage source={require("@assets/test.png")} width={24} />
           <Title COLOR={COLOR} style={{ marginLeft: 5 }}>
             Daily 용어 퀴즈를 시작해 볼까요?
           </Title>
-          <TouchableOpacity onPress={() => navigate()}>
+          <TouchableOpacity onPress={() => navigation.push("QuizIntro")}>
             <AutoSizedImage
               source={require("@assets/arrow-button.png")}
               width={40}
@@ -71,7 +78,7 @@ const Start = ({ navigate }: ChildrenProps) => {
         </>
       )}
 
-      {quizState === QuizState.IN_PROGRESS && (
+      {quizStatus === QuizState.IN_PROGRESS && (
         <>
           {countdown > 0 ? (
             <>
@@ -91,7 +98,7 @@ const Start = ({ navigate }: ChildrenProps) => {
               <Title COLOR={COLOR} style={{ marginLeft: 5 }}>
                 용어 복습 퀴즈를 통해 다시 학습해요!
               </Title>
-              <TouchableOpacity onPress={() => navigate()}>
+              <TouchableOpacity onPress={() => navigation.push("ReviewQuizIntro")}>
                 <AutoSizedImage
                   source={require("@assets/arrow-button.png")}
                   width={40}
@@ -102,8 +109,8 @@ const Start = ({ navigate }: ChildrenProps) => {
         </>
       )}
 
-      {quizState === QuizState.COMPLETED && (
-        <Clear navigate={() => navigation.push("QuizIntro")} />
+      {quizStatus === QuizState.COMPLETED && (
+        <Clear navigate={() => navigation.push("QuizReview")} />
       )}
     </>
   );

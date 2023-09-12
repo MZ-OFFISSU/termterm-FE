@@ -47,9 +47,6 @@ const DailyQuizRouter = ({ navigation }: ScreenProps) => {
       })
       .catch((err) => console.log(err));
   }, []);
-  // return (
-
-  // )
 
   return (
     <Container COLOR={COLOR} mode={mode}>

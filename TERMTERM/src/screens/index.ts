@@ -25,6 +25,9 @@ import QuizReview from "./QuizReview";
 import FilterScreen from "./FilterScreen";
 import EditFolder from "./EditFolder";
 import SelectFolder from "./SelectFolder";
+import ReviewQuizIntro from "./ReviewQuizIntro";
+import ReviewQuiz from "./ReviewQuiz";
+import ReviewQuizResult from "./ReviewQuizResult";
 
 export {
   Home,
@@ -54,4 +57,7 @@ export {
   FilterScreen,
   EditFolder,
   SelectFolder,
+  ReviewQuizIntro,
+  ReviewQuiz,
+  ReviewQuizResult,
 };

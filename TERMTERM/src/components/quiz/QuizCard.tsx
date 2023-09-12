@@ -5,7 +5,7 @@ import { screenWidth } from "@style/dimensions";
 
 interface QuizCardProps {
   title?: string;
-  explain: string;
+  explain: string | undefined;
 }
 
 const QuizCard = (props: QuizCardProps) => {

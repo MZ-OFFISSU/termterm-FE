@@ -9,9 +9,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { Fontisto } from "@expo/vector-icons";
 
-export type Props = StackScreenProps<RootStackParamList, "QuizIntro">;
+export type Props = StackScreenProps<RootStackParamList, "ReviewQuizIntro">;
 
-const QuizIntro = ({ navigation }: Props) => {
+const ReviewQuizIntro = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [width, setWidth] = useState(117);
 
@@ -46,16 +46,16 @@ const QuizIntro = ({ navigation }: Props) => {
           />
           <TitleBox>
             <Title COLOR={COLOR} mode={mode}>
-              Daily 용어 퀴즈
+              용어 복습 퀴즈
             </Title>
             <SubTitle COLOR={COLOR} mode={mode}>
-              {`Daily 용어 퀴즈로 용어를 학습하고\n포인트까지 얻어보세요!`}
+              {`용어 복습 퀴즈로 틀렸던 문제를\n다시 풀며 학습해보세요!`}
             </SubTitle>
           </TitleBox>
           <Button
             COLOR={COLOR}
             mode={mode}
-            onPress={() => navigation.navigate("DailyQuiz")}
+            onPress={() => navigation.navigate("ReviewQuiz")}
           >
             <ButtonText COLOR={COLOR} mode={mode}>
               {`퀴즈 응시하기     `}
@@ -73,7 +73,7 @@ const QuizIntro = ({ navigation }: Props) => {
   );
 };
 
-export default QuizIntro;
+export default ReviewQuizIntro;
 
 const Container = styled.View<{
   COLOR: colorTheme;

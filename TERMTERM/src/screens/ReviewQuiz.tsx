@@ -9,32 +9,34 @@ import { useThemeStyle } from "@hooks/useThemeStyle";
 import useHideWord from "@hooks/useHideWord";
 import { screenWidth } from "@style/dimensions";
 import { useQuiz } from "@hooks/useQuiz";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { quizState } from "@recoil/quizState";
 import { QuizSubmit } from "Quiz";
 
-export type Props = StackScreenProps<RootStackParamList, "DailyQuiz">;
+export type Props = StackScreenProps<RootStackParamList, "ReviewQuiz">;
 
-const DailyQuiz = ({ navigation }: Props) => {
-  const { dailyQuizItem, registerQuizResultInfo } = useQuiz();
+const ReviewQuiz = ({ navigation }: Props) => {
+  const { reviewQuizItem, registerQuizResultInfo } = useQuiz();
   const [COLOR, mode] = useThemeStyle();
+  const [idx, setIdx] = useState(0);
   const [selectedIdx, setSelectedIdx] = useState(-1);
   const [borderColor, setBorderColor] = useState(
     COLOR.Background.inputBorderDefault
   );
   const [curr, setCurr] = useRecoilState(quizState);
-  const currentQuiz = dailyQuizItem?.[curr.currIdx - 1];
+  const currentQuiz = reviewQuizItem?.[curr.currReviewIdx];
+  const setTotalReviewIdx = useSetRecoilState(quizState);
 
   // TODO : DB에 @@ 포함되어 용어 설명 들어가면 다시 훅 사용
   // const { hiddenExplain } = useHideWord(dummy[idx].explain, dummy[idx].word);
   const handleButton = (idx: number) => {
     setSelectedIdx(idx);
     setBorderColor(COLOR.THEME.secondary[120]);
-    setCurr((prev) => ({ ...prev, currIdx: prev.currIdx + 1 }));
+    setCurr((prev) => ({ ...prev, currReviewIdx: prev.currReviewIdx + 1 }));
     const memberQuizSelect: QuizSubmit = {
-      quizType: "DAILY",
+      quizType: "REVIEW",
       results: [
-        ...(curr.currIdx <= 5
+        ...(curr.currReviewIdx <= curr.totalReviewIdx
           ? [
               {
                 memberSelectedTermId: idx,
@@ -47,8 +49,14 @@ const DailyQuiz = ({ navigation }: Props) => {
 
     console.log(memberQuizSelect);
     registerQuizResultInfo(memberQuizSelect);
-    navigation.navigate("QuizResult", { id: idx });
+    navigation.navigate("ReviewQuizResult", { id: idx });
   };
+
+  useEffect(() => {
+    if (reviewQuizItem) {
+      setTotalReviewIdx((prev) => ({ ...prev, totalReviewIdx: reviewQuizItem.length }));
+    }
+  }, [reviewQuizItem, setTotalReviewIdx]);
 
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
@@ -84,7 +92,7 @@ const DailyQuiz = ({ navigation }: Props) => {
   );
 };
 
-export default DailyQuiz;
+export default ReviewQuiz;
 
 const Container = styled.ScrollView`
   width: 100%;

@@ -17,13 +17,13 @@ import QuizAnswerCard from "@components/terms/QuizAnswerCard";
 import { quizState } from "@recoil/quizState";
 import { useRecoilValue } from "recoil";
 
-export type Props = StackScreenProps<RootStackParamList, "QuizResult">;
+export type Props = StackScreenProps<RootStackParamList, "ReviewQuizResult">;
 
-const QuizResult = ({ navigation, route }: Props) => {
+const ReviewQuizResult = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [answer, setAnswer] = useState<WordProps>();
   const curr = useRecoilValue(quizState);
-  const { currIdx } = curr;
+  const { currIdx, currReviewIdx, totalReviewIdx } = curr;
 
   useEffect(() => {
     //TODO : 정답 받아오는 로직 추가
@@ -47,9 +47,9 @@ const QuizResult = ({ navigation, route }: Props) => {
           type={mode ? BUTTON_TYPE.primary : BUTTON_TYPE.secondary}
           state={BUTTON_STATE.active}
           onPress={() =>
-            currIdx === 5
+            currReviewIdx === totalReviewIdx
               ? navigation.navigate("CompleteQuiz")
-              : navigation.navigate("DailyQuiz")
+              : navigation.navigate("ReviewQuiz")
           }
           style={{ width: "90%", alignSelf: "center", marginTop: "7%" }}
         />
@@ -58,7 +58,7 @@ const QuizResult = ({ navigation, route }: Props) => {
   );
 };
 
-export default QuizResult;
+export default ReviewQuizResult;
 
 const Container = styled.View<{
   COLOR: colorTheme;

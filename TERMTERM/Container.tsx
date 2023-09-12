@@ -29,6 +29,9 @@ import {
   FilterScreen,
   EditFolder,
   SelectFolder,
+  ReviewQuizIntro,
+  ReviewQuiz,
+  ReviewQuizResult,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import {
@@ -50,6 +53,7 @@ import Filter from "@components/common/Filter";
 import KakaoLogin from "@screens/Webview/KakaoLogin";
 import GoogleLogin from "@screens/Webview/GoogleLogin";
 import Third from "@screens/Support/Third";
+import { quizState } from "@recoil/quizState";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -61,8 +65,9 @@ SplashScreen.preventAutoHideAsync();
  */
 const Container = () => {
   const [isReady, setIsReady] = useState(false);
-  const [quizIdx, setQuizIdx] = useState(1);
   const safeColor = useRecoilValue(safeAreaColorState);
+  const { totalIdx, currIdx, currReviewIdx, totalReviewIdx } =
+    useRecoilValue(quizState);
 
   const getFonts = async () => {
     await Font.loadAsync({
@@ -136,8 +141,7 @@ const Container = () => {
               header: (props) => {
                 return (
                   <BackBar
-                    // TODO : quizIdx 로직 추가
-                    title={`${quizIdx}/5`}
+                    title={`${currIdx}/${totalIdx}`}
                     onBack={() => props.navigation.pop()}
                   />
                 );
@@ -480,9 +484,11 @@ const Container = () => {
               headerShown: true,
               header: (props) => {
                 return (
-                  <BackBar
+                  <BookmarkSingleBar
                     title="정답 확인"
                     onBack={() => props.navigation.pop()}
+                    onBookmark={() => null}
+                    bookmarked={false}
                   />
                 );
               },
@@ -528,6 +534,50 @@ const Container = () => {
                   <BackBar
                     title="아카이빙"
                     onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="ReviewQuizIntro"
+            component={ReviewQuizIntro}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar title="" onBack={() => props.navigation.pop()} />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="ReviewQuiz"
+            component={ReviewQuiz}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BackBar
+                    title={`리뷰${currReviewIdx + 1}/${totalReviewIdx}`}
+                    onBack={() => props.navigation.pop()}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="ReviewQuizResult"
+            component={ReviewQuizResult}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BookmarkSingleBar
+                    title="정답 확인"
+                    onBack={() => props.navigation.pop()}
+                    onBookmark={() => null}
+                    bookmarked={false}
                   />
                 );
               },
