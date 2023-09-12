@@ -10,6 +10,8 @@ import {
   SearchResult,
 } from "Term";
 
+const SIZE_PER_PAGE = 20;
+
 /**
  * Term 관리 훅
  */
@@ -20,6 +22,8 @@ export const useTerm = () => {
   const [termDetail, setTermDetail] = useState<TermDetail>();
   const [totalTermRes, setTotalTermRes] = useState<TermResponse>();
   const [totalTermList, setTotalTermList] = useState<TermItem[]>([]);
+  const [page, setPage] = useState(0);
+  const [isLastPage, setIsLastPage] = useState(false);
 
   /** 용어 북마크(임시) */
   const bookmarkingTerm = async (termId: number): Promise<boolean> => {
@@ -57,11 +61,22 @@ export const useTerm = () => {
   };
 
   /** 전체 용어 리스트 받아오기 */
-  const getAllTermList = async (config: TermConfig): Promise<boolean> => {
+  const getAllTermList = async (
+    categories: TermConfig,
+    page: number
+  ): Promise<boolean> => {
+    if (isLastPage) return false;
     try {
-      const res = await termApi.allTermList(config);
-      setTotalTermList(res.content);
+      const res = await termApi.allTermList(categories, {
+        params: {
+          page: page,
+          size: SIZE_PER_PAGE,
+        },
+      });
+      setTotalTermList((prev) => [...prev, ...res.content]);
       setTotalTermRes(res);
+      setPage(page + 1);
+      if (res.last || res.empty) return false;
       return true;
     } catch (err) {
       console.log(err);
@@ -88,6 +103,11 @@ export const useTerm = () => {
     }
   };
 
+  const initializePage = () => {
+    setTotalTermList([]);
+    setPage(0);
+  };
+
   return {
     bookmarkingTerm,
     dailyTermList,
@@ -101,5 +121,7 @@ export const useTerm = () => {
     results,
     searchTerm,
     bookmarkTerm,
+    page,
+    initializePage,
   };
 };

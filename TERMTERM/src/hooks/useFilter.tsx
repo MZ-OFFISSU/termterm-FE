@@ -19,5 +19,24 @@ export function useFilter() {
     setFilterArr(dynamicFilterArr);
   };
 
-  return { filterArr, dynamicFilterArr, settingFilter, saveFilter };
+  const converter = (job: string) => {
+    switch (job) {
+      case "기획":
+        return "pm";
+      case "마케팅":
+        return "marketing";
+      case "개발":
+        return "development";
+      case "디자인":
+        return "design";
+      case "비즈니스":
+        return "business";
+      case "IT":
+        return "IT";
+      default:
+        return "IT";
+    }
+  };
+
+  return { filterArr, dynamicFilterArr, settingFilter, saveFilter, converter };
 }
