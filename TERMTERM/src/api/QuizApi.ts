@@ -1,4 +1,4 @@
-import { QuizDetail, QuizReview, QuizStatus, QuizSubmit } from "Quiz";
+import { QuizDetail, QuizReviewDetail, QuizStatus, QuizSubmit } from "Quiz";
 
 import { post, get } from "./AxiosCreate";
 
@@ -10,8 +10,8 @@ class QuizApi {
   };
 
   /** 용어 퀴즈 리뷰 */
-  getFinalQuizReview = async (): Promise<QuizReview[]> => {
-    const data = await get<QuizReview[]>(`/v1/quiz/final-quiz-review`);
+  getFinalQuizReview = async (): Promise<QuizReviewDetail[]> => {
+    const data = await get<QuizReviewDetail[]>(`/v1/quiz/final-quiz-review`);
     return data;
   };
 

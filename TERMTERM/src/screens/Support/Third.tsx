@@ -32,12 +32,7 @@ const Third = () => {
   }, []);
 
   return (
-    <View
-      style={{
-        width: "100%",
-        height: "100%",
-      }}
-    >
+    <Wrapper COLOR={COLOR} mode={mode}>
       <ContentWrapper>
         <AutoSizedImage
           source={require("@assets/bookmark-character.png")}
@@ -52,11 +47,17 @@ const Third = () => {
           </SubTitle>
         </TitleBox>
       </ContentWrapper>
-    </View>
+    </Wrapper>
   );
 };
 
 export default Third;
+
+const Wrapper = styled.View<{ COLOR: colorTheme; mode: boolean }>`
+  width: 100%;
+  height: 100%;
+  background-color: ${(props) => props.COLOR.Background.surface};
+`;
 
 const ContentWrapper = styled.View`
   width: 100%;
@@ -84,6 +85,7 @@ const Title = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
 
 const SubTitle = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
   ${TYPO_STYLE.Body[3].Regular};
-  color: ${(props) => props.mode ?  props.COLOR.Text.darken : props.COLOR.Text.lighten};
+  color: ${(props) =>
+    props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
   line-height: 30px;
 `;
