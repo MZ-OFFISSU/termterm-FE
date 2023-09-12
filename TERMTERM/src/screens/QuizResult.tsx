@@ -42,7 +42,7 @@ const QuizResult = ({ navigation, route }: Props) => {
           type={mode ? BUTTON_TYPE.primary : BUTTON_TYPE.secondary}
           state={BUTTON_STATE.active}
           // onPress={() => navigation.navigate("CompleteQuiz")}
-          onPress={() => navigation.navigate("QuizReview", { id: 1 })}
+          onPress={() => navigation.navigate("DailyQuiz")}
           style={{ width: "90%", alignSelf: "center", marginTop: "7%" }}
         />
       </Container>

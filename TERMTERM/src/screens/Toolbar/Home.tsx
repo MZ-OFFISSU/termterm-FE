@@ -48,11 +48,6 @@ const Home = ({ navigation, route }: Props) => {
   const { isOpen, openCoach, hideCoach, checked, handleCheck } = useCoach();
 
   useEffect(() => {
-    // TODO : 임시 CurationID값 해결
-    getCurationDetailInfo(8);
-  }, [curationDetailInfo]);
-
-  useEffect(() => {
     getArchiveListInHome();
     // TODO : 큐레이션 카테고리 배열로 선택해 넘기도록
     getEachCategoryCurationList("pm");
