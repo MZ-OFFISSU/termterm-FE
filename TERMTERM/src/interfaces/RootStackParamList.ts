@@ -39,5 +39,5 @@ export type RootStackParamList = {
   Kakao: undefined;
   Google: undefined;
   EditFolder: { id: number };
-  SelectFolder: { termId: number };
+  Third: undefined;
 };

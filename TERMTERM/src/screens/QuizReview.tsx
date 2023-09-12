@@ -1,28 +1,64 @@
+import QuizApi from "@api/QuizApi";
 import QuizReviewRouter from "@components/quiz/QuizReviewRouter";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { quizReviewProps } from "@interfaces/quizReview";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { StackScreenProps } from "@react-navigation/stack";
-import { colorTheme, TYPO_STYLE } from "@style/designSystem";
+import { QuizReviewDetail } from "Quiz";
+import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
 export type Props = StackScreenProps<RootStackParamList, "QuizReview">;
 
 const QuizReview = ({ navigation }: Props) => {
+  const quizApi = new QuizApi();
   const [COLOR, mode] = useThemeStyle();
+  const [quizReviewList, setQuizReviewList] = useState<QuizReviewDetail[]>([]);
+
+  const getQuizReviewList = async () => {
+    try {
+      const res = await quizApi.getFinalQuizReview();
+      const termNameArr = res.map((item) => {
+        return getMainTermName(item.termName);
+      });
+
+      const updatedReviewList = res.map((item, index) => {
+        return {
+          ...item,
+          termName: termNameArr[index],
+        };
+      });
+      setQuizReviewList(updatedReviewList);
+      console.log(updatedReviewList);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getMainTermName = (word: string): string => {
+    const match = word.split(" :: ");
+    if (match.length > 1) {
+      return match[1];
+    } else {
+      return word;
+    }
+  };
+
+  useEffect(() => {
+    getQuizReviewList();
+  }, []);
 
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
       <Container>
-        {dummy.map((item, idx) => (
+        {quizReviewList.map((item, idx) => (
           <QuizReviewRouter
             key={idx}
-            id={item.id}
-            answer={item.answer}
-            wordAnswer={item.wordAnswer}
-            userAnswer={item.userAnswer}
-            onPress={() => navigation.navigate("QuizResult", {id: 0})}
+            id={item.termId}
+            answer={item.isAnswerRight}
+            wordAnswer={item.termName}
+            userAnswer={item.wrongChoices[0]}
+            onPress={() => navigation.navigate("QuizResult", { id: 0 })}
           />
         ))}
       </Container>
@@ -37,36 +73,3 @@ const Container = styled.ScrollView`
   height: 100%;
   margin-top: 10px;
 `;
-
-const dummy: Array<quizReviewProps> = [
-  {
-    id: 1,
-    answer: true,
-    wordAnswer: "Stakeholder",
-    userAnswer: "Stakeholder",
-  },
-  {
-    id: 2,
-    answer: false,
-    wordAnswer: "Modal",
-    userAnswer: "Kick off",
-  },
-  {
-    id: 3,
-    answer: false,
-    wordAnswer: "Kick off",
-    userAnswer: "Modal",
-  },
-  {
-    id: 4,
-    answer: true,
-    wordAnswer: "API",
-    userAnswer: "API",
-  },
-  {
-    id: 5,
-    answer: false,
-    wordAnswer: "Design System",
-    userAnswer: "Design Guide",
-  },
-];

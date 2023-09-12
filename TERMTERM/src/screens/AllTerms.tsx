@@ -20,6 +20,7 @@ const AllTerms = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   // TODO : 임시 설정 값 돌려놓기
   const [termConfig, setTermConfig] = useState<TermConfig>({
+    // TODO : 카테고리 배열 디버깅
     categories: ["pm", "development"],
   });
 

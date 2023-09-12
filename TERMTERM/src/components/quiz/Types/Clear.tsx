@@ -12,7 +12,6 @@ const Clear = ({ navigate }: ChildrenProps) => {
   return (
     <>
       <LeftBox>
-        <AutoSizedImage source={require("@assets/test.png")} width={24} />
         <Title COLOR={COLOR} style={{ marginLeft: 5 }}>
           정말 잘하셨어요! 내일 다시 만나요 🙌🏻
         </Title>

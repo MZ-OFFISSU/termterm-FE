@@ -49,7 +49,7 @@ const HistoryWrapper = ({ ...props }: ViewProps) => {
         ? setVisible(5)
         : setVisible(dummyHistories.length);
     }
-  }, []);
+  }, [history]);
 
   return (
     <Container {...props}>

@@ -15,15 +15,13 @@ import CustomTextarea from "@components/common/CustomTextarea";
 import { BUTTON_STATE, BUTTON_TYPE, CustomButton, CustomTextInput } from "..";
 import CommentApi from "@api/CommentApi";
 import { CommentInput } from "Comment";
-import { getAccessToken } from "@utils/tokenHandler";
 
-const InputApply = ({ nextStage }: ApplyProps) => {
+const InputApply = ({ nextStage, termId }: ApplyProps) => {
   const commentApi = new CommentApi();
   const [comment, setComment] = useState<CommentInput>({
     content: "",
     source: "",
-    // TODO : 임시 termId 발급 -> 수정하기
-    termId: 1,
+    termId: termId,
   });
 
   const [COLOR, mode] = useThemeStyle();
@@ -58,6 +56,7 @@ const InputApply = ({ nextStage }: ApplyProps) => {
     try {
       await commentApi.registerComment(comment);
       // TODO : 네비게이션 이동 코드 추가
+      console.log(comment);
       navigate();
     } catch (err) {
       console.log(err);

@@ -63,7 +63,6 @@ const TermPreviewBox = ({
         </PreviewBookmark>
       </UpperBox>
       <Description COLOR={COLOR}>
-        {/* TODO : Description 확인하기 */}
         {description !== null
           ? truncateString(description, 60)
           : "용어 설명이 없어요."}
@@ -97,11 +96,12 @@ const Job = styled.Text<{ COLOR: colorTheme }>`
 
 const Description = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Subheading[1].Regular};
-  //TODO : line-height 수정
-  line-height: ${TEXT_STYLES.xsm.Reg?.fontSize! + 5}px;
+  line-height: 21px;
   color: ${(props) => props.COLOR.Text.default};
   margin-top: 10px;
   white-space: pre-line;
+  text-align: left;
+  width: 100%;
 `;
 
 export default TermPreviewBox;
