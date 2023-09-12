@@ -51,6 +51,7 @@ const Content = styled.Text<{ Color: colorTheme }>`
   color: ${(props) => props.Color.Text.active};
   text-align: center;
   white-space: pre-line;
+  line-height: 24px;
 `;
 
 const ContentHighlight = styled.Text`
