@@ -3,12 +3,11 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import styled from "styled-components/native";
 import { colorTheme } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import TermPreviewBox from "@components/curation/detail/term/TermPreviewBox";
-import TermApi from "@api/TermApi";
-import { TermConfig, TermItem } from "Term";
+import { TermConfig } from "Term";
 import { useTerm } from "@hooks/useTerm";
-import { getAccessToken } from "@utils/tokenHandler";
+import { RefreshControl } from "react-native";
 
 export type Props = StackScreenProps<RootStackParamList, "AllTerms">;
 
@@ -23,13 +22,31 @@ const AllTerms = ({ navigation }: Props) => {
     // TODO : 카테고리 배열 디버깅
     categories: ["pm", "development"],
   });
+  const [refresh, setRefresh] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefresh(true);
+    try {
+      getAllTermList(termConfig);
+      setRefresh(false);
+    } catch (err) {
+      setTimeout(() => {
+        setRefresh(false);
+      }, 2000);
+    }
+  }, []);
 
   useEffect(() => {
     getAllTermList(termConfig);
   }, []);
 
   return (
-    <Container COLOR={COLOR}>
+    <Container
+      COLOR={COLOR}
+      refreshControl={
+        <RefreshControl refreshing={refresh} onRefresh={() => onRefresh()} />
+      }
+    >
       <InnerContainer>
         {totalTermList.map((term) => (
           <TermPreviewBox {...term} key={term.id} />

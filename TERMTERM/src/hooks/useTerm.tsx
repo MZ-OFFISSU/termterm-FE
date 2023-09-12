@@ -1,5 +1,7 @@
 import TermApi from "@api/TermApi";
+import { dailyTermState } from "@recoil/dailyTermsState";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import {
   TermConfig,
   TermDetail,
@@ -14,7 +16,7 @@ import {
 export const useTerm = () => {
   const termApi = new TermApi();
   const [results, setResults] = useState<SearchResult[]>([]);
-  const [dailyTermList, setDailyTermList] = useState<TermItem[]>([]);
+  const [dailyTermList, setDailyTermList] = useRecoilState(dailyTermState);
   const [termDetail, setTermDetail] = useState<TermDetail>();
   const [totalTermRes, setTotalTermRes] = useState<TermResponse>();
   const [totalTermList, setTotalTermList] = useState<TermItem[]>([]);

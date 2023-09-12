@@ -3,8 +3,14 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
-import { TouchableOpacity } from "react-native";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { RefreshControl, TouchableOpacity } from "react-native";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { BookmarkedCurations, BookmarkedTerms } from "@components/archive";
 import CustomModal from "@components/popup/modal";
 import AutoSizedImage from "@components/common/AutoSizedImage";
@@ -18,16 +24,30 @@ interface Props extends RootProps {
 }
 const TYPES = ["용어", "큐레이션"];
 const TYPES_WRAPPER = [BookmarkedTerms, BookmarkedCurations] as const;
+
 const Archive = ({ modal, setModal, navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [curType, setCurType] = useState(0);
   const CurComponents = TYPES_WRAPPER[curType];
   const { getFolderInfoModal, folderInfoModal } = useFolder();
 
+  const [refresh, setRefresh] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefresh(true);
+    try {
+      getFolderInfoModal();
+      setRefresh(false);
+    } catch (err) {
+      setTimeout(() => {
+        setRefresh(false);
+      }, 2000);
+    }
+  }, []);
+
   //폴더 생성 관련 상태
-  const [restedFreeFolder, setRestedFreeFolder] = useState(3);
-  const [restedMaxFolder, setRestedMaxFolder] = useState(9);
   const [infoModal, setInfoModal] = useState(false);
+
   const gotoMakefolder = () => {
     navigation.push("MakeFolder");
     setModal(false);
@@ -35,24 +55,29 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
   const openInfoModal = () => {
     setInfoModal(true);
   };
+
   /**
    * 폴더 개수가 3개 미만일 때 모달
    */
-  const DefaultModal = () => {
+  const DefaultModal = useCallback(() => {
     return (
       <CustomModal
         visible={modal}
         title={"폴더는 포인트 없이 3개까지 생성할 수 있어요."}
-        subtitle={`폴더 생성 가능 횟수 : ${restedMaxFolder}개`}
+        subtitle={`폴더 생성 가능 횟수 : ${
+          folderInfoModal?.systemFolderCreationLimit! -
+          folderInfoModal?.currentFolderCount!
+        }개`}
         btnTitle={["확인"]}
         onNext={() => gotoMakefolder()}
       />
     );
-  };
+  }, [folderInfoModal]);
+
   /**
    * 폴더 개수가 3개 이상일 때 모달
    */
-  const PointModal = () => {
+  const PointModal = useCallback(() => {
     return (
       <CustomModal
         visible={modal}
@@ -63,11 +88,12 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
         onClose={() => setModal(false)}
       />
     );
-  };
+  }, [folderInfoModal]);
+
   /**
    * 최대 생성 가능한 폴더가 가득 찼을 때 모달
    */
-  const MaxModal = () => {
+  const MaxModal = useCallback(() => {
     return (
       <CustomModal
         visible={modal}
@@ -78,38 +104,20 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
         onClose={() => setModal(false)}
       />
     );
-  };
-  /**
-   * 최대 생성 가능한 폴더가 가득 찼을 때 모달
-   */
-  const InfoModal = () => {
-    // TODO 폴더 정보 채워넣기
-    const info = {
-      //현재 폴더 개수
-      cur: folderInfoModal?.currentFolderCount,
-      //나의 폴더 생성 한도
-      myMax: folderInfoModal?.myFolderCreationLimit,
-      max: folderInfoModal?.systemFolderCreationLimit,
-    };
+  }, [folderInfoModal]);
 
-    useEffect(() => {
-      getFolderInfoModal();
-    }, []);
-
-    return (
-      <CustomModal
-        visible={infoModal}
-        title={"폴더 관련 정보"}
-        subtitle={`현재 폴더 개수 : ${info.cur}개\n나의 폴더 생성 한도 : ${info.myMax}개\n생성 가능 폴더 개수 : 최대 ${info.max}개`}
-        btnTitle={["확인"]}
-        onNext={() => setInfoModal(false)}
-      />
-    );
-  };
+  useEffect(() => {
+    getFolderInfoModal();
+  }, []);
 
   return (
     <>
-      <Container COLOR={COLOR}>
+      <Container
+        COLOR={COLOR}
+        refreshControl={
+          <RefreshControl refreshing={refresh} onRefresh={() => onRefresh()} />
+        }
+      >
         <TypeSelector>
           {TYPES.map((type, idx) => (
             <TouchableOpacity
@@ -135,14 +143,24 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
         </InfoCheckbutton>
         <CurComponents type={TYPES[curType]} />
       </Container>
-      {restedFreeFolder > 0 ? (
+      {folderInfoModal?.myFolderCreationLimit! -
+        folderInfoModal?.currentFolderCount! >
+      0 ? (
         <DefaultModal />
-      ) : restedMaxFolder > 0 ? (
+      ) : folderInfoModal?.systemFolderCreationLimit! -
+          folderInfoModal?.currentFolderCount! >
+        0 ? (
         <PointModal />
       ) : (
         <MaxModal />
       )}
-      {infoModal && <InfoModal />}
+      <CustomModal
+        visible={infoModal}
+        title={"폴더 관련 정보"}
+        subtitle={`현재 폴더 개수 : ${folderInfoModal?.currentFolderCount}개\n나의 폴더 생성 한도 : ${folderInfoModal?.myFolderCreationLimit}개\n생성 가능 폴더 개수 : 최대 ${folderInfoModal?.systemFolderCreationLimit}개`}
+        btnTitle={["확인"]}
+        onNext={() => setInfoModal(false)}
+      />
     </>
   );
 };

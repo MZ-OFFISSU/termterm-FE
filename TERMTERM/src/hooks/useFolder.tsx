@@ -1,15 +1,13 @@
 import FolderApi from "@api/FolderApi";
 import {
-  CancelArchive,
   CreateFolder,
   EditFolder,
   FolderDetail,
-  UserFolderList,
   FolderModal,
   FolderPreview,
   RandomTerms,
 } from "Folder";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { useThemeStyle } from "./useThemeStyle";
 import { useRecoilState } from "recoil";
@@ -129,30 +127,7 @@ export const useFolder = () => {
       return false;
     }
   };
-  /** 폴더에 용어 저장하기(아카이빙하기) */
-  const saveTermInFolder = async (folderIds: number[]): Promise<boolean> => {
-    try {
-      await folderApi.registerTermInFolder(folderIds);
-      console.log("폴더에 용어 저장 완료 : ", folderIds);
-      return true;
-    } catch (err) {
-      console.log(err);
-      return false;
-    }
-  };
-  /** 폴더에 용어 삭제하기(아카이빙 해제하기) */
-  const deleteTermInFolder = async (
-    cancelArchiveInfo: CancelArchive
-  ): Promise<boolean> => {
-    try {
-      await folderApi.removeTermInFolder(cancelArchiveInfo);
-      console.log("폴더에 용어 삭제 완료 : ", cancelArchiveInfo);
-      return true;
-    } catch (err) {
-      console.log(err);
-      return false;
-    }
-  };
+
   /** 홈 화면 - 아카이빙한 용어 중 10개 랜덤으로 뽑아 가져오기 */
   const getArchived10Terms = async (): Promise<boolean> => {
     try {
@@ -180,8 +155,6 @@ export const useFolder = () => {
     createFolder,
     getFolderInfoModal,
     folderInfoModal,
-    saveTermInFolder,
-    deleteTermInFolder,
     getArchived10Terms,
     archived10Terms,
   };
