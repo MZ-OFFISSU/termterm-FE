@@ -6,13 +6,15 @@ import { atom } from "recoil";
 export interface QuizState {
   totalIdx: number;
   currIdx: number;
-  reviewIdx?: number;
+  currReviewIdx: number;
+  totalReviewIdx: number;
 }
 
 const defaultState: QuizState = {
   totalIdx: 5,
   currIdx: 1,
-  reviewIdx: 0,
+  currReviewIdx: 0,
+  totalReviewIdx: 0,
 };
 
 export const quizState = atom<QuizState>({
