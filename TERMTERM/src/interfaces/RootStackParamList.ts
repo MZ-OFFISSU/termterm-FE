@@ -40,4 +40,5 @@ export type RootStackParamList = {
   Google: undefined;
   EditFolder: { id: number };
   Third: undefined;
+  SelectFolder: { termId: number };
 };

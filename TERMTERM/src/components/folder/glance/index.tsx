@@ -2,12 +2,16 @@ import TermBox from "@components/common/TermBox";
 import styled from "styled-components/native";
 import { ViewProps } from "react-native";
 import { FolderPreview } from "Folder";
+import { RootStackParamList } from "@interfaces/RootStackParamList";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 
 interface Props extends ViewProps {
   terms: FolderPreview;
 }
 
 const TermDetailGlance = ({ terms, ...props }: Props) => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
     <Container {...props}>
       {terms.terms.map((term) => (
@@ -16,6 +20,9 @@ const TermDetailGlance = ({ terms, ...props }: Props) => {
           title={term.name}
           marked={true}
           key={term.termId}
+          onPress={() =>
+            navigation.push("TermDetail", { id: `${term.termId}` })
+          }
           bookmarkDisabled
         ></TermBox>
       ))}

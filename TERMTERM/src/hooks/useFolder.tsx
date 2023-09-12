@@ -12,6 +12,8 @@ import {
 import { useEffect, useState } from "react";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { useThemeStyle } from "./useThemeStyle";
+import { useRecoilState } from "recoil";
+import { folderState } from "@recoil/folderState";
 /**
  * 폴더 API 관련 훅
  */
@@ -22,7 +24,7 @@ export const useFolder = () => {
     useState<FolderDetail[]>();
   const [termPreviewInFolder, setTermPreviewInFolder] =
     useState<FolderPreview>();
-  const [myFolderList, setMyFolderList] = useState<UserFolderList[]>();
+  const [myFolderList, setMyFolderList] = useRecoilState(folderState);
   const [folderInfoModal, setFolderInfoModal] = useState<FolderModal>();
   const [archived10Terms, setArchived10Terms] = useState<RandomTerms[]>();
 
@@ -43,6 +45,7 @@ export const useFolder = () => {
     try {
       await folderApi.removeFolder(folderId);
       console.log("folder delete success");
+      await getUsersFolderList();
       return true;
     } catch (err) {
       console.log(err);
@@ -77,6 +80,7 @@ export const useFolder = () => {
     try {
       const res = await folderApi.putFolderInfo(input);
       console.log("폴더 정보 수정 값 / 결과 : ", input, res);
+      await getUsersFolderList();
       return true;
     } catch (err) {
       console.log(err);
@@ -88,7 +92,8 @@ export const useFolder = () => {
     try {
       const res = await folderApi.getMyFolderList();
       setMyFolderList(res);
-      return true;
+      if (res && res.length > 0) return true;
+      return false;
     } catch (err) {
       console.log(err);
       return false;
@@ -105,6 +110,7 @@ export const useFolder = () => {
         description: config.description,
         title: config.title,
       });
+      await getUsersFolderList();
       successToast();
     } catch (err) {
       console.log(err);

@@ -36,7 +36,7 @@ export const useArchive = () => {
     }
   };
 
-  const archiveTerm = (termId: number) => {
+  const archiveTerm = async (termId: number) => {
     if (!myFolderList || myFolderList!.length === 0) setIsModalOpen(true);
     else navigation.push("SelectFolder", { termId });
   };
@@ -100,10 +100,6 @@ export const useArchive = () => {
       desc,
     });
   };
-
-  useEffect(() => {
-    getUsersFolderList();
-  }, []);
 
   return {
     archivedWords,
