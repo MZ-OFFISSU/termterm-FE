@@ -1,7 +1,6 @@
 import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { TYPO_STYLE, colorTheme } from "@style/designSystem";
-import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import CommentComponent from "./Commnet";
 import { Comment } from "@interfaces/word";
@@ -9,9 +8,10 @@ import { useCallback, useState } from "react";
 import { Entypo } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import { TermComment } from "Term";
 
 interface Props {
-  comments: Array<Comment>;
+  comments: Array<TermComment>;
 }
 
 enum Filter {
@@ -54,7 +54,7 @@ const Container = ({ comments }: Props) => {
   };
 
   const renderItem = useCallback(
-    (comment: Comment) => (
+    (comment: TermComment) => (
       <CommentComponent comment={comment} key={comment.id} />
     ),
     []
