@@ -19,6 +19,20 @@ const CompleteQuiz = ({ navigation }: Props) => {
   const [score, setScore] = useState(200);
   const { quizStatus } = useQuiz();
 
+  let titleText = "Daily 용어 퀴즈 완료 🎉";
+  let subTitleText1 = "Daily 용어 퀴즈를 모두 맞춰";
+  let subTitleText2 = `${score}포인트`;
+  let subTitleText3 = "를 얻었어요!";
+  let subTitleText4 = "내일도 Daily 용어 퀴즈를 응시해보세요";
+
+  if (quizStatus === "COMPLETED") {
+    titleText = "Daily 용어 퀴즈 완료 🎉";
+    subTitleText1 = "Daily 용어 퀴즈 응시로";
+    subTitleText2 = `${score}포인트`;
+    subTitleText3 = "를 얻었어요!";
+    subTitleText4 = "3분 후 용어 복습 퀴즈로 학습해보세요";
+  } 
+
   /** 아이콘 너비 계산 함수 */
   const calcWidth = () => {
     if (screenWidth < 390) return;
@@ -38,6 +52,7 @@ const CompleteQuiz = ({ navigation }: Props) => {
 
   useEffect(() => {
     calcWidth();
+    console.log("CompleteQuiz : ", quizStatus)
   }, []);
 
   return (
@@ -52,19 +67,19 @@ const CompleteQuiz = ({ navigation }: Props) => {
           />
           <TitleBox>
             <Title COLOR={COLOR} mode={mode}>
-              Daily 용어 퀴즈 완료 🎉
+              {titleText}
             </Title>
             <SubTitle COLOR={COLOR} mode={mode}>
-              Daily 용어 퀴즈를 모두 맞춰
+              {subTitleText1}
             </SubTitle>
             <SubTitle COLOR={COLOR} mode={mode}>
               <BoldSub COLOR={COLOR} mode={mode}>
-                {score}포인트
+                {subTitleText2}
               </BoldSub>
-              를 얻었어요!
+              {subTitleText3}
             </SubTitle>
             <SubTitle COLOR={COLOR} mode={mode}>
-              내일도 Daily 용어 퀴즈를 응시해보세요.
+              {subTitleText4}
             </SubTitle>
           </TitleBox>
           <CompleteButton
