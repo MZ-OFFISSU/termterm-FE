@@ -6,6 +6,7 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useCallback, useEffect, useState } from "react";
 import { useCuration } from "@hooks/useCuration";
 import { RefreshControl } from "react-native";
+import { archivedCurationListState } from "@recoil/curationState";
 
 /**
  * 아카이브 툴바에서 큐레이션 탭을 클릭했을 때 나타나는 부분 컴포넌트
@@ -27,6 +28,8 @@ const CurationsSelector = () => {
     }
   }, []);
 
+  console.log(arcihivedCurationList);
+
   return (
     <Container
       refreshControl={
@@ -42,9 +45,9 @@ const CurationsSelector = () => {
               curationId: item.curationId,
               description: item.description,
               title: item.title,
-              thumbnail: "",
+              thumbnail: item.thumbnail,
             }}
-            img={""}
+            img={item.thumbnail}
             onMove={() =>
               navigation.push("CurationDetail", { id: item.curationId })
             }

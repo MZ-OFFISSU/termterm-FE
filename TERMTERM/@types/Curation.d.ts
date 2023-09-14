@@ -5,6 +5,7 @@ declare module "Curation" {
     description: string;
     status: "NO" | "YES";
     title: string;
+    thumbnail: string;
   };
 
   export type TermSimple = {
