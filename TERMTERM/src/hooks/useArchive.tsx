@@ -11,6 +11,7 @@ import { useThemeStyle } from "./useThemeStyle";
 import { FolderDetail, FolderPreview } from "Folder";
 import { useRecoilState } from "recoil";
 import { folderInfoState } from "@recoil/folderInfoState";
+import { useTerm } from "./useTerm";
 
 export const useArchive = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -18,6 +19,7 @@ export const useArchive = () => {
   const { myFolderList, getUsersFolderList } = useFolder();
   const { haptic } = useHaptics();
   const [COLOR, mode] = useThemeStyle();
+  const { getDailyTerm } = useTerm();
   const [folderInfo, setFolderInfo] = useRecoilState(folderInfoState);
 
   const [archivedWords, setArchivedWords] = useState<Array<WordProps> | null>();
@@ -73,6 +75,8 @@ export const useArchive = () => {
         text1:
           "용어가 아카이빙 되었어요!\n아카이브에서 용어를 편하게 찾아보세요",
       });
+
+      await getDailyTerm();
 
       navigation.pop();
     } catch (err) {
