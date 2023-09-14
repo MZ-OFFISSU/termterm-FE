@@ -9,12 +9,14 @@ import {
   RecommendCuration,
   RelatedTags,
 } from "@components/curation/detail";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import CustomModal from "@components/popup/modal";
 import { colorTheme } from "@style/designSystem";
 import { useCuration } from "@hooks/useCuration";
-import { MoreRecommendedCuration, TermSimple } from "Curation";
+import { TermSimple } from "Curation";
+import { RefreshControl } from "react-native";
+import { useBookmarkHeader } from "@hooks/useBookmarkHeader";
 
 export type Props = StackScreenProps<RootStackParamList, "CurationDetail">;
 
@@ -26,6 +28,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
   const [terms, setTerms] = useState<TermSimple[]>();
   const [pay, setPay] = useState(curationDetailInfo?.paid);
   const [modal, setModal] = useState(false);
+  const { settingCurationId } = useBookmarkHeader();
 
   //토스트메시지 보여주는 함수
   const showToast = () => {
@@ -45,10 +48,12 @@ const CurationDetail = ({ navigation, route }: Props) => {
   };
 
   useEffect(() => {
+    settingCurationId(CURATION_ID);
     getCurationDetailInfo(CURATION_ID);
     // console.log("first curation detail info : ", curationDetailInfo)
     setTerms(curationDetailInfo?.termSimples);
   }, []);
+
   //결제 여부에 따라서 온오프가 변경됨.
   //추후 백엔드와 논의가 필요함
   useEffect(() => {
@@ -61,29 +66,47 @@ const CurationDetail = ({ navigation, route }: Props) => {
     navigation.push("CurationDetail", { id: id });
   };
 
+  const [refresh, setRefresh] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefresh(true);
+    try {
+      getCurationDetailInfo(CURATION_ID);
+      setTerms(curationDetailInfo?.termSimples);
+      setRefresh(false);
+    } catch (err) {
+      setTimeout(() => {
+        setRefresh(false);
+      }, 2000);
+    }
+  }, []);
   return (
     <>
-      <Container COLOR={COLOR}>
+      <Container
+        COLOR={COLOR}
+        refreshControl={
+          <RefreshControl refreshing={refresh} onRefresh={() => onRefresh()} />
+        }
+      >
         <TitleBox
           thumbnail={curationDetailInfo?.thumbnail as string}
           title={curationDetailInfo?.title as string}
           subtitle={curationDetailInfo?.description as string}
           termCnt={curationDetailInfo?.cnt as number}
         />
-        <TermPreview
-          // TODO : items에 서버 응답값 넘기기
-          items={dummyData.termSimples as TermSimple[]}
-          pay={curationDetailInfo?.paid as boolean}
-          onPay={() => setModal(true)}
-        />
-        <RecommendCuration
-          items={
-            curationDetailInfo !== undefined
-              ? (curationDetailInfo?.moreRecommendedCurations as MoreRecommendedCuration[])
-              : dummyCuration
-          }
-          onNavigate={onNavigate}
-        />
+        {curationDetailInfo && (
+          <>
+            <TermPreview
+              items={curationDetailInfo.termSimples}
+              pay={curationDetailInfo.paid}
+              onPay={() => setModal(true)}
+            />
+            <RecommendCuration
+              items={curationDetailInfo.moreRecommendedCurations}
+              onNavigate={onNavigate}
+            />
+          </>
+        )}
         <RelatedTags tags={dummyData.tags} />
       </Container>
       <CustomModal

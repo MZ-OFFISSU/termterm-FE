@@ -12,12 +12,19 @@ interface Props {
   onShare: () => void;
   title?: string;
   bookmarked: boolean;
+  isCuration?: boolean;
 }
 
 /**
  * 북마크 아이콘이 있는 헤더
  */
-const BookmarkBar = ({ onBack, onBookmark, onShare, title }: Props) => {
+const BookmarkBar = ({
+  onBack,
+  onBookmark,
+  onShare,
+  title,
+  isCuration,
+}: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const { bookmarked, handleBookmarkState } = useBookmarkHeader();
 
@@ -34,7 +41,10 @@ const BookmarkBar = ({ onBack, onBookmark, onShare, title }: Props) => {
         ) : null}
       </ElementWrapper>
       <ElementWrapper style={{ marginRight: 20 }}>
-        <CaretBtn onPress={handleBookmarkState} style={{ marginRight: 20 }}>
+        <CaretBtn
+          onPress={() => handleBookmarkState(isCuration)}
+          style={{ marginRight: 20 }}
+        >
           {bookmarked ? (
             <Ionicons
               name="md-bookmark"

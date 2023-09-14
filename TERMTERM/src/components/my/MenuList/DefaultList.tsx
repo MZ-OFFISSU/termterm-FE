@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useMember } from "@hooks/useMember";
 import { logoutSucceed } from "@utils/showToast";
 import { useHaptics } from "@hooks/useHaptics";
+import { Linking } from "react-native";
 
 interface MenuProps {
   title: string;
@@ -25,6 +26,19 @@ const DefaultList = () => {
 
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [isModal, setIsModal] = useState(false);
+
+  const openURL = (url: string) => {
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (!supported) {
+          console.log(`Can't handle URL: ${url}`);
+        } else {
+          return Linking.openURL(url);
+        }
+      })
+      .catch((err) => console.error("An error occurred", err));
+  };
+
   const MENU_LIST: Array<Array<MenuProps>> = [
     [
       { title: "알림 설정", onPress: () => navigation.push("Notification") },
@@ -36,8 +50,20 @@ const DefaultList = () => {
     ],
     [{ title: "버전 정보", subtitle: "v 1.0", onPress: () => null }],
     [
-      { title: "서비스 이용약관", onPress: () => null },
-      { title: "개인정보 처리방침", onPress: () => null },
+      {
+        title: "서비스 이용약관",
+        onPress: () =>
+          openURL(
+            "https://www.notion.so/termterm-official/termterm-c70c9239619341fea412d34b77407322?pvs=4"
+          ),
+      },
+      {
+        title: "개인정보 처리방침",
+        onPress: () =>
+          openURL(
+            "https://www.notion.so/termterm-official/termterm-4b732dfde57c41e7a30ffa4d0e8fd246?pvs=4"
+          ),
+      },
     ],
     [
       { title: "로그아웃", onPress: () => setIsModal(true) },

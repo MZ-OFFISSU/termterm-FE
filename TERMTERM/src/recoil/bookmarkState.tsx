@@ -17,3 +17,9 @@ export const bookmarkTermId = atom<number>({
   key: "bookmarkTermId",
   default: 0,
 });
+
+/** 북마크 헤더가 큐레이션 스크린인가? */
+export const isBookmarkCuration = atom<number>({
+  key: "isBookmarkCuration",
+  default: 0,
+});

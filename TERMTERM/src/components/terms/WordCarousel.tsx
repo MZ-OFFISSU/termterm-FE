@@ -88,7 +88,6 @@ const WordCarousel = ({
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            width: 100,
             alignSelf: "center",
             marginTop: 20,
           }}
@@ -151,6 +150,7 @@ const PaginationItem: React.FC<{
         height: width,
         borderRadius: 50,
         overflow: "hidden",
+        marginLeft: index !== 0 ? 3 : 0,
         transform: [
           {
             rotateZ: isRotate ? "90deg" : "0deg",

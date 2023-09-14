@@ -142,8 +142,17 @@ const Login = ({ navigation, route }: Props) => {
         </ButtonBox>
         <NonUrl style={{ marginTop: 30 }}>
           {`회원가입시 `}
-          <UrlText text={`서비스 이용약관`} url="" underline={true} /> 및{" "}
-          <UrlText text={`개인정보 처리방침`} url="" underline={true} />
+          <UrlText
+            text={`서비스 이용약관`}
+            url="https://www.notion.so/termterm-official/termterm-c70c9239619341fea412d34b77407322?pvs=4"
+            underline={true}
+          />{" "}
+          및{" "}
+          <UrlText
+            text={`개인정보 처리방침`}
+            url="https://www.notion.so/termterm-official/termterm-4b732dfde57c41e7a30ffa4d0e8fd246?pvs=4"
+            underline={true}
+          />
           {`에\n동의하게 됩니다.`}
         </NonUrl>
       </Container>
