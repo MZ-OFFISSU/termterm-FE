@@ -27,7 +27,7 @@ export type ScreenProps = StackScreenProps<RootStackParamList, "ToolBar">;
 const DailyQuizRouter = ({ navigation }: ScreenProps) => {
   const [COLOR, mode] = useThemeStyle();
   const [stage, setStage] = useState(0);
-  const [quizState, setQuizState] = useState<string>(QuizState.COMPLETED);
+  const [quizState, setQuizState] = useState<string>(QuizState.NOT_STARTED);
   const [retakeTime, setRetakeTime] = useState("");
 
   const CurStage = STAGES[stage];
