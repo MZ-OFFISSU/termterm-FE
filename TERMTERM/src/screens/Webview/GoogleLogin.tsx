@@ -17,6 +17,9 @@ const GoogleLogin = ({ navigation }: HomeScreenProps) => {
   const authApi = new AuthApi();
   const memberApi = new MemberApi();
 
+  // Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36
+  const customUserAgent = "customUserAgent";
+
   const logInProgress = (data: any) => {
     const startIdx = data.indexOf("code=") + 5;
     const endIdx = data.indexOf("&", startIdx);
@@ -69,7 +72,8 @@ const GoogleLogin = ({ navigation }: HomeScreenProps) => {
         onMessage={(event) => {
           logInProgress(event.nativeEvent.url);
         }}
-        userAgent="Chrome/56.0.0.0 Mobile"
+        // userAgent="Chrome/56.0.0.0 Mobile"
+        userAgent={customUserAgent}
       />
     </View>
   );
