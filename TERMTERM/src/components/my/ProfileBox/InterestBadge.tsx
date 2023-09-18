@@ -7,7 +7,7 @@ const Interst: { [key: string]: string } = {
   PM: "기획",
   DESIGN: "디자인",
   IT: "IT",
-  MARKETING: "마켓팅",
+  MARKETING: "마케팅",
   BUSINESS: "비즈니스",
   DEVELOPMENT: "개발",
 };
