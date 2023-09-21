@@ -15,6 +15,7 @@ import { BookmarkedCurations, BookmarkedTerms } from "@components/archive";
 import CustomModal from "@components/popup/modal";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { useFolder } from "@hooks/useFolder";
+import { useHeader } from "@hooks/useHeader";
 
 export type RootProps = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -30,6 +31,7 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
   const [curType, setCurType] = useState(0);
   const CurComponents = TYPES_WRAPPER[curType];
   const { getFolderInfoModal, folderInfoModal } = useFolder();
+  const { initializeState } = useHeader();
 
   const [refresh, setRefresh] = useState(false);
 
@@ -108,6 +110,7 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
 
   useEffect(() => {
     getFolderInfoModal();
+    initializeState();
   }, []);
 
   return (

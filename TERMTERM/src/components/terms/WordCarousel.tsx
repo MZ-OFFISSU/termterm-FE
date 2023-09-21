@@ -63,7 +63,7 @@ const WordCarousel = ({
         style={{
           width: screenWidth,
         }}
-        loop
+        loop={words.length > 1}
         pagingEnabled={true}
         snapEnabled={true}
         onProgressChange={(_, absoluteProgress) =>

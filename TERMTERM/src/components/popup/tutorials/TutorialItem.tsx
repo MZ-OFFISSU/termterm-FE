@@ -31,7 +31,7 @@ const TutorialItem = ({ content, img, subContent }: Props) => {
           )
         )}
       </Content>
-      <AutoSizedImage source={img} width={173} />
+      <AutoSizedImage source={img} width={200} />
       {subContent && <SubContent Color={COLOR}>{subContent}</SubContent>}
     </Container>
   );
@@ -52,6 +52,7 @@ const Content = styled.Text<{ Color: colorTheme }>`
   text-align: center;
   white-space: pre-line;
   line-height: 24px;
+  /* margin-bottom: 50px; */
 `;
 
 const ContentHighlight = styled.Text`

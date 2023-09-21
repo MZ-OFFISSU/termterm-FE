@@ -102,7 +102,9 @@ const BookmarkButton = styled.TouchableOpacity<{ mode: boolean }>`
 `;
 
 const ResultTitle = styled.Text<{ COLOR: colorTheme }>`
-  ${TYPO_STYLE.Subheading[1].Medium};
+  flex: 1;
+  overflow: hidden;
+  ${TYPO_STYLE.Caption[1].Medium};
   color: ${(props) => props.COLOR.Text.active};
 `;
 

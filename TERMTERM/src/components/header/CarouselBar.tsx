@@ -24,7 +24,7 @@ const CarouselBar = ({ onBack, onBookmark, onShare }: Props) => {
       style={{ justifyContent: "space-between", position: "relative" }}
     >
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 20 }}>
-        <BackArrowIcon size={20} color={COLOR.Text.active} />
+        <BackArrowIcon size={24} color={COLOR.Text.active} />
       </CaretBtn>
       <TitleWrapper>
         <NavigatorTitle style={{ marginLeft: 10 }} COLOR={COLOR}>{`${

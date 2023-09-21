@@ -22,6 +22,7 @@ const Tutorial = () => {
   const getVisible = async () => {
     const data = await AsyncStorage.getItem("tutorial");
     if (!data) setVisible(true);
+    else return;
   };
 
   const hideTutorial = async () => {
@@ -33,13 +34,7 @@ const Tutorial = () => {
     setChecked((prev) => !prev);
   };
 
-  const tmpRemoveMemory = async () => {
-    //나중에 지우기
-    await AsyncStorage.clear();
-  };
-
   useEffect(() => {
-    // tmpRemoveMemory();
     getVisible();
   }, []);
 

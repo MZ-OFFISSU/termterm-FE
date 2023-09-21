@@ -135,7 +135,8 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
       {bookmarkBar ? (
         <TitleWrapper>
           <NavigatorTitle COLOR={COLOR}>
-            {`${headerState.curNum + 1}/${headerState.maxNum}`}
+            {headerState.maxNum > 0 &&
+              `${headerState.curNum + 1}/${headerState.maxNum}`}
           </NavigatorTitle>
         </TitleWrapper>
       ) : (

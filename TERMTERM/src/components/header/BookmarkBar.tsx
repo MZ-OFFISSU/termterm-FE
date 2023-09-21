@@ -32,7 +32,7 @@ const BookmarkBar = ({
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <ElementWrapper style={{ marginLeft: 20 }}>
         <CaretBtn onPress={() => onBack()}>
-          <BackArrowIcon size={20} color={COLOR.Text.active} />
+          <BackArrowIcon size={24} color={COLOR.Text.active} />
         </CaretBtn>
         {title ? (
           <NavigatorTitle COLOR={COLOR} style={{ marginLeft: 10 }}>
