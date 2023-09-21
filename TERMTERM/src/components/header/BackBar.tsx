@@ -30,7 +30,7 @@ const BackBar = ({ title, onBack, maxNum, curNum, Icon }: Props) => {
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 15 }}>
-        <BackArrowIcon size={20} color={COLOR.Text.active} />
+        <BackArrowIcon size={24} color={COLOR.Text.active} />
       </CaretBtn>
       {title ? (
         <TitleWrapper>
