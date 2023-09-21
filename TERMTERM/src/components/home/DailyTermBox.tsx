@@ -84,7 +84,7 @@ const Content = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Caption[1].Regular};
   //TODO : line-height 수정
   flex: 1;
-  line-height: ${TEXT_STYLES["2xsm"].Reg?.fontSize! + 3}px;
+  line-height: 17.5%;
   color: ${(props) => props.COLOR.Text.default};
   text-align: start;
   white-space: pre-line;

@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import { useEffect, useState } from "react";
-import { screenHeight } from "@style/dimensions";
+import { useEffect } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { LIGHT_COLOR_STYLE } from "@style/designSystem";
@@ -13,8 +12,6 @@ import CustomButton, {
 } from "@components/buttons/CustomButton";
 import WalkthroughCarousel from "@components/terms/WalkthroughCarousel";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useRecoilState } from "recoil";
-import { walkthroughState } from "@recoil/walkthroughState";
 
 export type Props = StackScreenProps<RootStackParamList, "Walkthrough">;
 interface WtProps {
@@ -25,31 +22,6 @@ interface WtProps {
 
 const Walkthrough = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const [walkthough, setWalkthrough] = useState<Array<WtProps> | null>();
-  const [height, setHeight] = useState(413);
-  const [checked, setChecked] = useState(false);
-  const [visible, setVisible] = useRecoilState(walkthroughState);
-
-  useEffect(() => {
-    setWalkthrough(walkthroughInfo);
-  }, []);
-
-  /** 아이콘 높이 계산 함수 */
-  const calcHeight = () => {
-    if (screenHeight < 845) return;
-    if (screenHeight < 900) {
-      setHeight(468);
-      return;
-    }
-    if (screenHeight < 955) {
-      setHeight(523);
-      return;
-    }
-    if (screenHeight > 1010) {
-      setHeight(578);
-      return;
-    }
-  };
 
   const goToHome = () => {
     navigation.reset({
@@ -57,24 +29,18 @@ const Walkthrough = ({ navigation }: Props) => {
     });
   };
 
-  const getVisible = async () => {
-    const data = await AsyncStorage.getItem("walkthrough");
-    if (!data) setVisible(true);
-  };
-
   const handleHideButton = async () => {
-    if (checked) {
-      await AsyncStorage.setItem("walkthrough", "hide");
-    } else {
-      await AsyncStorage.removeItem("walkthrough");
-    }
-    setVisible(false);
+    await AsyncStorage.setItem("walkthrough", "hide");
     goToHome();
   };
 
+  const checkHiden = async () => {
+    const record = await AsyncStorage.getItem("walkthrough");
+    if (record && record === "hide") goToHome();
+  };
+
   useEffect(() => {
-    calcHeight();
-    getVisible();
+    checkHiden();
   }, []);
 
   return (
