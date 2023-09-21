@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil";
 import {
+  DEFAULT_VALUE,
   bookmarkArrayState,
   iconHeaderState,
   termIdArrayState,
@@ -61,6 +62,12 @@ export function useHeader() {
     setTermIdArray(ids);
   };
 
+  const initializeState = () => {
+    setHeaderState(DEFAULT_VALUE);
+    setBookmarkArray([]);
+    setTermIdArray([]);
+  };
+
   return {
     headerState,
     settingIdx,
@@ -72,5 +79,6 @@ export function useHeader() {
     settingTermsArray,
     termIdArray,
     settingBookmarkArrayByIndex,
+    initializeState,
   };
 }

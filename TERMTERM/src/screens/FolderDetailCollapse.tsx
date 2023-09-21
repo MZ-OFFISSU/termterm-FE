@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from "react";
 import { WordProps } from "@interfaces/word";
 import OtherThink from "@components/OtherThink";
 import { useHeader } from "@hooks/useHeader";
-import { dummyWords } from "@assets/dummyWord";
+import Empty from "@components/folder/empty";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { screenWidth } from "@style/dimensions";
 import { useCoach } from "@hooks/useCoach";
@@ -101,7 +101,7 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
 
   return (
     <Container COLOR={COLOR}>
-      {termsEach.length > 0 && (
+      {termsEach.length > 0 ? (
         <>
           <WordCarousel
             words={termsEach.map((item) => {
@@ -117,6 +117,10 @@ const FolderDetailCollapse = ({ navigation, route }: Props) => {
           <FolderInfo {...folderInfo} />
           <OtherThink word={termsEach[curIdx] as any} />
         </>
+      ) : (
+        <EmptyWrapper COLOR={COLOR}>
+          <Empty title={folderInfo.name} subtitle={folderInfo.desc} />
+        </EmptyWrapper>
       )}
       <Coachmark type="folder" {...coachConfigs} />
     </Container>
@@ -131,7 +135,15 @@ const Container = styled.View<{ COLOR: colorTheme }>`
   align-items: center;
   justify-content: space-between;
   background-color: ${(props) => props.COLOR.Background.surface};
-  padding: 20px 0px 100px 0px;
+  padding: 0px 0px 100px 0px;
+`;
+
+const EmptyWrapper = styled.View<{ COLOR: colorTheme }>`
+  width: 100%;
+  height: 100%;
+  background-color: ${(props) => props.COLOR.Background.surface};
+  padding: 0px 16px;
+  position: relative;
 `;
 
 const FolderInfoWrapper = styled.View`
