@@ -29,7 +29,6 @@ const QuizReview = ({ navigation }: Props) => {
         };
       });
       setQuizReviewList(updatedReviewList);
-      console.log(updatedReviewList);
     } catch (err) {
       console.log(err);
     }
@@ -58,7 +57,9 @@ const QuizReview = ({ navigation }: Props) => {
             answer={item.isAnswerRight}
             wordAnswer={item.termName}
             userAnswer={item.wrongChoices[0]}
-            onPress={() => navigation.navigate("QuizResult", { id: item.termId })}
+            onPress={() =>
+              navigation.navigate("QuizResult", { id: item.termId })
+            }
           />
         ))}
       </Container>

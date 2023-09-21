@@ -40,8 +40,8 @@ const Start = ({ navigate }: ChildrenProps) => {
     try {
       const res = await quizApi.getDailyQuizStatus();
       // TODO : 값 바꿔두기
-      // setQuizState(res.status);
-      setQuizStatus(QuizState.COMPLETED)
+      setQuizStatus(res.status);
+      // setQuizStatus(QuizState.COMPLETED)
     } catch (err) {
       console.log(err);
     }

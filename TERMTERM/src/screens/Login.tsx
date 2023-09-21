@@ -88,12 +88,10 @@ const Login = ({ navigation, route }: Props) => {
           AppleAuthentication.AppleAuthenticationScope.EMAIL,
         ],
       });
-      console.log(credential);
       const data = await authApi.postAppleTokenToServer(
         credential.authorizationCode!,
         credential.identityToken!
       );
-      console.log(data);
       // await setAccessToken(data.access_token);
       // await setRefreshToken(data.refresh_token);
 

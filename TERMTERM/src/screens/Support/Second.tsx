@@ -30,7 +30,7 @@ const Second = ({ onEnd }: Props) => {
         개인정보 수집 및 이용에 대한 안내
       </Title>
       <SubTitle COLOR={COLOR} mode={mode}>
-        {`O'MZ는 이용자 문의를 처리하기 위해 다음과 같이 개인\n정보를 수집 및 이용하며, 이용자의 개인정보를 안전하게\n취급하는데 최선을 다하고 있습니다.`}
+        {`코메르는 이용자 문의를 처리하기 위해 다음과 같이 개인\n정보를 수집 및 이용하며, 이용자의 개인정보를 안전하게\n취급하는데 최선을 다하고 있습니다.`}
       </SubTitle>
       <TextWrapper>
         <InfoTitle COLOR={COLOR} mode={mode}>

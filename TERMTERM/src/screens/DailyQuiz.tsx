@@ -45,7 +45,6 @@ const DailyQuiz = ({ navigation }: Props) => {
       ],
     };
 
-    console.log(memberQuizSelect);
     registerQuizResultInfo(memberQuizSelect);
     navigation.navigate("QuizResult", { id: idx });
   };

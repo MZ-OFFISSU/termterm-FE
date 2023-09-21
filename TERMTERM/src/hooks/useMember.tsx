@@ -14,11 +14,13 @@ export const useMember = () => {
     try {
       setLoading(true);
       const info = await memberApi.getInfo();
-      const newUserState: LoginState = {
-        isLogined: true,
-        info: info,
-      };
-      setUser(newUserState);
+      if (info.domain) {
+        const newUserState: LoginState = {
+          isLogined: true,
+          info: info,
+        };
+        setUser(newUserState);
+      }
       setLoading(false);
     } catch (err) {
       console.log(err);

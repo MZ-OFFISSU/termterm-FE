@@ -27,7 +27,7 @@ const MakeFolder = ({ navigation }: Props) => {
   const onComplete = () => {
     if (info.name !== "") {
       const res = createFolder({ description: info.desc, title: info.name });
-      console.log("res : ", res);
+
       getUsersFolderList();
       navigation.pop();
     } else {
