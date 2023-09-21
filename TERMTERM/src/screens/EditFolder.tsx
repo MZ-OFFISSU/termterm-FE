@@ -23,10 +23,10 @@ const EditFolder = ({ navigation, route }: Props) => {
   const [btnPosition, setBtnPosiition] = useState(30);
   const { getUsersFolderList, myFolderList, editFolderInfo } = useFolder();
 
-  //TODO 여기서 폴더 기본 정보 받아오기
   const settingPrevInfo = async () => {
     const folderId = route.params.id;
-    const folderInfo = myFolderList && myFolderList[folderId];
+    if (!myFolderList || myFolderList.length === 0) return;
+    const folderInfo = myFolderList.find((item) => item.folderId === folderId);
 
     if (folderInfo) {
       const prevInfo = {
