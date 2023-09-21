@@ -40,7 +40,9 @@ export const useQuiz = () => {
   };
 
   /** 데일리/복습 퀴즈 결과 제출 */
-  const registerQuizResultInfo = async (resultData: QuizSubmit): Promise<boolean> => {
+  const registerQuizResultInfo = async (
+    resultData: QuizSubmit
+  ): Promise<boolean> => {
     try {
       await quizApi.registerQuizResult(resultData);
       return true;
@@ -66,7 +68,6 @@ export const useQuiz = () => {
   const getDailyQuizStatus = async (): Promise<boolean> => {
     try {
       const res = await quizApi.getDailyQuizStatus();
-      console.log("quizStatus in hook : ", res);
       setQuizStatus(res.status);
       return true;
     } catch (err) {

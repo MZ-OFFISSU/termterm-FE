@@ -56,7 +56,7 @@ const InputApply = ({ nextStage, termId }: ApplyProps) => {
     try {
       await commentApi.registerComment(comment);
       // TODO : 네비게이션 이동 코드 추가
-      console.log(comment);
+
       navigate();
     } catch (err) {
       console.log(err);

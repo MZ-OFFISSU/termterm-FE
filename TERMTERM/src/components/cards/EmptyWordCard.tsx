@@ -90,6 +90,7 @@ const Title = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Body[1].ExtraBold};
   color: ${(props) => props.COLOR.Text.active};
   text-align: center;
+  line-height: 37%;
 `;
 
 const SubTitle = styled.Text<{ COLOR: colorTheme }>`

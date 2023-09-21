@@ -47,14 +47,16 @@ const ReviewQuiz = ({ navigation }: Props) => {
       ],
     };
 
-    console.log(memberQuizSelect);
     registerQuizResultInfo(memberQuizSelect);
     navigation.navigate("ReviewQuizResult", { id: idx });
   };
 
   useEffect(() => {
     if (reviewQuizItem) {
-      setTotalReviewIdx((prev) => ({ ...prev, totalReviewIdx: reviewQuizItem.length }));
+      setTotalReviewIdx((prev) => ({
+        ...prev,
+        totalReviewIdx: reviewQuizItem.length,
+      }));
     }
   }, [reviewQuizItem, setTotalReviewIdx]);
 

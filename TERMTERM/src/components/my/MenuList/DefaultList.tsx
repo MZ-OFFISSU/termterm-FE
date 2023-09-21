@@ -54,14 +54,14 @@ const DefaultList = () => {
         title: "서비스 이용약관",
         onPress: () =>
           openURL(
-            "https://www.notion.so/termterm-official/termterm-c70c9239619341fea412d34b77407322?pvs=4"
+            "https://termterm-official.notion.site/termterm-6e59200979eb4cd19eb06bae7a6a493a"
           ),
       },
       {
         title: "개인정보 처리방침",
         onPress: () =>
           openURL(
-            "https://www.notion.so/termterm-official/termterm-4b732dfde57c41e7a30ffa4d0e8fd246?pvs=4"
+            "https://termterm-official.notion.site/termterm-e36735c262764c7e855851fb75dde077"
           ),
       },
     ],

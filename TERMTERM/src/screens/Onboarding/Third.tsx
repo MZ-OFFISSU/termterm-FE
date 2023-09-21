@@ -61,8 +61,6 @@ const Third = ({ onEnd }: Props) => {
     else if (jobs.length < 4) setJobs((prev) => [...prev, job]);
   };
 
-  console.log(jobs);
-
   const nextStage = () => {
     if (onEnd && jobs.length > 0) {
       onEnd(jobs);

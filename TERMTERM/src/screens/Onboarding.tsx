@@ -52,7 +52,7 @@ const Onboarding = ({ navigation }: Props) => {
 
     try {
       await memberApi.putInfo(basicInfo);
-      console.log(jobs);
+
       await memberApi.putCategory(jobs!);
 
       registerSucceed();

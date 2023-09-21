@@ -27,7 +27,7 @@ const GoogleLogin = ({ navigation }: HomeScreenProps) => {
     if (endIdx === -1) {
       getToken(decodeURIComponent(data.substring(startIdx)));
     }
-    console.log(decodeURIComponent(data.substring(startIdx, endIdx)));
+
     getToken(decodeURIComponent(data.substring(startIdx, endIdx)));
   };
 

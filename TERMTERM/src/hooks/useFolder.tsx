@@ -54,7 +54,6 @@ export const useFolder = () => {
   const getTermDetailInFolder = async (folderId: number): Promise<boolean> => {
     try {
       const res = await folderApi.getEachFolderDetail(folderId);
-      console.log("get Term Detail in Folder : ", res);
       setTermDetailInFolder(res);
       return true;
     } catch (err) {
@@ -77,7 +76,6 @@ export const useFolder = () => {
   const editFolderInfo = async (input: EditFolder): Promise<boolean> => {
     try {
       const res = await folderApi.putFolderInfo(input);
-      console.log("폴더 정보 수정 값 / 결과 : ", input, res);
       await getUsersFolderList();
       return true;
     } catch (err) {
@@ -120,7 +118,6 @@ export const useFolder = () => {
     try {
       const res = await folderApi.getFolderModal();
       setFolderInfoModal(res);
-      console.log("folder info modal - success : ", res);
       return true;
     } catch (err) {
       console.log(err);
@@ -133,7 +130,6 @@ export const useFolder = () => {
     try {
       const res = await folderApi.getRandomArchiveTerms();
       setArchived10Terms(res);
-      console.log("아카이빙 한 용어 10개 리턴 : ", res, archived10Terms);
       return true;
     } catch (err) {
       console.log(err);
