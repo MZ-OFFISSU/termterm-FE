@@ -30,9 +30,11 @@ const DailyTermBox = ({ bookmarked, id, name, description }: Preview) => {
         fill={booleanConverter(bookmarked)}
         onPress={() => archiveTerm(id)}
       />
-      <Title COLOR={COLOR} mode={mode}>
-        {main}
-      </Title>
+      <TitleWrapper>
+        <Title COLOR={COLOR} mode={mode}>
+          {main}
+        </Title>
+      </TitleWrapper>
       <Content COLOR={COLOR}>{truncateString(description, 75)}</Content>
       <CustomModal
         visible={isModalOpen}
@@ -63,6 +65,14 @@ const Container = styled.TouchableOpacity`
   margin-top: 8px;
 `;
 
+const TitleWrapper = styled.View`
+  width: 100%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Title = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
   ${TYPO_STYLE.Subheading[1].Bold};
   color: ${(props) =>
@@ -73,6 +83,7 @@ const Title = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
 const Content = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Caption[1].Regular};
   //TODO : line-height 수정
+  flex: 1;
   line-height: ${TEXT_STYLES["2xsm"].Reg?.fontSize! + 3}px;
   color: ${(props) => props.COLOR.Text.default};
   text-align: start;
