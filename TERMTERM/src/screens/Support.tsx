@@ -11,14 +11,16 @@ import { useRecoilValue } from "recoil";
 import { inquiryState } from "@recoil/inquiryState";
 import InquiryApi from "@api/InquiryApi";
 import { InquiryContent, InquiryType } from "Inquiry";
+import { useHaptics } from "@hooks/useHaptics";
 
 export type Props = StackScreenProps<RootStackParamList, "Support">;
 
-const STAGES = [First, Second] as const;
+const STAGES = [First, Second, Third] as const;
 
 const Support = ({ navigation }: Props) => {
   const inquiryInfo = useRecoilValue(inquiryState);
   const inquiryApi = new InquiryApi();
+  const { haptic } = useHaptics();
 
   const [COLOR, mode] = useThemeStyle();
   const [stage, setStage] = useState(0);
@@ -26,7 +28,7 @@ const Support = ({ navigation }: Props) => {
   useSafeColor();
 
   const onEnd = () => {
-    stage < STAGES.length - 1
+    stage < STAGES.length - 2
       ? setStage((prev) => prev + 1)
       : registerInquiry();
   };
@@ -37,12 +39,10 @@ const Support = ({ navigation }: Props) => {
       email: inquiryInfo.email,
       type: inquiryInfo.inquiryType as InquiryType,
     };
-
     try {
       await inquiryApi.postInquiry(basicInquiry);
-      // TODO : 네비게이션 경로 로직에 따라 변경
-      console.log(basicInquiry);
-      navigation.reset({ routes: [{ name: "Third" }] });
+      haptic("success");
+      setStage((prev) => prev + 1);
     } catch (err) {
       console.log(err);
       // TODO : 네비게이션 경로 로직에 따라 변경
