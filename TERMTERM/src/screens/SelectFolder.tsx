@@ -21,10 +21,17 @@ const SelectFolder = ({ navigation, route }: Props) => {
         <Topper>
           <TitleContainer>
             <TitleWrapper>
-              <Highlighting COLOR={COLOR} />
-              <Title COLOR={COLOR}>아카이빙할 폴더를 선택해주세요</Title>
+              {mode && <Highlighting COLOR={COLOR} />}
+              {mode ? (
+                <Title COLOR={COLOR}>아카이빙할 폴더를 선택해주세요</Title>
+              ) : (
+                <Title COLOR={COLOR}>
+                  <HighlightTitle COLOR={COLOR}>아카이빙할 폴더</HighlightTitle>
+                  를 선택해주세요
+                </Title>
+              )}
             </TitleWrapper>
-            <Subtitle COLOR={COLOR}>
+            <Subtitle COLOR={COLOR} mode={mode}>
               단어 하나를 여러 개의 폴더에 아카이빙 할 수 있어요!
             </Subtitle>
           </TitleContainer>
@@ -99,6 +106,11 @@ const Title = styled.Text<{ COLOR: colorTheme }>`
   color: ${(props) => props.COLOR.Text.active};
 `;
 
+const HighlightTitle = styled.Text<{ COLOR: colorTheme }>`
+  ${TYPO_STYLE.Body[1].ExtraBold};
+  color: ${(props) => props.COLOR.THEME.primary[100]};
+`;
+
 const Highlighting = styled.View<{ COLOR: colorTheme }>`
   width: 230px;
   height: 10px;
@@ -109,9 +121,10 @@ const Highlighting = styled.View<{ COLOR: colorTheme }>`
   left: 0px;
 `;
 
-const Subtitle = styled.Text<{ COLOR: colorTheme }>`
+const Subtitle = styled.Text<{ COLOR: colorTheme; mode: boolean }>`
   ${TYPO_STYLE.Subheading[1].Regular};
-  color: ${(props) => props.COLOR.Text.darken};
+  color: ${(props) =>
+    props.mode ? props.COLOR.Text.darken : props.COLOR.Text.lighten};
 
   margin-top: 15px;
 `;
