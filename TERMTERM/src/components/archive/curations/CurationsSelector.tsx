@@ -28,8 +28,6 @@ const CurationsSelector = () => {
     }
   }, []);
 
-  console.log(arcihivedCurationList);
-
   return (
     <Container
       refreshControl={
