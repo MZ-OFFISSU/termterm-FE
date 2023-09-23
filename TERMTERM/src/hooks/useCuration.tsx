@@ -1,4 +1,5 @@
 import CurationApi from "@api/CurationApi";
+import PointApi from "@api/PointApi";
 import {
   archivedCurationListState,
   curationDetailState,
@@ -18,6 +19,8 @@ import { useRecoilState } from "recoil";
  */
 export const useCuration = () => {
   const curationApi = new CurationApi();
+  const pointApi = new PointApi();
+
   const [arcihivedCurationList, setArchivedCurationList] = useRecoilState(
     archivedCurationListState
   );
@@ -87,6 +90,16 @@ export const useCuration = () => {
     }
   };
 
+  /** 포인트 지불하여 큐레이션 구매 함수 */
+  const buyThisCuration = async (id: number) => {
+    try {
+      await pointApi.buyCuration(id);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  };
+
   return {
     getArchivecurationList,
     arcihivedCurationList,
@@ -97,5 +110,6 @@ export const useCuration = () => {
     categoryCurationList,
     setCategoryCurationList,
     deleteCurationBookmark,
+    buyThisCuration,
   };
 };
