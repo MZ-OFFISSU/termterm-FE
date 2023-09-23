@@ -44,7 +44,7 @@ const WordCarousel = ({
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const navigateToTermDetail = (id: number) => {
-    navigation.push("TermsDetail", { id: id });
+    navigation.push("TermDetail", { id: `${id}` });
   };
 
   const moveToDetail = (index: number) => {
