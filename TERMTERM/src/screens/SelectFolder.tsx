@@ -52,6 +52,7 @@ const SelectFolder = ({ navigation, route }: Props) => {
               ? BUTTON_STATE.active
               : BUTTON_STATE.default
           }
+          disabled={selectedFolders.length === 0}
           style={{ width: "100%", marginTop: 32 }}
         />
       </Inner>
