@@ -1,23 +1,21 @@
 import CurationApi from "@api/CurationApi";
+import PointApi from "@api/PointApi";
 import {
   archivedCurationListState,
   curationDetailState,
   curationListState,
 } from "@recoil/curationState";
-import {
-  Category,
-  CurationDetail,
-  CurationPreview,
-  MoreRecommendedCuration,
-} from "Curation";
-import { useEffect, useState } from "react";
+import { Category } from "Curation";
 import { useRecoilState } from "recoil";
+import { usePoint } from "./usePoint";
 
 /**
  * 큐레이션 관리 훅
  */
 export const useCuration = () => {
   const curationApi = new CurationApi();
+  const pointApi = new PointApi();
+
   const [arcihivedCurationList, setArchivedCurationList] = useRecoilState(
     archivedCurationListState
   );
@@ -25,6 +23,8 @@ export const useCuration = () => {
     useRecoilState(curationDetailState);
   const [categoryCurationList, setCategoryCurationList] =
     useRecoilState(curationListState);
+
+  const { getCurPoint } = usePoint();
 
   /** 아카이브한 큐레이션 목록 가져오기 */
   const getArchivecurationList = async (): Promise<boolean> => {
@@ -87,6 +87,17 @@ export const useCuration = () => {
     }
   };
 
+  /** 포인트 지불하여 큐레이션 구매 함수 */
+  const buyThisCuration = async (id: number) => {
+    try {
+      await pointApi.buyCuration(id);
+      getCurPoint();
+      return true;
+    } catch (err) {
+      return false;
+    }
+  };
+
   return {
     getArchivecurationList,
     arcihivedCurationList,
@@ -97,5 +108,6 @@ export const useCuration = () => {
     categoryCurationList,
     setCategoryCurationList,
     deleteCurationBookmark,
+    buyThisCuration,
   };
 };

@@ -157,7 +157,7 @@ const Login = ({ navigation, route }: Props) => {
       <QuestionBox>
         <UrlText
           text={`이용하시는 데에 어려움이 있나요?`}
-          url=""
+          url="https://www.notion.so/termterm-official/termterm-4b732dfde57c41e7a30ffa4d0e8fd246?pvs=4"
           style={{
             fontSize: 14,
             fontWeight: "500",

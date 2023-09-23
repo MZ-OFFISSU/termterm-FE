@@ -5,6 +5,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useHeader } from "@hooks/useHeader";
 import BackArrowIcon from "@assets/icon/BackArrowIcon";
+import { useShare } from "@hooks/useShare";
 
 interface Props {
   onBack: () => void;
@@ -18,6 +19,7 @@ interface Props {
 const CarouselBar = ({ onBack, onBookmark, onShare }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const { headerState, bookmarkHandler } = useHeader();
+  const { handleShare } = useShare();
 
   return (
     <HeaderWrapper
@@ -47,7 +49,7 @@ const CarouselBar = ({ onBack, onBookmark, onShare }: Props) => {
             />
           )}
         </CaretBtn>
-        <CaretBtn onPress={() => onShare()}>
+        <CaretBtn onPress={() => handleShare()}>
           <Ionicons
             name="share-social-outline"
             size={24}

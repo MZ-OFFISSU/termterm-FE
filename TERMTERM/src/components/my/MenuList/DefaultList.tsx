@@ -10,6 +10,7 @@ import { useMember } from "@hooks/useMember";
 import { logoutSucceed } from "@utils/showToast";
 import { useHaptics } from "@hooks/useHaptics";
 import { Linking } from "react-native";
+import { useShare } from "@hooks/useShare";
 
 interface MenuProps {
   title: string;
@@ -23,6 +24,7 @@ interface MenuProps {
 const DefaultList = () => {
   const { haptic } = useHaptics();
   const { logout, loading } = useMember();
+  const { handleShare } = useShare();
 
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [isModal, setIsModal] = useState(false);
@@ -46,7 +48,7 @@ const DefaultList = () => {
     ],
     [
       { title: "문의하기", onPress: () => navigation.push("Support") },
-      { title: "앱 공유하기", onPress: () => null },
+      { title: "앱 공유하기", onPress: () => handleShare() },
     ],
     [{ title: "버전 정보", subtitle: "v 1.0", onPress: () => null }],
     [

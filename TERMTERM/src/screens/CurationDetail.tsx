@@ -22,7 +22,8 @@ export type Props = StackScreenProps<RootStackParamList, "CurationDetail">;
 
 const CurationDetail = ({ navigation, route }: Props) => {
   //아이디로 통신해서 정보 가져올 것
-  const { getCurationDetailInfo, curationDetailInfo } = useCuration();
+  const { getCurationDetailInfo, curationDetailInfo, buyThisCuration } =
+    useCuration();
   const CURATION_ID = route.params.id;
   const [COLOR, mode] = useThemeStyle();
   const [terms, setTerms] = useState<TermSimple[]>();
@@ -31,20 +32,31 @@ const CurationDetail = ({ navigation, route }: Props) => {
   const { settingCurationId } = useBookmarkHeader();
 
   //토스트메시지 보여주는 함수
-  const showToast = () => {
-    Toast.show({
-      type: mode ? "light" : "dark",
-      text1: "이제 마음껏 큐레이션을 볼 수 있어요!",
-    });
+  const showToast = (res: boolean) => {
+    if (res) {
+      Toast.show({
+        type: mode ? "light" : "dark",
+        text1: "이제 마음껏 큐레이션을 볼 수 있어요!",
+      });
+    } else {
+      Toast.show({
+        type: mode ? "light" : "dark",
+        text1: "큐레이션 구매에 실패했어요.",
+      });
+    }
   };
 
   //모달에서 결제버튼 클릭할 때 실행되는 함수
   //TODO 통신해서 해금 넣을 것
   //포인트가 부족한 경우도 있어야함.
-  const onPay = () => {
-    showToast();
+  const onPay = async () => {
+    const res = await buyThisCuration(CURATION_ID);
+    showToast(res);
+    if (res) {
+      getCurationDetailInfo(CURATION_ID);
+      setPay(true);
+    }
     setModal(false);
-    setPay(true);
   };
 
   useEffect(() => {
@@ -80,6 +92,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
       }, 2000);
     }
   }, []);
+
   return (
     <>
       <Container

@@ -1,20 +1,19 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { tutorialState } from "@recoil/tutorialState";
+import { coachState, tutorialState } from "@recoil/tutorialState";
 import { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 export type CoachType = "folder" | "slide" | "comment" | "collapse";
 
 export const useCoach = () => {
-  const isTutorialOpen = useRecoilValue(tutorialState);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useRecoilState(coachState);
   const [whatCoach, setWhatCoach] = useState<CoachType>("folder");
   const [checked, setChecked] = useState(false);
 
   const openCoach = async (type: CoachType) => {
     const checkPrevState = await AsyncStorage.getItem(`coach_${type}`);
 
-    if (!checkPrevState && !isTutorialOpen) {
+    if (!checkPrevState) {
       setIsOpen(true);
       setWhatCoach(type);
     }

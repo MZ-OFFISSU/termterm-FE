@@ -1,12 +1,14 @@
 import PointApi from "@api/PointApi";
+import { pointState } from "@recoil/pointState";
 import { PointHistoryContent } from "Point";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
 
 export const usePoint = () => {
   const pointApi = new PointApi();
 
   const [history, setHistory] = useState<PointHistoryContent[]>([]);
-  const [curPoint, setCurPoint] = useState(0);
+  const [curPoint, setCurPoint] = useRecoilState(pointState);
   const [curPage, setCurPage] = useState(0);
   const [isEnd, setIsEnd] = useState(false);
 
@@ -31,10 +33,5 @@ export const usePoint = () => {
     }
   };
 
-  useEffect(() => {
-    getCurPoint();
-    getHistoryByPage();
-  }, []);
-
-  return { history, isEnd, curPoint };
+  return { history, isEnd, curPoint, getCurPoint, getHistoryByPage };
 };

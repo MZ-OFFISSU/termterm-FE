@@ -15,13 +15,14 @@ import { useHome } from "@hooks/useHome";
 import { useCuration } from "@hooks/useCuration";
 import Tutorial from "@components/popup/tutorials";
 import { useCoach } from "@hooks/useCoach";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { tutorialState } from "@recoil/tutorialState";
 import Coachmark from "@components/popup/coach";
 import { useArchive } from "@hooks/useArchive";
 import { useTerm } from "@hooks/useTerm";
 import { useMember } from "@hooks/useMember";
 import { Category } from "Curation";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -40,11 +41,30 @@ const Home = ({ navigation, route }: Props) => {
   const { archivedWords, getArchiveListInHome } = useArchive();
   const { getDailyTerm } = useTerm();
 
-  const isTutorialOpen = useRecoilValue(tutorialState);
   const [COLOR, mode] = useThemeStyle();
   const { homeMainTitle, homeSubTitle } = useHome();
-  const { isOpen, openCoach, hideCoach, checked, handleCheck } = useCoach();
+  const { isOpen, hideCoach, checked, handleCheck } = useCoach();
   const [refresh, setRefresh] = useState(false);
+
+  const [visible, setVisible] = useRecoilState(tutorialState);
+  const [tutorialChecked, setTutorialChecked] = useState(false);
+  const { openCoach } = useCoach();
+
+  const getVisible = async () => {
+    const data = await AsyncStorage.getItem("tutorial");
+    if (!data) setVisible(true);
+    else openCoach("slide");
+  };
+
+  const hideTutorial = async () => {
+    if (tutorialChecked) await AsyncStorage.setItem("tutorial", "hide");
+    setVisible(false);
+    openCoach("slide");
+  };
+
+  const handleTutorialCheck = () => {
+    setTutorialChecked((prev) => !prev);
+  };
 
   const onRefresh = useCallback(async () => {
     setRefresh(true);
@@ -63,15 +83,15 @@ const Home = ({ navigation, route }: Props) => {
   }, []);
 
   useEffect(() => {
+    getVisible();
+  }, []);
+
+  useEffect(() => {
     getArchiveListInHome();
     getEachCategoryCurationList(
       user.info?.categories[0].toLowerCase() as Category
     );
   }, []);
-
-  useEffect(() => {
-    openCoach("slide");
-  }, [isTutorialOpen]);
 
   return (
     <SafeAreaView>
@@ -142,15 +162,20 @@ const Home = ({ navigation, route }: Props) => {
             ))}
           </CurationCardWrapper>
         </InnerContainer>
-        {isTutorialOpen ? (
-          <Tutorial />
-        ) : (
+        {isOpen ? (
           <Coachmark
             type="slide"
             isOpen={isOpen}
             checked={checked}
             handleCheck={handleCheck}
             hideCoach={hideCoach}
+          />
+        ) : (
+          <Tutorial
+            visible={visible}
+            checked={tutorialChecked}
+            handleCheck={handleTutorialCheck}
+            hideTutorial={hideTutorial}
           />
         )}
       </Container>

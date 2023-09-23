@@ -4,12 +4,10 @@ import {
   CaretBtn,
   TitleWrapper,
 } from "../common/NavigatorTitle";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import styled from "styled-components/native";
 import AutoSizedImage from "@components/common/AutoSizedImage";
-import { iconHeaderState } from "@recoil/iconHeaderState";
-import { useRecoilValue } from "recoil";
 import { useCallback } from "react";
 import { Feather } from "@expo/vector-icons";
 import * as Sharing from "expo-sharing";
@@ -19,6 +17,7 @@ import { useHeader } from "@hooks/useHeader";
 import FolderApi from "@api/FolderApi";
 import { useHaptics } from "@hooks/useHaptics";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import { useShare } from "@hooks/useShare";
 
 export enum Icon {
   fold,
@@ -37,6 +36,7 @@ interface Props {
  */
 const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
   const folderApi = new FolderApi();
+  const { handleShare } = useShare();
 
   const [COLOR, mode] = useThemeStyle();
   const {
@@ -119,14 +119,6 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
     );
   };
 
-  const handleShare = async (url: string) => {
-    if (!(await Sharing.isAvailableAsync())) {
-      return;
-    }
-    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
-    Sharing.shareAsync(url);
-  };
-
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
       <CaretBtn onPress={() => onBack()} style={{ marginLeft: 20 }}>
@@ -147,7 +139,7 @@ const IconBar = ({ onBack, icon, onPress, bookmarkBar }: Props) => {
         <CaretBtn onPress={() => onPress()} style={{ marginRight: 13 }}>
           {icon === Icon.fold ? <Fold /> : <Collapse />}
         </CaretBtn>
-        <CaretBtn onPress={() => handleShare("https://www.naver.com/")}>
+        <CaretBtn onPress={() => handleShare()}>
           <Feather name="share-2" size={20} color={COLOR.Text.active} />
         </CaretBtn>
       </ElementWrapper>
