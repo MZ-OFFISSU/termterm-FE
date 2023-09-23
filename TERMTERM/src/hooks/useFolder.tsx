@@ -13,6 +13,7 @@ import { useThemeStyle } from "./useThemeStyle";
 import { useRecoilState } from "recoil";
 import { folderState } from "@recoil/folderState";
 import PointApi from "@api/PointApi";
+import { usePoint } from "./usePoint";
 /**
  * 폴더 API 관련 훅
  */
@@ -28,6 +29,8 @@ export const useFolder = () => {
   const [myFolderList, setMyFolderList] = useRecoilState(folderState);
   const [folderInfoModal, setFolderInfoModal] = useState<FolderModal>();
   const [archived10Terms, setArchived10Terms] = useState<RandomTerms[]>();
+
+  const { getCurPoint } = usePoint();
 
   const successToast = () => {
     Toast.show({
@@ -144,6 +147,7 @@ export const useFolder = () => {
   const buyFolderOne = async () => {
     try {
       await pointApi.buyFolder();
+      getCurPoint();
       return true;
     } catch (err) {
       console.log(err);

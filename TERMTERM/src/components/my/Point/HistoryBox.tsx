@@ -18,7 +18,7 @@ const HistoryBox = ({ history, ...props }: Props) => {
           <ContentText COLOR={COLOR}>{content.detail}</ContentText>
           <ContentText COLOR={COLOR}>
             <ContentText COLOR={COLOR} style={{ fontWeight: `700` }}>
-              {Number(content.point) > 0 ? `+${content.point}` : content.point}
+              {Number(content.point) > 0 ? content.point : content.point}
             </ContentText>{" "}
             포인트
           </ContentText>

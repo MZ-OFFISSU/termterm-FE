@@ -24,7 +24,7 @@ const ToolBar = ({ ...props }: Props) => {
   const { haptic } = useHaptics();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { authCheckProfile, onboardingToast } = useProfile();
-  const {curPoint} = usePoint();
+  const { curPoint, getCurPoint } = usePoint();
 
   /** tabNavigator 생성 */
   const Tab = createBottomTabNavigator();
@@ -54,6 +54,8 @@ const ToolBar = ({ ...props }: Props) => {
     };
 
     onboardingTest();
+
+    getCurPoint();
   }, []);
 
   return (

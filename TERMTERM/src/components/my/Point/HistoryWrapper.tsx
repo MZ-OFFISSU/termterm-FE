@@ -19,7 +19,7 @@ const HistoryWrapper = ({ ...props }: ViewProps) => {
   const [visible, setVisible] = useState<number>(0);
   const [max, setMax] = useState(false);
 
-  const { history } = usePoint();
+  const { history, getCurPoint, getHistoryByPage } = usePoint();
 
   /**
    * 시간 순으로 정렬
@@ -50,6 +50,11 @@ const HistoryWrapper = ({ ...props }: ViewProps) => {
         : setVisible(dummyHistories.length);
     }
   }, [history]);
+
+  useEffect(() => {
+    getCurPoint();
+    getHistoryByPage();
+  }, []);
 
   return (
     <Container {...props}>
