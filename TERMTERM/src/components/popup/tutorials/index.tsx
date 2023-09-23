@@ -9,34 +9,21 @@ import { AntDesign } from "@expo/vector-icons";
 import TutorialCarousel from "./Carousel";
 import { useRecoilState } from "recoil";
 import { tutorialState } from "@recoil/tutorialState";
+import { useCoach } from "@hooks/useCoach";
+
+interface Props {
+  visible: boolean;
+  checked: boolean;
+  handleCheck: () => void;
+  hideTutorial: () => void;
+}
 
 /**
  * 모달창 컴포넌트
  * 그냥 사용만해도 뒷 배경이 흐릿해진다!
  */
-const Tutorial = () => {
+const Tutorial = ({ visible, checked, handleCheck, hideTutorial }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const [visible, setVisible] = useRecoilState(tutorialState);
-  const [checked, setChecked] = useState(false);
-
-  const getVisible = async () => {
-    const data = await AsyncStorage.getItem("tutorial");
-    if (!data) setVisible(true);
-    else return;
-  };
-
-  const hideTutorial = async () => {
-    if (checked) await AsyncStorage.setItem("tutorial", "hide");
-    setVisible(false);
-  };
-
-  const handleCheck = () => {
-    setChecked((prev) => !prev);
-  };
-
-  useEffect(() => {
-    getVisible();
-  }, []);
 
   return (
     <Modal
