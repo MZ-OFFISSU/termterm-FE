@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import BackArrowIcon from "@assets/icon/BackArrowIcon";
 import { useBookmarkHeader } from "@hooks/useBookmarkHeader";
+import { useShare } from "@hooks/useShare";
 
 interface Props {
   onBack: () => void;
@@ -27,6 +28,7 @@ const BookmarkBar = ({
 }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const { bookmarked, handleBookmarkState } = useBookmarkHeader();
+  const { handleShare } = useShare();
 
   return (
     <HeaderWrapper style={{ justifyContent: "space-between" }}>
@@ -59,7 +61,7 @@ const BookmarkBar = ({
             />
           )}
         </CaretBtn>
-        <CaretBtn onPress={() => onShare()}>
+        <CaretBtn onPress={() => handleShare()}>
           <Ionicons
             name="share-social-outline"
             size={24}
