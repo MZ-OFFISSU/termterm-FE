@@ -16,6 +16,7 @@ import CustomModal from "@components/popup/modal";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import { useFolder } from "@hooks/useFolder";
 import { useHeader } from "@hooks/useHeader";
+import Toast from "react-native-toast-message";
 
 export type RootProps = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -30,7 +31,7 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [curType, setCurType] = useState(0);
   const CurComponents = TYPES_WRAPPER[curType];
-  const { getFolderInfoModal, folderInfoModal } = useFolder();
+  const { getFolderInfoModal, folderInfoModal, buyFolderOne } = useFolder();
   const { initializeState } = useHeader();
 
   const [refresh, setRefresh] = useState(false);
@@ -76,6 +77,28 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
     );
   }, [folderInfoModal, modal]);
 
+  const showToast = (res: boolean) => {
+    if (res) {
+      Toast.show({
+        type: mode ? "light" : "dark",
+        text1: "생성 가능한 폴더가 1개 추가 되었어요!",
+      });
+    } else {
+      Toast.show({
+        type: mode ? "light" : "dark",
+        text1: "폴더 추가에 실패했어요.",
+      });
+    }
+  };
+
+  //모달에서 결제버튼 클릭할 때 실행되는 함수
+  const onPay = async () => {
+    const res = await buyFolderOne();
+    showToast(res);
+    if (res) gotoMakefolder();
+    else setModal(false);
+  };
+
   /**
    * 폴더 개수가 3개 이상일 때 모달
    */
@@ -86,7 +109,7 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
         title={"포인트로 폴더를 추가 하시겠어요?"}
         subtitle={`1000 포인트를 사용하면\n폴더를 추가할 수 있어요!`}
         btnTitle={["아니오", "추가할래요"]}
-        onNext={() => gotoMakefolder()}
+        onNext={() => onPay()}
         onClose={() => setModal(false)}
       />
     );
@@ -106,7 +129,7 @@ const Archive = ({ modal, setModal, navigation }: Props) => {
         onClose={() => setModal(false)}
       />
     );
-  }, [folderInfoModal, modal]);
+  }, [folderInfoModal, modal]); //토스트메시지 보여주는 함수
 
   useEffect(() => {
     getFolderInfoModal();

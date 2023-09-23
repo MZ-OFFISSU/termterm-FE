@@ -12,11 +12,14 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { useThemeStyle } from "./useThemeStyle";
 import { useRecoilState } from "recoil";
 import { folderState } from "@recoil/folderState";
+import PointApi from "@api/PointApi";
 /**
  * 폴더 API 관련 훅
  */
 export const useFolder = () => {
   const folderApi = new FolderApi();
+  const pointApi = new PointApi();
+
   const [COLOR, mode] = useThemeStyle();
   const [termDetailInFolder, setTermDetailInFolder] =
     useState<FolderDetail[]>();
@@ -137,6 +140,17 @@ export const useFolder = () => {
     }
   };
 
+  /** 폴더 개수 하나 늘리기 */
+  const buyFolderOne = async () => {
+    try {
+      await pointApi.buyFolder();
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  };
+
   return {
     successToast,
     failedToast,
@@ -153,5 +167,6 @@ export const useFolder = () => {
     folderInfoModal,
     getArchived10Terms,
     archived10Terms,
+    buyFolderOne,
   };
 };

@@ -22,8 +22,8 @@ class PointApi {
   };
 
   /** 폴더 한도 1개 추가 (폴더 구매) */
-  buyFolder = async (id: number) => {
-    await put(`/v1/point/pay/folder/${id}`);
+  buyFolder = async () => {
+    await put(`/v1/point/pay/folder`);
   };
 }
 
