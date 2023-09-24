@@ -33,16 +33,16 @@ const DailyQuiz = ({ navigation }: Props) => {
     setCurr((prev) => ({ ...prev, currIdx: prev.currIdx + 1 }));
     const memberQuizSelect: QuizSubmit = {
       quizType: "DAILY",
-      results: [
-        ...(curr.currIdx <= 5
-          ? [
-              {
-                memberSelectedTermId: idx,
-                problemTermId: currentQuiz?.termId || 0,
-              },
-            ]
-          : []),
-      ],
+      result:
+        curr.currIdx <= 5
+          ? {
+              memberSelectedTermId: idx,
+              problemTermId: currentQuiz?.termId || 0,
+            }
+          : {
+              memberSelectedTermId: 0,
+              problemTermId: 0,
+            },
     };
 
     registerQuizResultInfo(memberQuizSelect);
