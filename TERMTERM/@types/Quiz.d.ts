@@ -35,7 +35,7 @@ declare module "Quiz" {
 
   export type QuizSubmit = {
     quizType: string;
-    results: QuizResult[];
+    result: QuizResult;
   };
 
   export type QuizStatus = {
