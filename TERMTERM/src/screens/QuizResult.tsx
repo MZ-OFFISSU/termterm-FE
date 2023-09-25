@@ -6,7 +6,6 @@ import { colorTheme } from "@style/designSystem";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { WordProps } from "@interfaces/word";
-import { dummyWord } from "@assets/dummyWord";
 import {
   CustomButton,
   BUTTON_STATE,
@@ -16,9 +15,6 @@ import {
 import QuizAnswerCard from "@components/terms/QuizAnswerCard";
 import { eachQuizAnswerResult, quizState } from "@recoil/quizState";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { useQuiz } from "@hooks/useQuiz";
-import { QuizAnswerResult } from "Quiz";
-import { divideTerm } from "@utils/termCutter";
 
 export type Props = StackScreenProps<RootStackParamList, "QuizResult">;
 
