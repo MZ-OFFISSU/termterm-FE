@@ -92,11 +92,11 @@ const Login = ({ navigation, route }: Props) => {
         credential.authorizationCode!,
         credential.identityToken!
       );
-      // await setAccessToken(data.access_token);
-      // await setRefreshToken(data.refresh_token);
+      await setAccessToken(data.access_token);
+      await setRefreshToken(data.refresh_token);
 
-      // const memberInfo = await memberApi.getInfo();
-      // checkInfo(memberInfo);
+      const memberInfo = await memberApi.getInfo();
+      checkInfo(memberInfo);
     } catch (e) {
       console.log(e);
       loginFailed();
