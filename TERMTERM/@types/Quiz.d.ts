@@ -38,6 +38,14 @@ declare module "Quiz" {
     result: QuizResult;
   };
 
+  export type QuizAnswerResult = {
+    termId: number;
+    termName: string;
+    termDescription: string;
+    memberSelectedTermName: string;
+    isAnswerRight: boolean;
+  }
+
   export type QuizStatus = {
     status: "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
   };

@@ -1,5 +1,5 @@
 import QuizApi from "@api/QuizApi";
-import { QuizDetail, QuizReviewDetail, QuizResult, QuizSubmit } from "Quiz";
+import { QuizDetail, QuizReviewDetail, QuizResult, QuizSubmit, QuizAnswerResult } from "Quiz";
 import { useEffect, useState } from "react";
 
 /**
@@ -12,6 +12,7 @@ export const useQuiz = () => {
     useState<QuizReviewDetail[]>();
   const [reviewQuizItem, setReviewQuizItem] = useState<QuizDetail[]>();
   const [quizStatus, setQuizStatus] = useState<string>();
+  const [quizResultData, setQuizResultData] = useState<QuizAnswerResult>();
 
   /** 데일리 퀴즈 */
   const getDailyQuizInfo = async (): Promise<boolean> => {
@@ -41,10 +42,14 @@ export const useQuiz = () => {
 
   /** 데일리/복습 퀴즈 결과 제출 */
   const registerQuizResultInfo = async (
+    apiUrl: string,
     resultData: QuizSubmit
   ): Promise<boolean> => {
     try {
-      await quizApi.registerQuizResult(resultData);
+      const data = await quizApi.registerQuizResult(apiUrl, resultData);
+      // console.log("퀴즈 요청 성공", apiUrl, resultData, data);
+      setQuizResultData(data);
+      // console.log("quizResultData in hook : ", quizResultData);
       return true;
     } catch (err) {
       console.log(err);
@@ -87,6 +92,7 @@ export const useQuiz = () => {
     finalQuizReviewItem,
     reviewQuizItem,
     quizStatus,
+    quizResultData,
     getDailyQuizInfo,
     getDailyQuizStatus,
     getFinalQuizReviewInfo,
