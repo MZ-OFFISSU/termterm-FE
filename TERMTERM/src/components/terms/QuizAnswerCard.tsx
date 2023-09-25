@@ -3,12 +3,13 @@ import { useWordReg } from "@hooks/useWordReg";
 import { WordProps } from "@interfaces/word";
 import { TEXT_STYLES, TYPO, colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
+import { QuizAnswerResult } from "Quiz";
 import { TouchableOpacityProps } from "react-native";
 import { css } from "styled-components";
 import styled from "styled-components/native";
 
 interface Props extends TouchableOpacityProps {
-  word: WordProps;
+  word: QuizAnswerResult;
   quiz?: boolean;
   detail?: boolean;
 }
@@ -18,7 +19,7 @@ interface Props extends TouchableOpacityProps {
  */
 const QuizAnswerCard = ({ word, quiz, detail, ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const [sub, main] = useWordReg(word.name);
+  const [sub, main] = useWordReg(word?.termName);
 
   return (
     <Container
@@ -42,7 +43,7 @@ const QuizAnswerCard = ({ word, quiz, detail, ...props }: Props) => {
         </MainName>
       </NameWrapper>
       <Content COLOR={COLOR} mode={mode}>
-        {word.description}
+        {word?.termDescription}
       </Content>
     </Container>
   );

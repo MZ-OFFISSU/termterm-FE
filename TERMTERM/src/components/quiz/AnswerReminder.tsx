@@ -2,6 +2,7 @@ import AutoSizedImage from "@components/common/AutoSizedImage";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
+import { divideTerm } from "@utils/termCutter";
 import { useEffect, useState } from "react";
 import styled from "styled-components/native";
 
@@ -52,7 +53,7 @@ const AnswerReminder = ({ answer, userAnswer }: AnswerReminderProps) => {
           <>
             내가 생각한 답은{" "}
             <BoldText COLOR={COLOR} mode={mode}>
-              {userAnswer}
+              {divideTerm(userAnswer)[0]}
             </BoldText>
             이에요
           </>
