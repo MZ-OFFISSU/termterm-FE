@@ -1,4 +1,4 @@
-import { QuizAnswerResult, QuizStatus } from "Quiz";
+import { QuizAnswerResult, QuizReviewDetail, QuizStatus } from "Quiz";
 import { atom } from "recoil";
 
 /**
@@ -55,4 +55,24 @@ const defaultQuizAnswer: QuizAnswerResult = {
 export const eachQuizAnswerResult = atom<QuizAnswerResult>({
   key: "eachQuizAnswerResult",
   default: defaultQuizAnswer,
+});
+
+/**
+ * 퀴즈 리뷰에서 사용할 전역 변수
+ */
+const defaultQuizReviewList: QuizReviewDetail[] = [
+  {
+    bookmarked: "NO",
+    isAnswerRight: false,
+    termDescription: "",
+    termId: 0,
+    termName: "",
+    termSource: "",
+    wrongChoices: [],
+  },
+];
+
+export const quizReviewList = atom<QuizReviewDetail[]>({
+  key: "quizReviewList",
+  default: defaultQuizReviewList,
 });

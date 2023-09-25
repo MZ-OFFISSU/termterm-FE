@@ -28,6 +28,7 @@ import SelectFolder from "./SelectFolder";
 import ReviewQuizIntro from "./ReviewQuizIntro";
 import ReviewQuiz from "./ReviewQuiz";
 import ReviewQuizResult from "./ReviewQuizResult";
+import QuizReViewDetail from "./QuizReviewDetail";
 
 export {
   Home,
@@ -60,4 +61,5 @@ export {
   ReviewQuizIntro,
   ReviewQuiz,
   ReviewQuizResult,
+  QuizReViewDetail,
 };
