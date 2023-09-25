@@ -12,7 +12,7 @@ export interface QuizState {
 
 const defaultState: QuizState = {
   totalIdx: 5,
-  currIdx: 1,
+  currIdx: 0,
   currReviewIdx: 0,
   totalReviewIdx: 0,
 };

@@ -141,7 +141,7 @@ const Container = () => {
               header: (props) => {
                 return (
                   <BackBar
-                    title={`${currIdx}/${totalIdx}`}
+                    title={`${currIdx + 1}/${totalIdx}`}
                     onBack={() => props.navigation.pop()}
                   />
                 );
