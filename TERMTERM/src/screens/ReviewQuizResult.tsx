@@ -14,8 +14,10 @@ import {
   AnswerReminder,
 } from "@components/index";
 import QuizAnswerCard from "@components/terms/QuizAnswerCard";
-import { quizState } from "@recoil/quizState";
+import { eachQuizAnswerResult, quizState } from "@recoil/quizState";
 import { useRecoilValue } from "recoil";
+import { useQuiz } from "@hooks/useQuiz";
+import { QuizAnswerResult } from "Quiz";
 
 export type Props = StackScreenProps<RootStackParamList, "ReviewQuizResult">;
 
@@ -24,19 +26,18 @@ const ReviewQuizResult = ({ navigation, route }: Props) => {
   const [answer, setAnswer] = useState<WordProps>();
   const curr = useRecoilValue(quizState);
   const { currIdx, currReviewIdx, totalReviewIdx } = curr;
-
-  useEffect(() => {
-    //TODO : 정답 받아오는 로직 추가
-    setAnswer(dummyWord);
-  });
+  const quizResult = useRecoilValue(eachQuizAnswerResult);
 
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
       <Container COLOR={COLOR} mode={mode}>
-        <AnswerReminder answer={false} userAnswer={"Product Manager"} />
+        <AnswerReminder
+          answer={quizResult.isAnswerRight}
+          userAnswer={quizResult.memberSelectedTermName}
+        />
         <ContentWrapper>
           <QuizAnswerCard
-            word={dummyWord}
+            word={quizResult}
             quiz={true}
             style={{ marginTop: "-15%" }}
           />

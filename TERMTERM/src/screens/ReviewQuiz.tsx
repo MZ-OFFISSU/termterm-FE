@@ -10,8 +10,9 @@ import useHideWord from "@hooks/useHideWord";
 import { screenWidth } from "@style/dimensions";
 import { useQuiz } from "@hooks/useQuiz";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { quizState } from "@recoil/quizState";
+import { eachQuizAnswerResult, quizState } from "@recoil/quizState";
 import { QuizSubmit } from "Quiz";
+import { divideTerm } from "@utils/termCutter";
 
 export type Props = StackScreenProps<RootStackParamList, "ReviewQuiz">;
 
@@ -26,28 +27,38 @@ const ReviewQuiz = ({ navigation }: Props) => {
   const [curr, setCurr] = useRecoilState(quizState);
   const currentQuiz = reviewQuizItem?.[curr.currReviewIdx];
   const setTotalReviewIdx = useSetRecoilState(quizState);
+  const setEachQuizAnswer = useSetRecoilState(eachQuizAnswerResult);
 
   // TODO : DB에 @@ 포함되어 용어 설명 들어가면 다시 훅 사용
   // const { hiddenExplain } = useHideWord(dummy[idx].explain, dummy[idx].word);
-  const handleButton = (idx: number) => {
+  const handleButton = async (idx: number) => {
     setSelectedIdx(idx);
     setBorderColor(COLOR.THEME.secondary[120]);
     setCurr((prev) => ({ ...prev, currReviewIdx: prev.currReviewIdx + 1 }));
+    const isFinalQuestion = curr.currReviewIdx + 1 === curr.totalReviewIdx;
+    let apiUrl = `/v1/quiz/result`;
+
     const memberQuizSelect: QuizSubmit = {
       quizType: "REVIEW",
-      results: [
-        ...(curr.currReviewIdx <= curr.totalReviewIdx
-          ? [
-              {
-                memberSelectedTermId: idx,
-                problemTermId: currentQuiz?.termId || 0,
-              },
-            ]
-          : []),
-      ],
+      result: {
+        memberSelectedTermId: idx,
+        problemTermId: currentQuiz?.termId || 0,
+      },
     };
 
-    registerQuizResultInfo(memberQuizSelect);
+    if (isFinalQuestion) {
+      apiUrl += `?final=true`;
+      // setCurr((prev) => ({ ...prev, currReviewIdx: prev.currReviewIdx * 0 }));
+    }
+
+    const res = await registerQuizResultInfo(apiUrl, memberQuizSelect);
+    setEachQuizAnswer({
+      termId: res?.termId as number,
+      termName: res?.termName as string,
+      termDescription: res?.termDescription as string,
+      memberSelectedTermName: res?.memberSelectedTermName as string,
+      isAnswerRight: res?.isAnswerRight as boolean,
+    });
     navigation.navigate("ReviewQuizResult", { id: idx });
   };
 
@@ -85,7 +96,7 @@ const ReviewQuiz = ({ navigation }: Props) => {
             onPress={() => handleButton(item.termId)}
           >
             <ButtonText COLOR={COLOR} mode={mode}>
-              {item.optionName}
+              {divideTerm(item.optionName)[0]}
             </ButtonText>
           </QuizButton>
         ))}
