@@ -1,5 +1,11 @@
 import QuizApi from "@api/QuizApi";
-import { QuizDetail, QuizReviewDetail, QuizResult, QuizSubmit, QuizAnswerResult } from "Quiz";
+import {
+  QuizDetail,
+  QuizReviewDetail,
+  QuizResult,
+  QuizSubmit,
+  QuizAnswerResult,
+} from "Quiz";
 import { useEffect, useState } from "react";
 
 /**
@@ -73,6 +79,7 @@ export const useQuiz = () => {
   const getDailyQuizStatus = async (): Promise<boolean> => {
     try {
       const res = await quizApi.getDailyQuizStatus();
+      console.log("여기 : ", res);
       setQuizStatus(res.status);
       return true;
     } catch (err) {
@@ -98,5 +105,6 @@ export const useQuiz = () => {
     getFinalQuizReviewInfo,
     getReviewQuizInfo,
     registerQuizResultInfo,
+    setQuizStatus,
   };
 };
