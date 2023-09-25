@@ -9,6 +9,9 @@ import { BackBar } from "@components/header";
 import { colorTheme, LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { Fontisto } from "@expo/vector-icons";
+import QuizApi from "@api/QuizApi";
+import { useRecoilState } from "recoil";
+import { memberQuizSolveState } from "@recoil/quizState";
 
 export type Props = StackScreenProps<RootStackParamList, "CompleteQuiz">;
 
@@ -16,6 +19,8 @@ const CompleteQuiz = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [width, setWidth] = useState(112);
   const [score, setScore] = useState(200);
+  const quizApi = new QuizApi();
+  const [quizSolve, setQuizSolve] = useRecoilState(memberQuizSolveState);
 
   /** 아이콘 너비 계산 함수 */
   const calcWidth = () => {
@@ -31,6 +36,16 @@ const CompleteQuiz = ({ navigation }: Props) => {
     if (screenWidth > 500) {
       setWidth(212);
       return;
+    }
+  };
+
+  const handleButton = async () => {
+    try {
+      const res = await quizApi.getDailyQuizStatus();
+      setQuizSolve((prev) => ({ ...prev, memberQuizSolveState: res }));
+      navigation.navigate("Home");
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -68,7 +83,7 @@ const CompleteQuiz = ({ navigation }: Props) => {
           <CompleteButton
             COLOR={COLOR}
             mode={mode}
-            onPress={() => navigation.navigate("Home")}
+            onPress={() => handleButton()}
           >
             <ButtonText COLOR={COLOR} mode={mode}>
               {`홈으로 돌아가기    `}
@@ -144,7 +159,8 @@ const CompleteButton = styled.TouchableOpacity<{
   width: ${screenWidth - 72}px;
   height: 44px;
   z-index: 2;
-  background-color: ${(props) => props.mode ? props.COLOR.Neutral[100] : props.COLOR.Background.onSurface};
+  background-color: ${(props) =>
+    props.mode ? props.COLOR.Neutral[100] : props.COLOR.Background.onSurface};
   border-radius: 50%;
   margin-top: 40px;
 `;
