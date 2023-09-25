@@ -8,8 +8,9 @@ import Clear from "./Clear";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { useRecoilValue } from "recoil";
-import { quizState } from "@recoil/quizState";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { memberQuizSolveState, quizState } from "@recoil/quizState";
+import { QuizStatus } from "Quiz";
 
 /**
  * async storage에 저장되는 퀴즈 현재 상태
@@ -23,25 +24,32 @@ enum QuizState {
   IN_PROGRESS = "IN_PROGRESS",
 }
 
+export interface MemberQuizSolveState {
+  quizSolveState: QuizStatus;
+}
+
 /**
  * 용어퀴즈 시작 가능
  */
 const Start = ({ navigate }: ChildrenProps) => {
   const quizApi = new QuizApi();
   const [COLOR, mode] = useThemeStyle();
-  const [quizStatus, setQuizStatus] = useState<string>(QuizState.NOT_STARTED);
-  // TODO : 180초로 추후 재설정
-  const [countdown, setCountdown] = useState(3);
+  // TODO : 시간 바꿔두기
+  const [countdown, setCountdown] = useState(0);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const curr = useRecoilValue(quizState);
-  const { currIdx } = curr
+  const { currIdx } = curr;
+  const setQuizStatus = useSetRecoilState(memberQuizSolveState);
+  const quizStatus = useRecoilValue(memberQuizSolveState);
 
   const remindQuizStatus = async () => {
     try {
       const res = await quizApi.getDailyQuizStatus();
-      // TODO : 값 바꿔두기
-      setQuizStatus(res.status);
-      // setQuizStatus(QuizState.COMPLETED)
+      setQuizStatus({
+        quizSolveState: {
+          status: res.status,
+        },
+      });
     } catch (err) {
       console.log(err);
     }
@@ -50,7 +58,7 @@ const Start = ({ navigate }: ChildrenProps) => {
   useEffect(() => {
     remindQuizStatus();
     let interval: NodeJS.Timer;
-    if (quizStatus === QuizState.IN_PROGRESS) {
+    if (quizStatus.quizSolveState.status === QuizState.IN_PROGRESS) {
       interval = setInterval(() => {
         setCountdown((prevCountdown) => prevCountdown - 1);
       }, 1000);
@@ -63,22 +71,23 @@ const Start = ({ navigate }: ChildrenProps) => {
 
   return (
     <>
-      {quizStatus === QuizState.NOT_STARTED && currIdx <= 5 && (
-        <>
-          <AutoSizedImage source={require("@assets/test.png")} width={24} />
-          <Title COLOR={COLOR} style={{ marginLeft: 5 }}>
-            Daily 용어 퀴즈를 시작해 볼까요?
-          </Title>
-          <TouchableOpacity onPress={() => navigation.push("QuizIntro")}>
-            <AutoSizedImage
-              source={require("@assets/arrow-button.png")}
-              width={40}
-            />
-          </TouchableOpacity>
-        </>
-      )}
+      {quizStatus.quizSolveState.status === QuizState.NOT_STARTED &&
+        currIdx <= 5 && (
+          <>
+            <AutoSizedImage source={require("@assets/test.png")} width={24} />
+            <Title COLOR={COLOR} style={{ marginLeft: 5 }}>
+              Daily 용어 퀴즈를 시작해 볼까요?
+            </Title>
+            <TouchableOpacity onPress={() => navigation.push("QuizIntro")}>
+              <AutoSizedImage
+                source={require("@assets/arrow-button.png")}
+                width={40}
+              />
+            </TouchableOpacity>
+          </>
+        )}
 
-      {quizStatus === QuizState.IN_PROGRESS && (
+      {quizStatus.quizSolveState.status === QuizState.IN_PROGRESS && (
         <>
           {countdown > 0 ? (
             <>
@@ -98,7 +107,9 @@ const Start = ({ navigate }: ChildrenProps) => {
               <Title COLOR={COLOR} style={{ marginLeft: 5 }}>
                 용어 복습 퀴즈를 통해 다시 학습해요!
               </Title>
-              <TouchableOpacity onPress={() => navigation.push("ReviewQuizIntro")}>
+              <TouchableOpacity
+                onPress={() => navigation.push("ReviewQuizIntro")}
+              >
                 <AutoSizedImage
                   source={require("@assets/arrow-button.png")}
                   width={40}
@@ -109,7 +120,7 @@ const Start = ({ navigate }: ChildrenProps) => {
         </>
       )}
 
-      {quizStatus === QuizState.COMPLETED && (
+      {quizStatus.quizSolveState.status === QuizState.COMPLETED && (
         <Clear navigate={() => navigation.push("QuizReview")} />
       )}
     </>
