@@ -4,7 +4,7 @@ import { UrlText, NonScrollContainer } from "@components/index";
 import { screenWidth } from "@style/dimensions";
 import AutoSizedImage from "@components/common/AutoSizedImage";
 import SocialLoginButton from "@components/buttons/SocialLogin";
-import { StackScreenProps } from "@react-navigation/stack";
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useSafeColor } from "@hooks/useSafeColor";
 import { NonUrl } from "@components/common/UrlText";
@@ -14,8 +14,8 @@ import { useHaptics } from "@hooks/useHaptics";
 import * as AppleAuthentication from "expo-apple-authentication";
 import AuthApi from "@api/AuthApi";
 import { MemberInfo } from "Member";
-import { setAccessToken, setRefreshToken } from "@utils/tokenHandler";
 import MemberApi from "@api/MemberApi";
+import { useNavigation } from "@react-navigation/native";
 
 export type Props = StackScreenProps<RootStackParamList, "Login">;
 
@@ -42,6 +42,8 @@ const Login = ({ navigation, route }: Props) => {
   const { user, loading } = useMember();
   const authApi = new AuthApi();
   const memberApi = new MemberApi();
+  const inquiryNavigation =
+    useNavigation<StackNavigationProp<RootStackParamList>>();
 
   useSafeColor();
 
@@ -155,15 +157,9 @@ const Login = ({ navigation, route }: Props) => {
         </NonUrl>
       </Container>
       <QuestionBox>
-        <UrlText
-          text={`이용하시는 데에 어려움이 있나요?`}
-          url="https://www.notion.so/termterm-official/termterm-4b732dfde57c41e7a30ffa4d0e8fd246?pvs=4"
-          style={{
-            fontSize: 14,
-            fontWeight: "500",
-            color: "#929292",
-          }}
-        />
+        <InquiryLink onPress={() => inquiryNavigation.navigate("Support")}>
+          이용하시는 데에 어려움이 있나요?
+        </InquiryLink>
       </QuestionBox>
     </NonScrollContainer>
   );
@@ -214,6 +210,12 @@ const QuestionBox = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const InquiryLink = styled.Text`
+  font-size: 14px;
+  font-weight: 500;
+  color: #929292;
 `;
 
 export default Login;

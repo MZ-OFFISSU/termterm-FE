@@ -6,46 +6,55 @@ import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { SafeAreaView } from "react-native-safe-area-context";
 import QuizCard from "@components/quiz/QuizCard";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import useHideWord from "@hooks/useHideWord";
 import { screenWidth } from "@style/dimensions";
 import { useQuiz } from "@hooks/useQuiz";
-import { useRecoilState } from "recoil";
-import { quizState } from "@recoil/quizState";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { eachQuizAnswerResult, quizState } from "@recoil/quizState";
 import { QuizSubmit } from "Quiz";
+import { divideTerm } from "@utils/termCutter";
 
 export type Props = StackScreenProps<RootStackParamList, "DailyQuiz">;
 
 const DailyQuiz = ({ navigation }: Props) => {
-  const { dailyQuizItem, registerQuizResultInfo } = useQuiz();
+  const { dailyQuizItem, registerQuizResultInfo, quizResultData } = useQuiz();
   const [COLOR, mode] = useThemeStyle();
   const [selectedIdx, setSelectedIdx] = useState(-1);
   const [borderColor, setBorderColor] = useState(
     COLOR.Background.inputBorderDefault
   );
   const [curr, setCurr] = useRecoilState(quizState);
-  const currentQuiz = dailyQuizItem?.[curr.currIdx - 1];
+  const currentQuiz = dailyQuizItem?.[curr.currIdx];
+  const setEachQuizAnswer = useSetRecoilState(eachQuizAnswerResult);
 
   // TODO : DB에 @@ 포함되어 용어 설명 들어가면 다시 훅 사용
   // const { hiddenExplain } = useHideWord(dummy[idx].explain, dummy[idx].word);
-  const handleButton = (idx: number) => {
+  const handleButton = async (idx: number) => {
     setSelectedIdx(idx);
     setBorderColor(COLOR.THEME.secondary[120]);
     setCurr((prev) => ({ ...prev, currIdx: prev.currIdx + 1 }));
+    const isFinalQuestion = curr.currIdx === 4;
+    let apiUrl = `/v1/quiz/result`;
+
     const memberQuizSelect: QuizSubmit = {
       quizType: "DAILY",
-      results: [
-        ...(curr.currIdx <= 5
-          ? [
-              {
-                memberSelectedTermId: idx,
-                problemTermId: currentQuiz?.termId || 0,
-              },
-            ]
-          : []),
-      ],
+      result: {
+        memberSelectedTermId: idx,
+        problemTermId: currentQuiz?.termId || 0,
+      },
     };
 
-    registerQuizResultInfo(memberQuizSelect);
+    if (isFinalQuestion) {
+      apiUrl += `?final=true`;
+    }
+
+    const res = await registerQuizResultInfo(apiUrl, memberQuizSelect);
+    setEachQuizAnswer({
+      termId: res?.termId as number,
+      termName: res?.termName as string,
+      termDescription: res?.termDescription as string,
+      memberSelectedTermName: res?.memberSelectedTermName as string,
+      isAnswerRight: res?.isAnswerRight as boolean,
+    })
     navigation.navigate("QuizResult", { id: idx });
   };
 
@@ -74,7 +83,7 @@ const DailyQuiz = ({ navigation }: Props) => {
             onPress={() => handleButton(item.termId)}
           >
             <ButtonText COLOR={COLOR} mode={mode}>
-              {item.optionName}
+              {divideTerm(item.optionName)[0]}
             </ButtonText>
           </QuizButton>
         ))}

@@ -18,7 +18,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 export type Props = StackScreenProps<RootStackParamList, "QuizResult">;
 
-const QuizResult = ({ navigation, route }: Props) => {
+const QuizReViewDetail = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [answer, setAnswer] = useState<WordProps>();
   const curr = useRecoilValue(quizState);
@@ -44,11 +44,7 @@ const QuizResult = ({ navigation, route }: Props) => {
           theme={mode}
           type={mode ? BUTTON_TYPE.primary : BUTTON_TYPE.secondary}
           state={BUTTON_STATE.active}
-          onPress={() =>
-            currIdx === 5
-              ? navigation.navigate("CompleteQuiz")
-              : navigation.navigate("DailyQuiz")
-          }
+          onPress={() => navigation.navigate("QuizReview")}
           style={{ width: "90%", alignSelf: "center", marginTop: "7%" }}
         />
       </Container>
@@ -56,7 +52,7 @@ const QuizResult = ({ navigation, route }: Props) => {
   );
 };
 
-export default QuizResult;
+export default QuizReViewDetail;
 
 const Container = styled.View<{
   COLOR: colorTheme;
