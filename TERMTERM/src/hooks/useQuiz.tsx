@@ -44,16 +44,16 @@ export const useQuiz = () => {
   const registerQuizResultInfo = async (
     apiUrl: string,
     resultData: QuizSubmit
-  ): Promise<boolean> => {
+  ): Promise<QuizAnswerResult | null> => {
     try {
       const data = await quizApi.registerQuizResult(apiUrl, resultData);
       // console.log("퀴즈 요청 성공", apiUrl, resultData, data);
       setQuizResultData(data);
       // console.log("quizResultData in hook : ", quizResultData);
-      return true;
+      return data;
     } catch (err) {
       console.log(err);
-      return false;
+      return null;
     }
   };
 

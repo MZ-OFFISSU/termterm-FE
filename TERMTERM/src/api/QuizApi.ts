@@ -1,4 +1,4 @@
-import { QuizDetail, QuizReviewDetail, QuizStatus, QuizSubmit } from "Quiz";
+import { QuizAnswerResult, QuizDetail, QuizReviewDetail, QuizStatus, QuizSubmit } from "Quiz";
 
 import { post, get } from "./AxiosCreate";
 
@@ -16,8 +16,8 @@ class QuizApi {
   };
 
   /** 데일리/복습 퀴즈 결과 제출 */
-  registerQuizResult = async (input: QuizSubmit): Promise<QuizSubmit> => {
-    const data = await post<QuizSubmit>(`/v1/quiz/result`, input);
+  registerQuizResult = async (apiUrl: string, input: QuizSubmit): Promise<QuizAnswerResult> => {
+    const data = await post<QuizAnswerResult>(apiUrl, input);
     return data;
   };
 
