@@ -1,3 +1,4 @@
+import { QuizAnswerResult, QuizStatus } from "Quiz";
 import { atom } from "recoil";
 
 /**
@@ -20,4 +21,38 @@ const defaultState: QuizState = {
 export const quizState = atom<QuizState>({
   key: "quizState",
   default: defaultState,
+});
+
+/**
+ * 퀴즈 풀이 여부 관련 전역 상태
+ */
+export interface MemberQuizSolveState {
+  quizSolveState: QuizStatus;
+}
+
+const defaultSolveState: MemberQuizSolveState = {
+  quizSolveState: {
+    status: "NOT_STARTED",
+  },
+};
+
+export const memberQuizSolveState = atom<MemberQuizSolveState>({
+  key: "memberQuizSolveState",
+  default: defaultSolveState,
+});
+
+/**
+ * 퀴즈 제출 시 받아오는 값 관련 전역변수
+ */
+const defaultQuizAnswer: QuizAnswerResult = {
+  termId: 0,
+  termName: "",
+  termDescription: "",
+  memberSelectedTermName: "",
+  isAnswerRight: true,
+};
+
+export const eachQuizAnswerResult = atom<QuizAnswerResult>({
+  key: "eachQuizAnswerResult",
+  default: defaultQuizAnswer,
 });
