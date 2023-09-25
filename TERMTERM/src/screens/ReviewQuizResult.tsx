@@ -15,7 +15,7 @@ import {
 } from "@components/index";
 import QuizAnswerCard from "@components/terms/QuizAnswerCard";
 import { eachQuizAnswerResult, quizState } from "@recoil/quizState";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useQuiz } from "@hooks/useQuiz";
 import { QuizAnswerResult } from "Quiz";
 
@@ -27,6 +27,17 @@ const ReviewQuizResult = ({ navigation, route }: Props) => {
   const curr = useRecoilValue(quizState);
   const { currIdx, currReviewIdx, totalReviewIdx } = curr;
   const quizResult = useRecoilValue(eachQuizAnswerResult);
+  const setCurrReviewIdx = useSetRecoilState(quizState);
+
+  const handleCompleteButton = () => {
+    setCurrReviewIdx((prev) => ({ ...prev, currReviewIdx: 0 }));
+    navigation.navigate("CompleteQuiz");
+  };
+
+  const handleReviewButton = () => {
+    setCurrReviewIdx((prev) => ({ ...prev, currReviewIdx: 1 }));
+    navigation.navigate("ReviewQuiz");
+  };
 
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
@@ -49,8 +60,8 @@ const ReviewQuizResult = ({ navigation, route }: Props) => {
           state={BUTTON_STATE.active}
           onPress={() =>
             currReviewIdx === totalReviewIdx
-              ? navigation.navigate("CompleteQuiz")
-              : navigation.navigate("ReviewQuiz")
+              ? handleCompleteButton()
+              : handleReviewButton()
           }
           style={{ width: "90%", alignSelf: "center", marginTop: "7%" }}
         />
