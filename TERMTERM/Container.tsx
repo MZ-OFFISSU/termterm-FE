@@ -32,6 +32,7 @@ import {
   ReviewQuizIntro,
   ReviewQuiz,
   ReviewQuizResult,
+  QuizReViewDetail,
 } from "@screens/index";
 import ToolBar from "@screens/ToolBar";
 import {
@@ -570,6 +571,23 @@ const Container = () => {
           <RootStack.Screen
             name="ReviewQuizResult"
             component={ReviewQuizResult}
+            options={{
+              headerShown: true,
+              header: (props) => {
+                return (
+                  <BookmarkSingleBar
+                    title="정답 확인"
+                    onBack={() => props.navigation.pop()}
+                    onBookmark={() => null}
+                    bookmarked={false}
+                  />
+                );
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="QuizReviewDetail"
+            component={QuizReViewDetail}
             options={{
               headerShown: true,
               header: (props) => {
