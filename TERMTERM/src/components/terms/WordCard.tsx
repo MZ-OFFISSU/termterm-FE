@@ -1,3 +1,4 @@
+import useRemoveChar from "@hooks/useRemoveChar";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useWordReg } from "@hooks/useWordReg";
 import { TEXT_STYLES, TYPO, colorTheme, TYPO_STYLE } from "@style/designSystem";
@@ -20,6 +21,7 @@ interface Props extends TouchableOpacityProps {
 const WordCard = ({ word, quiz, detail, ...props }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [sub, main] = useWordReg(word.name);
+  const { filteredExplain } = useRemoveChar(word.description)
 
   return (
     <Container
@@ -43,7 +45,7 @@ const WordCard = ({ word, quiz, detail, ...props }: Props) => {
         </MainName>
       </NameWrapper>
       <Content COLOR={COLOR} mode={mode}>
-        {word.description}
+        {filteredExplain}
       </Content>
     </Container>
   );
