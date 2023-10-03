@@ -60,7 +60,6 @@ export const useQuiz = () => {
       //console.log("curr.currReviewIdx:", curr.currReviewIdx, "curr.totalReviewIdx: ", curr.totalReviewIdx);
       //console.log("퀴즈 요청 성공", apiUrl, resultData, data);
       setQuizResultData(data);
-      // console.log("quizResultData in hook : ", quizResultData);
       return data;
     } catch (err) {
       console.log(err);

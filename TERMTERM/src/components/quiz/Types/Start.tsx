@@ -67,7 +67,7 @@ const Start = ({ navigate }: ChildrenProps) => {
     return () => {
       clearInterval(interval);
     };
-  }, [quizStatus]);
+  }, [quizStatus, countdown]);
 
   return (
     <>
