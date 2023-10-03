@@ -486,11 +486,9 @@ const Container = () => {
               headerShown: true,
               header: (props) => {
                 return (
-                  <BookmarkSingleBar
+                  <BackBar
                     title="정답 확인"
                     onBack={() => props.navigation.pop()}
-                    onBookmark={() => null}
-                    bookmarked={false}
                   />
                 );
               },
@@ -575,11 +573,9 @@ const Container = () => {
               headerShown: true,
               header: (props) => {
                 return (
-                  <BookmarkSingleBar
+                  <BackBar
                     title="정답 확인"
                     onBack={() => props.navigation.pop()}
-                    onBookmark={() => null}
-                    bookmarked={false}
                   />
                 );
               },

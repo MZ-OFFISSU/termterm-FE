@@ -15,7 +15,7 @@ export type RootStackParamList = {
   My: undefined;
   ArchiveBookmark: undefined;
   DailyQuiz: undefined;
-  CompleteQuiz: undefined;
+  CompleteQuiz: {id: number};
   CurationDetail: { id: number };
   MakeFolder: undefined;
   FolderDetailGlance: { id: number };
