@@ -29,7 +29,7 @@ const ReviewQuizResult = ({ navigation, route }: Props) => {
 
   const handleCompleteButton = () => {
     setCurrReviewIdx((prev) => ({ ...prev, currReviewIdx: 0 }));
-    navigation.navigate("CompleteQuiz");
+    navigation.navigate("CompleteQuiz", {id: quizResult.statusCode});
   };
 
   const handleReviewButton = () => {

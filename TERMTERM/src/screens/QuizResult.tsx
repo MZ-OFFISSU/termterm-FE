@@ -46,7 +46,7 @@ const QuizResult = ({ navigation, route }: Props) => {
           state={BUTTON_STATE.active}
           onPress={() =>
             currIdx === 5
-              ? navigation.navigate("CompleteQuiz")
+              ? navigation.navigate("CompleteQuiz", {id: quizResult.statusCode})
               : navigation.navigate("DailyQuiz")
           }
           style={{ width: "90%", alignSelf: "center", marginTop: "7%" }}

@@ -44,6 +44,7 @@ declare module "Quiz" {
     termDescription: string;
     memberSelectedTermName: string;
     isAnswerRight: boolean;
+    statusCode: number;
   }
 
   export type QuizStatus = {
