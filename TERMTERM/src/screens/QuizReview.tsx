@@ -3,9 +3,8 @@ import QuizReviewRouter from "@components/quiz/QuizReviewRouter";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { StackScreenProps } from "@react-navigation/stack";
-import { eachQuizAnswerResult, quizReviewList } from "@recoil/quizState";
-import { QuizReviewDetail } from "Quiz";
-import { useEffect, useState } from "react";
+import { quizReviewList } from "@recoil/quizState";
+import { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components/native";
@@ -15,8 +14,6 @@ export type Props = StackScreenProps<RootStackParamList, "QuizReview">;
 const QuizReview = ({ navigation }: Props) => {
   const quizApi = new QuizApi();
   const [COLOR, mode] = useThemeStyle();
-  // const [quizReviewList, setQuizReviewList] = useState<QuizReviewDetail[]>([]);
-  const setEachQuizAnswer = useSetRecoilState(eachQuizAnswerResult);
   const setQuizReviewList = useSetRecoilState(quizReviewList);
   const quizReviewLocalList = useRecoilValue(quizReviewList);
 
@@ -24,20 +21,6 @@ const QuizReview = ({ navigation }: Props) => {
     try {
       const res = await quizApi.getFinalQuizReview();
       
-      const updatedQuizReviewList: QuizReviewDetail[] = res.map((item) => ({
-        termId: item.termId as number,
-        termName: item.termName as string,
-        termDescription: item.termDescription as string,
-        isAnswerRight: item.isAnswerRight as boolean,
-        bookmarked: "NO",
-        termSource: "",
-        wrongChoices: [],
-      }));
-      
-      setQuizReviewList(updatedQuizReviewList);
-      console.log("res : ", res);
-      console.log("quizReviewLocalList : ", quizReviewLocalList);
-      console.log("updatedQuizReviewList", updatedQuizReviewList);
       const termNameArr = res.map((item) => {
         return getMainTermName(item.termName);
       });
@@ -78,7 +61,7 @@ const QuizReview = ({ navigation }: Props) => {
             wordAnswer={item.termName}
             userAnswer={item.wrongChoices[0]}
             onPress={() =>
-              navigation.navigate("QuizReviewDetail", { id: item.termId })
+              navigation.navigate("QuizReviewDetail", { id: item.termId, item })
             }
           />
         ))}
