@@ -54,6 +54,7 @@ const DailyQuiz = ({ navigation }: Props) => {
       termDescription: res?.termDescription as string,
       memberSelectedTermName: res?.memberSelectedTermName as string,
       isAnswerRight: res?.isAnswerRight as boolean,
+      statusCode: res?.statusCode as number,
     })
     navigation.navigate("QuizResult", { id: idx });
   };

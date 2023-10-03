@@ -38,7 +38,7 @@ const Start = ({ navigate }: ChildrenProps) => {
   const [countdown, setCountdown] = useState(0);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const curr = useRecoilValue(quizState);
-  const { currIdx } = curr;
+  const { currIdx, totalReviewIdx } = curr;
   const setQuizStatus = useSetRecoilState(memberQuizSolveState);
   const quizStatus = useRecoilValue(memberQuizSolveState);
 
@@ -67,7 +67,7 @@ const Start = ({ navigate }: ChildrenProps) => {
     return () => {
       clearInterval(interval);
     };
-  }, [quizStatus]);
+  }, [quizStatus, countdown]);
 
   return (
     <>

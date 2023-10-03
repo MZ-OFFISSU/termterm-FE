@@ -13,6 +13,7 @@ import { useTerm } from "@hooks/useTerm";
 import { booleanConverter } from "@utils/booleanConverter";
 import { useArchive } from "@hooks/useArchive";
 import CustomModal from "@components/popup/modal";
+import useRemoveChar from "@hooks/useRemoveChar";
 
 interface Props extends TouchableOpacityProps {
   id: number;
@@ -35,6 +36,7 @@ const TermPreviewBox = ({
   const [sub, main] = useWordReg(name);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { archiveTerm, isModalOpen, goToFolderMake, closeModal } = useArchive();
+  const { filteredExplain } = useRemoveChar(description);
 
   return (
     <Container
@@ -67,8 +69,8 @@ const TermPreviewBox = ({
         </PreviewBookmark>
       </UpperBox>
       <Description COLOR={COLOR}>
-        {description !== null
-          ? truncateString(description, 60)
+        {filteredExplain !== null
+          ? truncateString(filteredExplain, 60)
           : "용어 설명이 없어요."}
       </Description>
       <CustomModal

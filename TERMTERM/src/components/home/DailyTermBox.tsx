@@ -2,6 +2,7 @@ import { BookmarkButtonComponent } from "@components/common/Bookmark";
 import { Preview } from "@components/curation/detail/term";
 import CustomModal from "@components/popup/modal";
 import { useArchive } from "@hooks/useArchive";
+import useRemoveChar from "@hooks/useRemoveChar";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useWordReg } from "@hooks/useWordReg";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
@@ -20,6 +21,7 @@ const DailyTermBox = ({ bookmarked, id, name, description }: Preview) => {
   const [sub, main] = useWordReg(name);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { archiveTerm, isModalOpen, goToFolderMake, closeModal } = useArchive();
+  const { filteredExplain } = useRemoveChar(description);
 
   return (
     <Container
@@ -35,7 +37,7 @@ const DailyTermBox = ({ bookmarked, id, name, description }: Preview) => {
           {main}
         </Title>
       </TitleWrapper>
-      <Content COLOR={COLOR}>{truncateString(description, 75)}</Content>
+      <Content COLOR={COLOR}>{truncateString(filteredExplain, 75)}</Content>
       <CustomModal
         visible={isModalOpen}
         title={"용어 아카이빙 폴더가 없어요"}

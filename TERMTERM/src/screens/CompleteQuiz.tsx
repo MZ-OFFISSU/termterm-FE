@@ -12,15 +12,17 @@ import { Fontisto } from "@expo/vector-icons";
 import QuizApi from "@api/QuizApi";
 import { useRecoilState } from "recoil";
 import { memberQuizSolveState } from "@recoil/quizState";
+import { useQuiz } from "@hooks/useQuiz";
 
 export type Props = StackScreenProps<RootStackParamList, "CompleteQuiz">;
 
-const CompleteQuiz = ({ navigation }: Props) => {
+const CompleteQuiz = ({ navigation, route }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [width, setWidth] = useState(112);
   const [score, setScore] = useState(200);
   const quizApi = new QuizApi();
   const [quizSolve, setQuizSolve] = useRecoilState(memberQuizSolveState);
+  const { quizStatus } = useQuiz();
 
   /** 아이콘 너비 계산 함수 */
   const calcWidth = () => {
@@ -53,10 +55,63 @@ const CompleteQuiz = ({ navigation }: Props) => {
     calcWidth();
   }, []);
 
+  let assetPath = "@assets/complete-quiz.png";
+  let titleText = "Daily 용어 퀴즈 완료 🎉";
+  let subTitleText1 = "Daily 용어 퀴즈를 모두 맞춰";
+  let subTitleText2 = `200포인트`;
+  let subTitleText3 = "를 얻었어요!";
+  let subTitleText4 = "내일도 Daily 용어 퀴즈를 응시해보세요";
+
+  if (route.params.id == 2202) {
+    // 데일리 퀴즈 결과 제출 성공 (200)
+    titleText = "Daily 용어 퀴즈 완료 🎉";
+    subTitleText1 = "Daily 용어 퀴즈를 모두 맞춰";
+    subTitleText2 = `200포인트`;
+    subTitleText3 = "를 얻었어요!";
+    subTitleText4 = "내일도 Daily 용어 퀴즈를 응시해보세요";
+  }
+  if (route.params.id == 2212) {
+    // 복습 퀴즈 첫 번째 시도에 모두 정답
+    titleText = "용어 복습 퀴즈 완료 🎉";
+    subTitleText1 = "용어 복습 퀴즈를 모두 맞춰";
+    subTitleText2 = `50포인트`;
+    subTitleText3 = "를 얻었어요!";
+    subTitleText4 = "내일도 Daily 용어 퀴즈를 응시해보세요";
+  }
+  if (route.params.id == 2213) {
+    //	복습 퀴즈 첫 번째 시도에 한 개 이상 오답
+    titleText = "용어 복습 퀴즈 완료 🎉";
+    subTitleText1 = "용어 복습 퀴즈 응시로";
+    subTitleText2 = `10포인트`;
+    subTitleText3 = "를 얻었어요!";
+    subTitleText4 = "3분 후 용어 복습 퀴즈로 학습해보세요";
+  }
+  if (route.params.id == 2214) {
+    // 복습 퀴즈 두 번 이상째 시도에 모두 정답
+    titleText = "용어 복습 퀴즈 완료 🎉";
+    subTitleText1 = "용어 복습 퀴즈를 모두 맞췄어요!";
+    subTitleText2 = ``;
+    subTitleText3 = "내일도 Daily 용어 퀴즈를 응시해보세요";
+    subTitleText4 = "";
+  }
+  if (route.params.id == 2215) {
+    // 복습 퀴즈 두 번 이상째 시도에 한 개 이상 오답
+    titleText = "용어 복습 퀴즈 완료 🎉";
+    subTitleText1 = "용어 복습 퀴즈를 재응시했어요!";
+    subTitleText2 = ``;
+    subTitleText3 = "3분 후 용어 복습 퀴즈로 학습해보세요";
+    subTitleText4 = "";
+  }
+
   return (
     <SafeAreaView style={{ backgroundColor: COLOR.Background.surface }}>
       <Container>
-        <BackBar title="Daily 용어 퀴즈 완료" onBack={() => navigation.pop()} />
+        <BackBar
+          title={
+            route.params.id === 2202 ? "Daily 용어 퀴즈" : "용어 복습 퀴즈"
+          }
+          onBack={() => navigation.pop()}
+        />
         <ContentWrapper>
           <AutoSizedImage
             source={require("@assets/complete-quiz.png")}
@@ -65,19 +120,19 @@ const CompleteQuiz = ({ navigation }: Props) => {
           />
           <TitleBox>
             <Title COLOR={COLOR} mode={mode}>
-              Daily 용어 퀴즈 완료 🎉
+              {titleText}
             </Title>
             <SubTitle COLOR={COLOR} mode={mode}>
-              Daily 용어 퀴즈를 모두 맞춰
+              {subTitleText1}
             </SubTitle>
             <SubTitle COLOR={COLOR} mode={mode}>
               <BoldSub COLOR={COLOR} mode={mode}>
-                {score}포인트
+                {subTitleText2}
               </BoldSub>
-              를 얻었어요!
+              {subTitleText3}
             </SubTitle>
             <SubTitle COLOR={COLOR} mode={mode}>
-              내일도 Daily 용어 퀴즈를 응시해보세요.
+              {subTitleText4}
             </SubTitle>
           </TitleBox>
           <CompleteButton
