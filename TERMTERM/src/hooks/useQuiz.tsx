@@ -1,4 +1,5 @@
 import QuizApi from "@api/QuizApi";
+import { quizState } from "@recoil/quizState";
 import {
   QuizDetail,
   QuizReviewDetail,
@@ -7,6 +8,7 @@ import {
   QuizAnswerResult,
 } from "Quiz";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 
 /**
  * 퀴즈 관리 훅
@@ -19,6 +21,8 @@ export const useQuiz = () => {
   const [reviewQuizItem, setReviewQuizItem] = useState<QuizDetail[]>();
   const [quizStatus, setQuizStatus] = useState<string>();
   const [quizResultData, setQuizResultData] = useState<QuizAnswerResult>();
+  const curr = useRecoilValue(quizState);
+  const { currIdx, currReviewIdx, totalIdx, totalReviewIdx } = curr;
 
   /** 데일리 퀴즈 */
   const getDailyQuizInfo = async (): Promise<boolean> => {
@@ -53,7 +57,8 @@ export const useQuiz = () => {
   ): Promise<QuizAnswerResult | null> => {
     try {
       const data = await quizApi.registerQuizResult(apiUrl, resultData);
-      // console.log("퀴즈 요청 성공", apiUrl, resultData, data);
+      //console.log("curr.currReviewIdx:", curr.currReviewIdx, "curr.totalReviewIdx: ", curr.totalReviewIdx);
+      //console.log("퀴즈 요청 성공", apiUrl, resultData, data);
       setQuizResultData(data);
       // console.log("quizResultData in hook : ", quizResultData);
       return data;

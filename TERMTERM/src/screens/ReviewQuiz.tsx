@@ -6,7 +6,6 @@ import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { SafeAreaView } from "react-native-safe-area-context";
 import QuizCard from "@components/quiz/QuizCard";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-import useHideWord from "@hooks/useHideWord";
 import { screenWidth } from "@style/dimensions";
 import { useQuiz } from "@hooks/useQuiz";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -29,8 +28,6 @@ const ReviewQuiz = ({ navigation }: Props) => {
   const setTotalReviewIdx = useSetRecoilState(quizState);
   const setEachQuizAnswer = useSetRecoilState(eachQuizAnswerResult);
 
-  // TODO : DB에 @@ 포함되어 용어 설명 들어가면 다시 훅 사용
-  // const { hiddenExplain } = useHideWord(dummy[idx].explain, dummy[idx].word);
   const handleButton = async (idx: number) => {
     setSelectedIdx(idx);
     setBorderColor(COLOR.THEME.secondary[120]);
@@ -48,7 +45,6 @@ const ReviewQuiz = ({ navigation }: Props) => {
 
     if (isFinalQuestion) {
       apiUrl += `?final=true`;
-      // setCurr((prev) => ({ ...prev, currReviewIdx: prev.currReviewIdx * 0 }));
     }
 
     const res = await registerQuizResultInfo(apiUrl, memberQuizSelect);
