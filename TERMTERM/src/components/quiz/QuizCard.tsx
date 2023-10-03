@@ -1,7 +1,8 @@
 import styled from "styled-components/native";
-import { colorTheme, LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { screenWidth } from "@style/dimensions";
+import useQuizExplain from "@hooks/useQuizExplain";
 
 interface QuizCardProps {
   title?: string;
@@ -10,11 +11,12 @@ interface QuizCardProps {
 
 const QuizCard = (props: QuizCardProps) => {
   const [COLOR, mode] = useThemeStyle();
+  const { hiddenExplain } = useQuizExplain(props.explain ?? "")
 
   return (
     <CardContainer COLOR={COLOR} mode={mode}>
       <CardText COLOR={COLOR} mode={mode}>
-        {props.explain}
+        {hiddenExplain}
       </CardText>
     </CardContainer>
   );
