@@ -34,40 +34,39 @@ export interface MemberQuizSolveState {
 const Start = ({ navigate }: ChildrenProps) => {
   const quizApi = new QuizApi();
   const [COLOR, mode] = useThemeStyle();
-  // TODO : 시간 바꿔두기
-  const [countdown, setCountdown] = useState(0);
+  const [countdown, setCountdown] = useState(180);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const curr = useRecoilValue(quizState);
   const { currIdx, totalReviewIdx } = curr;
   const setQuizStatus = useSetRecoilState(memberQuizSolveState);
   const quizStatus = useRecoilValue(memberQuizSolveState);
 
-  const remindQuizStatus = async () => {
-    try {
-      const res = await quizApi.getDailyQuizStatus();
-      setQuizStatus({
-        quizSolveState: {
-          status: res.status,
-        },
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
-    remindQuizStatus();
-    let interval: NodeJS.Timer;
-    if (quizStatus.quizSolveState.status === QuizState.IN_PROGRESS) {
-      interval = setInterval(() => {
-        setCountdown((prevCountdown) => prevCountdown - 1);
-      }, 1000);
-    }
+    const remindQuizStatus = async () => {
+      try {
+        const res = await quizApi.getDailyQuizStatus();
+        setQuizStatus({
+          quizSolveState: {
+            status: res.status,
+          },
+        });
 
-    return () => {
-      clearInterval(interval);
+        if (res.status === QuizState.IN_PROGRESS) {
+          let timer = setInterval(() => {
+            setCountdown((prevCountdown) => prevCountdown - 0.009);
+          }, 1000);
+
+          return () => {
+            clearInterval(timer);
+          };
+        }
+      } catch (err) {
+        console.log(err);
+      }
     };
-  }, [quizStatus, countdown]);
+
+    remindQuizStatus();
+  }, [quizStatus]);
 
   return (
     <>
@@ -97,7 +96,7 @@ const Start = ({ navigate }: ChildrenProps) => {
               />
               <Title COLOR={COLOR} style={{ marginLeft: 5 }}>
                 {`${Math.floor(countdown / 60)}:${String(
-                  countdown % 60
+                  Math.floor(countdown % 60)
                 ).padStart(2, "0")} 후 용어 복습 퀴즈를 응시할 수 있어요.`}
               </Title>
             </>
