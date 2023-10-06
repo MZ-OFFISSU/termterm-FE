@@ -72,7 +72,7 @@ const CompleteQuiz = ({ navigation, route }: Props) => {
   if (route.params.id == 2211) {
     // 복습 퀴즈 필요할 때(데일리퀴즈를 다 맞추지 못했을 때)
     titleText = "Daily 용어 퀴즈 완료 🎉";
-    subTitleText1 = "Daily 용어 퀴즈를 응시로";
+    subTitleText1 = "Daily 용어 퀴즈 응시로";
     subTitleText2 = `100포인트`;
     subTitleText3 = "를 얻었어요!";
     subTitleText4 = "3분 후 용어 복습 퀴즈로 학습해보세요";
