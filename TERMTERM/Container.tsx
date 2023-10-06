@@ -559,7 +559,7 @@ const Container = () => {
               header: (props) => {
                 return (
                   <BackBar
-                    title={`리뷰${currReviewIdx + 1}/${totalReviewIdx}`}
+                    title={`${currReviewIdx + 1}/${totalReviewIdx}`}
                     onBack={() => props.navigation.pop()}
                   />
                 );
