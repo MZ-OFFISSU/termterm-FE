@@ -55,20 +55,27 @@ const CompleteQuiz = ({ navigation, route }: Props) => {
     calcWidth();
   }, []);
 
-  let assetPath = "@assets/complete-quiz.png";
   let titleText = "Daily 용어 퀴즈 완료 🎉";
   let subTitleText1 = "Daily 용어 퀴즈를 모두 맞춰";
   let subTitleText2 = `200포인트`;
   let subTitleText3 = "를 얻었어요!";
   let subTitleText4 = "내일도 Daily 용어 퀴즈를 응시해보세요";
 
-  if (route.params.id == 2202) {
-    // 데일리 퀴즈 결과 제출 성공 (200)
+  if (route.params.id == 2210) {
+    // 데일리 퀴즈 다 맞았을 때
     titleText = "Daily 용어 퀴즈 완료 🎉";
     subTitleText1 = "Daily 용어 퀴즈를 모두 맞춰";
     subTitleText2 = `200포인트`;
     subTitleText3 = "를 얻었어요!";
     subTitleText4 = "내일도 Daily 용어 퀴즈를 응시해보세요";
+  }
+  if (route.params.id == 2211) {
+    // 복습 퀴즈 필요할 때(데일리퀴즈를 다 맞추지 못했을 때)
+    titleText = "Daily 용어 퀴즈 완료 🎉";
+    subTitleText1 = "Daily 용어 퀴즈를 응시로";
+    subTitleText2 = `100포인트`;
+    subTitleText3 = "를 얻었어요!";
+    subTitleText4 = "3분 후 용어 복습 퀴즈로 학습해보세요";
   }
   if (route.params.id == 2212) {
     // 복습 퀴즈 첫 번째 시도에 모두 정답
@@ -114,7 +121,13 @@ const CompleteQuiz = ({ navigation, route }: Props) => {
         />
         <ContentWrapper>
           <AutoSizedImage
-            source={require("@assets/complete-quiz.png")}
+            source={
+              route.params.id == 2210 ||
+              route.params.id == 2212 ||
+              route.params.id == 2214
+                ? require("@assets/complete-quiz.png")
+                : require("@assets/done-quiz.png")
+            }
             width={width}
             style={{ marginTop: 70 }}
           />
