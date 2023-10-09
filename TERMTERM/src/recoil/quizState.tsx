@@ -50,6 +50,7 @@ const defaultQuizAnswer: QuizAnswerResult = {
   termDescription: "",
   memberSelectedTermName: "",
   isAnswerRight: true,
+  statusCode: 0,
 };
 
 export const eachQuizAnswerResult = atom<QuizAnswerResult>({

@@ -7,7 +7,6 @@ import {
   NavigatorPager,
   CaretBtn,
 } from "@components/index";
-import { AntDesign } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { useState } from "react";

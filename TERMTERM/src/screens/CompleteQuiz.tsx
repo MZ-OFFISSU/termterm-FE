@@ -22,7 +22,19 @@ const CompleteQuiz = ({ navigation, route }: Props) => {
   const [score, setScore] = useState(200);
   const quizApi = new QuizApi();
   const [quizSolve, setQuizSolve] = useRecoilState(memberQuizSolveState);
-  const { quizStatus } = useQuiz();
+
+  const remindQuizStatus = async () => {
+    try {
+      const res = await quizApi.getDailyQuizStatus();
+      setQuizSolve({
+        quizSolveState: {
+          status: res.status,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   /** 아이콘 너비 계산 함수 */
   const calcWidth = () => {
@@ -43,8 +55,7 @@ const CompleteQuiz = ({ navigation, route }: Props) => {
 
   const handleButton = async () => {
     try {
-      const res = await quizApi.getDailyQuizStatus();
-      setQuizSolve((prev) => ({ ...prev, memberQuizSolveState: res }));
+      remindQuizStatus();
       navigation.navigate("Home");
     } catch (err) {
       console.log(err);

@@ -11,6 +11,7 @@ import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { memberQuizSolveState, quizState } from "@recoil/quizState";
 import { QuizStatus } from "Quiz";
+import { useInterval } from "@hooks/useInterval";
 
 /**
  * async storage에 저장되는 퀴즈 현재 상태
@@ -38,35 +39,29 @@ const Start = ({ navigate }: ChildrenProps) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const curr = useRecoilValue(quizState);
   const { currIdx, totalReviewIdx } = curr;
-  const setQuizStatus = useSetRecoilState(memberQuizSolveState);
-  const quizStatus = useRecoilValue(memberQuizSolveState);
+  const [quizStatus, setQuizStatus] = useRecoilState(memberQuizSolveState);
+
+  const remindQuizStatus = async () => {
+    try {
+      const res = await quizApi.getDailyQuizStatus();
+      setQuizStatus({
+        quizSolveState: {
+          status: res.status,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useInterval(() => {
+    quizStatus.quizSolveState.status === QuizState.IN_PROGRESS &&
+      setCountdown((prevCountdown) => prevCountdown - 1);
+  }, 1000);
 
   useEffect(() => {
-    const remindQuizStatus = async () => {
-      try {
-        const res = await quizApi.getDailyQuizStatus();
-        setQuizStatus({
-          quizSolveState: {
-            status: res.status,
-          },
-        });
-
-        if (res.status === QuizState.IN_PROGRESS) {
-          let timer = setInterval(() => {
-            setCountdown((prevCountdown) => prevCountdown - 0.009);
-          }, 1000);
-
-          return () => {
-            clearInterval(timer);
-          };
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
     remindQuizStatus();
-  }, [quizStatus]);
+  }, []);
 
   return (
     <>
