@@ -2,7 +2,6 @@ import { View } from "react-native";
 import { WebView } from "react-native-webview";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
-import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from "@api/secret";
 import AuthApi from "@api/AuthApi";
 import { setAccessToken, setRefreshToken } from "@utils/tokenHandler";
 import MemberApi from "@api/MemberApi";
@@ -65,7 +64,7 @@ const GoogleLogin = ({ navigation }: HomeScreenProps) => {
         scalesPageToFit={false}
         style={{ marginTop: 30 }}
         source={{
-          uri: `https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?scope=profile%20email%20openid&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=https%3A%2F%2Fapi.iterview.com%2Fv1%2Fsocial-auth&client_id=413663542158-o4k411e714pjhibpb2nbmpa54o6vucuf.apps.googleusercontent.com&service=lso&o2v=2&flowName=GeneralOAuthFlow`,
+          uri: `https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?scope=profile%20email%20openid&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=https%3A%2F%2Fapi.termterm.site%2Fv1%2Fsocial-auth&client_id=413663542158-o4k411e714pjhibpb2nbmpa54o6vucuf.apps.googleusercontent.com&service=lso&o2v=2&flowName=GeneralOAuthFlow`,
         }}
         injectedJavaScript={runFirst}
         javaScriptEnabled={true}

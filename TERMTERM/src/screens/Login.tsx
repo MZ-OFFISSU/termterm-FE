@@ -16,6 +16,7 @@ import AuthApi from "@api/AuthApi";
 import { MemberInfo } from "Member";
 import MemberApi from "@api/MemberApi";
 import { useNavigation } from "@react-navigation/native";
+import { setAccessToken, setRefreshToken } from "@utils/tokenHandler";
 
 export type Props = StackScreenProps<RootStackParamList, "Login">;
 

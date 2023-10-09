@@ -1,28 +1,27 @@
 import styled from "styled-components/native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import { colorTheme } from "@style/designSystem";
-import { useRecoilState } from "recoil";
-import { themeState } from "@recoil/themeState";
 import { Radio } from "@components/my/ThemeSelect";
+import { useControllerTheme } from "@hooks/useControllerTheme";
 
 /**
  * 테마 선택 스크린
  */
 const ThemeSelect = () => {
   const [COLOR, mode] = useThemeStyle();
-  const [theme, setTheme] = useRecoilState(themeState);
+  const { theme, themeController } = useControllerTheme();
 
   return (
     <Container COLOR={COLOR}>
       <Radio
         title="라이트 모드"
         checked={theme}
-        onPress={() => setTheme(true)}
+        onPress={() => themeController(true)}
       />
       <Radio
         title="다크 모드"
         checked={!theme}
-        onPress={() => setTheme(false)}
+        onPress={() => themeController(false)}
       />
     </Container>
   );

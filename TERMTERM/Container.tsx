@@ -55,6 +55,7 @@ import KakaoLogin from "@screens/Webview/KakaoLogin";
 import GoogleLogin from "@screens/Webview/GoogleLogin";
 import Third from "@screens/Support/Third";
 import { quizState } from "@recoil/quizState";
+import { useControllerTheme } from "@hooks/useControllerTheme";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -69,6 +70,8 @@ const Container = () => {
   const safeColor = useRecoilValue(safeAreaColorState);
   const { totalIdx, currIdx, currReviewIdx, totalReviewIdx } =
     useRecoilValue(quizState);
+
+  const { getTheme } = useControllerTheme();
 
   const getFonts = async () => {
     await Font.loadAsync({
@@ -96,7 +99,7 @@ const Container = () => {
         setIsReady(true);
       }
     }
-
+    getTheme();
     prepare();
   }, []);
 

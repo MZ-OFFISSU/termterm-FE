@@ -1,3 +1,5 @@
+import { QuizReviewDetail } from "Quiz";
+
 /**
  * 스크린 리스트라고 생각하면 됩니다.
  * props가 존재하는 스크린의 경우에는,
@@ -15,7 +17,7 @@ export type RootStackParamList = {
   My: undefined;
   ArchiveBookmark: undefined;
   DailyQuiz: undefined;
-  CompleteQuiz: {id: number};
+  CompleteQuiz: { id: number };
   CurationDetail: { id: number };
   MakeFolder: undefined;
   FolderDetailGlance: { id: number };
@@ -44,5 +46,5 @@ export type RootStackParamList = {
   ReviewQuiz: undefined;
   ReviewQuizResult: { id: number };
   SelectFolder: { termId: number };
-  QuizReviewDetail: { id: number };
+  QuizReviewDetail: { id: number; item: QuizReviewDetail };
 };

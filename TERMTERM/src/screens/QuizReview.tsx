@@ -20,7 +20,7 @@ const QuizReview = ({ navigation }: Props) => {
   const getQuizReviewList = async () => {
     try {
       const res = await quizApi.getFinalQuizReview();
-      
+
       const termNameArr = res.map((item) => {
         return getMainTermName(item.termName);
       });
