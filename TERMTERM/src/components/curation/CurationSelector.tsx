@@ -8,18 +8,13 @@ import { Category } from "Curation";
 
 interface Props {
   items: Array<string>;
-  curIdx: number;
-  setIdx: (idx: number) => void;
 }
 
-const CurationSelector = ({ items, curIdx, setIdx }: Props) => {
+const CurationSelector = ({ items }: Props) => {
   const [COLOR, mode] = useThemeStyle();
-  const {
-    getEachCategoryCurationList,
-    categoryCurationList,
-    setCategoryCurationList,
-  } = useCuration();
-  const [renderItems, setRenderItems] = useState(items);
+  const { getEachCategoryCurationList } = useCuration();
+
+  const [curIdx, setCurIdx] = useState(0);
 
   const convertIdxToCategory = (idx: number): string | undefined => {
     switch (idx) {
@@ -42,15 +37,16 @@ const CurationSelector = ({ items, curIdx, setIdx }: Props) => {
     }
   };
 
-  useEffect(() => {
-    const selectedCategory = convertIdxToCategory(curIdx);
+  const updateCurations = (idx: number) => {
+    setCurIdx(idx);
+    const selectedCategory = convertIdxToCategory(idx);
     getEachCategoryCurationList(selectedCategory as Category);
-  }, [curIdx]);
+  };
 
   return (
     <Selectors>
       {items.map((item, idx) => (
-        <TouchableOpacity key={item} onPress={() => setIdx(idx)}>
+        <TouchableOpacity key={item} onPress={() => updateCurations(idx)}>
           <Item focused={curIdx === idx} COLOR={COLOR}>
             {item}
           </Item>
