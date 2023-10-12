@@ -36,9 +36,9 @@ const defaultSolveState: MemberQuizSolveState = {
   },
 };
 
-export const memberQuizSolveState = atom<MemberQuizSolveState>({
+export const memberQuizSolveState = atom<MemberQuizSolveState | null>({
   key: "memberQuizSolveState",
-  default: defaultSolveState,
+  default: null,
 });
 
 /**

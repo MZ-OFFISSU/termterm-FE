@@ -15,11 +15,13 @@ import { infoState } from "@recoil/signupState";
 import { nicknameReg } from "@utils/reg";
 import { useThemeStyle } from "@hooks/useThemeStyle";
 import MemberApi from "@api/MemberApi";
+import { useControllerTheme } from "@hooks/useControllerTheme";
 
 const First = ({ onEnd }: Props) => {
   const memberApi = new MemberApi();
 
   const [COLOR, mode] = useThemeStyle();
+  const { themeController } = useControllerTheme();
   const [info, setInfo] = useRecoilState(infoState);
   const [name, setName] = useState("");
   const [btnPosition, setBtnPosiition] = useState(30);
@@ -58,6 +60,8 @@ const First = ({ onEnd }: Props) => {
   };
 
   useEffect(() => {
+    themeController(true);
+
     const showSubscription = Keyboard.addListener("keyboardWillShow", (e) => {
       setBtnPosiition(10 + e.endCoordinates.height);
     });

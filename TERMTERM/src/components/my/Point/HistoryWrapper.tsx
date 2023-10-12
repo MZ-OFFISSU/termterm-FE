@@ -69,16 +69,17 @@ const HistoryWrapper = ({ ...props }: ViewProps) => {
       ) : (
         <></>
       )}
-      {max && history ? (
+      {max && history && (
         <Button COLOR={COLOR} mode={mode} onPress={() => onVisible()}>
           <ButtonContent>더보기</ButtonContent>
           <Entypo name="chevron-down" size={24} color="white" />
         </Button>
-      ) : (
+      )}
+      {/* {(!history || history.length === 0) && (
         <EmptyBox>
           <EmptyText COLOR={COLOR}>아직 포인트 사용내역이 없어요</EmptyText>
         </EmptyBox>
-      )}
+      )} */}
     </Container>
   );
 };
