@@ -8,10 +8,10 @@ import { useWordReg } from "@hooks/useWordReg";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { TEXT_STYLES, colorTheme, TYPO_STYLE } from "@style/designSystem";
+import { colorTheme, TYPO_STYLE } from "@style/designSystem";
 import { booleanConverter } from "@utils/booleanConverter";
 import { truncateString } from "@utils/wordCutter";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 /**
  * 오늘의 용어 박스
@@ -25,6 +25,8 @@ const DailyTermBox = ({ bookmarked, id, name, description }: Preview) => {
 
   return (
     <Container
+      COLOR={COLOR}
+      mode={mode}
       style={{ borderWidth: 1, borderColor: COLOR.Background.onSurface }}
       onPress={() => navigation.push("TermDetail", { id: `${id}` })}
     >
@@ -54,10 +56,14 @@ const DailyTermBox = ({ bookmarked, id, name, description }: Preview) => {
   );
 };
 
-const Container = styled.TouchableOpacity`
+const Container = styled.TouchableOpacity<{ COLOR: colorTheme; mode: boolean }>`
   min-width: 165px;
   width: 49%;
   height: 205px;
+  background-color: ${(props) =>
+    props.mode
+      ? props.COLOR.Background.surface
+      : props.COLOR.Background.onSurface};
   border-radius: 10px;
   display: flex;
   flex-direction: column;

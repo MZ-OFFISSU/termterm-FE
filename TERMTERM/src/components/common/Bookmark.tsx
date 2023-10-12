@@ -45,7 +45,7 @@ export const BookmarkButtonComponent = ({ fill, ...props }: Props) => {
 
   return (
     <BookmarkWrapper
-      style={{ backgroundColor: mode ? "#e2e2e279" : "#2c2c2c7a" }}
+      style={{ backgroundColor: mode ? "#e2e2e279" : "#00000058" }}
       {...props}
     >
       {fill ? (
@@ -58,7 +58,7 @@ export const BookmarkButtonComponent = ({ fill, ...props }: Props) => {
         <Ionicons
           name="ios-bookmark-outline"
           size={22}
-          color={mode ? "white" : " #DEE0E2"}
+          color={mode ? "white" : "#DEE0E2"}
         />
       )}
     </BookmarkWrapper>
