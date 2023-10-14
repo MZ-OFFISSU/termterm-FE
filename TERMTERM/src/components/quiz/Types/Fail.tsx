@@ -2,7 +2,6 @@ import AutoSizedImage from "@components/common/AutoSizedImage";
 import { ChildrenProps, LeftBox, Title } from "./common";
 import { TouchableOpacity } from "react-native";
 import { useThemeStyle } from "@hooks/useThemeStyle";
-
 /**
  * 용어 퀴즈에 오답이 있는 경우 (타이머 적용)
  */

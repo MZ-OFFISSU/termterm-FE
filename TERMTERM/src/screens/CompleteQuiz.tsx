@@ -13,6 +13,7 @@ import QuizApi from "@api/QuizApi";
 import { useRecoilState } from "recoil";
 import { memberQuizSolveState } from "@recoil/quizState";
 import { useQuiz } from "@hooks/useQuiz";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type Props = StackScreenProps<RootStackParamList, "CompleteQuiz">;
 
@@ -34,6 +35,11 @@ const CompleteQuiz = ({ navigation, route }: Props) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  /** 남은 타이머 시간 저장 */
+  const saveTimerStamp = async (countdown: number) => {
+    await AsyncStorage.setItem("quiz_timer", `${countdown}`);
   };
 
   /** 아이콘 너비 계산 함수 */
@@ -87,6 +93,7 @@ const CompleteQuiz = ({ navigation, route }: Props) => {
     subTitleText2 = `100포인트`;
     subTitleText3 = "를 얻었어요!";
     subTitleText4 = "3분 후 용어 복습 퀴즈로 학습해보세요";
+    saveTimerStamp(180);
   }
   if (route.params.id == 2212) {
     // 복습 퀴즈 첫 번째 시도에 모두 정답
@@ -103,6 +110,7 @@ const CompleteQuiz = ({ navigation, route }: Props) => {
     subTitleText2 = `10포인트`;
     subTitleText3 = "를 얻었어요!";
     subTitleText4 = "3분 후 용어 복습 퀴즈로 학습해보세요";
+    saveTimerStamp(180);
   }
   if (route.params.id == 2214) {
     // 복습 퀴즈 두 번 이상째 시도에 모두 정답
@@ -119,6 +127,7 @@ const CompleteQuiz = ({ navigation, route }: Props) => {
     subTitleText2 = ``;
     subTitleText3 = "3분 후 용어 복습 퀴즈로 학습해보세요";
     subTitleText4 = "";
+    saveTimerStamp(180);
   }
 
   return (
