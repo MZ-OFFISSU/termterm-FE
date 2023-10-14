@@ -4,13 +4,13 @@ import { useHaptics } from "@hooks/useHaptics";
 
 const RecommendList = [
   "비즈니스",
-  "기획자",
-  "IT",
-  "개발자",
+  "디자인",
+  "개발",
   "UX",
-  "회사",
+  "메뉴",
+  "블록체인",
   "데이터",
-  "디자이너",
+  "user",
 ];
 
 interface Props {
