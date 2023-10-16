@@ -11,6 +11,8 @@ npm-debug.*
 web-build/
 secret.ts
 environment.js
+ios/
+android/
 
 # macOS
 .DS_Store
