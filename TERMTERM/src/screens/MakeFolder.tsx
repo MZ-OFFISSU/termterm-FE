@@ -9,6 +9,7 @@ import { Keyboard } from "react-native";
 import CompleteButton from "@components/makefolder/CompleteButton";
 import { useHaptics } from "@hooks/useHaptics";
 import { useFolder } from "@hooks/useFolder";
+import { logGAevent } from "@utils/analytics";
 
 export type Props = StackScreenProps<RootStackParamList, "MakeFolder">;
 
@@ -27,7 +28,7 @@ const MakeFolder = ({ navigation }: Props) => {
   const onComplete = () => {
     if (info.name !== "") {
       const res = createFolder({ description: info.desc, title: info.name });
-
+      logGAevent("make_folder");
       getUsersFolderList();
       navigation.pop();
     } else {
