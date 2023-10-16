@@ -100,7 +100,7 @@ const TitleWrapper = styled.View`
 `;
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
-  text-align: start;
+  text-align: left;
   white-space: pre-line;
   word-break: keep-all;
   ${TYPO_STYLE.Body[1].ExtraBold};

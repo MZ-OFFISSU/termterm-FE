@@ -46,7 +46,7 @@ const Input = styled.TextInput<{ COLOR: colorTheme }>`
   padding: 15px 20px;
   outline: none;
   border: none;
-  text-align: start;
+  text-align: left;
   ${TYPO_STYLE.Subheading[1].Regular};
 `;
 

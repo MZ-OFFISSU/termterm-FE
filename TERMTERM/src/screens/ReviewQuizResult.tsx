@@ -16,6 +16,7 @@ import {
 import QuizAnswerCard from "@components/terms/QuizAnswerCard";
 import { eachQuizAnswerResult, quizState } from "@recoil/quizState";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { logGAevent } from "@utils/analytics";
 
 export type Props = StackScreenProps<RootStackParamList, "ReviewQuizResult">;
 
@@ -29,11 +30,17 @@ const ReviewQuizResult = ({ navigation, route }: Props) => {
 
   const handleCompleteButton = () => {
     setCurrReviewIdx((prev) => ({ ...prev, currReviewIdx: 0 }));
-    navigation.navigate("CompleteQuiz", {id: quizResult.statusCode});
+    logGAevent("review_quiz_complete", {
+      status_code: quizResult.statusCode,
+    });
+    navigation.navigate("CompleteQuiz", { id: quizResult.statusCode });
   };
 
   const handleReviewButton = () => {
-    setCurrReviewIdx((prev) => ({ ...prev, currReviewIdx: curr.currReviewIdx }));
+    setCurrReviewIdx((prev) => ({
+      ...prev,
+      currReviewIdx: curr.currReviewIdx,
+    }));
     navigation.navigate("ReviewQuiz");
   };
 

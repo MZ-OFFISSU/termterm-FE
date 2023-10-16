@@ -85,7 +85,7 @@ const WordButton = styled.TouchableOpacity`
   height: 44px;
   z-index: 2;
   background-color: #19d24d;
-  border-radius: 50%;
+  border-radius: 50px;
   margin-top: 30px;
 `;
 

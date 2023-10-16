@@ -188,7 +188,7 @@ const TitleWrapper = styled.View`
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Body[1].ExtraBold};
-  text-align: start;
+  text-align: left;
   color: ${(props) => props.COLOR.Text.active};
 `;
 

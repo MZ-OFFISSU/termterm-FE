@@ -15,6 +15,7 @@ import {
 import QuizAnswerCard from "@components/terms/QuizAnswerCard";
 import { eachQuizAnswerResult, quizState } from "@recoil/quizState";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { logGAevent } from "@utils/analytics";
 
 export type Props = StackScreenProps<RootStackParamList, "QuizResult">;
 
@@ -44,11 +45,18 @@ const QuizResult = ({ navigation, route }: Props) => {
           theme={mode}
           type={mode ? BUTTON_TYPE.primary : BUTTON_TYPE.secondary}
           state={BUTTON_STATE.active}
-          onPress={() =>
-            currIdx === 5
-              ? navigation.navigate("CompleteQuiz", {id: quizResult.statusCode})
-              : navigation.navigate("DailyQuiz")
-          }
+          onPress={() => {
+            if (currIdx === 5) {
+              logGAevent("daily_quiz_complete", {
+                status_code: quizResult.statusCode,
+              });
+              navigation.navigate("CompleteQuiz", {
+                id: quizResult.statusCode,
+              });
+            } else {
+              navigation.navigate("DailyQuiz");
+            }
+          }}
           style={{ width: "90%", alignSelf: "center", marginTop: "7%" }}
         />
       </Container>
