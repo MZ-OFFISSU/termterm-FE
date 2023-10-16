@@ -18,6 +18,7 @@ import { useFolder } from "@hooks/useFolder";
 import { useCuration } from "@hooks/useCuration";
 import { useMember } from "@hooks/useMember";
 import { Category } from "Curation";
+import { logGAevent } from "@utils/analytics";
 
 export type Props = StackScreenProps<RootStackParamList, "ToolBar">;
 
@@ -34,6 +35,7 @@ const Search = ({ navigation }: Props) => {
 
   const handleSearch = async (keyword: string) => {
     await searchTerm(keyword);
+    logGAevent("search_query_cnt");
     if (keyword !== "") setRecords([...records, keyword]);
   };
 
