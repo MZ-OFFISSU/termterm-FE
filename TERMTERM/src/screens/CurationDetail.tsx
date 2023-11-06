@@ -62,7 +62,6 @@ const CurationDetail = ({ navigation, route }: Props) => {
   useEffect(() => {
     settingCurationId(CURATION_ID);
     getCurationDetailInfo(CURATION_ID);
-    // console.log("first curation detail info : ", curationDetailInfo)
     setTerms(curationDetailInfo?.termSimples);
   }, []);
 
