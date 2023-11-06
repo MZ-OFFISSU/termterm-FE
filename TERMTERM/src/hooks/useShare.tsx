@@ -2,7 +2,7 @@ import * as Sharing from "expo-sharing";
 import * as Haptics from "expo-haptics";
 
 export const useShare = () => {
-  const handleShare = async (url = "https://www.naver.com/") => {
+  const handleShare = async (url = "https://www.termterm.site/") => {
     if (!(await Sharing.isAvailableAsync())) {
       return;
     }
