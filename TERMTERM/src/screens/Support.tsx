@@ -25,6 +25,7 @@ const Support = ({ navigation }: Props) => {
   const [COLOR, mode] = useThemeStyle();
   const [stage, setStage] = useState(0);
   const CurrentPage = STAGES[stage];
+
   useSafeColor();
 
   const onEnd = () => {

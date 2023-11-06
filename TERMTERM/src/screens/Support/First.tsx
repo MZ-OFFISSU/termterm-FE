@@ -19,8 +19,6 @@ import CustomTextarea from "@components/common/CustomTextarea";
 import { useControllerTheme } from "@hooks/useControllerTheme";
 
 const First = ({ onEnd }: Props) => {
-  const inquiryApi = new InquiryApi();
-  
   const [COLOR, mode] = useThemeStyle();
   const modeBool = mode ? true : false; // 네비게이터 색상 관련
   const { themeController } = useControllerTheme();

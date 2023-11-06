@@ -25,9 +25,6 @@ export const useSafeColor = () => {
       case "Login":
         setSafeColor(darkSafe);
         break;
-      case "Support":
-        setSafeColor(lightSafe);
-        break;
       case "Onboarding":
         setSafeColor(lightSafe);
         break;
