@@ -125,7 +125,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
       <CustomModal
         visible={modal}
         title={"큐레이션을 열어볼까요?"}
-        subtitle={`50 포인트를 사용하면\n큐레이션의 모든 용어를 볼 수 있어요!`}
+        subtitle={`500 포인트를 사용하면\n큐레이션의 모든 용어를 볼 수 있어요!`}
         btnTitle={["아니오", "더 볼래요"]}
         onClose={() => setModal(false)}
         onNext={() => onPay()}
