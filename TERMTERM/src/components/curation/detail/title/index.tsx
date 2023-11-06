@@ -38,7 +38,7 @@ const Thumbnail = styled.ImageBackground`
 `;
 
 const InfoWrapper = styled.View`
-  width: 100%;
+  width: 90%;
   height: 180px;
   display: flex;
   flex-direction: column;
@@ -63,7 +63,8 @@ const Subtitle = styled.Text<{ COLOR: colorTheme }>`
   color: ${(props) => props.COLOR.Text.default};
   text-align: center;
   white-space: pre-line;
-  margin-top: -20px;
+  line-height: 20px;
+  margin-top: -10px;
 `;
 
 export default TitleBox;
