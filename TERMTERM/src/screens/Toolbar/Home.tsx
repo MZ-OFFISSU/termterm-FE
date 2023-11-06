@@ -150,7 +150,7 @@ const Home = ({ navigation, route }: Props) => {
             </CurationTitleBox>
           </FlexContainer>
           <CurationCardWrapper>
-            {categoryCurationList.map((item, idx) => (
+            {categoryCurationList.slice(0, 3).map((item, idx) => (
               <CurationItem
                 item={item}
                 onMove={() =>
