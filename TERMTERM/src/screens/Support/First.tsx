@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { TouchableWithoutFeedback, Keyboard } from "react-native";
 import { colorTheme, LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { screenWidth } from "@style/dimensions";
 import { Props } from "@interfaces/support";
 import {
@@ -16,11 +16,14 @@ import { useRecoilState } from "recoil";
 import { inquiryState } from "@recoil/inquiryState";
 import CustomEmailInput from "@components/common/CustomEmailInput";
 import CustomTextarea from "@components/common/CustomTextarea";
+import { useControllerTheme } from "@hooks/useControllerTheme";
 
 const First = ({ onEnd }: Props) => {
   const inquiryApi = new InquiryApi();
-
+  
   const [COLOR, mode] = useThemeStyle();
+  const modeBool = mode ? true : false; // 네비게이터 색상 관련
+  const { themeController } = useControllerTheme();
   const [inquiryInfo, setInquiryInfo] = useRecoilState(inquiryState);
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -46,6 +49,10 @@ const First = ({ onEnd }: Props) => {
       onEnd();
     }
   };
+
+  useEffect(() => {
+    themeController(modeBool);
+  }, []);
 
   const DynamicTitleBox = () => {
     const [COLOR, mode] = useThemeStyle();
