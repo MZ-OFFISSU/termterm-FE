@@ -70,21 +70,21 @@ const Container = styled.View<{
   mode: boolean;
   answer: boolean;
 }>`
-  width: 90%;
+  min-width: 358px;
+  border-radius: 10px;
   height: 55px;
+  display: flex;
   background-color: ${(props) =>
     props.mode
       ? props.answer
         ? props.COLOR.THEME.positive[10]
         : props.COLOR.THEME.negative[10]
       : props.COLOR.Background.onSurface};
-  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   padding: 10px;
   margin: 20px auto;
-  border-radius: 10px;
 `;
 
 const AnswerText = styled.Text<{
