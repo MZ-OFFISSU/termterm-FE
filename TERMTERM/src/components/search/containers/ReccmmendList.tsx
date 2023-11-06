@@ -26,7 +26,7 @@ const RecommendList = ({ navigation, ...props }: Props) => {
   return (
     <ContentsWrapper {...props}>
       <ContentsHeader title="추천 모음집" />
-      {categoryCurationList.map((item, idx) => (
+      {categoryCurationList.slice(0, 3).map((item, idx) => (
         <CurationItem
           item={item}
           img={item.thumbnail}
