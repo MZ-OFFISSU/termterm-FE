@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { WebView } from "react-native-webview";
+import { WebView, WebViewNavigation } from "react-native-webview";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "@interfaces/RootStackParamList";
 import { KAKAO_CLIENT_ID, KAKAO_REDIRECT_URI } from "@api/secret";
@@ -8,6 +8,7 @@ import { setAccessToken, setRefreshToken } from "@utils/tokenHandler";
 import MemberApi from "@api/MemberApi";
 import { MemberInfo } from "Member";
 import { loginFailed, loginSucceed, needRegister } from "@utils/showToast";
+import { Linking, Platform } from "react-native";
 
 export type HomeScreenProps = StackScreenProps<RootStackParamList, "Kakao">;
 
@@ -16,6 +17,21 @@ const runFirst = `window.ReactNativeWebView.postMessage("this is message from we
 const KakaoLogin = ({ navigation }: HomeScreenProps) => {
   const authApi = new AuthApi();
   const memberApi = new MemberApi();
+
+  // Mozilla/5.0 (Linux; Android 8.0.0; SM-G935S Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Mobile Safari/537.36
+  const customUserAgent =
+    "Mozilla/5.0 (Linux; Android 8.0.0; SM-G935S Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Mobile Safari/537.36";
+
+  const onShouldStartLoadWithRequest = (
+    request: WebViewNavigation
+  ): boolean => {
+    console.log(request);
+    if (request.url.startsWith("kakaotalk://")) {
+      Linking.openURL(request.url);
+      return false;
+    }
+    return true;
+  };
 
   const logInProgress = (data: any) => {
     const exp = "code=";
@@ -69,6 +85,8 @@ const KakaoLogin = ({ navigation }: HomeScreenProps) => {
         onMessage={(event) => {
           logInProgress(event.nativeEvent.url);
         }}
+        userAgent={customUserAgent}
+        onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
       />
     </View>
   );
