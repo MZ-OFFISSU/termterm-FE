@@ -6,7 +6,7 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 import Carousel from "react-native-reanimated-carousel";
-import { screenWidth } from "@style/dimensions";
+import { screenHeight, screenWidth } from "@style/dimensions";
 import { WordProps } from "@interfaces/word";
 import WordCard from "./WordCard";
 import { useThemeStyle } from "@hooks/useThemeStyle";
@@ -62,6 +62,7 @@ const WordCarousel = ({
         {...baseOptions}
         style={{
           width: screenWidth,
+          height: 370,
         }}
         loop={words.length > 1}
         pagingEnabled={true}
