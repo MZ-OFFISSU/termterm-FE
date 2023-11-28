@@ -94,7 +94,7 @@ const Container = styled.View`
 
 const TitleBox = styled.Text<{ COLOR: colorTheme }>`
   width: 100%;
-  text-align: start;
+  text-align: left;
   ${TYPO_STYLE.Body[2].Bold};
   color: ${(props) => props.COLOR.Text.active};
 `;

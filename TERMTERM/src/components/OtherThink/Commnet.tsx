@@ -148,7 +148,7 @@ const Content = styled.Text<{ COLOR: colorTheme }>`
   width: 100%;
   ${TYPO_STYLE.Subheading[1].Regular};
   color: ${(props) => props.COLOR.Text.active};
-  text-align: start;
+  text-align: left;
   white-space: pre-line;
 
   line-height: 20.5%;
@@ -156,7 +156,7 @@ const Content = styled.Text<{ COLOR: colorTheme }>`
 
 const Source = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Caption[2].Medium};
-  text-align: start;
+  text-align: left;
   color: ${(props) => props.COLOR.Text.disabled};
   margin-top: 7px;
 `;

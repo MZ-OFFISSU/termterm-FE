@@ -36,6 +36,8 @@ const KakaoLogin = ({ navigation }: HomeScreenProps) => {
   const logInProgress = (data: any) => {
     const exp = "code=";
 
+    if (!data) return;
+
     const condition = data.indexOf(exp);
 
     if (condition != -1) {

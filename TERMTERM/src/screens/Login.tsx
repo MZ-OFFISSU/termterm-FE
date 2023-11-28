@@ -17,6 +17,7 @@ import { MemberInfo } from "Member";
 import MemberApi from "@api/MemberApi";
 import { useNavigation } from "@react-navigation/native";
 import { setAccessToken, setRefreshToken } from "@utils/tokenHandler";
+import { Platform } from "react-native";
 
 export type Props = StackScreenProps<RootStackParamList, "Login">;
 
@@ -43,8 +44,6 @@ const Login = ({ navigation, route }: Props) => {
   const { user, loading } = useMember();
   const authApi = new AuthApi();
   const memberApi = new MemberApi();
-  const inquiryNavigation =
-    useNavigation<StackNavigationProp<RootStackParamList>>();
 
   useSafeColor();
 
@@ -135,11 +134,9 @@ const Login = ({ navigation, route }: Props) => {
             type="google"
             onPress={() => navigation.navigate("Google")}
           />
-          <SocialLoginButton
-            type="apple"
-            // onPress={() => navigation.navigate("Support")}
-            onPress={appleOauth}
-          />
+          {Platform.OS === "ios" && (
+            <SocialLoginButton type="apple" onPress={appleOauth} />
+          )}
         </ButtonBox>
         <NonUrl style={{ marginTop: 30 }}>
           {`회원가입시 `}
@@ -158,7 +155,7 @@ const Login = ({ navigation, route }: Props) => {
         </NonUrl>
       </Container>
       <QuestionBox>
-        <InquiryLink onPress={() => inquiryNavigation.navigate("Support")}>
+        <InquiryLink onPress={() => navigation.navigate("Support")}>
           이용하시는 데에 어려움이 있나요?
         </InquiryLink>
       </QuestionBox>

@@ -50,7 +50,7 @@ const Input = styled.TextInput<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Subheading[1].Regular};
   width: 100%;
   height: 100%;
-  text-align: start;
+  text-align: left;
   color: ${(props) => props.COLOR.Text.active};
   margin-bottom: 2px;
 `;

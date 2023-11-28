@@ -94,7 +94,7 @@ const Content = styled.Text<{ COLOR: colorTheme }>`
   flex: 1;
   line-height: 17.5%;
   color: ${(props) => props.COLOR.Text.default};
-  text-align: start;
+  text-align: left;
   white-space: pre-line;
 `;
 
