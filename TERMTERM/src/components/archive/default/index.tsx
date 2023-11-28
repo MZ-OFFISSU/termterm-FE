@@ -63,7 +63,7 @@ const Title = styled.Text<{ COLOR: colorTheme }>`
   text-align: center;
   white-space: pre-line;
   margin-top: 20px;
-  line-height: 37%;
+  line-height: 37px;
 `;
 
 const Subtitle = styled.Text<{ COLOR: colorTheme }>`

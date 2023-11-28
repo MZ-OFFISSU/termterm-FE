@@ -56,7 +56,7 @@ const InterestBadge = ({ interest, ...props }: Props) => {
 const Badge = styled.View<{ bg: string }>`
   height: 20px;
   padding: 1px 13px;
-  border-radius: 100px;
+  border-radius: 1000px;
   display: flex;
   align-items: center;
   justify-content: center;

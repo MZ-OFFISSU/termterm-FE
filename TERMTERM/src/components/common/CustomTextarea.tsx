@@ -16,7 +16,7 @@ const CustomTextarea = ({ value, max, ...props }: Props) => {
         COLOR={COLOR}
         multiline={true}
         value={value}
-        style={{ textAlignVertical: "top" }}
+        style={{ textAlignVertical: "top", textAlign: "left" }}
         maxLength={max}
         placeholderTextColor={COLOR.Text.disabled}
         {...props}
