@@ -21,6 +21,7 @@ declare module "Point" {
   type DailyHistory = {
     detail: string;
     point: string;
+    subText: string;
   };
 
   type Pageable = {
