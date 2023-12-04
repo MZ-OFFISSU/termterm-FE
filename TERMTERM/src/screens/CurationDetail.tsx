@@ -30,7 +30,6 @@ const CurationDetail = ({ navigation, route }: Props) => {
   const [pay, setPay] = useState(curationDetailInfo?.paid);
   const [modal, setModal] = useState(false);
   const { settingCurationId } = useBookmarkHeader();
-
   //토스트메시지 보여주는 함수
   const showToast = (res: boolean) => {
     if (res) {
@@ -119,7 +118,7 @@ const CurationDetail = ({ navigation, route }: Props) => {
             />
           </>
         )}
-        <RelatedTags tags={dummyData.tags} />
+        <RelatedTags tags={curationDetailInfo.tags} />
       </Container>
       <CustomModal
         visible={modal}
