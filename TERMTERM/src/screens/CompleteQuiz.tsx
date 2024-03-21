@@ -240,7 +240,7 @@ const CompleteButton = styled.TouchableOpacity<{
   z-index: 2;
   background-color: ${(props) =>
     props.mode ? props.COLOR.Neutral[100] : props.COLOR.Background.onSurface};
-  border-radius: 50%;
+  border-radius: 50px;
   margin-top: 40px;
 `;
 

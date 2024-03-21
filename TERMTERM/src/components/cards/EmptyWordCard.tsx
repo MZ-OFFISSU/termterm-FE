@@ -90,7 +90,6 @@ const Title = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Body[1].ExtraBold};
   color: ${(props) => props.COLOR.Text.active};
   text-align: center;
-  line-height: 37%;
 `;
 
 const SubTitle = styled.Text<{ COLOR: colorTheme }>`
@@ -107,7 +106,7 @@ const WordButton = styled.TouchableOpacity<{ COLOR: colorTheme }>`
   height: 45px;
   z-index: 2;
   background-color: ${(props) => props.COLOR.THEME.primary[130]};
-  border-radius: 50%;
+  border-radius: 50px;
   margin-top: 30px;
   display: flex;
   flex-direction: row;

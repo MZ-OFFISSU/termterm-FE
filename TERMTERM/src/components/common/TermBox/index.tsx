@@ -98,7 +98,7 @@ const BookmarkButton = styled.TouchableOpacity<{ mode: boolean }>`
   align-items: center;
   justify-content: center;
   background-color: ${(props) => (props.mode ? "#e2e2e261" : "#0000003b")};
-  border-radius: 100%;
+  border-radius: 100px;
 `;
 
 const ResultTitle = styled.Text<{ COLOR: colorTheme }>`
