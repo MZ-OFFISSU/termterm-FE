@@ -33,7 +33,7 @@ const ReviewQuiz = ({ navigation }: Props) => {
     setBorderColor(COLOR.THEME.secondary[120]);
     setCurr((prev) => ({ ...prev, currReviewIdx: prev.currReviewIdx + 1 }));
     const isFinalQuestion = curr.currReviewIdx + 1 === curr.totalReviewIdx;
-    let apiUrl = `/v1/quiz/result`;
+    let apiUrl = `/v2/s/quiz/result`;
 
     const memberQuizSelect: QuizSubmit = {
       quizType: "REVIEW",
