@@ -147,7 +147,7 @@ export const useProfile = () => {
   /** 프로필 이미지 수정 */
   const editProfileImage = async (input: MemberInfo): Promise<boolean> => {
     try {
-      const updateS3url = await memberApi.getPresignedUrl();
+      const updateS3url = await memberApi.putPresignedUrl();
       const blob = await fetchBlob(input.profileImage);
       await uploadToS3(updateS3url, blob);
       await memberApi.syncPresignedUrl();
