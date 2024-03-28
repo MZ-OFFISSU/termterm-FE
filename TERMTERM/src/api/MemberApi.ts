@@ -24,7 +24,7 @@ class MemberApi {
 
   /** 사용자 닉네임 중복 검사하기 */
   nicknameDoubleCheck = async (nickname: string): Promise<string> => {
-    const data = await get<string>(`/v2/s/member/nickname/check`, {
+    const data = await get<string>(`/v2/member/nickname/check`, {
       params: {
         nickname: nickname,
       },
@@ -62,7 +62,7 @@ class MemberApi {
 
   /** 회원 탈퇴 */
   withdraw = async (): Promise<string> => {
-    const data = await get<string>(`/v2/s/member/withdraw`);
+    const data = await put<string>(`/v2/s/member/withdraw`);
     return data;
   };
 }
