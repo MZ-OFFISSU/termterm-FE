@@ -33,7 +33,7 @@ const DailyQuiz = ({ navigation }: Props) => {
     setBorderColor(COLOR.THEME.secondary[120]);
     setCurr((prev) => ({ ...prev, currIdx: prev.currIdx + 1 }));
     const isFinalQuestion = curr.currIdx === 4;
-    let apiUrl = `/v1/quiz/result`;
+    let apiUrl = `/v2/s/quiz/result`;
 
     const memberQuizSelect: QuizSubmit = {
       quizType: "DAILY",
