@@ -148,15 +148,15 @@ const Content = styled.Text<{ COLOR: colorTheme }>`
   width: 100%;
   ${TYPO_STYLE.Subheading[1].Regular};
   color: ${(props) => props.COLOR.Text.active};
-  text-align: start;
+  text-align: left;
   white-space: pre-line;
 
-  line-height: 20.5%;
+  line-height: 20.5px;
 `;
 
 const Source = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Caption[2].Medium};
-  text-align: start;
+  text-align: left;
   color: ${(props) => props.COLOR.Text.disabled};
   margin-top: 7px;
 `;
@@ -180,7 +180,7 @@ const DefaultInfoWrapper = styled.View`
 const ProfileImageWrapper = styled.View`
   width: 22px;
   height: 22px;
-  border-radius: 100%;
+  border-radius: 500px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -220,7 +220,7 @@ const Likes = styled.Text<{ COLOR: colorTheme }>`
 const LikeButtonWrapper = styled.TouchableOpacity`
   width: 34px;
   height: 34px;
-  border-radius: 100%;
+  border-radius: 500px;
   overflow: hidden;
   margin-right: 7px;
 `;

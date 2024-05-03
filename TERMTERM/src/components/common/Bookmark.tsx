@@ -9,7 +9,7 @@ export const BookmarkButton = styled.TouchableOpacity`
   right: 10px;
   width: 38px;
   height: 38px;
-  border-radius: 100%;
+  border-radius: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +27,7 @@ export const PreviewBookmark = styled.TouchableOpacity`
 export const BookmarkWrapper = styled.TouchableOpacity`
   width: 38px;
   height: 38px;
-  border-radius: 100%;
+  border-radius: 500px;
   display: flex;
   align-items: center;
   justify-content: center;

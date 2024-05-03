@@ -32,7 +32,7 @@ export const TitleWrapper = styled.View`
 export const Title = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Body[1].ExtraBold};
   color: ${(props) => props.COLOR.Text.active};
-  text-align: start;
+  text-align: left;
 `;
 
 export const TitleObjet = styled.View`
@@ -46,7 +46,7 @@ export const TitleObjet = styled.View`
 
 export const Content = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Subheading[1].Regular};
-  text-align: start;
+  text-align: left;
   white-space: pre-line;
   line-height: 20px;
   color: ${(props) => props.COLOR.Text.active};

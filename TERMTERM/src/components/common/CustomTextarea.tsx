@@ -16,7 +16,7 @@ const CustomTextarea = ({ value, max, ...props }: Props) => {
         COLOR={COLOR}
         multiline={true}
         value={value}
-        style={{ textAlignVertical: "top" }}
+        style={{ textAlignVertical: "top", textAlign: "left" }}
         maxLength={max}
         placeholderTextColor={COLOR.Text.disabled}
         {...props}
@@ -46,7 +46,7 @@ const Input = styled.TextInput<{ COLOR: colorTheme }>`
   padding: 15px 20px;
   outline: none;
   border: none;
-  text-align: start;
+  text-align: left;
   ${TYPO_STYLE.Subheading[1].Regular};
 `;
 

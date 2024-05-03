@@ -92,9 +92,9 @@ const Content = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Caption[1].Regular};
   //TODO : line-height 수정
   flex: 1;
-  line-height: 17.5%;
+  line-height: 17.5px;
   color: ${(props) => props.COLOR.Text.default};
-  text-align: start;
+  text-align: left;
   white-space: pre-line;
 `;
 

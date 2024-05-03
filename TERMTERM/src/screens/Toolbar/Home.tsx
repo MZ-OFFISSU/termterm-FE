@@ -103,7 +103,7 @@ const Home = ({ navigation, route }: Props) => {
       >
         <InnerContainer>
           <TitleContainer maintitle={homeMainTitle} subtitle={homeSubTitle} />
-          {archivedWords ? (
+          {archivedWords && archivedWords.length ? (
             <WordCarousel words={archivedWords} dots={true} />
           ) : (
             <EmptyWordCard style={{ marginTop: 20 }} />

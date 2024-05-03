@@ -23,17 +23,17 @@ const ReportWord = ({ route, navigation }: Props) => {
 
   const [COLOR, mode] = useThemeStyle();
   const [reasonType, setReasonType] = useState([
-    {label: "저작권 침해, 명예훼손", value: "COPYRIGHT"},
-    {label: "개인정보 유출", value: "PERSONAL_INFORMATION"},
-    {label: "광고 및 홍보성 내용", value: "ADVERTISEMENT"},
-    {label: "용어와 무관한 내용", value: "IRRELEVANT_CONTENT"},
-    {label: "사기 또는 거짓 정보", value: "FRAUD"},
-    {label: "잘못된 정보 포함", value: "INCORRECT_CONTENT"},
-    {label: "혐오 발언 또는 상징", value: "DISGUST"},
-    {label: "욕설, 비방, 선정성 등 미풍양속을 해치는 내용", value: "ABUSE"},
-    {label: "스팸", value: "SPAM"},
-    {label: "기타", value: "OTHER"},
-  ])
+    { label: "저작권 침해, 명예훼손", value: "COPYRIGHT" },
+    { label: "개인정보 유출", value: "PERSONAL_INFORMATION" },
+    { label: "광고 및 홍보성 내용", value: "ADVERTISEMENT" },
+    { label: "용어와 무관한 내용", value: "IRRELEVANT_CONTENT" },
+    { label: "사기 또는 거짓 정보", value: "FRAUD" },
+    { label: "잘못된 정보 포함", value: "INCORRECT_CONTENT" },
+    { label: "혐오 발언 또는 상징", value: "DISGUST" },
+    { label: "욕설, 비방, 선정성 등 미풍양속을 해치는 내용", value: "ABUSE" },
+    { label: "스팸", value: "SPAM" },
+    { label: "기타", value: "OTHER" },
+  ]);
   const [selectedReason, setSelectedReason] = useState("");
   const [etc, setEtc] = useState("");
   const [btnPosition, setBtnPosition] = useState(70);
@@ -219,7 +219,7 @@ const LightTitleWrapper = styled.View`
 
 const Title = styled.Text<{ COLOR: colorTheme }>`
   ${TYPO_STYLE.Body[1].ExtraBold};
-  text-align: start;
+  text-align: left;
   color: ${(props) => props.COLOR.Text.active};
 `;
 

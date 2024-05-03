@@ -52,7 +52,7 @@ const FilterButton = styled.TouchableOpacity`
 const CilrcleWrapper = styled.View<{ COLOR: colorTheme }>`
   width: 11px;
   height: 11px;
-  border-radius: 100%;
+  border-radius: 500px;
   background-color: ${(props) => props.COLOR.THEME.primary[130]};
   display: flex;
   align-items: center;

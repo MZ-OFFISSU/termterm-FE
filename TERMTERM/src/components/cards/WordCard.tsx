@@ -1,7 +1,11 @@
 import styled from "styled-components/native";
 import { useState, useEffect } from "react";
 import { TouchableOpacityProps, ImageSourcePropType } from "react-native";
-import { DARK_COLOR_STYLE, LIGHT_COLOR_STYLE, TYPO_STYLE } from "@style/designSystem";
+import {
+  DARK_COLOR_STYLE,
+  LIGHT_COLOR_STYLE,
+  TYPO_STYLE,
+} from "@style/designSystem";
 import { screenWidth } from "@style/dimensions";
 
 interface Props extends TouchableOpacityProps {
@@ -85,7 +89,7 @@ const WordButton = styled.TouchableOpacity`
   height: 44px;
   z-index: 2;
   background-color: #19d24d;
-  border-radius: 50%;
+  border-radius: 50px;
   margin-top: 30px;
 `;
 
